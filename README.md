@@ -44,9 +44,15 @@
 │   │   ├── index.astro (homepage)
 │   │   ├── contact.astro
 │   │   └── resources/
+│   │       ├── documents/
+│   │       │   ├── index.astro
+│   │       │   └── [slug].astro
+│   │       ├── guides/
+│   │       │   ├── index.astro (search/filter)
+│   │       │   └── [slug].astro (9 guides)
 │   │       └── news/
 │   │           ├── index.astro
-│   │           └── [slug].astro
+│   │           └── [slug].astro (8 articles)
 │   └── styles/
 │       └── global.css
 ├── tailwind.config.ts
@@ -244,6 +250,110 @@ Recent commits demonstrate incremental development:
 - [ ] Implement blog/news system
 - [ ] Add contractor directory with search/filter
 - [ ] Set up analytics
+
+## 📚 Guides System (Guides.co Replacement)
+
+### ✅ Currently Implemented Features
+
+The guides system successfully replaces the functionality from Guides.co with the following features:
+
+**Content & Media:**
+- ✅ Rich text content with full HTML support
+- ✅ Single images with captions
+- ✅ Image carousels (multiple images with prev/next navigation)
+- ✅ YouTube video embeds
+- ✅ Inline PDF viewers with download buttons
+- ✅ Data comparison tables
+- ✅ Featured hero images
+- ✅ Callout boxes (tips, warnings, important notes)
+
+**Navigation & Progress:**
+- ✅ Step-by-step structure with numbered badges
+- ✅ Sticky progress sidebar showing all steps
+- ✅ Auto-progress tracking (Intersection Observer highlights current step)
+- ✅ Smooth scroll navigation between steps
+- ✅ Breadcrumbs with Schema.org structured data
+- ✅ Visual step completion indicator
+
+**Metadata & Organization:**
+- ✅ Category badges (Homeowners/Contractors)
+- ✅ Difficulty levels (Beginner/Intermediate/Advanced)
+- ✅ Estimated reading time
+- ✅ Step count display
+- ✅ Author attribution and publication date
+- ✅ Full SEO meta tags (title, description, OG, Twitter cards)
+- ✅ Sitemap inclusion for all guides
+- ✅ Canonical URLs
+
+**User Experience:**
+- ✅ Related guides recommendations (2 per guide)
+- ✅ Next action CTAs (Browse More Guides, Contact Us)
+- ✅ Fully responsive mobile design
+- ✅ Search and filter on index page (category, difficulty, keywords)
+- ✅ Featured guides highlighting
+- ✅ Guide completion celebration section
+
+**Current Guide Content:**
+- 6 fully functional guides with rich media:
+  1. Heat Pump Installation Checklist (8 steps)
+  2. Getting Started with Home Energy Assessments (5 steps)
+  3. Understanding BC Rebate Programs (5 steps - inline PDF, video, tables)
+  4. Air Sealing Best Practices (5 steps - 3-image carousel, video, PDF)
+  5. Choosing the Right Insulation (5 steps - 4-image carousel, tables, video, PDF)
+  6. Complete Guide to Blower Door Testing (5 steps - 3-image carousel, video, inline PDF)
+- 3 additional guides with placeholder content (ready for content migration)
+
+### 🔮 Possible Future Enhancements
+
+These features could be added later if needed:
+
+**Interactive Features:**
+- Print-friendly version
+- Social sharing buttons (Twitter, Facebook, LinkedIn)
+- Bookmark/Save for later functionality
+- Email guide to friend
+- Download PDF version of entire guide
+- Copy link to specific step
+- Dark mode toggle
+
+**User Engagement:**
+- Comments section
+- Star ratings/reviews
+- "Was this helpful?" feedback buttons
+- User accounts/authentication
+- Personal progress saving (requires auth)
+- Completion certificates
+- Multi-language support
+
+**Content Enhancements:**
+- Prerequisites section
+- Required tools/materials checklist
+- Estimated cost breakdown
+- Glossary/definitions popup
+- FAQs within guide
+- Interactive quizzes/knowledge checks
+- Downloadable checklists
+- Voice narration
+
+**Advanced Features:**
+- Font size adjustment controls
+- Estimated savings calculator (for energy guides)
+- Contractor finder integration
+- Related resources library
+- Version history/changelog
+- Community contributions/edits
+
+### 📊 Content Migration Plan
+
+When migrating from Guides.co:
+1. Export existing guide content from Guides.co
+2. Set up WordPress headless CMS with custom post types for guides
+3. Configure Cloudflare R2 for media storage (images, videos, PDFs)
+4. Create guide templates in WordPress matching current data structure
+5. Import/migrate existing guides through WordPress admin
+6. Future guides can be created by non-technical editors in WordPress
+
+The current implementation provides all core functionality needed. Additional features can be prioritized based on user feedback and analytics after launch.
 
 ## 📝 Notes
 
