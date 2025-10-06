@@ -410,7 +410,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				const observerOptions = {
 					root: null,
 					rootMargin: '0px',
-					threshold: 0.5 // Card needs to be 50% visible
+					threshold: 0.5, // Card needs to be 50% visible
 				};
 
 				const observer = new IntersectionObserver((entries) => {
@@ -1056,7 +1056,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		// Auto-play carousel
 		setInterval(() => {
 			if (!isDragging) {
-				currentIndex = currentIndex < totalSlides - 1 ? currentIndex + 1 : 0;
+				currentIndex = currentIndex < getTotalSlides() - 1 ? currentIndex + 1 : 0;
 				updateCarousel();
 			}
 		}, 5000);

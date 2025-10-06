@@ -65,11 +65,13 @@
 ### Color Palette (from homeperformance.ca)
 
 **Primary Blue** (`#00b6f0`)
+
 - Full scale from 50-900
 - Light variant: `#33c4f3`
 - Dark variant: `#0095c7`
 
 **Accent Colors**
+
 - Cyan: `#abb8c3`
 - Pink: `#f78da7`
 - Red: `#cf2e2e`
@@ -79,6 +81,7 @@
 - Purple: `#9b51e0`
 
 ### Typography
+
 - **Font Family**: Montserrat (weights: 400, 500, 600, 700, 800)
 - **Fallback**: Helvetica, Arial, Lucida, sans-serif
 
@@ -87,6 +90,7 @@
 ### Major Accomplishments
 
 #### 1. **Homepage Development** (`src/pages/index.astro`)
+
 - ✅ Built comprehensive homepage with hero section, stats cards, services, carousel, and CTA
 - ✅ Removed redundant "Home" breadcrumb from index page
 - ✅ Fixed hero section styling with consistent primary blue buttons and white borders
@@ -98,12 +102,14 @@
   - CTA section
 
 #### 2. **Interactive Stats Cards**
+
 - ✅ Implemented hover/tap reveal functionality for service cards
 - ✅ Fixed mobile tap support with proper CSS targeting
 - ✅ Active state management with JavaScript click handlers
 - ✅ Cards slide up to reveal detailed information on interaction
 
 #### 3. **Supporter Logo Carousel**
+
 - ✅ Added BC Hydro, FortisBC, CleanBC, and Vancity logos
 - ✅ Implemented responsive carousel:
   - **Mobile**: Shows 1 logo at a time (4 slides total)
@@ -113,6 +119,7 @@
 - ✅ Auto-resize handling to prevent stuck states
 
 #### 4. **Navigation Component** (`src/components/layouts/Nav.astro`)
+
 - ✅ Sticky header with top contact bar
 - ✅ Responsive hamburger menu with animated X transformation
 - ✅ Changed hamburger lines from gray to primary blue
@@ -123,6 +130,7 @@
 - ✅ Top bar hides on scroll down, shows when scrolling up
 
 #### 5. **Contact Page** (`src/pages/contact.astro`)
+
 - ✅ Built comprehensive contact form with Cloudflare Turnstile
 - ✅ Added mobile-responsive padding (p-4 md:p-8)
 - ✅ Form validation: submit button disabled until all required fields filled
@@ -134,6 +142,7 @@
 - ✅ Changed page width from max-w-7xl to w-full for better mobile experience
 
 #### 6. **Layout & SEO** (`src/layouts/Layout.astro`)
+
 - ✅ Yoast-style comprehensive SEO support:
   - Meta descriptions
   - Open Graph tags (Facebook)
@@ -148,6 +157,7 @@
 - ✅ AccessibilityTab component (currently commented out due to mobile issues)
 
 #### 7. **Footer Component** (`src/components/layouts/Footer.astro`)
+
 - ✅ Multi-column responsive layout
 - ✅ Newsletter signup form
 - ✅ Social media links
@@ -156,6 +166,7 @@
 - ✅ Copyright with dynamic year
 
 #### 8. **Accessibility Features** (`src/components/AccessibilityTab.astro`)
+
 - 🟡 Built comprehensive accessibility panel (currently disabled):
   - Font size controls (A-, A, A+)
   - High contrast mode toggle
@@ -167,6 +178,7 @@
 - ⚠️ Currently commented out in Layout due to mobile visibility conflicts
 
 #### 9. **Code Quality & Tooling**
+
 - ✅ ESLint configuration with Astro support
 - ✅ Prettier formatting with Astro plugin
 - ✅ TypeScript support throughout
@@ -231,6 +243,7 @@ All commands are run from the root of the project, from a terminal:
 ## 🔄 Git Workflow
 
 Recent commits demonstrate incremental development:
+
 1. Initial Tailwind config with HPSC theme and SEO layout
 2. Nav search bar, Footer policies section, and mock home page
 3. Complete homepage design with interactive components
@@ -240,10 +253,12 @@ Recent commits demonstrate incremental development:
 ## 🚧 Known Issues & Future Work
 
 ### Known Issues
+
 1. **AccessibilityTab** - Currently disabled due to mobile visibility conflicts with CSS rules
 2. **Contact Form API** - Currently simulated, needs backend endpoint for production
 
 ### Planned Features
+
 - [ ] Re-enable and fix AccessibilityTab for mobile
 - [ ] Connect contact form to backend API
 - [ ] Add remaining pages (About, Resources, Contractor Network)
@@ -258,6 +273,7 @@ Recent commits demonstrate incremental development:
 The guides system successfully replaces the functionality from Guides.co with the following features:
 
 **Content & Media:**
+
 - ✅ Rich text content with full HTML support
 - ✅ Single images with captions
 - ✅ Image carousels (multiple images with prev/next navigation)
@@ -268,6 +284,7 @@ The guides system successfully replaces the functionality from Guides.co with th
 - ✅ Callout boxes (tips, warnings, important notes)
 
 **Navigation & Progress:**
+
 - ✅ Step-by-step structure with numbered badges
 - ✅ Sticky progress sidebar showing all steps
 - ✅ Auto-progress tracking (Intersection Observer highlights current step)
@@ -276,6 +293,7 @@ The guides system successfully replaces the functionality from Guides.co with th
 - ✅ Visual step completion indicator
 
 **Metadata & Organization:**
+
 - ✅ Category badges (Homeowners/Contractors)
 - ✅ Difficulty levels (Beginner/Intermediate/Advanced)
 - ✅ Estimated reading time
@@ -286,6 +304,7 @@ The guides system successfully replaces the functionality from Guides.co with th
 - ✅ Canonical URLs
 
 **User Experience:**
+
 - ✅ Related guides recommendations (2 per guide)
 - ✅ Next action CTAs (Browse More Guides, Contact Us)
 - ✅ Fully responsive mobile design
@@ -294,6 +313,7 @@ The guides system successfully replaces the functionality from Guides.co with th
 - ✅ Guide completion celebration section
 
 **Current Guide Content:**
+
 - 6 fully functional guides with rich media:
   1. Heat Pump Installation Checklist (8 steps)
   2. Getting Started with Home Energy Assessments (5 steps)
@@ -308,6 +328,7 @@ The guides system successfully replaces the functionality from Guides.co with th
 These features could be added later if needed:
 
 **Interactive Features:**
+
 - Print-friendly version
 - Social sharing buttons (Twitter, Facebook, LinkedIn)
 - Bookmark/Save for later functionality
@@ -317,6 +338,7 @@ These features could be added later if needed:
 - Dark mode toggle
 
 **User Engagement:**
+
 - Comments section
 - Star ratings/reviews
 - "Was this helpful?" feedback buttons
@@ -326,6 +348,7 @@ These features could be added later if needed:
 - Multi-language support
 
 **Content Enhancements:**
+
 - Prerequisites section
 - Required tools/materials checklist
 - Estimated cost breakdown
@@ -336,6 +359,7 @@ These features could be added later if needed:
 - Voice narration
 
 **Advanced Features:**
+
 - Font size adjustment controls
 - Estimated savings calculator (for energy guides)
 - Contractor finder integration
@@ -346,6 +370,7 @@ These features could be added later if needed:
 ### 📊 Content Migration Plan
 
 When migrating from Guides.co:
+
 1. Export existing guide content from Guides.co
 2. Set up WordPress headless CMS with custom post types for guides
 3. Configure Cloudflare R2 for media storage (images, videos, PDFs)

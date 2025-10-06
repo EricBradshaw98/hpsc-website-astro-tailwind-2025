@@ -5,11 +5,12 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 import tailwindcss from '@tailwindcss/vite';
+import pagefind from 'astro-pagefind';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://homeperformance.ca', // Required for sitemap generation
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap(), pagefind()],
   adapter: cloudflare(),
 
   image: {

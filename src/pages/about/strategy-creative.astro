@@ -165,12 +165,22 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 
 	<!-- Hero Header with Visual -->
 	<div class="mb-16 relative">
-		<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-blue/5 to-green/5 rounded-3xl -z-10"></div>
+		<div
+			class="absolute inset-0 bg-gradient-to-br from-primary/5 via-blue/5 to-green/5 rounded-3xl -z-10"
+		>
+		</div>
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center p-8 md:p-12">
 			<div>
-				<div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4">
+				<div
+					class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4"
+				>
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+						></path>
 					</svg>
 					Our Strategic Plan
 				</div>
@@ -179,13 +189,26 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 				</h1>
 				<div class="space-y-4">
 					<p class="text-xl text-gray-700 leading-relaxed">
-						The HPSC's work is guided by this Strategic Plan, developed in collaboration with our Industry Advisory Committee, Sector Councils, and Board of Directors.
+						The HPSC's work is guided by this Strategic Plan, developed in collaboration with our
+						Industry Advisory Committee, Sector Councils, and Board of Directors.
 					</p>
 					<p class="text-lg text-gray-600 flex items-start gap-2">
-						<svg class="w-6 h-6 text-primary flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+						<svg
+							class="w-6 h-6 text-primary flex-shrink-0 mt-1"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+							></path>
 						</svg>
-						<span>A <strong>living document</strong>, updated annually to reflect evolving priorities</span>
+						<span
+							>A <strong>living document</strong>, updated annually to reflect evolving priorities</span
+						>
 					</p>
 				</div>
 			</div>
@@ -196,34 +219,82 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 					<div class="absolute bottom-0 left-0 w-64 h-64 bg-green/10 rounded-full blur-3xl"></div>
 					<!-- Strategy visualization -->
 					<div class="relative grid grid-cols-2 gap-4 p-8">
-						<div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform">
+						<div
+							class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform"
+						>
 							<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-3">
-								<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+								<svg
+									class="w-6 h-6 text-primary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+									></path>
 								</svg>
 							</div>
 							<p class="text-sm font-semibold text-gray-700">Regulations</p>
 						</div>
-						<div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform mt-8">
+						<div
+							class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform mt-8"
+						>
 							<div class="w-12 h-12 bg-blue/10 rounded-xl flex items-center justify-center mb-3">
-								<svg class="w-6 h-6 text-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+								<svg
+									class="w-6 h-6 text-blue"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+									></path>
 								</svg>
 							</div>
 							<p class="text-sm font-semibold text-gray-700">Education</p>
 						</div>
-						<div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform">
+						<div
+							class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform"
+						>
 							<div class="w-12 h-12 bg-green/10 rounded-xl flex items-center justify-center mb-3">
-								<svg class="w-6 h-6 text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+								<svg
+									class="w-6 h-6 text-green"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+									></path>
 								</svg>
 							</div>
 							<p class="text-sm font-semibold text-gray-700">Workforce</p>
 						</div>
-						<div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform mt-8">
+						<div
+							class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform mt-8"
+						>
 							<div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center mb-3">
-								<svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+								<svg
+									class="w-6 h-6 text-orange"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+									></path>
 								</svg>
 							</div>
 							<p class="text-sm font-semibold text-gray-700">Network</p>
@@ -236,7 +307,9 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 
 	<!-- Stats Overview -->
 	<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
-		<div class="bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 text-center">
+		<div
+			class="bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 text-center"
+		>
 			<div class="text-4xl font-bold mb-2">4</div>
 			<div class="text-sm opacity-90">Focus Areas</div>
 		</div>
@@ -258,24 +331,34 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 	<div class="mb-12 p-6 bg-white rounded-2xl shadow-md border border-gray-100">
 		<h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
 			<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M13 10V3L4 14h7v7l9-11h-7z"></path>
 			</svg>
 			Jump to Focus Area
 		</h3>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-			{strategicPriorities.map((priority, index) => (
-				<a
-					href={`#focus-area-${index + 1}`}
-					class={`flex items-center gap-3 p-4 rounded-xl border-2 ${colorMap[priority.color].border} ${colorMap[priority.color].bg} hover:shadow-md transition-all group`}
-				>
-					<div class={`w-8 h-8 rounded-lg ${colorMap[priority.color].text} bg-white flex items-center justify-center font-bold text-sm`}>
-						{index + 1}
-					</div>
-					<span class={`text-sm font-semibold ${colorMap[priority.color].text} group-hover:underline`}>
-						{priority.category}
-					</span>
-				</a>
-			))}
+			{
+				strategicPriorities.map((priority, index) => (
+					<a
+						href={`#focus-area-${index + 1}`}
+						class={`flex items-center gap-3 p-4 rounded-xl border-2 ${colorMap[priority.color].border} ${colorMap[priority.color].bg} hover:shadow-md transition-all group`}
+					>
+						<div
+							class={`w-8 h-8 rounded-lg ${colorMap[priority.color].text} bg-white flex items-center justify-center font-bold text-sm`}
+						>
+							{index + 1}
+						</div>
+						<span
+							class={`text-sm font-semibold ${colorMap[priority.color].text} group-hover:underline`}
+						>
+							{priority.category}
+						</span>
+					</a>
+				))
+			}
 		</div>
 	</div>
 
@@ -287,7 +370,9 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 					<div class="mb-8 flex items-start justify-between flex-wrap gap-4">
 						<div>
 							<div class="flex items-center gap-3 mb-3">
-								<div class={`w-12 h-12 rounded-xl ${colorMap[priority.color].bg} flex items-center justify-center`}>
+								<div
+									class={`w-12 h-12 rounded-xl ${colorMap[priority.color].bg} flex items-center justify-center`}
+								>
 									<span class={`text-2xl font-bold ${colorMap[priority.color].text}`}>
 										{categoryIndex + 1}
 									</span>
@@ -298,17 +383,24 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 						</div>
 						<div class="flex items-center gap-2 text-sm text-gray-600">
 							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+								/>
 							</svg>
 							{priority.items.length} {priority.items.length === 1 ? 'Priority' : 'Priorities'}
 						</div>
 					</div>
 
 					<div class="space-y-6">
-						{priority.items.map((item, itemIndex) => (
+						{priority.items.map((item) => (
 							<div class="group bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl hover:border-primary/30 transition-all overflow-hidden relative">
-								<!-- Color accent bar -->
-								<div class={`absolute left-0 top-0 bottom-0 w-1 ${colorMap[priority.color].border} border-l-4`}></div>
+								{/* Color accent bar */}
+								<div
+									class={`absolute left-0 top-0 bottom-0 w-1 ${colorMap[priority.color].border} border-l-4`}
+								/>
 
 								<div class="p-6 md:p-8 pl-8 md:pl-10">
 									<div class="flex items-start gap-4 mb-4">
@@ -403,12 +495,12 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 
 	<!-- Download CTA -->
 	<section class="mt-20">
-		<div class="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
+		<div
+			class="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20"
+		>
 			<div class="flex flex-col md:flex-row items-center justify-between gap-6">
 				<div class="flex-1">
-					<h2 class="text-2xl font-bold text-gray-900 mb-2">
-						Download the Full Strategic Plan
-					</h2>
+					<h2 class="text-2xl font-bold text-gray-900 mb-2">Download the Full Strategic Plan</h2>
 					<p class="text-gray-600">
 						Access the complete strategic plan document with detailed timelines and metrics.
 					</p>
@@ -423,7 +515,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 							stroke-linejoin="round"
 							stroke-width="2"
 							d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-						/>
+						></path>
 					</svg>
 					Download PDF
 				</a>
@@ -433,7 +525,9 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 
 	<!-- Get Involved CTA -->
 	<section class="mt-12">
-		<div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white text-center">
+		<div
+			class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white text-center"
+		>
 			<h2 class="text-3xl font-bold mb-4">Help Shape Our Strategy</h2>
 			<p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
 				We welcome input from industry stakeholders. Get involved in shaping the future of home

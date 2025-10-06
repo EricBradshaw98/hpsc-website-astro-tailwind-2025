@@ -173,8 +173,8 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 				the Board of Directors.
 			</p>
 			<p class="text-lg text-gray-600 mt-4">
-				It is a <strong>living document</strong>, updated annually to reflect updates and changes
-				to strategic priorities.
+				It is a <strong>living document</strong>, updated annually to reflect updates and changes to
+				strategic priorities.
 			</p>
 		</div>
 	</div>
@@ -182,7 +182,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 	<!-- Strategic Priorities -->
 	<div class="space-y-16">
 		{
-			strategicPriorities.map((priority, categoryIndex) => (
+			strategicPriorities.map((priority) => (
 				<section>
 					<div class="mb-8">
 						<h2 class="text-3xl font-bold text-gray-900 mb-2">{priority.category}</h2>
@@ -190,7 +190,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 					</div>
 
 					<div class="space-y-6">
-						{priority.items.map((item, itemIndex) => (
+						{priority.items.map((item) => (
 							<div class="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow overflow-hidden">
 								<div class="p-6 md:p-8">
 									<div class="flex items-start gap-4 mb-4">
@@ -285,12 +285,12 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 
 	<!-- Download CTA -->
 	<section class="mt-20">
-		<div class="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
+		<div
+			class="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20"
+		>
 			<div class="flex flex-col md:flex-row items-center justify-between gap-6">
 				<div class="flex-1">
-					<h2 class="text-2xl font-bold text-gray-900 mb-2">
-						Download the Full Strategic Plan
-					</h2>
+					<h2 class="text-2xl font-bold text-gray-900 mb-2">Download the Full Strategic Plan</h2>
 					<p class="text-gray-600">
 						Access the complete strategic plan document with detailed timelines and metrics.
 					</p>
@@ -305,7 +305,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 							stroke-linejoin="round"
 							stroke-width="2"
 							d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-						/>
+						></path>
 					</svg>
 					Download PDF
 				</a>
@@ -315,7 +315,9 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 
 	<!-- Get Involved CTA -->
 	<section class="mt-12">
-		<div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white text-center">
+		<div
+			class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white text-center"
+		>
 			<h2 class="text-3xl font-bold mb-4">Help Shape Our Strategy</h2>
 			<p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
 				We welcome input from industry stakeholders. Get involved in shaping the future of home

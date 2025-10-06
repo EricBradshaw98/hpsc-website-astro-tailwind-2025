@@ -59,7 +59,11 @@ const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) =
 			class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
 		>
 			<option value="all">All Categories</option>
-			{Object.keys(documentsByCategory).map((category) => <option value={category}>{category}</option>)}
+			{
+				Object.keys(documentsByCategory).map((category) => (
+					<option value={category}>{category}</option>
+				))
+			}
 		</select>
 	</div>
 
@@ -129,7 +133,12 @@ const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) =
 
 	<!-- No Results Message -->
 	<div id="no-results" class="hidden text-center py-12">
-		<svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+		<svg
+			class="w-16 h-16 text-gray-400 mx-auto mb-4"
+			fill="none"
+			stroke="currentColor"
+			viewBox="0 0 24 24"
+		>
 			<path
 				stroke-linecap="round"
 				stroke-linejoin="round"

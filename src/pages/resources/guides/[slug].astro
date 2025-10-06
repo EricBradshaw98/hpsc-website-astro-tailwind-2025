@@ -24,7 +24,8 @@ export async function getStaticPaths() {
 const guides: Record<string, any> = {
 	'heat-pump-installation-checklist': {
 		title: 'Heat Pump Installation: Complete Checklist',
-		description: 'Everything contractors need to know for a successful heat pump installation from start to finish.',
+		description:
+			'Everything contractors need to know for a successful heat pump installation from start to finish.',
 		category: 'Contractors',
 		difficulty: 'Intermediate',
 		readTime: '15 min',
@@ -292,7 +293,8 @@ const guides: Record<string, any> = {
 	},
 	'getting-started-with-home-energy-assessments': {
 		title: 'Getting Started with Home Energy Assessments',
-		description: 'A comprehensive guide to understanding and preparing for your home energy assessment.',
+		description:
+			'A comprehensive guide to understanding and preparing for your home energy assessment.',
 		category: 'Homeowners',
 		difficulty: 'Beginner',
 		readTime: '10 min',
@@ -426,7 +428,8 @@ const guides: Record<string, any> = {
 	},
 	'understanding-rebate-programs': {
 		title: 'Understanding BC Energy Rebate Programs',
-		description: 'Navigate the landscape of energy efficiency rebates and incentives available to BC homeowners.',
+		description:
+			'Navigate the landscape of energy efficiency rebates and incentives available to BC homeowners.',
 		category: 'Homeowners',
 		difficulty: 'Beginner',
 		readTime: '12 min',
@@ -624,7 +627,8 @@ const guides: Record<string, any> = {
 	},
 	'air-sealing-best-practices': {
 		title: 'Air Sealing Best Practices for Contractors',
-		description: 'Professional techniques for effective air sealing to improve home energy efficiency and comfort.',
+		description:
+			'Professional techniques for effective air sealing to improve home energy efficiency and comfort.',
 		category: 'Contractors',
 		difficulty: 'Intermediate',
 		readTime: '18 min',
@@ -851,7 +855,8 @@ const guides: Record<string, any> = {
 	},
 	'choosing-the-right-insulation': {
 		title: 'Choosing the Right Insulation for Your Home',
-		description: 'A comprehensive guide to insulation types, R-values, and selecting the best option for your climate and budget.',
+		description:
+			'A comprehensive guide to insulation types, R-values, and selecting the best option for your climate and budget.',
 		category: 'Homeowners',
 		difficulty: 'Beginner',
 		readTime: '14 min',
@@ -1106,7 +1111,8 @@ const guides: Record<string, any> = {
 	},
 	'blower-door-testing-guide': {
 		title: 'Complete Guide to Blower Door Testing',
-		description: 'Professional guide to conducting accurate blower door tests and interpreting results for home performance contractors.',
+		description:
+			'Professional guide to conducting accurate blower door tests and interpreting results for home performance contractors.',
 		category: 'Contractors',
 		difficulty: 'Advanced',
 		readTime: '20 min',
@@ -1358,7 +1364,9 @@ const guides: Record<string, any> = {
 	},
 };
 
-const guide = guides[slug || 'getting-started-with-home-energy-assessments'] || guides['getting-started-with-home-energy-assessments'];
+const guide =
+	guides[slug || 'getting-started-with-home-energy-assessments'] ||
+	guides['getting-started-with-home-energy-assessments'];
 
 const formattedDate = new Date(guide.date).toLocaleDateString('en-US', {
 	year: 'numeric',
@@ -1423,33 +1431,33 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 
 			<!-- Steps -->
 			<div class="space-y-12">
-				{guide.steps.map((step: any, index: number) => (
-					<div id={`step-${index + 1}`} class="scroll-mt-24">
-						<div class="flex items-start gap-4 mb-6">
-							<div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg">
-								{index + 1}
+				{
+					guide.steps.map((step: any, index: number) => (
+						<div id={`step-${index + 1}`} class="scroll-mt-24">
+							<div class="flex items-start gap-4 mb-6">
+								<div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg">
+									{index + 1}
+								</div>
+								<div class="flex-1">
+									<h2 class="text-2xl md:text-3xl font-bold text-gray-900">{step.title}</h2>
+								</div>
 							</div>
-							<div class="flex-1">
-								<h2 class="text-2xl md:text-3xl font-bold text-gray-900">
-									{step.title}
-								</h2>
+							<div class="pl-0 md:pl-16">
+								<div
+									class="prose prose-lg max-w-none prose-headings:font-bold prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-ul:my-4 prose-li:my-2 prose-ol:my-4 prose-strong:text-gray-900"
+									set:html={step.content}
+								/>
 							</div>
+							{index < guide.steps.length - 1 && <div class="mt-8 pt-8 border-b border-gray-200" />}
 						</div>
-						<div class="pl-0 md:pl-16">
-							<div
-								class="prose prose-lg max-w-none prose-headings:font-bold prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-ul:my-4 prose-li:my-2 prose-ol:my-4 prose-strong:text-gray-900"
-								set:html={step.content}
-							/>
-						</div>
-						{index < guide.steps.length - 1 && (
-							<div class="mt-8 pt-8 border-b border-gray-200"></div>
-						)}
-					</div>
-				))}
+					))
+				}
 			</div>
 
 			<!-- Guide Complete -->
-			<div class="mt-12 p-8 bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl border-2 border-primary/20">
+			<div
+				class="mt-12 p-8 bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl border-2 border-primary/20"
+			>
 				<div class="flex items-center gap-3 mb-4">
 					<svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
 						<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
@@ -1476,33 +1484,35 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 			</div>
 
 			<!-- Related Guides -->
-			{guide.relatedGuides && guide.relatedGuides.length > 0 && (
-				<div class="mt-12 pt-8 border-t border-gray-200">
-					<h2 class="text-2xl font-bold text-gray-900 mb-6">Related Guides</h2>
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-						{guide.relatedGuides.map((related: any) => (
-							<a
-								href={`/resources/guides/${related.slug}`}
-								class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 hover:border-primary"
-							>
-								<Image
-									src={related.image}
-									alt={related.title}
-									class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-									width={400}
-									height={300}
-									loading="lazy"
-								/>
-								<div class="p-4">
-									<h3 class="font-bold text-gray-900 group-hover:text-primary transition-colors">
-										{related.title}
-									</h3>
-								</div>
-							</a>
-						))}
+			{
+				guide.relatedGuides && guide.relatedGuides.length > 0 && (
+					<div class="mt-12 pt-8 border-t border-gray-200">
+						<h2 class="text-2xl font-bold text-gray-900 mb-6">Related Guides</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							{guide.relatedGuides.map((related: any) => (
+								<a
+									href={`/resources/guides/${related.slug}`}
+									class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 hover:border-primary"
+								>
+									<Image
+										src={related.image}
+										alt={related.title}
+										class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+										width={400}
+										height={300}
+										loading="lazy"
+									/>
+									<div class="p-4">
+										<h3 class="font-bold text-gray-900 group-hover:text-primary transition-colors">
+											{related.title}
+										</h3>
+									</div>
+								</a>
+							))}
+						</div>
 					</div>
-				</div>
-			)}
+				)
+			}
 		</article>
 
 		<!-- Sidebar -->
@@ -1512,22 +1522,20 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 				<div class="bg-white rounded-2xl shadow-md p-6">
 					<h3 class="text-lg font-bold text-gray-900 mb-4">Progress</h3>
 					<div class="space-y-3">
-						{guide.steps.map((step: any, index: number) => (
-							<a
-								href={`#step-${index + 1}`}
-								class="step-link block group"
-								data-step={index + 1}
-							>
-								<div class="flex items-center gap-3">
-									<div class="flex-shrink-0 w-8 h-8 border-2 border-gray-300 rounded-full flex items-center justify-center text-sm font-semibold text-gray-400 group-hover:border-primary group-hover:text-primary transition-colors">
-										{index + 1}
+						{
+							guide.steps.map((step: any, index: number) => (
+								<a href={`#step-${index + 1}`} class="step-link block group" data-step={index + 1}>
+									<div class="flex items-center gap-3">
+										<div class="flex-shrink-0 w-8 h-8 border-2 border-gray-300 rounded-full flex items-center justify-center text-sm font-semibold text-gray-400 group-hover:border-primary group-hover:text-primary transition-colors">
+											{index + 1}
+										</div>
+										<div class="flex-1 text-sm text-gray-600 group-hover:text-primary transition-colors line-clamp-2">
+											{step.title}
+										</div>
 									</div>
-									<div class="flex-1 text-sm text-gray-600 group-hover:text-primary transition-colors line-clamp-2">
-										{step.title}
-									</div>
-								</div>
-							</a>
-						))}
+								</a>
+							))
+						}
 					</div>
 				</div>
 
@@ -1565,8 +1573,7 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
-								d="M15 19l-7-7 7-7"
-							></path>
+								d="M15 19l-7-7 7-7"></path>
 						</svg>
 						Back to All Guides
 					</div>
