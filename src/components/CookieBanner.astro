@@ -100,18 +100,13 @@
 							</div>
 							<p class="text-sm text-gray-300">
 								These cookies allow us to count visits and traffic sources so we can measure and
-								improve the performance of our site. They help us understand which pages are the most
-								and least popular.
+								improve the performance of our site. They help us understand which pages are the
+								most and least popular.
 							</p>
 						</div>
 						<div class="flex-shrink-0">
 							<label class="relative inline-block w-12 h-6 cursor-pointer">
-								<input
-									type="checkbox"
-									id="analytics-toggle"
-									class="sr-only peer"
-									checked
-								/>
+								<input type="checkbox" id="analytics-toggle" class="sr-only peer" checked />
 								<div
 									class="w-12 h-6 bg-gray-600 peer-checked:bg-primary rounded-full peer transition-colors"
 								>
@@ -138,11 +133,7 @@
 						</div>
 						<div class="flex-shrink-0">
 							<label class="relative inline-block w-12 h-6 cursor-pointer">
-								<input
-									type="checkbox"
-									id="marketing-toggle"
-									class="sr-only peer"
-								/>
+								<input type="checkbox" id="marketing-toggle" class="sr-only peer" />
 								<div
 									class="w-12 h-6 bg-gray-600 peer-checked:bg-primary rounded-full peer transition-colors"
 								>
@@ -228,7 +219,8 @@
 				// @ts-ignore
 				function gtag() {
 					// @ts-ignore
-					dataLayer.push(arguments);
+					// eslint-disable-next-line prefer-rest-params
+					window.dataLayer.push(arguments);
 				}
 				// @ts-ignore
 				window.gtag = gtag;
@@ -347,10 +339,10 @@
 
 		// Save settings button
 		document.getElementById('cookie-save-settings-btn')?.addEventListener('click', () => {
-			const analyticsEnabled = (document.getElementById('analytics-toggle') as HTMLInputElement)
-				?.checked;
-			const marketingEnabled = (document.getElementById('marketing-toggle') as HTMLInputElement)
-				?.checked;
+			const analyticsToggle = document.getElementById('analytics-toggle') as HTMLInputElement;
+			const marketingToggle = document.getElementById('marketing-toggle') as HTMLInputElement;
+			const analyticsEnabled = analyticsToggle?.checked;
+			const marketingEnabled = marketingToggle?.checked;
 
 			const consent: CookieConsent = {
 				essential: true,

@@ -281,7 +281,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 																	stroke-linejoin="round"
 																	stroke-width="2"
 																	d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-																></path>
+																/>
 															</svg>
 															<p class="text-gray-700 text-sm">
 																<strong>Status:</strong> In Progress
@@ -299,23 +299,22 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 																	stroke-linejoin="round"
 																	stroke-width="2"
 																	d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-																></path>
+																/>
 															</svg>
 															<p class="text-gray-700 text-sm">
-																<strong>Last Updated:</strong> {
-																	new Date().toLocaleDateString('en-US', {
-																		year: 'numeric',
-																		month: 'long',
-																		day: 'numeric',
-																	})
-																}
+																<strong>Last Updated:</strong>{' '}
+																{new Date().toLocaleDateString('en-US', {
+																	year: 'numeric',
+																	month: 'long',
+																	day: 'numeric',
+																})}
 															</p>
 														</div>
 														<div class="mt-4 pt-4 border-t border-gray-200">
 															<p class="text-gray-600 text-sm leading-relaxed">
-																The HPSC is actively working on this strategic priority. Updates will
-																be posted here as milestones are achieved. Check back regularly for the
-																latest progress on this initiative.
+																The HPSC is actively working on this strategic priority. Updates
+																will be posted here as milestones are achieved. Check back regularly
+																for the latest progress on this initiative.
 															</p>
 														</div>
 													</div>
@@ -428,4 +427,3 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 		});
 	});
 </script>
-
