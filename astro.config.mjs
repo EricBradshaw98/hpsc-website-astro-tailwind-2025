@@ -12,6 +12,23 @@ export default defineConfig({
   integrations: [react(), sitemap()],
   adapter: cloudflare(),
 
+  image: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+      },
+    ],
+  },
+
   vite: {
     plugins: [tailwindcss()]
   }
