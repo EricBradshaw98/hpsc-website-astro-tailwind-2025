@@ -1,0 +1,137 @@
+# Cloudflare Pages Security Headers Configuration
+# These headers are currently commented out for development
+# Uncomment and customize for production deployment
+
+# IMPORTANT: Test thoroughly before enabling in production
+# Some headers may break functionality if not configured correctly
+
+## PRODUCTION SECURITY HEADERS (COMMENTED OUT FOR DEV)
+## Uncomment the section below when ready for production
+
+# /*
+#   # Content Security Policy (CSP)
+#   # Restricts sources of content to prevent XSS attacks
+#   # IMPORTANT: Adjust 'unsafe-inline' and 'unsafe-eval' based on your needs
+#   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com https://marker.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data: blob:; connect-src 'self' https://www.google-analytics.com https://pagefind.app; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+#
+#   # Prevent clickjacking attacks by controlling iframe embedding
+#   X-Frame-Options: DENY
+#
+#   # Prevent MIME type sniffing
+#   X-Content-Type-Options: nosniff
+#
+#   # Enable browser XSS protection (legacy, CSP is preferred)
+#   X-XSS-Protection: 1; mode=block
+#
+#   # Control referrer information sent to other sites
+#   Referrer-Policy: strict-origin-when-cross-origin
+#
+#   # Restrict browser features and APIs
+#   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
+#
+#   # Enforce HTTPS connections (only after enabling HTTPS)
+#   # Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+#
+#   # Cross-Origin policies for enhanced security
+#   Cross-Origin-Embedder-Policy: require-corp
+#   Cross-Origin-Opener-Policy: same-origin
+#   Cross-Origin-Resource-Policy: same-origin
+
+## DEVELOPMENT HEADERS (ACTIVE)
+## Minimal headers for local development and testing
+
+/*
+  # Basic security header for development
+  X-Content-Type-Options: nosniff
+
+  # Permissive CORS for development
+  Access-Control-Allow-Origin: *
+
+  # Cache control for static assets
+  Cache-Control: public, max-age=3600
+
+## STATIC ASSET CACHING
+## Aggressive caching for immutable assets
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=86400
+
+## HTML PAGES
+## No caching for HTML to ensure fresh content
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+## INSTRUCTIONS FOR PRODUCTION DEPLOYMENT
+
+# 1. Test CSP with report-only mode first:
+#    Content-Security-Policy-Report-Only: [your policy]
+#    Monitor violations at configured report-uri endpoint
+
+# 2. Gradually tighten CSP by removing 'unsafe-inline' and 'unsafe-eval'
+#    Move inline scripts to external files
+#    Use nonces or hashes for necessary inline scripts
+
+# 3. Enable HSTS only after confirming HTTPS works correctly
+#    Start with shorter max-age (e.g., 300) for testing
+
+# 4. Test thoroughly across all browsers:
+#    - Chrome/Edge
+#    - Firefox
+#    - Safari
+#    - Mobile browsers
+
+# 5. Monitor for issues:
+#    - Check browser console for CSP violations
+#    - Test all interactive features (forms, modals, etc.)
+#    - Verify third-party integrations (Analytics, Turnstile, Marker.io)
+
+# 6. Common CSP Issues to Watch For:
+#    - Inline event handlers (onclick, onload) won't work
+#    - Inline styles may be blocked
+#    - eval() and new Function() will fail
+#    - Third-party scripts need explicit allow-listing
+
+# 7. CSP Sources to Consider:
+#    - Google Analytics: https://www.googletagmanager.com https://www.google-analytics.com
+#    - Google Fonts: https://fonts.googleapis.com https://fonts.gstatic.com
+#    - Cloudflare Turnstile: https://challenges.cloudflare.com
+#    - Marker.io: https://marker.io https://edge.marker.io
+#    - Unsplash Images: https://images.unsplash.com
+#    - Pagefind Search: self-hosted, uses 'self'
+
+## ADDITIONAL SECURITY RECOMMENDATIONS
+
+# Consider adding these headers based on your needs:
+
+# 1. Report-URI for CSP violations:
+#    Content-Security-Policy: ...; report-uri https://your-domain.com/csp-report
+
+# 2. Expect-CT for Certificate Transparency:
+#    Expect-CT: max-age=86400, enforce
+
+# 3. Clear-Site-Data on logout pages:
+#    Clear-Site-Data: "cache", "cookies", "storage"
+
+# 4. Feature-Policy (deprecated, use Permissions-Policy):
+#    Feature-Policy: geolocation 'none'; microphone 'none'; camera 'none'
+
+## TESTING RESOURCES
+
+# Test your security headers:
+# - https://securityheaders.com/
+# - https://observatory.mozilla.org/
+# - https://csp-evaluator.withgoogle.com/
+
+# CSP Generator:
+# - https://report-uri.com/home/generate
+
+# Header Documentation:
+# - https://developers.cloudflare.com/pages/platform/headers/
+# - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
