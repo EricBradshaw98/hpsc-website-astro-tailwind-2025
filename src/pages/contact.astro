@@ -281,7 +281,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 		<!-- FAQ Section -->
 		<div class="bg-gray-50 rounded-2xl p-4 md:p-8 lg:p-12 mb-16 mx-4 md:mx-0">
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-			<div class="space-y-4 max-w-4xl">
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+				<div class="lg:col-span-2 space-y-4">
 				<!-- FAQ Item 1 -->
 				<details class="faq-item group bg-white rounded-lg shadow-sm overflow-hidden">
 					<summary
@@ -391,6 +392,34 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 						</div>
 					</div>
 				</details>
+				</div>
+
+				<!-- Additional Questions CTA -->
+				<div class="lg:col-span-1">
+					<div class="bg-white rounded-2xl shadow-md p-6 sticky top-24">
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+								<svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+								</svg>
+							</div>
+							<h3 class="text-xl font-bold text-gray-900 mb-3">Have Another Question?</h3>
+							<p class="text-gray-600 mb-6">
+								Can't find what you're looking for? We're here to help!
+							</p>
+							<a
+								href="#contact-form"
+								class="block w-full bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors mb-3"
+								onclick="const element = document.getElementById('contact-form'); const y = element.getBoundingClientRect().top + window.pageYOffset - 100; window.scrollTo({ top: y, behavior: 'smooth' }); return false;"
+							>
+								Ask Your Question
+							</a>
+							<p class="text-sm text-gray-500">
+								Or call us at <a href="tel:+16047553469" class="text-primary hover:underline">(604) 755-3469</a>
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
