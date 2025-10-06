@@ -1,19 +1,21 @@
 {
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:homeperformance.ca)",
-      "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Tailwind config with homeperformance.ca theme and SEO layout\n\n- Extract color scheme from homeperformance.ca website (primary blue #00b6f0 with accent colors)\n- Create Tailwind config with full color palette\n- Build comprehensive Layout component with Yoast-style SEO support (meta tags, OG, Twitter, JSON-LD)\n- Add Breadcrumbs component with Schema.org structured data\n- Update index page with example usage\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Nav search bar, Footer policies section, and mock home page\n\n- Add search bar to Nav component with icon and form\n- Add Policies section to Footer (Terms, Cookie Policy, Accessibility)\n- Move Breadcrumbs to components/layouts folder\n- Create comprehensive mock home page with:\n  - Hero section with CTA buttons\n  - Services/What We Do section with cards\n  - Stats section (500+ contractors, 10k+ homes, 15+ years)\n  - Call-to-action section\n  - Latest news section with article cards\n- Update Layout to import Nav, Footer, and Breadcrumbs from layouts folder\n- Improve Layout structure with flexbox for sticky footer\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(npm install:*)",
-      "Bash(npm run format:*)",
-      "Bash(npm run lint)",
-      "Bash(npm run build:*)",
-      "Bash(git commit:*)",
-      "Bash(npm run dev:*)"
-    ],
-    "deny": [],
-    "ask": []
-  }
+	"permissions": {
+		"allow": [
+			"WebFetch(domain:homeperformance.ca)",
+			"Bash(git add:*)",
+			"Bash(git commit -m \"$(cat <<''EOF''\nAdd Tailwind config with homeperformance.ca theme and SEO layout\n\n- Extract color scheme from homeperformance.ca website (primary blue #00b6f0 with accent colors)\n- Create Tailwind config with full color palette\n- Build comprehensive Layout component with Yoast-style SEO support (meta tags, OG, Twitter, JSON-LD)\n- Add Breadcrumbs component with Schema.org structured data\n- Update index page with example usage\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+			"Bash(git push:*)",
+			"Bash(git commit -m \"$(cat <<''EOF''\nAdd Nav search bar, Footer policies section, and mock home page\n\n- Add search bar to Nav component with icon and form\n- Add Policies section to Footer (Terms, Cookie Policy, Accessibility)\n- Move Breadcrumbs to components/layouts folder\n- Create comprehensive mock home page with:\n  - Hero section with CTA buttons\n  - Services/What We Do section with cards\n  - Stats section (500+ contractors, 10k+ homes, 15+ years)\n  - Call-to-action section\n  - Latest news section with article cards\n- Update Layout to import Nav, Footer, and Breadcrumbs from layouts folder\n- Improve Layout structure with flexbox for sticky footer\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+			"Bash(npm install:*)",
+			"Bash(npm run format:*)",
+			"Bash(npm run lint)",
+			"Bash(npm run build:*)",
+			"Bash(git commit:*)",
+			"Bash(npm run dev:*)",
+			"Bash(copy:*)",
+			"Bash(cp:*)"
+		],
+		"deny": [],
+		"ask": []
+	}
 }

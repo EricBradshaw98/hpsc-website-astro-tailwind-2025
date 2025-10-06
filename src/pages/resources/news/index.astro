@@ -67,8 +67,7 @@ const newsArticles = [
 	{
 		id: 7,
 		title: 'Winter Preparedness Workshop Series Announced',
-		excerpt:
-			'Free workshops for contractors on winter-specific retrofit challenges and solutions.',
+		excerpt: 'Free workshops for contractors on winter-specific retrofit challenges and solutions.',
 		image: 'https://images.unsplash.com/photo-1417816491410-d61e1546e539?w=800&h=600&fit=crop',
 		date: '2025-08-10',
 		category: 'Training',
@@ -122,7 +121,8 @@ const archiveMonths = getArchiveMonths();
 			<div class="mb-8">
 				<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">News & Updates</h1>
 				<p class="text-lg text-gray-600">
-					Stay informed with the latest news, updates, and insights from the home performance industry.
+					Stay informed with the latest news, updates, and insights from the home performance
+					industry.
 				</p>
 			</div>
 
@@ -195,16 +195,15 @@ const archiveMonths = getArchiveMonths();
 
 			<!-- Pagination -->
 			<div class="mt-12 flex justify-center items-center gap-4">
-				<button
-					class="px-4 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed"
-					disabled
-				>
+				<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed" disabled>
 					← Previous
 				</button>
 				<div class="flex gap-2">
 					<button class="px-4 py-2 rounded-lg bg-primary text-white">1</button>
-					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">2</button>
-					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">3</button>
+					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">2</button
+					>
+					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">3</button
+					>
 				</div>
 				<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">
 					Next →
@@ -218,7 +217,8 @@ const archiveMonths = getArchiveMonths();
 			<div class="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white mb-8">
 				<h3 class="text-2xl font-bold mb-3">Monthly Newsletter</h3>
 				<p class="mb-4 text-primary-light">
-					Get industry updates, training opportunities, and exclusive insights delivered to your inbox.
+					Get industry updates, training opportunities, and exclusive insights delivered to your
+					inbox.
 				</p>
 				<form class="space-y-3">
 					<input
@@ -268,10 +268,7 @@ const archiveMonths = getArchiveMonths();
 					{
 						newsArticles.slice(0, 5).map((article) => (
 							<li>
-								<a
-									href={`/resources/news/${article.id}`}
-									class="block group"
-								>
+								<a href={`/resources/news/${article.id}`} class="block group">
 									<h4 class="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors mb-1">
 										{article.title}
 									</h4>
@@ -301,12 +298,7 @@ const archiveMonths = getArchiveMonths();
 									class="text-gray-700 hover:text-primary transition-colors flex items-center justify-between"
 								>
 									<span>{month}</span>
-									<svg
-										class="w-4 h-4"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path
 											stroke-linecap="round"
 											stroke-linejoin="round"

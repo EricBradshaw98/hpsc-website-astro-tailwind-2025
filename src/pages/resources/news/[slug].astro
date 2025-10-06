@@ -6,6 +6,21 @@ import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 // For now, we'll use the slug from the URL to fetch mock data
 const { slug } = Astro.params;
 
+export async function getStaticPaths() {
+	// When connected to WordPress, this will fetch all post slugs from the API
+	// For now, return the mock article IDs
+	return [
+		{ params: { slug: '1' } },
+		{ params: { slug: '2' } },
+		{ params: { slug: '3' } },
+		{ params: { slug: '4' } },
+		{ params: { slug: '5' } },
+		{ params: { slug: '6' } },
+		{ params: { slug: '7' } },
+		{ params: { slug: '8' } },
+	];
+}
+
 // Mock article data - will be replaced with WordPress + Yoast SEO data
 const mockArticles: Record<string, any> = {
 	'1': {
@@ -45,7 +60,8 @@ const mockArticles: Record<string, any> = {
 		date: '2025-09-15',
 		category: 'Training',
 		author: 'HPSC Team',
-		authorBio: 'The HPSC communications team is dedicated to sharing news and insights from the home performance industry.',
+		authorBio:
+			'The HPSC communications team is dedicated to sharing news and insights from the home performance industry.',
 		tags: ['Certification', 'Training', 'Contractors', 'Professional Development'],
 	},
 	'2': {
@@ -82,7 +98,8 @@ const mockArticles: Record<string, any> = {
 		date: '2025-09-10',
 		category: 'Rebates',
 		author: 'Policy Team',
-		authorBio: 'Our policy team monitors and analyzes energy efficiency programs and government initiatives affecting the home performance sector.',
+		authorBio:
+			'Our policy team monitors and analyzes energy efficiency programs and government initiatives affecting the home performance sector.',
 		tags: ['Rebates', 'CleanBC', 'BC Hydro', 'Energy Efficiency', 'Homeowners'],
 	},
 };
@@ -131,7 +148,9 @@ const ogImage = article.image;
 			<!-- Article Header -->
 			<header class="mb-8">
 				<div class="flex items-center gap-3 mb-4">
-					<span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">
+					<span
+						class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full"
+					>
 						{article.category}
 					</span>
 					<time class="text-sm text-gray-500" datetime={article.date}>
@@ -154,7 +173,9 @@ const ogImage = article.image;
 			</div>
 
 			<!-- Article Content -->
-			<div class="prose prose-lg max-w-none prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-ul:my-6 prose-li:my-2 prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700">
+			<div
+				class="prose prose-lg max-w-none prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-ul:my-6 prose-li:my-2 prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700"
+			>
 				<Fragment set:html={article.content} />
 			</div>
 
@@ -178,7 +199,9 @@ const ogImage = article.image;
 			<!-- Author Bio -->
 			<div class="mt-8 p-6 bg-gray-50 rounded-2xl">
 				<div class="flex items-start gap-4">
-					<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+					<div
+						class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0"
+					>
 						<svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
 							<path
 								d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
@@ -263,11 +286,7 @@ const ogImage = article.image;
 									href={`/resources/news/${related.id}`}
 									class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
 								>
-									<img
-										src={related.image}
-										alt={related.title}
-										class="w-full h-48 object-cover"
-									/>
+									<img src={related.image} alt={related.title} class="w-full h-48 object-cover" />
 									<div class="p-4">
 										<h3 class="font-bold text-gray-900 group-hover:text-primary transition-colors mb-2">
 											{related.title}
@@ -291,7 +310,9 @@ const ogImage = article.image;
 		<!-- Sidebar -->
 		<aside class="lg:col-span-1">
 			<!-- Newsletter Signup -->
-			<div class="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white mb-8 sticky top-24">
+			<div
+				class="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white mb-8 sticky top-24"
+			>
 				<h3 class="text-2xl font-bold mb-3">Stay Updated</h3>
 				<p class="mb-4 text-primary-light">
 					Get the latest news and insights delivered to your inbox.
