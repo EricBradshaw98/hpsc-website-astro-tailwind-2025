@@ -8,6 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://homeperformance.ca', // Required for sitemap generation
   integrations: [react(), sitemap()],
   adapter: cloudflare(),
 

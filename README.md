@@ -1,10 +1,12 @@
-# Astro Starter Kit: Basics
+# Home Performance Standards Council Website
 
-```sh
-npm create astro@latest -- --template basics
-```
+⚠️ **DEV ENVIRONMENT** - This site is configured to be unindexable by search engines.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## SEO Blocking Configuration
+
+- `public/robots.txt` - Blocks all crawlers
+- `src/layouts/Layout.astro` - Default robots meta tag set to `noindex, nofollow`
+- Sitemap configured at `astro.config.mjs` with site URL
 
 ## 🚀 Project Structure
 
