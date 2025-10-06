@@ -282,13 +282,13 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
 			<div class="space-y-4 max-w-4xl">
 				<!-- FAQ Item 1 -->
-				<details class="group bg-white rounded-lg shadow-sm">
+				<details class="faq-item group bg-white rounded-lg shadow-sm overflow-hidden">
 					<summary
-						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors list-none"
 					>
 						<span>How quickly will I receive a response?</span>
 						<svg
-							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							class="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -300,20 +300,22 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 								d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</summary>
-					<div class="px-6 pb-6 text-gray-600">
-						We typically respond to all inquiries within 1-2 business days. For urgent matters,
-						please call us directly at (604) 755-3469.
+					<div class="faq-content">
+						<div class="px-6 pb-6 text-gray-600">
+							We typically respond to all inquiries within 1-2 business days. For urgent matters,
+							please call us directly at (604) 755-3469.
+						</div>
 					</div>
 				</details>
 
 				<!-- FAQ Item 2 -->
-				<details class="group bg-white rounded-lg shadow-sm">
+				<details class="faq-item group bg-white rounded-lg shadow-sm overflow-hidden">
 					<summary
-						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors list-none"
 					>
 						<span>Do you offer technical support?</span>
 						<svg
-							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							class="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -325,20 +327,22 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 								d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</summary>
-					<div class="px-6 pb-6 text-gray-600">
-						Yes! Our technical team is available to help contractors and homeowners with questions
-						about energy assessments, retrofits, and building science.
+					<div class="faq-content">
+						<div class="px-6 pb-6 text-gray-600">
+							Yes! Our technical team is available to help contractors and homeowners with questions
+							about energy assessments, retrofits, and building science.
+						</div>
 					</div>
 				</details>
 
 				<!-- FAQ Item 3 -->
-				<details class="group bg-white rounded-lg shadow-sm">
+				<details class="faq-item group bg-white rounded-lg shadow-sm overflow-hidden">
 					<summary
-						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors list-none"
 					>
 						<span>Can I visit your office?</span>
 						<svg
-							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							class="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -350,20 +354,22 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 								d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</summary>
-					<div class="px-6 pb-6 text-gray-600">
-						We welcome visitors! Please contact us in advance to schedule an appointment and ensure
-						someone will be available to assist you.
+					<div class="faq-content">
+						<div class="px-6 pb-6 text-gray-600">
+							We welcome visitors! Please contact us in advance to schedule an appointment and ensure
+							someone will be available to assist you.
+						</div>
 					</div>
 				</details>
 
 				<!-- FAQ Item 4 -->
-				<details class="group bg-white rounded-lg shadow-sm">
+				<details class="faq-item group bg-white rounded-lg shadow-sm overflow-hidden">
 					<summary
-						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors list-none"
 					>
 						<span>How do I become a certified contractor?</span>
 						<svg
-							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							class="w-5 h-5 text-gray-500 transition-transform duration-300 group-open:rotate-180"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -375,10 +381,12 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 								d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</summary>
-					<div class="px-6 pb-6 text-gray-600">
-						Visit our <a href="/contractor-network/certification" class="text-primary hover:underline"
-							>certification page</a
-						> or contact us using the subject "Contractor Certification" for detailed information.
+					<div class="faq-content">
+						<div class="px-6 pb-6 text-gray-600">
+							Visit our <a href="/contractor-network/certification" class="text-primary hover:underline"
+								>certification page</a
+							> or contact us using the subject "Contractor Certification" for detailed information.
+						</div>
 					</div>
 				</details>
 			</div>
@@ -495,4 +503,59 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 			submitButton.innerHTML = originalButtonText;
 		}
 	});
+
+	// FAQ Smooth Animation
+	document.querySelectorAll('.faq-item').forEach((details) => {
+		const summary = details.querySelector('summary');
+		const content = details.querySelector('.faq-content') as HTMLElement;
+
+		if (!summary || !content) return;
+
+		summary.addEventListener('click', (e) => {
+			e.preventDefault();
+
+			if (details.hasAttribute('open')) {
+				// Closing
+				const startHeight = content.scrollHeight;
+				content.style.height = startHeight + 'px';
+
+				requestAnimationFrame(() => {
+					content.style.height = '0px';
+				});
+
+				setTimeout(() => {
+					details.removeAttribute('open');
+				}, 300);
+			} else {
+				// Opening
+				details.setAttribute('open', '');
+				const endHeight = content.scrollHeight;
+				content.style.height = '0px';
+
+				requestAnimationFrame(() => {
+					content.style.height = endHeight + 'px';
+				});
+
+				setTimeout(() => {
+					content.style.height = 'auto';
+				}, 300);
+			}
+		});
+	});
 </script>
+
+<style>
+	.faq-content {
+		overflow: hidden;
+		transition: height 300ms ease-out;
+		height: 0;
+	}
+
+	details[open] .faq-content {
+		height: auto;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+</style>
