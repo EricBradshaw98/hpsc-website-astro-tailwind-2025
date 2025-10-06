@@ -161,8 +161,11 @@ const navLinks: NavLink[] = [
 		</div>
 
 		<!-- Mobile Menu -->
-		<nav id="mobile-menu" class="lg:hidden hidden mt-4">
-			<ul class="flex flex-col gap-4">
+		<nav
+			id="mobile-menu"
+			class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0"
+		>
+			<ul class="flex flex-col gap-4 pt-4">
 				{
 					navLinks.map((link) => (
 						<li>
@@ -239,22 +242,32 @@ const navLinks: NavLink[] = [
 	const mobileMenuButton = document.getElementById('mobile-menu-button');
 	const mobileMenu = document.getElementById('mobile-menu');
 	const hamburgerLines = mobileMenuButton?.querySelectorAll('.hamburger-line');
+	let isMenuOpen = false;
 
 	mobileMenuButton?.addEventListener('click', () => {
-		mobileMenu?.classList.toggle('hidden');
+		isMenuOpen = !isMenuOpen;
 
-		// Animate hamburger to X
-		if (hamburgerLines) {
-			if (mobileMenu?.classList.contains('hidden')) {
-				// Back to hamburger
-				hamburgerLines[0].style.transform = 'rotate(0) translateY(0)';
-				hamburgerLines[1].style.opacity = '1';
-				hamburgerLines[2].style.transform = 'rotate(0) translateY(0)';
-			} else {
-				// Transform to X
+		if (isMenuOpen) {
+			// Open menu - smooth dropdown
+			mobileMenu?.classList.remove('max-h-0', 'opacity-0');
+			mobileMenu?.classList.add('max-h-[800px]', 'opacity-100');
+
+			// Transform hamburger to X
+			if (hamburgerLines) {
 				hamburgerLines[0].style.transform = 'rotate(45deg) translateY(8px)';
 				hamburgerLines[1].style.opacity = '0';
 				hamburgerLines[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+			}
+		} else {
+			// Close menu - smooth slide up
+			mobileMenu?.classList.remove('max-h-[800px]', 'opacity-100');
+			mobileMenu?.classList.add('max-h-0', 'opacity-0');
+
+			// Back to hamburger
+			if (hamburgerLines) {
+				hamburgerLines[0].style.transform = 'rotate(0) translateY(0)';
+				hamburgerLines[1].style.opacity = '1';
+				hamburgerLines[2].style.transform = 'rotate(0) translateY(0)';
 			}
 		}
 	});
