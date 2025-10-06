@@ -11,7 +11,8 @@
 		<!-- Tab Content Panel -->
 		<div
 			id="accessibility-tab-panel"
-			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 max-w-[calc(100vw-48px)] opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 border-2 border-white"
+			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 max-w-[calc(100vw-48px)] transition-opacity duration-300 border-2 border-white"
+			style="opacity: 0;"
 		>
 			<h2 class="text-xl font-bold mb-4 flex items-center gap-2">
 				<svg
@@ -250,12 +251,10 @@
 
 		if (isTabOpen) {
 			tabWrapper?.style.setProperty('transform', 'translateX(0)');
-			tabPanel?.classList.remove('opacity-0');
-			tabPanel?.classList.add('opacity-100');
+			if (tabPanel) tabPanel.style.opacity = '1';
 		} else {
 			tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
-			tabPanel?.classList.remove('opacity-100');
-			tabPanel?.classList.add('opacity-0');
+			if (tabPanel) tabPanel.style.opacity = '0';
 		}
 	});
 
@@ -265,8 +264,7 @@
 		if (isTabOpen && !target.closest('.accessibility-tab-wrapper')) {
 			isTabOpen = false;
 			tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
-			tabPanel?.classList.remove('opacity-100');
-			tabPanel?.classList.add('opacity-0');
+			if (tabPanel) tabPanel.style.opacity = '0';
 		}
 	});
 
@@ -305,7 +303,12 @@
 </script>
 
 <style>
-	.accessibility-tab-wrapper:hover {
-		transform: translateX(0) !important;
+	@media (min-width: 768px) {
+		.accessibility-tab-wrapper:hover {
+			transform: translateX(0) !important;
+		}
+		.accessibility-tab-wrapper:hover #accessibility-tab-panel {
+			opacity: 1 !important;
+		}
 	}
 </style>
