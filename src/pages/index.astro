@@ -1,21 +1,244 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// Example of how to use the layout with SEO and breadcrumbs
 ---
 
 <Layout
-	title="Home Performance Sciences Canada"
-	description="Professional home performance services across Canada"
-	keywords="home performance, energy efficiency, Canada"
-	breadcrumbs={[
-		{ label: 'Home', href: '/' },
-	]}
+	title="Home Performance Stakeholder Council | Energy Efficiency Experts in BC"
+	description="Leading the way in home performance and energy efficiency solutions across British Columbia. Connect with certified contractors and access expert resources."
+	keywords="home performance, energy efficiency, British Columbia, home retrofits, contractors, sustainability"
+	breadcrumbs={[{ label: 'Home' }]}
 >
-	<h1 class="text-4xl font-bold text-primary mb-6">
-		Welcome to Home Performance Sciences Canada
-	</h1>
-	<p class="text-lg text-gray-700">
-		Your content goes here...
-	</p>
+	<!-- Hero Section -->
+	<section class="mb-16 -mx-4 md:mx-0">
+		<div
+			class="bg-gradient-to-r from-primary to-primary/80 text-white rounded-none md:rounded-2xl px-8 md:px-16 py-20 md:py-24"
+		>
+			<div class="max-w-3xl">
+				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+					Building a More Energy-Efficient Future
+				</h1>
+				<p class="text-xl md:text-2xl mb-8 text-white/90">
+					Connecting homeowners with certified contractors to deliver proven
+					home performance solutions across British Columbia.
+				</p>
+				<div class="flex flex-wrap gap-4">
+					<a
+						href="/contractor-network/find"
+						class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+					>
+						Find a Contractor
+					</a>
+					<a
+						href="/about"
+						class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
+					>
+						Learn More
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Services Section -->
+	<section class="mb-16">
+		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center">
+			What We Do
+		</h2>
+		<p class="text-lg text-gray-600 mb-12 text-center max-w-2xl mx-auto">
+			The HPSC brings together industry leaders, government, and contractors to
+			advance home performance standards across BC.
+		</p>
+
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+			<!-- Service 1 -->
+			<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+						></path>
+					</svg>
+				</div>
+				<h3 class="text-xl font-semibold mb-3">Contractor Network</h3>
+				<p class="text-gray-600 mb-4">
+					Access BC's largest network of certified home performance contractors
+					committed to quality and excellence.
+				</p>
+				<a href="/contractor-network" class="text-primary font-medium hover:underline">
+					Explore Network →
+				</a>
+			</div>
+
+			<!-- Service 2 -->
+			<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+						></path>
+					</svg>
+				</div>
+				<h3 class="text-xl font-semibold mb-3">Resources & Training</h3>
+				<p class="text-gray-600 mb-4">
+					Industry-leading resources, training programs, and best practices for
+					home performance professionals.
+				</p>
+				<a href="/resources" class="text-primary font-medium hover:underline">
+					View Resources →
+				</a>
+			</div>
+
+			<!-- Service 3 -->
+			<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+						></path>
+					</svg>
+				</div>
+				<h3 class="text-xl font-semibold mb-3">Industry Standards</h3>
+				<p class="text-gray-600 mb-4">
+					Setting and maintaining high standards for home performance work
+					throughout British Columbia.
+				</p>
+				<a href="/about/strategy" class="text-primary font-medium hover:underline">
+					Learn About Our Strategy →
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Stats Section -->
+	<section class="mb-16 bg-gray-50 -mx-4 md:mx-0 md:rounded-2xl px-8 md:px-16 py-12">
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+			<div>
+				<div class="text-4xl md:text-5xl font-bold text-primary mb-2">500+</div>
+				<div class="text-gray-600 text-lg">Certified Contractors</div>
+			</div>
+			<div>
+				<div class="text-4xl md:text-5xl font-bold text-primary mb-2">10,000+</div>
+				<div class="text-gray-600 text-lg">Homes Improved</div>
+			</div>
+			<div>
+				<div class="text-4xl md:text-5xl font-bold text-primary mb-2">15+</div>
+				<div class="text-gray-600 text-lg">Years of Excellence</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="mb-16 text-center">
+		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+			Ready to Improve Your Home?
+		</h2>
+		<p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+			Connect with a certified contractor today and start your journey to a more
+			energy-efficient, comfortable home.
+		</p>
+		<div class="flex flex-wrap justify-center gap-4">
+			<a
+				href="/contractor-network/find"
+				class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+			>
+				Find a Contractor
+			</a>
+			<a
+				href="/contact"
+				class="bg-gray-200 text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+			>
+				Contact Us
+			</a>
+		</div>
+	</section>
+
+	<!-- Latest News -->
+	<section class="mb-16">
+		<div class="flex items-center justify-between mb-8">
+			<h2 class="text-3xl md:text-4xl font-bold text-gray-900">Latest News</h2>
+			<a href="/resources/news" class="text-primary font-medium hover:underline">
+				View All →
+			</a>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+			<!-- News Item 1 -->
+			<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+				<div class="bg-gradient-to-br from-primary/20 to-primary/5 h-48"></div>
+				<div class="p-6">
+					<div class="text-sm text-gray-500 mb-2">March 15, 2025</div>
+					<h3 class="text-xl font-semibold mb-2">
+						New Energy Efficiency Rebate Program Launched
+					</h3>
+					<p class="text-gray-600 mb-4">
+						BC homeowners can now access enhanced rebates for energy-efficient
+						home upgrades.
+					</p>
+					<a href="/resources/news/rebate-program" class="text-primary font-medium hover:underline">
+						Read More →
+					</a>
+				</div>
+			</article>
+
+			<!-- News Item 2 -->
+			<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+				<div class="bg-gradient-to-br from-accent-green/20 to-accent-green/5 h-48"></div>
+				<div class="p-6">
+					<div class="text-sm text-gray-500 mb-2">March 10, 2025</div>
+					<h3 class="text-xl font-semibold mb-2">
+						Spring Training Series Announced
+					</h3>
+					<p class="text-gray-600 mb-4">
+						Join us for comprehensive training workshops on the latest home
+						performance techniques.
+					</p>
+					<a href="/resources/training-events" class="text-primary font-medium hover:underline">
+						Read More →
+					</a>
+				</div>
+			</article>
+
+			<!-- News Item 3 -->
+			<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+				<div class="bg-gradient-to-br from-accent-purple/20 to-accent-purple/5 h-48"></div>
+				<div class="p-6">
+					<div class="text-sm text-gray-500 mb-2">March 5, 2025</div>
+					<h3 class="text-xl font-semibold mb-2">
+						2025 Contractor Excellence Awards
+					</h3>
+					<p class="text-gray-600 mb-4">
+						Celebrating outstanding achievements in home performance across
+						British Columbia.
+					</p>
+					<a href="/resources/news/awards-2025" class="text-primary font-medium hover:underline">
+						Read More →
+					</a>
+				</div>
+			</article>
+		</div>
+	</section>
 </Layout>
