@@ -1,0 +1,201 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
+
+// Document list - this could be fetched from a CMS or database later
+const documents = [
+	{
+		slug: 'sample-document',
+		title: 'Sample Document',
+		description: 'This is a sample PDF document for viewing.',
+		category: 'General',
+		date: '2025-01-06',
+		fileSize: '2.5 MB',
+	},
+];
+
+// Group documents by category
+const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) => {
+	if (!acc[doc.category]) {
+		acc[doc.category] = [];
+	}
+	acc[doc.category].push(doc);
+	return acc;
+}, {});
+---
+
+<Layout
+	title="Documents | HPSC Resources"
+	description="Access important documents, guides, and resources from the Home Performance Stakeholder Council."
+	keywords="HPSC documents, PDF resources, guides, home performance, energy efficiency"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'Resources', href: '/resources' },
+			{ label: 'Documents', href: '/resources/documents' },
+		]}
+	/>
+
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Documents & Resources</h1>
+		<p class="text-xl text-gray-600 max-w-3xl">
+			Browse our collection of important documents, guides, and resources for contractors,
+			homeowners, and industry professionals.
+		</p>
+	</div>
+
+	<!-- Search and Filter -->
+	<div class="mb-8 flex flex-col md:flex-row gap-4">
+		<div class="flex-1">
+			<input
+				type="text"
+				id="search-input"
+				placeholder="Search documents..."
+				class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+			/>
+		</div>
+		<select
+			id="category-filter"
+			class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
+		>
+			<option value="all">All Categories</option>
+			{Object.keys(documentsByCategory).map((category) => <option value={category}>{category}</option>)}
+		</select>
+	</div>
+
+	<!-- Documents by Category -->
+	{
+		Object.entries(documentsByCategory).map(([category, docs]) => (
+			<section class="mb-12" data-category={category}>
+				<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+					<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+						/>
+					</svg>
+					{category}
+				</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{docs.map((doc: any) => (
+						<a
+							href={`/resources/documents/${doc.slug}`}
+							class="document-card group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary"
+							data-title={doc.title.toLowerCase()}
+							data-category={doc.category}
+						>
+							<div class="p-6">
+								<div class="flex items-start justify-between mb-4">
+									<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+										<svg
+											class="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+											/>
+										</svg>
+									</div>
+									<span class="text-xs text-gray-500 font-medium">{doc.fileSize}</span>
+								</div>
+								<h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+									{doc.title}
+								</h3>
+								<p class="text-sm text-gray-600 mb-4 line-clamp-2">{doc.description}</p>
+								<div class="flex items-center justify-between text-sm text-gray-500">
+									<time datetime={doc.date}>
+										{new Date(doc.date).toLocaleDateString('en-US', {
+											month: 'short',
+											day: 'numeric',
+											year: 'numeric',
+										})}
+									</time>
+									<span class="text-primary font-medium group-hover:underline">View →</span>
+								</div>
+							</div>
+						</a>
+					))}
+				</div>
+			</section>
+		))
+	}
+
+	<!-- No Results Message -->
+	<div id="no-results" class="hidden text-center py-12">
+		<svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+			></path>
+		</svg>
+		<p class="text-xl text-gray-600">No documents found matching your criteria.</p>
+	</div>
+</Layout>
+
+<script>
+	// Search and filter functionality
+	const searchInput = document.getElementById('search-input') as HTMLInputElement;
+	const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement;
+	const documentCards = document.querySelectorAll('.document-card');
+	const categorySections = document.querySelectorAll('[data-category]');
+	const noResults = document.getElementById('no-results');
+
+	function filterDocuments() {
+		const searchTerm = searchInput.value.toLowerCase();
+		const selectedCategory = categoryFilter.value;
+		let visibleCount = 0;
+
+		documentCards.forEach((card) => {
+			const title = card.getAttribute('data-title') || '';
+			const category = card.getAttribute('data-category') || '';
+
+			const matchesSearch = title.includes(searchTerm);
+			const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+
+			if (matchesSearch && matchesCategory) {
+				(card as HTMLElement).style.display = 'block';
+				visibleCount++;
+			} else {
+				(card as HTMLElement).style.display = 'none';
+			}
+		});
+
+		// Show/hide category sections based on visible cards
+		categorySections.forEach((section) => {
+			const sectionCategory = section.getAttribute('data-category');
+			const visibleCardsInSection = section.querySelectorAll(
+				`.document-card[data-category="${sectionCategory}"][style*="display: block"], .document-card[data-category="${sectionCategory}"]:not([style*="display: none"])`
+			);
+
+			if (
+				visibleCardsInSection.length > 0 &&
+				(selectedCategory === 'all' || sectionCategory === selectedCategory)
+			) {
+				(section as HTMLElement).style.display = 'block';
+			} else {
+				(section as HTMLElement).style.display = 'none';
+			}
+		});
+
+		// Show/hide no results message
+		if (noResults) {
+			if (visibleCount === 0) {
+				noResults.classList.remove('hidden');
+			} else {
+				noResults.classList.add('hidden');
+			}
+		}
+	}
+
+	searchInput?.addEventListener('input', filterDocuments);
+	categoryFilter?.addEventListener('change', filterDocuments);
+</script>

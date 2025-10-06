@@ -1,0 +1,248 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+	// Add your documents here with their metadata
+	return [
+		{
+			params: { slug: 'sample-document' }
+		},
+	];
+}
+
+// Document metadata - map slug to document details
+const documents: Record<string, any> = {
+	'sample-document': {
+		title: 'Sample Document',
+		description: 'This is a sample PDF document for viewing.',
+		pdfPath: '/documents/sample-document.pdf',
+		category: 'General',
+		date: '2025-01-06',
+		fileSize: '2.5 MB',
+	},
+};
+
+const doc = documents[slug || 'sample-document'] || documents['sample-document'];
+
+// Format date
+const formattedDate = new Date(doc.date).toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+const pageTitle = `${doc.title} | HPSC Documents`;
+const pageDescription = doc.description;
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	keywords="HPSC, documents, PDF, resources"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'Resources', href: '/resources' },
+			{ label: 'Documents', href: '/resources/documents' },
+			{ label: doc.title, href: `/resources/documents/${slug}` },
+		]}
+	/>
+
+	<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+		<!-- Main PDF Viewer -->
+		<div class="lg:col-span-3">
+			<!-- Document Header -->
+			<header class="mb-6">
+				<div class="flex items-center gap-3 mb-4">
+					<span
+						class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full"
+					>
+						{doc.category}
+					</span>
+					<time class="text-sm text-gray-500" datetime={doc.date}>
+						{formattedDate}
+					</time>
+					<span class="text-sm text-gray-500">• {doc.fileSize}</span>
+				</div>
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+					{doc.title}
+				</h1>
+				<p class="text-xl text-gray-600">{doc.description}</p>
+			</header>
+
+			<!-- PDF Viewer -->
+			<div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+				<div class="bg-gray-100 border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+					<h2 class="font-semibold text-gray-900">Document Viewer</h2>
+					<div class="flex gap-3">
+						<a
+							href={doc.pdfPath}
+							download
+							class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium"
+						>
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+								></path>
+							</svg>
+							Download PDF
+						</a>
+						<button
+							id="fullscreen-btn"
+							class="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium"
+						>
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+								></path>
+							</svg>
+							Fullscreen
+						</button>
+					</div>
+				</div>
+				<div id="pdf-container" class="relative w-full" style="min-height: 800px;">
+					<!-- PDF.js will render here, or fallback to iframe -->
+					<iframe
+						id="pdf-iframe"
+						src={`${doc.pdfPath}#view=FitH`}
+						class="w-full h-full border-0"
+						style="min-height: 800px;"
+						title={doc.title}
+					></iframe>
+				</div>
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<aside class="lg:col-span-1">
+			<!-- Document Actions -->
+			<div class="bg-white rounded-2xl shadow-md p-6 mb-6 sticky top-24">
+				<h3 class="text-lg font-bold text-gray-900 mb-4">Document Actions</h3>
+				<div class="space-y-3">
+					<a
+						href={doc.pdfPath}
+						download
+						class="flex items-center gap-3 w-full px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+					>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+							></path>
+						</svg>
+						<span class="font-medium">Download</span>
+					</a>
+					<a
+						href={doc.pdfPath}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="flex items-center gap-3 w-full px-4 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+					>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+							></path>
+						</svg>
+						<span class="font-medium">Open in New Tab</span>
+					</a>
+					<button
+						id="print-btn"
+						class="flex items-center gap-3 w-full px-4 py-3 bg-gray-100 text-gray-900 rounded-lg hover:bg-gray-200 transition-colors"
+					>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+							></path>
+						</svg>
+						<span class="font-medium">Print</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Document Info -->
+			<div class="bg-gray-50 rounded-2xl p-6 mb-6">
+				<h3 class="text-lg font-bold text-gray-900 mb-4">Document Information</h3>
+				<dl class="space-y-3 text-sm">
+					<div>
+						<dt class="font-semibold text-gray-700">Category</dt>
+						<dd class="text-gray-600">{doc.category}</dd>
+					</div>
+					<div>
+						<dt class="font-semibold text-gray-700">Published</dt>
+						<dd class="text-gray-600">{formattedDate}</dd>
+					</div>
+					<div>
+						<dt class="font-semibold text-gray-700">File Size</dt>
+						<dd class="text-gray-600">{doc.fileSize}</dd>
+					</div>
+					<div>
+						<dt class="font-semibold text-gray-700">Format</dt>
+						<dd class="text-gray-600">PDF</dd>
+					</div>
+				</dl>
+			</div>
+
+			<!-- Back to Documents -->
+			<a
+				href="/resources/documents"
+				class="block bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow"
+			>
+				<div class="flex items-center gap-3 text-primary font-semibold">
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M15 19l-7-7 7-7"></path>
+					</svg>
+					Back to All Documents
+				</div>
+			</a>
+		</aside>
+	</div>
+</Layout>
+
+<script>
+	// Fullscreen functionality
+	const fullscreenBtn = document.getElementById('fullscreen-btn');
+	const pdfContainer = document.getElementById('pdf-container');
+
+	fullscreenBtn?.addEventListener('click', () => {
+		if (pdfContainer) {
+			if (document.fullscreenElement) {
+				document.exitFullscreen();
+			} else {
+				pdfContainer.requestFullscreen();
+			}
+		}
+	});
+
+	// Print functionality
+	const printBtn = document.getElementById('print-btn');
+	const pdfIframe = document.getElementById('pdf-iframe') as HTMLIFrameElement;
+
+	printBtn?.addEventListener('click', () => {
+		if (pdfIframe?.contentWindow) {
+			pdfIframe.contentWindow.print();
+		} else {
+			window.print();
+		}
+	});
+</script>
