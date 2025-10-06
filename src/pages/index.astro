@@ -14,15 +14,28 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 		<div
 			class="rounded-none md:rounded-2xl px-8 md:px-16 py-20 md:py-24 text-white relative overflow-hidden"
 		>
-			<!-- Background Image with Gradient Overlay -->
+			<!-- Background Images with Gradient Overlay -->
 			<div class="absolute inset-0 z-0">
 				<img
+					id="hero-img-1"
 					src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&h=800&fit=crop"
 					alt="Energy Efficient Home"
-					class="w-full h-full object-cover"
+					class="hero-image w-full h-full object-cover absolute inset-0 opacity-100 transition-opacity duration-1000"
+				/>
+				<img
+					id="hero-img-2"
+					src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1920&h=800&fit=crop"
+					alt="Modern Home Exterior"
+					class="hero-image w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-1000"
+				/>
+				<img
+					id="hero-img-3"
+					src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&h=800&fit=crop"
+					alt="Sustainable Home"
+					class="hero-image w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-1000"
 				/>
 				<div
-					class="absolute inset-0"
+					class="absolute inset-0 z-10"
 					style="background: linear-gradient(to right, #00b6f0 0%, rgba(0, 182, 240, 0.95) 40%, rgba(0, 182, 240, 0.7) 70%, rgba(0, 182, 240, 0.4) 100%);"
 				></div>
 			</div>
@@ -66,8 +79,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 			<!-- Service 1 -->
 			<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden">
-				<div class="absolute bottom-0 right-0 w-32 h-32 opacity-5 -mr-8 -mb-8">
-					<svg class="w-full h-full text-primary" fill="currentColor" viewBox="0 0 24 24">
+				<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
+					<svg class="w-64 h-64 text-primary" fill="currentColor" viewBox="0 0 24 24">
 						<path
 							d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
 						></path>
@@ -87,8 +100,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 			<!-- Service 2 -->
 			<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden">
-				<div class="absolute bottom-0 right-0 w-32 h-32 opacity-5 -mr-8 -mb-8">
-					<svg class="w-full h-full text-primary" fill="currentColor" viewBox="0 0 24 24">
+				<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
+					<svg class="w-64 h-64 text-primary" fill="currentColor" viewBox="0 0 24 24">
 						<path
 							d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
 						></path>
@@ -106,8 +119,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 			<!-- Service 3 -->
 			<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden">
-				<div class="absolute bottom-0 right-0 w-32 h-32 opacity-5 -mr-8 -mb-8">
-					<svg class="w-full h-full text-primary" fill="currentColor" viewBox="0 0 24 24">
+				<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
+					<svg class="w-64 h-64 text-primary" fill="currentColor" viewBox="0 0 24 24">
 						<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 					</svg>
 				</div>
@@ -137,53 +150,18 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 			<div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
 				<div class="flex flex-col items-center">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4"
-					>
-						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-							></path>
-						</svg>
-					</div>
 					<div class="text-5xl md:text-6xl font-bold mb-3" style="color: #00b6f0;">500+</div>
 					<div class="text-gray-700 text-lg font-medium">Certified Contractors</div>
 					<p class="text-gray-600 text-sm mt-2">Trusted professionals across BC</p>
 				</div>
 
 				<div class="flex flex-col items-center">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4"
-					>
-						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-							></path>
-						</svg>
-					</div>
 					<div class="text-5xl md:text-6xl font-bold mb-3" style="color: #00b6f0;">10,000+</div>
 					<div class="text-gray-700 text-lg font-medium">Homes Improved</div>
 					<p class="text-gray-600 text-sm mt-2">Energy-efficient retrofits completed</p>
 				</div>
 
 				<div class="flex flex-col items-center">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4"
-					>
-						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-						</svg>
-					</div>
 					<div class="text-5xl md:text-6xl font-bold mb-3" style="color: #00b6f0;">15+</div>
 					<div class="text-gray-700 text-lg font-medium">Years of Excellence</div>
 					<p class="text-gray-600 text-sm mt-2">Leading the industry since 2010</p>
@@ -191,6 +169,21 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 			</div>
 		</div>
 	</section>
+
+	<script>
+		// Hero image carousel
+		const heroImages = document.querySelectorAll('.hero-image');
+		let currentHeroIndex = 0;
+		const totalHeroImages = heroImages.length;
+
+		function cycleHeroImages() {
+			heroImages[currentHeroIndex].style.opacity = '0';
+			currentHeroIndex = (currentHeroIndex + 1) % totalHeroImages;
+			heroImages[currentHeroIndex].style.opacity = '1';
+		}
+
+		setInterval(cycleHeroImages, 5000);
+	</script>
 
 	<!-- Parallax CTA Section -->
 	<section class="mb-16 -mx-4 md:mx-0 relative h-96 md:rounded-2xl overflow-hidden">
@@ -250,6 +243,161 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 		});
 	</script>
 
+	<!-- We Work With Section -->
+	<section class="mb-16">
+		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">We Work With</h2>
+		<p class="text-lg text-gray-600 mb-12 max-w-2xl">
+			Collaborating across the residential retrofit industry with key stakeholders and sectors.
+		</p>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+			<!-- Industry Card -->
+			<div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/20">
+				<h3 class="text-2xl font-bold text-gray-900 mb-4">Industry</h3>
+				<div class="text-xl font-semibold text-primary">Residential Retrofit</div>
+			</div>
+
+			<!-- Stakeholders Card -->
+			<div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+				<h3 class="text-2xl font-bold text-gray-900 mb-4">Stakeholders</h3>
+				<div class="flex flex-wrap gap-3 text-gray-700">
+					<span class="inline-flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						Contractors
+					</span>
+					<span class="inline-flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						Manufacturers
+					</span>
+					<span class="inline-flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						Suppliers
+					</span>
+					<span class="inline-flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						Industry associations
+					</span>
+					<span class="inline-flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						Program administrators
+					</span>
+					<span class="inline-flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						Other leaders
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Sectors Card -->
+		<div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+			<h3 class="text-2xl font-bold text-gray-900 mb-6">Sectors</h3>
+			<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+				<!-- Sector Icon 1 -->
+				<div class="flex flex-col items-center text-center group cursor-pointer">
+					<div
+						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors"
+					>
+						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+							></path>
+						</svg>
+					</div>
+					<span class="text-sm font-medium text-gray-700">Insulation</span>
+				</div>
+
+				<!-- Sector Icon 2 -->
+				<div class="flex flex-col items-center text-center group cursor-pointer">
+					<div
+						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors"
+					>
+						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+							></path>
+						</svg>
+					</div>
+					<span class="text-sm font-medium text-gray-700">HVAC</span>
+				</div>
+
+				<!-- Sector Icon 3 -->
+				<div class="flex flex-col items-center text-center group cursor-pointer">
+					<div
+						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors"
+					>
+						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+							></path>
+						</svg>
+					</div>
+					<span class="text-sm font-medium text-gray-700">Windows</span>
+				</div>
+
+				<!-- Sector Icon 4 -->
+				<div class="flex flex-col items-center text-center group cursor-pointer">
+					<div
+						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors"
+					>
+						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M13 10V3L4 14h7v7l9-11h-7z"
+							></path>
+						</svg>
+					</div>
+					<span class="text-sm font-medium text-gray-700">Electrical</span>
+				</div>
+
+				<!-- Sector Icon 5 -->
+				<div class="flex flex-col items-center text-center group cursor-pointer">
+					<div
+						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors"
+					>
+						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+							></path>
+						</svg>
+					</div>
+					<span class="text-sm font-medium text-gray-700">Solar</span>
+				</div>
+
+				<!-- Sector Icon 6 -->
+				<div class="flex flex-col items-center text-center group cursor-pointer">
+					<div
+						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors"
+					>
+						<svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+							></path>
+						</svg>
+					</div>
+					<span class="text-sm font-medium text-gray-700">Quality</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- Our Supporters Carousel -->
 	<section class="mb-16">
 		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Supporters</h2>
@@ -266,29 +414,29 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 				<div class="min-w-full flex items-center justify-center gap-8 px-4">
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+1"
-							alt="Partner 1"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=BC+Hydro&font=montserrat"
+							alt="BC Hydro"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+2"
-							alt="Partner 2"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=FortisBC&font=montserrat"
+							alt="FortisBC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+3"
-							alt="Partner 3"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=CleanBC&font=montserrat"
+							alt="CleanBC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+4"
-							alt="Partner 4"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=NRCan&font=montserrat"
+							alt="Natural Resources Canada"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>
@@ -298,29 +446,29 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 				<div class="min-w-full flex items-center justify-center gap-8 px-4">
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+5"
-							alt="Partner 5"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=BC+Housing&font=montserrat"
+							alt="BC Housing"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+6"
-							alt="Partner 6"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=CMHC&font=montserrat"
+							alt="CMHC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+7"
-							alt="Partner 7"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=Efficiency+BC&font=montserrat"
+							alt="Efficiency BC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<img
-							src="https://via.placeholder.com/150x80?text=Partner+8"
-							alt="Partner 8"
+							src="https://placehold.co/150x80/e0e0e0/666666?text=HAVAN&font=montserrat"
+							alt="HAVAN"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
 						/>
 					</div>

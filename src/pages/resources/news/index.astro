@@ -1,0 +1,394 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
+
+// Mock news data - this would eventually come from a CMS or API
+const newsArticles = [
+	{
+		id: 1,
+		title: 'HPSC Launches New Contractor Certification Program',
+		excerpt:
+			'We are excited to announce the launch of our comprehensive certification program designed to elevate standards in the home performance industry.',
+		image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop',
+		date: '2025-09-15',
+		category: 'Training',
+		author: 'HPSC Team',
+	},
+	{
+		id: 2,
+		title: 'New Energy Efficiency Rebates Available for Homeowners',
+		excerpt:
+			'CleanBC and BC Hydro have expanded their rebate programs, making energy-efficient upgrades more accessible than ever.',
+		image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&h=600&fit=crop',
+		date: '2025-09-10',
+		category: 'Rebates',
+		author: 'Policy Team',
+	},
+	{
+		id: 3,
+		title: 'Heat Pump Technology Advances: What Contractors Need to Know',
+		excerpt:
+			'Recent developments in heat pump efficiency and cold-climate performance are changing the retrofit landscape.',
+		image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+		date: '2025-09-05',
+		category: 'Resources',
+		author: 'Technical Team',
+	},
+	{
+		id: 4,
+		title: 'HPSC Annual Conference 2025: Registration Now Open',
+		excerpt:
+			'Join us for three days of learning, networking, and innovation in the residential retrofit industry.',
+		image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop',
+		date: '2025-08-28',
+		category: 'Events',
+		author: 'Events Team',
+	},
+	{
+		id: 5,
+		title: 'Building Code Updates Impact Home Performance Standards',
+		excerpt:
+			'Understanding the latest BC Building Code changes and their implications for retrofit projects.',
+		image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop',
+		date: '2025-08-20',
+		category: 'Policy',
+		author: 'HPSC Team',
+	},
+	{
+		id: 6,
+		title: 'Success Story: 100-Year-Old Home Achieves Net Zero',
+		excerpt:
+			'How one Vancouver homeowner and contractor team transformed a heritage home into a modern energy-efficient dwelling.',
+		image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
+		date: '2025-08-15',
+		category: 'Case Studies',
+		author: 'Communications Team',
+	},
+	{
+		id: 7,
+		title: 'Winter Preparedness Workshop Series Announced',
+		excerpt:
+			'Free workshops for contractors on winter-specific retrofit challenges and solutions.',
+		image: 'https://images.unsplash.com/photo-1417816491410-d61e1546e539?w=800&h=600&fit=crop',
+		date: '2025-08-10',
+		category: 'Training',
+		author: 'Education Team',
+	},
+	{
+		id: 8,
+		title: 'Indoor Air Quality: The Hidden Benefit of Energy Retrofits',
+		excerpt:
+			'Research shows that proper home performance upgrades significantly improve indoor air quality and occupant health.',
+		image: 'https://images.unsplash.com/photo-1628624747186-a941c476b7ef?w=800&h=600&fit=crop',
+		date: '2025-08-05',
+		category: 'Resources',
+		author: 'Research Team',
+	},
+];
+
+// Extract unique categories
+const categories = ['All', ...new Set(newsArticles.map((article) => article.category))];
+
+// Get recent months for archive
+const getArchiveMonths = () => {
+	const months = new Set();
+	newsArticles.forEach((article) => {
+		const date = new Date(article.date);
+		const monthYear = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+		months.add(monthYear);
+	});
+	return Array.from(months);
+};
+
+const archiveMonths = getArchiveMonths();
+---
+
+<Layout
+	title="News & Updates | Home Performance Stakeholder Council"
+	description="Stay informed with the latest news, updates, and insights from the home performance industry in British Columbia."
+	keywords="home performance news, energy efficiency updates, BC retrofit news, HPSC updates"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'Resources', href: '/resources' },
+			{ label: 'News & Updates', href: '/resources/news' },
+		]}
+	/>
+
+	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+		<!-- Main Content -->
+		<div class="lg:col-span-2">
+			<!-- Page Header -->
+			<div class="mb-8">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">News & Updates</h1>
+				<p class="text-lg text-gray-600">
+					Stay informed with the latest news, updates, and insights from the home performance industry.
+				</p>
+			</div>
+
+			<!-- Filter Buttons -->
+			<div class="mb-8 flex flex-wrap gap-2" id="category-filters">
+				{
+					categories.map((category) => (
+						<button
+							data-category={category}
+							class={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all ${
+								category === 'All'
+									? 'bg-primary text-white'
+									: 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+							}`}
+						>
+							{category}
+						</button>
+					))
+				}
+			</div>
+
+			<!-- News Grid -->
+			<div class="space-y-8" id="news-grid">
+				{
+					newsArticles.map((article) => (
+						<article
+							data-category={article.category}
+							class="news-article bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+						>
+							<div class="md:flex">
+								<div class="md:w-2/5">
+									<img
+										src={article.image}
+										alt={article.title}
+										class="w-full h-64 md:h-full object-cover"
+									/>
+								</div>
+								<div class="p-6 md:w-3/5">
+									<div class="flex items-center gap-3 mb-3">
+										<span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+											{article.category}
+										</span>
+										<time class="text-sm text-gray-500">
+											{new Date(article.date).toLocaleDateString('en-US', {
+												year: 'numeric',
+												month: 'long',
+												day: 'numeric',
+											})}
+										</time>
+									</div>
+									<h2 class="text-2xl font-bold text-gray-900 mb-3 hover:text-primary transition-colors">
+										<a href={`/resources/news/${article.id}`}>{article.title}</a>
+									</h2>
+									<p class="text-gray-600 mb-4">{article.excerpt}</p>
+									<div class="flex items-center justify-between">
+										<span class="text-sm text-gray-500">By {article.author}</span>
+										<a
+											href={`/resources/news/${article.id}`}
+											class="text-primary font-semibold hover:underline"
+										>
+											Read More →
+										</a>
+									</div>
+								</div>
+							</div>
+						</article>
+					))
+				}
+			</div>
+
+			<!-- Pagination -->
+			<div class="mt-12 flex justify-center items-center gap-4">
+				<button
+					class="px-4 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed"
+					disabled
+				>
+					← Previous
+				</button>
+				<div class="flex gap-2">
+					<button class="px-4 py-2 rounded-lg bg-primary text-white">1</button>
+					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">2</button>
+					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">3</button>
+				</div>
+				<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">
+					Next →
+				</button>
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<aside class="lg:col-span-1">
+			<!-- Newsletter Signup -->
+			<div class="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white mb-8">
+				<h3 class="text-2xl font-bold mb-3">Monthly Newsletter</h3>
+				<p class="mb-4 text-primary-light">
+					Get industry updates, training opportunities, and exclusive insights delivered to your inbox.
+				</p>
+				<form class="space-y-3">
+					<input
+						type="email"
+						placeholder="Your email address"
+						class="w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+						required
+					/>
+					<button
+						type="submit"
+						class="w-full bg-white text-primary font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+					>
+						Subscribe
+					</button>
+				</form>
+			</div>
+
+			<!-- Search -->
+			<div class="bg-white rounded-2xl shadow-md p-6 mb-8">
+				<h3 class="text-xl font-bold text-gray-900 mb-4">Search News</h3>
+				<form action="/resources/news/search" method="get" class="relative">
+					<input
+						type="search"
+						name="q"
+						placeholder="Search articles..."
+						class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+					/>
+					<svg
+						class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+					</svg>
+				</form>
+			</div>
+
+			<!-- Recent Posts -->
+			<div class="bg-white rounded-2xl shadow-md p-6 mb-8">
+				<h3 class="text-xl font-bold text-gray-900 mb-4">Recent Posts</h3>
+				<ul class="space-y-4">
+					{
+						newsArticles.slice(0, 5).map((article) => (
+							<li>
+								<a
+									href={`/resources/news/${article.id}`}
+									class="block group"
+								>
+									<h4 class="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors mb-1">
+										{article.title}
+									</h4>
+									<time class="text-xs text-gray-500">
+										{new Date(article.date).toLocaleDateString('en-US', {
+											month: 'short',
+											day: 'numeric',
+											year: 'numeric',
+										})}
+									</time>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<!-- Archives -->
+			<div class="bg-white rounded-2xl shadow-md p-6 mb-8">
+				<h3 class="text-xl font-bold text-gray-900 mb-4">Archives</h3>
+				<ul class="space-y-2">
+					{
+						archiveMonths.map((month) => (
+							<li>
+								<a
+									href={`/resources/news/archive/${month.toLowerCase().replace(' ', '-')}`}
+									class="text-gray-700 hover:text-primary transition-colors flex items-center justify-between"
+								>
+									<span>{month}</span>
+									<svg
+										class="w-4 h-4"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M9 5l7 7-7 7"
+										/>
+									</svg>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<!-- Categories -->
+			<div class="bg-white rounded-2xl shadow-md p-6">
+				<h3 class="text-xl font-bold text-gray-900 mb-4">Categories</h3>
+				<ul class="space-y-2">
+					{
+						categories.slice(1).map((category) => {
+							const count = newsArticles.filter((a) => a.category === category).length;
+							return (
+								<li>
+									<button
+										data-category={category}
+										class="sidebar-category-btn w-full text-left text-gray-700 hover:text-primary transition-colors flex items-center justify-between"
+									>
+										<span>{category}</span>
+										<span class="text-sm bg-gray-100 px-2 py-1 rounded-full">{count}</span>
+									</button>
+								</li>
+							);
+						})
+					}
+				</ul>
+			</div>
+		</aside>
+	</div>
+</Layout>
+
+<script>
+	// Filter functionality
+	const filterButtons = document.querySelectorAll('.filter-btn');
+	const sidebarCategoryButtons = document.querySelectorAll('.sidebar-category-btn');
+	const newsArticles = document.querySelectorAll('.news-article');
+
+	function filterArticles(category: string) {
+		newsArticles.forEach((article) => {
+			const articleCategory = article.getAttribute('data-category');
+			if (category === 'All' || articleCategory === category) {
+				article.classList.remove('hidden');
+			} else {
+				article.classList.add('hidden');
+			}
+		});
+
+		// Update button styles
+		filterButtons.forEach((btn) => {
+			const btnCategory = btn.getAttribute('data-category');
+			if (btnCategory === category) {
+				btn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+				btn.classList.add('bg-primary', 'text-white');
+			} else {
+				btn.classList.remove('bg-primary', 'text-white');
+				btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+			}
+		});
+	}
+
+	filterButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const category = button.getAttribute('data-category') || 'All';
+			filterArticles(category);
+		});
+	});
+
+	sidebarCategoryButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const category = button.getAttribute('data-category') || 'All';
+			filterArticles(category);
+			// Scroll to top of news grid
+			document.getElementById('news-grid')?.scrollIntoView({ behavior: 'smooth' });
+		});
+	});
+</script>
