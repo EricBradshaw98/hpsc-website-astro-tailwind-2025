@@ -15,7 +15,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	<!-- Hero Section -->
 	<section class="mb-16 -mx-4 md:mx-0 -mt-8">
 		<div
-			class="rounded-none md:rounded-2xl px-8 md:px-16 py-20 md:py-24 text-white relative overflow-hidden"
+			class="rounded-none md:rounded-2xl px-4 md:px-16 py-20 md:py-24 text-white relative overflow-hidden"
 		>
 			<!-- Background Images with Gradient Overlay -->
 			<div class="absolute inset-0 z-0">
@@ -80,7 +80,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	</section>
 
 	<!-- Services Section -->
-	<section class="mb-16">
+	<section class="mb-16 px-4 md:px-0">
 		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What We Do</h2>
 		<p class="text-lg text-gray-600 mb-12">
 			The HPSC brings together industry leaders, government, and contractors to advance home
@@ -474,7 +474,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		</div>
 
 		<!-- Content -->
-		<div class="relative z-10 h-full flex items-center px-8 md:px-16 py-12 md:py-0">
+		<div class="relative z-10 h-full flex items-center px-4 md:px-16 py-12 md:py-0">
 			<div class="w-full">
 				<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
 					Ready to Improve Your Home?
@@ -514,7 +514,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	</script>
 
 	<!-- We Work With Section -->
-	<section class="mb-16">
+	<section class="mb-16 px-4 md:px-0">
 		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">We Work With</h2>
 		<p class="text-lg text-gray-600 mb-12">
 			Collaborating across the residential retrofit industry with key stakeholders and sectors.
@@ -710,9 +710,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		<!-- Carousel Container -->
 		<div class="relative overflow-hidden">
 			<div id="supporters-carousel" class="flex transition-transform duration-500 ease-in-out">
-				<!-- Slide 1 -->
+				<!-- Slide 1 - BC Hydro (mobile) / All 4 logos (desktop) -->
 				<div
-					class="min-w-full grid grid-cols-1 md:flex md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
+					class="min-w-full flex items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
 				>
 					<div
 						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
@@ -725,7 +725,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
 					>
 						<Image
 							src={fortisBCLogo}
@@ -735,7 +735,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
 					>
 						<Image
 							src={bcLogo}
@@ -745,7 +745,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
 					>
 						<Image
 							src={vancityLogo}
@@ -756,20 +756,10 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 					</div>
 				</div>
 
-				<!-- Slide 2 -->
+				<!-- Slide 2 - FortisBC (mobile) / All 4 logos (desktop) -->
 				<div
-					class="min-w-full grid grid-cols-1 md:flex md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
+					class="min-w-full flex items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
 				>
-					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
-					>
-						<Image
-							src={bcHydroLogo}
-							alt="BC Hydro"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
 					<div
 						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
@@ -781,6 +771,42 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
+						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
+					>
+						<Image
+							src={bcHydroLogo}
+							alt="BC Hydro"
+							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
+							loading="lazy"
+						/>
+					</div>
+					<div
+						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
+					>
+						<Image
+							src={bcLogo}
+							alt="CleanBC"
+							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
+							loading="lazy"
+						/>
+					</div>
+					<div
+						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
+					>
+						<Image
+							src={vancityLogo}
+							alt="Vancity"
+							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
+							loading="lazy"
+						/>
+					</div>
+				</div>
+
+				<!-- Slide 3 - CleanBC (mobile only) -->
+				<div
+					class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4"
+				>
+					<div
 						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
@@ -790,6 +816,12 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 							loading="lazy"
 						/>
 					</div>
+				</div>
+
+				<!-- Slide 4 - Vancity (mobile only) -->
+				<div
+					class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4"
+				>
 					<div
 						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
@@ -803,7 +835,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				</div>
 			</div>
 
-			<!-- Dots Indicator -->
+			<!-- Dots Indicator - 4 dots on mobile, 2 on desktop -->
 			<div class="flex justify-center gap-2 mt-6">
 				<button
 					class="carousel-dot w-11 h-11 rounded-full bg-primary/30 transition-all flex items-center justify-center"
@@ -819,6 +851,20 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				>
 					<span class="w-3 h-3 rounded-full bg-gray-300"></span>
 				</button>
+				<button
+					class="carousel-dot md:hidden w-11 h-11 rounded-full bg-gray-300/30 transition-all flex items-center justify-center"
+					data-index="2"
+					aria-label="Go to slide 3"
+				>
+					<span class="w-3 h-3 rounded-full bg-gray-300"></span>
+				</button>
+				<button
+					class="carousel-dot md:hidden w-11 h-11 rounded-full bg-gray-300/30 transition-all flex items-center justify-center"
+					data-index="3"
+					aria-label="Go to slide 4"
+				>
+					<span class="w-3 h-3 rounded-full bg-gray-300"></span>
+				</button>
 			</div>
 		</div>
 	</section>
@@ -830,9 +876,13 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		const nextBtn = document.getElementById('next-btn');
 		const dots = document.querySelectorAll('.carousel-dot');
 		let currentIndex = 0;
-		const totalSlides = 2;
 		let startX = 0;
 		let isDragging = false;
+
+		// Get total slides based on screen size
+		function getTotalSlides() {
+			return window.innerWidth < 768 ? 4 : 2;
+		}
 
 		function updateCarousel() {
 			if (carousel) {
@@ -856,11 +906,13 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		}
 
 		prevBtn?.addEventListener('click', () => {
+			const totalSlides = getTotalSlides();
 			currentIndex = currentIndex > 0 ? currentIndex - 1 : totalSlides - 1;
 			updateCarousel();
 		});
 
 		nextBtn?.addEventListener('click', () => {
+			const totalSlides = getTotalSlides();
 			currentIndex = currentIndex < totalSlides - 1 ? currentIndex + 1 : 0;
 			updateCarousel();
 		});
@@ -871,6 +923,15 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				currentIndex = parseInt(target.dataset.index || '0');
 				updateCarousel();
 			});
+		});
+
+		// Reset to first slide on resize to prevent being stuck on non-existent slides
+		window.addEventListener('resize', () => {
+			const totalSlides = getTotalSlides();
+			if (currentIndex >= totalSlides) {
+				currentIndex = 0;
+				updateCarousel();
+			}
 		});
 
 		// Drag/Swipe functionality
@@ -905,6 +966,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 			const diff = startX - endX;
 			const threshold = 50;
+			const totalSlides = getTotalSlides();
 
 			if (diff > threshold && currentIndex < totalSlides - 1) {
 				currentIndex++;

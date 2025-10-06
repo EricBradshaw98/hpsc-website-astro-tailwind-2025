@@ -24,9 +24,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 px-4 md:px-0">
 			<!-- Contact Form -->
-			<div class="bg-white rounded-2xl shadow-lg p-8">
+			<div class="bg-white rounded-2xl shadow-lg p-4 md:p-8">
 				<h2 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
 				<form class="space-y-6" id="contact-form">
 					<!-- Name -->
@@ -143,7 +143,7 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 			<!-- Contact Information & Map -->
 			<div class="space-y-8">
 				<!-- Contact Info Cards -->
-				<div class="bg-white rounded-2xl shadow-lg p-8">
+				<div class="bg-white rounded-2xl shadow-lg p-4 md:p-8">
 					<h2 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
 
 					<!-- Office Address -->
@@ -279,7 +279,7 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 		</div>
 
 		<!-- FAQ Section -->
-		<div class="bg-gray-50 rounded-2xl p-8 md:p-12 mb-16">
+		<div class="bg-gray-50 rounded-2xl p-4 md:p-8 lg:p-12 mb-16 mx-4 md:mx-0">
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
 			<div class="space-y-4 max-w-4xl">
 				<!-- FAQ Item 1 -->
@@ -400,21 +400,33 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 	// Turnstile callback functions
 	let turnstileToken: string | null = null;
 
+	// Check if all required fields are filled
+	function areRequiredFieldsFilled(): boolean {
+		const name = (document.getElementById('name') as HTMLInputElement)?.value.trim();
+		const email = (document.getElementById('email') as HTMLInputElement)?.value.trim();
+		const subject = (document.getElementById('subject') as HTMLSelectElement)?.value;
+		const message = (document.getElementById('message') as HTMLTextAreaElement)?.value.trim();
+		return !!(name && email && subject && message);
+	}
+
+	// Update submit button state
+	function updateSubmitButton() {
+		const submitButton = document.getElementById('submit-btn') as HTMLButtonElement;
+		if (submitButton) {
+			submitButton.disabled = !(areRequiredFieldsFilled() && turnstileToken);
+		}
+	}
+
 	(window as any).onTurnstileSuccess = function (token: string) {
 		console.log('Turnstile success');
 		turnstileToken = token;
-		const submitButton = document.getElementById('submit-btn') as HTMLButtonElement;
-		if (submitButton) {
-			submitButton.disabled = false;
-		}
+		updateSubmitButton();
 	};
 
 	(window as any).onTurnstileError = function (errorCode: string) {
 		console.error('Turnstile error:', errorCode);
-		const submitButton = document.getElementById('submit-btn') as HTMLButtonElement;
-		if (submitButton) {
-			submitButton.disabled = true;
-		}
+		turnstileToken = null;
+		updateSubmitButton();
 		const formMessage = document.getElementById('form-message') as HTMLDivElement;
 		if (formMessage) {
 			formMessage.className =
@@ -427,11 +439,18 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 	(window as any).onTurnstileExpired = function () {
 		console.log('Turnstile expired');
 		turnstileToken = null;
-		const submitButton = document.getElementById('submit-btn') as HTMLButtonElement;
-		if (submitButton) {
-			submitButton.disabled = true;
-		}
+		updateSubmitButton();
 	};
+
+	// Listen for input changes on required fields
+	document.addEventListener('DOMContentLoaded', () => {
+		const requiredFields = ['name', 'email', 'subject', 'message'];
+		requiredFields.forEach((fieldId) => {
+			const field = document.getElementById(fieldId);
+			field?.addEventListener('input', updateSubmitButton);
+			field?.addEventListener('change', updateSubmitButton);
+		});
+	});
 
 	// Form submission handler
 	const form = document.getElementById('contact-form') as HTMLFormElement;
@@ -482,7 +501,7 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 			if ((window as any).turnstile) {
 				(window as any).turnstile.reset();
 			}
-			submitButton.disabled = true;
+			updateSubmitButton();
 
 			// Hide message after 5 seconds
 			setTimeout(() => {
