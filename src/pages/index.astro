@@ -2,6 +2,10 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
+import bcHydroLogo from '../assets/BC_Hydro.png';
+import bcLogo from '../assets/bc-logo.jpg';
+import fortisBCLogo from '../assets/FortisBC-Secondary-W-RGB_Small-480x227.png';
+import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 ---
 
 <Layout
@@ -189,7 +193,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 						height={600}
 						loading="lazy"
 					/>
-					<div class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300">
+					<div
+						class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"
+					>
 					</div>
 				</div>
 
@@ -255,7 +261,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 						height={600}
 						loading="lazy"
 					/>
-					<div class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300">
+					<div
+						class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"
+					>
 					</div>
 				</div>
 
@@ -321,7 +329,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 						height={600}
 						loading="lazy"
 					/>
-					<div class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300">
+					<div
+						class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"
+					>
 					</div>
 				</div>
 
@@ -352,8 +362,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 						class="px-6 pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
 					>
 						<div class="text-white text-sm leading-relaxed mb-4">
-							Since 2010, we've been leading the home performance industry with innovative
-							standards and best practices.
+							Since 2010, we've been leading the home performance industry with innovative standards
+							and best practices.
 						</div>
 						<div class="text-white font-semibold mb-2">Years of Excellence</div>
 						<div class="text-white/90 text-xs mb-4">Leading the industry since 2010</div>
@@ -458,14 +468,14 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
 			<!-- Industry Card -->
 			<div
-				class="bg-linear-to-br from-primary/5 to-primary/10 rounded-2xl p-8 border-2 border-primary"
+				class="bg-linear-to-br from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary"
 			>
 				<h3 class="text-2xl font-bold text-gray-900 mb-4">Industry</h3>
 				<div class="text-xl font-semibold text-primary">Residential Retrofit</div>
 			</div>
 
 			<!-- Stakeholders Card -->
-			<div class="bg-gray-50 rounded-2xl p-8 border-2 border-primary">
+			<div class="bg-gray-50 rounded-2xl p-8 border border-primary">
 				<h3 class="text-2xl font-bold text-gray-900 mb-4">Stakeholders</h3>
 				<div class="flex flex-wrap gap-3 text-gray-700">
 					<span class="inline-flex items-center gap-2">
@@ -497,7 +507,7 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 		</div>
 
 		<!-- Sectors Card -->
-		<div class="bg-white rounded-2xl p-8 border-2 border-primary shadow-sm">
+		<div class="bg-white rounded-2xl p-8 border border-primary shadow-sm">
 			<h3 class="text-2xl font-bold text-gray-900 mb-6">Sectors</h3>
 			<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
 				<!-- Sector Icon 1 -->
@@ -649,41 +659,33 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 				<div class="min-w-full flex items-center justify-center gap-8 px-4">
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=BC+Hydro&font=montserrat"
+							src={bcHydroLogo}
 							alt="BC Hydro"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=FortisBC&font=montserrat"
+							src={fortisBCLogo}
 							alt="FortisBC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=CleanBC&font=montserrat"
+							src={bcLogo}
 							alt="CleanBC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=NRCan&font=montserrat"
-							alt="Natural Resources Canada"
+							src={vancityLogo}
+							alt="Vancity"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>
@@ -693,41 +695,33 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 				<div class="min-w-full flex items-center justify-center gap-8 px-4">
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=BC+Housing&font=montserrat"
-							alt="BC Housing"
+							src={bcHydroLogo}
+							alt="BC Hydro"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=CMHC&font=montserrat"
-							alt="CMHC"
+							src={fortisBCLogo}
+							alt="FortisBC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=Efficiency+BC&font=montserrat"
-							alt="Efficiency BC"
+							src={bcLogo}
+							alt="CleanBC"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>
 					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
 						<Image
-							src="https://placehold.co/150x80/e0e0e0/666666?text=HAVAN&font=montserrat"
-							alt="HAVAN"
+							src={vancityLogo}
+							alt="Vancity"
 							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							width={150}
-							height={80}
 							loading="lazy"
 						/>
 					</div>

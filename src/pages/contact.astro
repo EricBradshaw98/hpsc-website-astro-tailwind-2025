@@ -108,8 +108,7 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 							required
 							rows="6"
 							class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors resize-none"
-							placeholder="Tell us how we can help..."
-						></textarea>
+							placeholder="Tell us how we can help..."></textarea>
 					</div>
 
 					<!-- Cloudflare Turnstile -->
@@ -121,7 +120,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 							data-callback="onTurnstileSuccess"
 							data-error-callback="onTurnstileError"
 							data-expired-callback="onTurnstileExpired"
-						></div>
+						>
+						</div>
 					</div>
 
 					<!-- Submit Button -->
@@ -135,11 +135,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 					</button>
 
 					<!-- Success/Error Messages -->
-					<div
-						id="form-message"
-						class="hidden p-4 rounded-lg text-sm font-medium"
-						role="alert"
-					></div>
+					<div id="form-message" class="hidden p-4 rounded-lg text-sm font-medium" role="alert">
+					</div>
 				</form>
 			</div>
 
@@ -151,7 +148,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 					<!-- Office Address -->
 					<div class="flex items-start gap-4 mb-6">
-						<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+						<div
+							class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"
+						>
 							<svg
 								class="w-6 h-6 text-primary"
 								fill="none"
@@ -183,7 +182,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 					<!-- Phone -->
 					<div class="flex items-start gap-4 mb-6">
-						<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+						<div
+							class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"
+						>
 							<svg
 								class="w-6 h-6 text-primary"
 								fill="none"
@@ -208,7 +209,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 					<!-- Email -->
 					<div class="flex items-start gap-4 mb-6">
-						<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+						<div
+							class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"
+						>
 							<svg
 								class="w-6 h-6 text-primary"
 								fill="none"
@@ -225,10 +228,7 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 						</div>
 						<div>
 							<h3 class="font-semibold text-gray-900 mb-1">Email</h3>
-							<a
-								href="mailto:info@homeperformance.ca"
-								class="text-primary hover:text-primary-dark"
-							>
+							<a href="mailto:info@homeperformance.ca" class="text-primary hover:text-primary-dark">
 								info@homeperformance.ca
 							</a>
 						</div>
@@ -236,7 +236,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 					<!-- Office Hours -->
 					<div class="flex items-start gap-4">
-						<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+						<div
+							class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"
+						>
 							<svg
 								class="w-6 h-6 text-primary"
 								fill="none"
@@ -271,8 +273,7 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 						loading="lazy"
 						referrerpolicy="no-referrer-when-downgrade"
 						title="HPSC Office Location Map"
-						class="w-full"
-					></iframe>
+						class="w-full"></iframe>
 				</div>
 			</div>
 		</div>
@@ -356,8 +357,8 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 					</summary>
 					<div class="faq-content">
 						<div class="px-6 pb-6 text-gray-600">
-							We welcome visitors! Please contact us in advance to schedule an appointment and ensure
-							someone will be available to assist you.
+							We welcome visitors! Please contact us in advance to schedule an appointment and
+							ensure someone will be available to assist you.
 						</div>
 					</div>
 				</details>
@@ -383,8 +384,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 					</summary>
 					<div class="faq-content">
 						<div class="px-6 pb-6 text-gray-600">
-							Visit our <a href="/contractor-network/certification" class="text-primary hover:underline"
-								>certification page</a
+							Visit our <a
+								href="/contractor-network/certification"
+								class="text-primary hover:underline">certification page</a
 							> or contact us using the subject "Contractor Certification" for detailed information.
 						</div>
 					</div>
