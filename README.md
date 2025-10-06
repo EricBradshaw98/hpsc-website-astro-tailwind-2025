@@ -13,9 +13,35 @@
 - **Framework**: Astro 5.14.1
 - **Styling**: Tailwind CSS 4.1.14 (latest v4 with CSS-first configuration)
 - **Deployment**: Cloudflare Pages (@astrojs/cloudflare)
+- **Search**: Pagefind (static search, indexes 28+ pages)
+- **Analytics**: Google Analytics 4 (with GDPR-compliant cookie consent)
 - **Font**: Montserrat (Google Fonts)
 - **Code Quality**: ESLint + Prettier
 - **Feedback**: Marker.io widget integration
+
+## 🍪 Cookie Consent & Analytics Setup
+
+The site includes a GDPR-compliant cookie consent banner with granular controls for analytics and marketing cookies.
+
+### Setup Google Analytics:
+
+1. Get your GA4 Measurement ID from [Google Analytics](https://analytics.google.com)
+2. Add it to `.env`:
+   ```
+   PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+   ```
+3. The cookie banner will handle loading analytics only after user consent
+
+### Cookie Banner Features:
+
+- **3 consent options**: Accept All, Reject All, or Custom Settings
+- **Granular controls**: Essential (always on), Analytics, and Marketing cookies
+- **Privacy-focused**: IP anonymization, SameSite=Lax, Secure flags
+- **Persistent**: 365-day cookie remembers user choice
+- **Analytics integration**: Only loads GA4 after explicit consent
+- **Responsive**: Mobile-friendly slide-up banner
+
+The banner appears at the bottom of the screen for first-time visitors and saves their preference for 1 year.
 
 ## 📂 Project Structure
 
