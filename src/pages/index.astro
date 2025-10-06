@@ -435,22 +435,16 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	<style>
 		/* Active state for mobile - override group-hover with direct targeting */
 		@media (max-width: 767px) {
-			.stats-card.active .bg-primary.transform {
+			.stats-card.active .absolute.bottom-0 {
 				transform: translateY(0) !important;
 			}
-			.stats-card.active .bg-accent-green.transform {
-				transform: translateY(0) !important;
-			}
-			.stats-card.active .bg-accent-blue.transform {
-				transform: translateY(0) !important;
-			}
-			.stats-card.active .px-6.pb-6 {
+			.stats-card.active .opacity-0 {
 				opacity: 1 !important;
 			}
 			.stats-card.active img {
 				transform: scale(1.1) !important;
 			}
-			.stats-card.active .bg-black\/50 {
+			.stats-card.active .absolute.inset-0.bg-black\/50 {
 				background-color: rgba(0, 0, 0, 0.6) !important;
 			}
 		}
