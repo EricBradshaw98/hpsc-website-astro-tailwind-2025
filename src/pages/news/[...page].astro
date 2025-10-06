@@ -1,0 +1,322 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
+import { newsArticles, getCategories, getArchiveYears, filterArticles, type NewsArticle } from '../../data/news';
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const ARTICLES_PER_PAGE = 9;
+
+	// Get URL parameters from the request
+	const params = new URLSearchParams();
+
+	// Get unique categories and years
+	const categories = getCategories();
+	const years = getArchiveYears();
+
+	// Generate pages for different combinations
+	const paths: any[] = [];
+
+	// Base pagination (no filters)
+	const baseArticles = filterArticles();
+	paths.push(...paginate(baseArticles, { pageSize: ARTICLES_PER_PAGE }));
+
+	// Category filters
+	categories.forEach(category => {
+		const categoryArticles = filterArticles(category);
+		paths.push(...paginate(categoryArticles, {
+			pageSize: ARTICLES_PER_PAGE,
+			params: { category },
+			props: { category },
+		}));
+	});
+
+	// Year filters
+	years.forEach(year => {
+		const yearArticles = filterArticles(undefined, year);
+		paths.push(...paginate(yearArticles, {
+			pageSize: ARTICLES_PER_PAGE,
+			params: { year: year.toString() },
+			props: { year },
+		}));
+	});
+
+	// Category + Year combinations
+	categories.forEach(category => {
+		years.forEach(year => {
+			const filtered = filterArticles(category, year);
+			if (filtered.length > 0) {
+				paths.push(...paginate(filtered, {
+					pageSize: ARTICLES_PER_PAGE,
+					params: { category, year: year.toString() },
+					props: { category, year },
+				}));
+			}
+		});
+	});
+
+	return paths;
+}) satisfies GetStaticPaths;
+
+interface Props {
+	page: Page<NewsArticle>;
+	category?: string;
+	year?: number;
+}
+
+const { page, category, year } = Astro.props;
+const categories = getCategories();
+const years = getArchiveYears();
+
+// Get current sort from URL (default to 'date')
+const url = new URL(Astro.request.url);
+const sortBy = (url.searchParams.get('sort') || 'date') as 'date' | 'title';
+
+// Format date helper
+function formatDate(date: Date): string {
+	return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+// Build filter URL
+function buildFilterUrl(newCategory?: string, newYear?: number): string {
+	const params = new URLSearchParams();
+	if (newCategory) params.set('category', newCategory);
+	if (newYear) params.set('year', newYear.toString());
+	if (sortBy !== 'date') params.set('sort', sortBy);
+
+	const query = params.toString();
+	return query ? `/news?${query}` : '/news';
+}
+
+// Build sort URL
+function buildSortUrl(newSort: 'date' | 'title'): string {
+	const params = new URLSearchParams();
+	if (category) params.set('category', category);
+	if (year) params.set('year', year.toString());
+	if (newSort !== 'date') params.set('sort', newSort);
+
+	const query = params.toString();
+	return query ? `/news?${query}` : '/news';
+}
+---
+
+<Layout
+	title={`News${category ? ` - ${category}` : ''}${year ? ` - ${year}` : ''} | Home Performance Stakeholder Council`}
+	description="Stay updated with the latest news, updates, and insights from the Home Performance Stakeholder Council and BC's home performance industry."
+	keywords="HPSC news, home performance news, energy efficiency updates, contractor news, BC housing"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'News', href: '/news' },
+		]}
+	/>
+
+	<!-- Page Header -->
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+			News & Updates
+			{category && <span class="text-primary"> - {category}</span>}
+			{year && <span class="text-primary"> - {year}</span>}
+		</h1>
+		<p class="text-xl text-gray-600 max-w-3xl">
+			Stay informed with the latest news, insights, and updates from BC's home performance industry.
+		</p>
+	</div>
+
+	<!-- Filters and Sorting -->
+	<div class="mb-8 bg-white rounded-xl shadow-md p-6 border border-gray-200">
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+			<!-- Category Filter -->
+			<div>
+				<label for="category-filter" class="block text-sm font-semibold text-gray-700 mb-2">
+					Category
+				</label>
+				<select
+					id="category-filter"
+					class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+					onchange={`window.location.href = this.value`}
+				>
+					<option value="/news" selected={!category}>All Categories</option>
+					{categories.map(cat => (
+						<option value={buildFilterUrl(cat, year)} selected={category === cat}>
+							{cat}
+						</option>
+					))}
+				</select>
+			</div>
+
+			<!-- Year Filter -->
+			<div>
+				<label for="year-filter" class="block text-sm font-semibold text-gray-700 mb-2">
+					Archive
+				</label>
+				<select
+					id="year-filter"
+					class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+					onchange={`window.location.href = this.value`}
+				>
+					<option value={buildFilterUrl(category)} selected={!year}>All Time</option>
+					{years.map(yr => (
+						<option value={buildFilterUrl(category, yr)} selected={year === yr}>
+							{yr}
+						</option>
+					))}
+				</select>
+			</div>
+
+			<!-- Sort -->
+			<div>
+				<label for="sort-filter" class="block text-sm font-semibold text-gray-700 mb-2">
+					Sort By
+				</label>
+				<select
+					id="sort-filter"
+					class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+					onchange={`window.location.href = this.value`}
+				>
+					<option value={buildSortUrl('date')} selected={sortBy === 'date'}>
+						Newest First
+					</option>
+					<option value={buildSortUrl('title')} selected={sortBy === 'title'}>
+						Title (A-Z)
+					</option>
+				</select>
+			</div>
+
+			<!-- Clear Filters -->
+			{(category || year) && (
+				<div class="flex items-end">
+					<a
+						href="/news"
+						class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors text-center"
+					>
+						Clear Filters
+					</a>
+				</div>
+			)}
+		</div>
+
+		<!-- Active Filters Display -->
+		{(category || year) && (
+			<div class="mt-4 pt-4 border-t border-gray-200">
+				<div class="flex flex-wrap gap-2 items-center">
+					<span class="text-sm font-semibold text-gray-700">Active Filters:</span>
+					{category && (
+						<span class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+							{category}
+							<a href={buildFilterUrl(undefined, year)} class="hover:text-primary-dark">×</a>
+						</span>
+					)}
+					{year && (
+						<span class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+							{year}
+							<a href={buildFilterUrl(category, undefined)} class="hover:text-primary-dark">×</a>
+						</span>
+					)}
+				</div>
+			</div>
+		)}
+	</div>
+
+	<!-- Articles Grid -->
+	{page.data.length > 0 ? (
+		<>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+				{page.data.map((article) => (
+					<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+						<a href={`/news/${article.slug}`}>
+							<div class="h-48 overflow-hidden">
+								<img
+									src={article.image}
+									alt={article.title}
+									class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+									loading="lazy"
+								/>
+							</div>
+						</a>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-2">
+								<span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded">
+									{article.category}
+								</span>
+								<span class="text-sm text-gray-500">{formatDate(article.date)}</span>
+							</div>
+							<a href={`/news/${article.slug}`}>
+								<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
+									{article.title}
+								</h3>
+							</a>
+							<p class="text-gray-600 mb-4 line-clamp-3">
+								{article.excerpt}
+							</p>
+							<div class="flex items-center justify-between">
+								<a
+									href={`/news/${article.slug}`}
+									class="text-primary font-medium hover:underline"
+									aria-label={`Read more about ${article.title}`}
+								>
+									Read More →
+								</a>
+								<span class="text-sm text-gray-500">By {article.author}</span>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+
+			<!-- Pagination -->
+			{(page.lastPage > 1) && (
+				<nav class="flex justify-center items-center gap-2" aria-label="Pagination">
+					{page.url.prev && (
+						<a
+							href={page.url.prev}
+							class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+							aria-label="Previous page"
+						>
+							← Previous
+						</a>
+					)}
+
+					<div class="flex gap-2">
+						{Array.from({ length: page.lastPage }, (_, i) => i + 1).map(pageNum => (
+							<a
+								href={pageNum === 1 ? '/news' : `/news/${pageNum}`}
+								class={`px-4 py-2 rounded-lg transition-colors ${
+									pageNum === page.currentPage
+										? 'bg-primary text-white'
+										: 'bg-white border border-gray-300 hover:bg-gray-50'
+								}`}
+								aria-label={`Go to page ${pageNum}`}
+								aria-current={pageNum === page.currentPage ? 'page' : undefined}
+							>
+								{pageNum}
+							</a>
+						))}
+					</div>
+
+					{page.url.next && (
+						<a
+							href={page.url.next}
+							class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+							aria-label="Next page"
+						>
+							Next →
+						</a>
+					)}
+				</nav>
+			)}
+
+			<!-- Results Count -->
+			<div class="text-center mt-8 text-gray-600">
+				Showing {page.start + 1}-{page.end + 1} of {page.total} articles
+			</div>
+		</>
+	) : (
+		<div class="bg-gray-50 rounded-lg p-12 text-center">
+			<p class="text-xl text-gray-600 mb-4">No articles found matching your filters.</p>
+			<a href="/news" class="text-primary font-medium hover:underline">
+				Clear filters and view all articles →
+			</a>
+		</div>
+	)}
+</Layout>
