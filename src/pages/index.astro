@@ -446,28 +446,25 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	<style>
 		/* Active state for mobile - override group-hover with direct targeting */
 		@media (max-width: 767px) {
-			/* Disable hover effects on mobile */
-			.stats-card:not(.active):hover > div[class*="translate-y"] {
-				transform: translateY(66.666667%) !important;
-			}
-			.stats-card:not(.active):hover .opacity-0 {
-				opacity: 0 !important;
-			}
-
-			/* Active state - slide up the colored tab */
-			.stats-card.active > div[class*="translate-y-2/3"] {
+			/* Active state - slide up the colored tab to show content */
+			.stats-card.active > .absolute.bottom-0[class*="bg-primary"],
+			.stats-card.active > .absolute.bottom-0[class*="bg-accent-green"],
+			.stats-card.active > .absolute.bottom-0[class*="bg-accent-blue"] {
 				transform: translateY(0) !important;
 			}
-			/* Show the hidden content */
-			.stats-card.active .opacity-0 {
+
+			/* Show the hidden content when active */
+			.stats-card.active .px-6.pb-6.opacity-0 {
 				opacity: 1 !important;
 			}
-			/* Zoom the image */
+
+			/* Zoom the image when active */
 			.stats-card.active img {
 				transform: scale(1.1) !important;
 			}
-			/* Darken the overlay */
-			.stats-card.active > div > div[class*="bg-black"] {
+
+			/* Darken the overlay when active */
+			.stats-card.active .aspect-square > .absolute.inset-0[class*="bg-black"] {
 				background-color: rgba(0, 0, 0, 0.6) !important;
 			}
 		}
