@@ -18,27 +18,9 @@ const TEAM_API_KEY = import.meta.env.TEAM_API_KEY;
 
 // Helper function to generate placeholder avatar from random image API
 function getPlaceholderAvatar(name: string, index: number): string {
-	// Multiple placeholder API options:
-
-	// Option 1: Random professional portraits from Lorem Picsum
-	// return `https://picsum.photos/seed/${encodeURIComponent(name)}/400/400`;
-
-	// Option 2: This Person Does Not Exist (AI-generated faces)
-	// Note: Each request gets a different face, can't seed by name
-	// return `https://thispersondoesnotexist.com/`;
-
-	// Option 3: Random User Generator (real professional photos)
-	// Consistent based on seed
-	const seed = name.toLowerCase().replace(/\s+/g, '-');
-	return `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}&size=400`;
-
-	// Option 4: Pravatar (real people photos, numbered 1-70)
-	// const photoId = (index % 70) + 1;
-	// return `https://i.pravatar.cc/400?img=${photoId}`;
-
-	// Option 5: UI Avatars (current, initials-based)
-	// const color = index % 3 === 0 ? '00b6f0' : index % 3 === 1 ? '0095c7' : '33c4f3';
-	// return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=400&background=${color}&color=fff&bold=true`;
+	// Pravatar - Real people photos, numbered 1-70
+	const photoId = (index % 70) + 1;
+	return `https://i.pravatar.cc/400?img=${photoId}`;
 }
 
 // Helper function to fetch from WordPress REST API
