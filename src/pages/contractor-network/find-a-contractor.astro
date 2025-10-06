@@ -1,0 +1,590 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
+
+// API Configuration for contractor search
+const CONTRACTOR_API_URL = import.meta.env.PUBLIC_CONTRACTOR_API_URL;
+const CONTRACTOR_API_KEY = import.meta.env.CONTRACTOR_API_KEY;
+---
+
+<Layout
+	title="Find a Contractor | Home Performance Stakeholder Council"
+	description="Search our network of verified home performance contractors in British Columbia. All contractors meet rigorous standards for quality, insurance, and professionalism."
+	keywords="find contractor, home performance, energy efficiency, BC contractors, verified contractors"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'Contractor Network', href: '/contractor-network' },
+			{ label: 'Find a Contractor', href: '/contractor-network/find-a-contractor' },
+		]}
+	/>
+
+	<!-- Page Header -->
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Find a Contractor</h1>
+		<p class="text-xl text-gray-600 max-w-3xl">
+			Search our network of verified home performance contractors across British Columbia.
+		</p>
+	</div>
+
+	<!-- Search Tool Section -->
+	<section class="mb-16">
+		<div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+			<h2 class="text-2xl font-bold text-gray-900 mb-6">Search for a Contractor</h2>
+
+			<form class="space-y-6" id="contractor-search-form">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<!-- Service Type -->
+					<div>
+						<label for="service-type" class="block text-sm font-semibold text-gray-700 mb-2">
+							Service Type
+						</label>
+						<select
+							id="service-type"
+							name="service-type"
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						>
+							<option value="">All Services</option>
+							<option value="energy-audit">Energy Audit / Assessment</option>
+							<option value="insulation">Insulation</option>
+							<option value="air-sealing">Air Sealing</option>
+							<option value="hvac">HVAC Systems</option>
+							<option value="windows-doors">Windows & Doors</option>
+							<option value="heat-pumps">Heat Pumps</option>
+							<option value="ventilation">Ventilation</option>
+							<option value="weatherization">Weatherization</option>
+							<option value="general-contractor">General Contractor</option>
+						</select>
+					</div>
+
+					<!-- Location -->
+					<div>
+						<label for="location" class="block text-sm font-semibold text-gray-700 mb-2">
+							Location
+						</label>
+						<select
+							id="location"
+							name="location"
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						>
+							<option value="">All of BC</option>
+							<option value="lower-mainland">Lower Mainland</option>
+							<option value="vancouver-island">Vancouver Island</option>
+							<option value="okanagan">Okanagan</option>
+							<option value="kootenays">Kootenays</option>
+							<option value="northern-bc">Northern BC</option>
+							<option value="cariboo">Cariboo</option>
+							<option value="thompson">Thompson-Nicola</option>
+						</select>
+					</div>
+				</div>
+
+				<button
+					type="submit"
+					class="w-full md:w-auto px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+				>
+					Search Contractors
+				</button>
+			</form>
+
+			<!-- Results Container -->
+			<div id="search-results" class="mt-8 hidden">
+				<h3 class="text-xl font-bold text-gray-900 mb-4">Search Results</h3>
+				<div id="results-container" class="space-y-4">
+					<!-- Results will be populated here via JavaScript -->
+				</div>
+			</div>
+
+			<!-- Loading State -->
+			<div id="loading-state" class="mt-8 hidden text-center py-8">
+				<div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+				<p class="mt-4 text-gray-600">Searching contractors...</p>
+			</div>
+
+			<!-- No Results State -->
+			<div id="no-results" class="mt-8 hidden">
+				<div class="bg-gray-50 rounded-lg p-8 text-center">
+					<p class="text-gray-600">
+						No contractors found matching your criteria. Try adjusting your search filters.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- How to Use Section -->
+	<section class="mb-16">
+		<h2 class="text-3xl font-bold text-gray-900 mb-8">How to Use the Search Tool</h2>
+
+		<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+				<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
+					1
+				</div>
+				<h3 class="text-lg font-bold text-gray-900 mb-2">Select Service</h3>
+				<p class="text-gray-600 text-sm">
+					Choose the type of service you need from the dropdown menu.
+				</p>
+			</div>
+
+			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+				<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
+					2
+				</div>
+				<h3 class="text-lg font-bold text-gray-900 mb-2">Choose Location</h3>
+				<p class="text-gray-600 text-sm">
+					Select your region to find contractors in your area.
+				</p>
+			</div>
+
+			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+				<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
+					3
+				</div>
+				<h3 class="text-lg font-bold text-gray-900 mb-2">Review Results</h3>
+				<p class="text-gray-600 text-sm">
+					Browse through the list of qualified contractors in your area.
+				</p>
+			</div>
+
+			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+				<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
+					4
+				</div>
+				<h3 class="text-lg font-bold text-gray-900 mb-2">Contact Contractors</h3>
+				<p class="text-gray-600 text-sm">
+					Reach out to contractors directly to discuss your project.
+				</p>
+			</div>
+
+			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+				<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
+					5
+				</div>
+				<h3 class="text-lg font-bold text-gray-900 mb-2">Share Feedback</h3>
+				<p class="text-gray-600 text-sm">
+					After your project, let us know about your experience.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- HPCN Requirements Section -->
+	<section class="mb-16">
+		<div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 md:p-12">
+			<h2 class="text-3xl font-bold text-gray-900 mb-6">
+				Home Performance Contractor Network (HPCN) Requirements
+			</h2>
+			<p class="text-lg text-gray-700 mb-8">
+				All contractors in our network meet rigorous standards to ensure quality and professionalism:
+			</p>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">Reference Checks</h3>
+						<p class="text-gray-600 text-sm">Verified references from past clients and projects.</p>
+					</div>
+				</div>
+
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">Valid Business Licenses</h3>
+						<p class="text-gray-600 text-sm">Current and valid business operating licenses.</p>
+					</div>
+				</div>
+
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">General Liability Insurance</h3>
+						<p class="text-gray-600 text-sm">Comprehensive insurance coverage for all work.</p>
+					</div>
+				</div>
+
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">WorkSafeBC Standing</h3>
+						<p class="text-gray-600 text-sm">Good standing with WorkSafeBC requirements.</p>
+					</div>
+				</div>
+
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">Code of Conduct Commitment</h3>
+						<p class="text-gray-600 text-sm">Signed commitment to professional standards.</p>
+					</div>
+				</div>
+
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">Best Practices Training</h3>
+						<p class="text-gray-600 text-sm">Ongoing training in home performance best practices.</p>
+					</div>
+				</div>
+
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">One-Year Labor Warranty</h3>
+						<p class="text-gray-600 text-sm">Minimum one-year warranty on all labor.</p>
+					</div>
+				</div>
+
+				<div class="flex gap-4">
+					<div class="flex-shrink-0">
+						<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-1">Ongoing Quality Assurance</h3>
+						<p class="text-gray-600 text-sm">Regular reviews and quality control checks.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contractor Feedback Form -->
+	<section class="mb-16">
+		<div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+			<h2 class="text-3xl font-bold text-gray-900 mb-4">Share Your Experience</h2>
+			<p class="text-gray-600 mb-8">
+				Your feedback helps us maintain high standards and improve our contractor network. Please share your experience working with an HPCN contractor.
+			</p>
+
+			<form class="space-y-6" id="feedback-form">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<label for="first-name" class="block text-sm font-semibold text-gray-700 mb-2">
+							First Name *
+						</label>
+						<input
+							type="text"
+							id="first-name"
+							name="first-name"
+							required
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						/>
+					</div>
+
+					<div>
+						<label for="last-name" class="block text-sm font-semibold text-gray-700 mb-2">
+							Last Name *
+						</label>
+						<input
+							type="text"
+							id="last-name"
+							name="last-name"
+							required
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						/>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+							Email Address *
+						</label>
+						<input
+							type="email"
+							id="email"
+							name="email"
+							required
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						/>
+					</div>
+
+					<div>
+						<label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+							Phone Number
+						</label>
+						<input
+							type="tel"
+							id="phone"
+							name="phone"
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						/>
+					</div>
+				</div>
+
+				<div>
+					<label for="company-name" class="block text-sm font-semibold text-gray-700 mb-2">
+						Contracting Company Name *
+					</label>
+					<input
+						type="text"
+						id="company-name"
+						name="company-name"
+						required
+						class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+					/>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<label for="project-status" class="block text-sm font-semibold text-gray-700 mb-2">
+							Project Status *
+						</label>
+						<select
+							id="project-status"
+							name="project-status"
+							required
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						>
+							<option value="">Select status...</option>
+							<option value="completed">Completed</option>
+							<option value="in-progress">In Progress</option>
+							<option value="planning">Planning</option>
+						</select>
+					</div>
+
+					<div>
+						<label for="project-type" class="block text-sm font-semibold text-gray-700 mb-2">
+							Project Type *
+						</label>
+						<select
+							id="project-type"
+							name="project-type"
+							required
+							class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+						>
+							<option value="">Select type...</option>
+							<option value="energy-audit">Energy Audit / Assessment</option>
+							<option value="insulation">Insulation</option>
+							<option value="air-sealing">Air Sealing</option>
+							<option value="hvac">HVAC Systems</option>
+							<option value="windows-doors">Windows & Doors</option>
+							<option value="heat-pumps">Heat Pumps</option>
+							<option value="ventilation">Ventilation</option>
+							<option value="weatherization">Weatherization</option>
+							<option value="general">General Contractor</option>
+						</select>
+					</div>
+				</div>
+
+				<div>
+					<label for="feedback" class="block text-sm font-semibold text-gray-700 mb-2">
+						Detailed Feedback *
+					</label>
+					<textarea
+						id="feedback"
+						name="feedback"
+						rows="6"
+						required
+						class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors resize-y"
+						placeholder="Please share details about your experience with the contractor..."
+					></textarea>
+				</div>
+
+				<div>
+					<label for="file-upload" class="block text-sm font-semibold text-gray-700 mb-2">
+						File Upload (Optional)
+					</label>
+					<input
+						type="file"
+						id="file-upload"
+						name="file-upload"
+						accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
+						class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+					/>
+					<p class="text-sm text-gray-500 mt-1">Maximum file size: 2MB</p>
+				</div>
+
+				<div class="flex items-start gap-3">
+					<input
+						type="checkbox"
+						id="privacy-consent"
+						name="privacy-consent"
+						required
+						class="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+					/>
+					<label for="privacy-consent" class="text-sm text-gray-700">
+						I consent to HPSC collecting and using this information in accordance with the <a href="/privacy-policy" class="text-primary hover:text-primary-dark underline">Privacy Policy</a>. *
+					</label>
+				</div>
+
+				<div class="flex items-center gap-4">
+					<label for="math-verification" class="text-sm font-semibold text-gray-700">
+						Please verify: What is 5 + 3? *
+					</label>
+					<input
+						type="text"
+						id="math-verification"
+						name="math-verification"
+						required
+						pattern="8"
+						class="w-20 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+					/>
+				</div>
+
+				<button
+					type="submit"
+					class="w-full md:w-auto px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+				>
+					Submit Feedback
+				</button>
+			</form>
+
+			<!-- Success Message -->
+			<div id="feedback-success" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+				<p class="text-green-800 font-semibold">Thank you for your feedback!</p>
+				<p class="text-green-700 text-sm mt-1">We appreciate you taking the time to share your experience.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Program Partners -->
+	<section class="mb-12">
+		<h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Program Partners</h2>
+
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+			<div class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100">
+				<div class="text-center">
+					<p class="font-bold text-gray-900">CleanBC</p>
+				</div>
+			</div>
+
+			<div class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100">
+				<div class="text-center">
+					<p class="font-bold text-gray-900">BC Hydro</p>
+				</div>
+			</div>
+
+			<div class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100">
+				<div class="text-center">
+					<p class="font-bold text-gray-900">FortisBC</p>
+				</div>
+			</div>
+
+			<div class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100">
+				<div class="text-center">
+					<p class="font-bold text-gray-900">Pacific Northern Gas</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	// Contractor Search Functionality
+	const searchForm = document.getElementById('contractor-search-form');
+	const resultsContainer = document.getElementById('results-container');
+	const searchResults = document.getElementById('search-results');
+	const loadingState = document.getElementById('loading-state');
+	const noResults = document.getElementById('no-results');
+
+	searchForm?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		const serviceType = (document.getElementById('service-type') as HTMLSelectElement).value;
+		const location = (document.getElementById('location') as HTMLSelectElement).value;
+
+		// Show loading state
+		searchResults?.classList.add('hidden');
+		noResults?.classList.add('hidden');
+		loadingState?.classList.remove('hidden');
+
+		// Simulate API call (replace with actual API integration)
+		setTimeout(() => {
+			loadingState?.classList.add('hidden');
+
+			// Mock data for demonstration
+			const mockContractors = [
+				{
+					name: 'ABC Energy Solutions',
+					services: ['Energy Audit', 'Insulation', 'Air Sealing'],
+					location: 'Lower Mainland',
+					phone: '(604) 555-1234',
+					email: 'info@abcenergy.ca',
+					website: 'https://abcenergy.ca',
+				},
+				{
+					name: 'Green Home Performance',
+					services: ['HVAC Systems', 'Heat Pumps', 'Ventilation'],
+					location: 'Vancouver Island',
+					phone: '(250) 555-5678',
+					email: 'contact@greenhome.ca',
+					website: 'https://greenhome.ca',
+				},
+			];
+
+			if (mockContractors.length > 0) {
+				resultsContainer!.innerHTML = mockContractors.map(contractor => `
+					<div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+						<h4 class="text-xl font-bold text-gray-900 mb-2">${contractor.name}</h4>
+						<p class="text-sm text-gray-600 mb-2"><strong>Services:</strong> ${contractor.services.join(', ')}</p>
+						<p class="text-sm text-gray-600 mb-2"><strong>Location:</strong> ${contractor.location}</p>
+						<div class="flex flex-wrap gap-4 mt-4">
+							<a href="tel:${contractor.phone}" class="text-primary hover:text-primary-dark font-semibold text-sm">
+								${contractor.phone}
+							</a>
+							<a href="mailto:${contractor.email}" class="text-primary hover:text-primary-dark font-semibold text-sm">
+								${contractor.email}
+							</a>
+							<a href="${contractor.website}" target="_blank" class="text-primary hover:text-primary-dark font-semibold text-sm">
+								Visit Website
+							</a>
+						</div>
+					</div>
+				`).join('');
+				searchResults?.classList.remove('hidden');
+			} else {
+				noResults?.classList.remove('hidden');
+			}
+		}, 1000);
+	});
+
+	// Feedback Form Functionality
+	const feedbackForm = document.getElementById('feedback-form');
+	const feedbackSuccess = document.getElementById('feedback-success');
+
+	feedbackForm?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		// Simulate form submission (replace with actual API integration)
+		setTimeout(() => {
+			feedbackForm.reset();
+			feedbackSuccess?.classList.remove('hidden');
+
+			setTimeout(() => {
+				feedbackSuccess?.classList.add('hidden');
+			}, 5000);
+		}, 500);
+	});
+</script>
