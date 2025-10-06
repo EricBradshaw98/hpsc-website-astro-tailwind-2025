@@ -1,14 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 ---
 
 <Layout
 	title="Get Involved | Home Performance Stakeholder Council"
 	description="Join the HPSC's mission to improve home performance. Choose ways to get involved that fit your schedule and interests."
 	keywords="get involved, volunteer, sector council, industry advisory, HPSC, home performance, British Columbia"
+	breadcrumbs={[{ label: 'Get Involved', href: '/get-involved' }]}
 >
-	<Breadcrumbs items={[{ label: 'Get Involved', href: '/get-involved' }]} />
+	
 
 	<!-- Page Header -->
 	<div class="mb-12">

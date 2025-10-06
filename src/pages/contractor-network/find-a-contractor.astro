@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 
 // API Configuration for contractor search
 const CONTRACTOR_API_URL = import.meta.env.PUBLIC_CONTRACTOR_API_URL;
@@ -11,13 +10,11 @@ const CONTRACTOR_API_KEY = import.meta.env.CONTRACTOR_API_KEY;
 	title="Find a Contractor | Home Performance Stakeholder Council"
 	description="Search our network of verified home performance contractors in British Columbia. All contractors meet rigorous standards for quality, insurance, and professionalism."
 	keywords="find contractor, home performance, energy efficiency, BC contractors, verified contractors"
+	breadcrumbs={[
+		{ label: 'Contractor Network', href: '/contractor-network' },
+		{ label: 'Find a Contractor', href: '/contractor-network/find-a-contractor' },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'Contractor Network', href: '/contractor-network' },
-			{ label: 'Find a Contractor', href: '/contractor-network/find-a-contractor' },
-		]}
-	/>
 
 	<!-- Page Header -->
 	<div class="mb-12">

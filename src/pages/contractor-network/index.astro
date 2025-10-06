@@ -1,14 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 ---
 
 <Layout
 	title="Home Performance Contractor Network | HPSC"
 	description="The Home Performance Contractor Network (HPCN) is an upskilling initiative for home performance professionals in British Columbia. Join our network of qualified contractors and energy advisors."
 	keywords="HPCN, contractor network, energy advisors, home performance, British Columbia, HVAC, insulation, windows, doors, retrofit"
+	breadcrumbs={[{ label: 'Contractor Network', href: '/contractor-network' }]}
 >
-	<Breadcrumbs items={[{ label: 'Contractor Network', href: '/contractor-network' }]} />
 
 	<!-- Page Header -->
 	<div class="mb-12">

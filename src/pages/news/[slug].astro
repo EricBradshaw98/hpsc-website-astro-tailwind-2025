@@ -1,7 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 import { newsArticles, type NewsArticle } from '../../data/news';
 
 export const getStaticPaths = (() => {
@@ -33,13 +32,11 @@ const relatedArticles = newsArticles
 	title={`${article.title} | HPSC News`}
 	description={article.excerpt}
 	keywords={article.tags.join(', ')}
+	breadcrumbs={[
+		{ label: 'News', href: '/news' },
+		{ label: article.title, href: `/news/${article.slug}` },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'News', href: '/news' },
-			{ label: article.title, href: `/news/${article.slug}` },
-		]}
-	/>
 
 	<!-- Article Header -->
 	<article class="mb-16">

@@ -1,7 +1,6 @@
 ---
 import type { GetStaticPaths, Page } from 'astro';
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 import { newsArticles, getCategories, getArchiveYears, filterArticles, type NewsArticle } from '../../data/news';
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -104,12 +103,8 @@ function buildSortUrl(newSort: 'date' | 'title'): string {
 	title={`News${category ? ` - ${category}` : ''}${year ? ` - ${year}` : ''} | Home Performance Stakeholder Council`}
 	description="Stay updated with the latest news, updates, and insights from the Home Performance Stakeholder Council and BC's home performance industry."
 	keywords="HPSC news, home performance news, energy efficiency updates, contractor news, BC housing"
+	breadcrumbs={[{ label: 'News', href: '/news' }]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'News', href: '/news' },
-		]}
-	/>
 
 	<!-- Page Header -->
 	<div class="mb-12">

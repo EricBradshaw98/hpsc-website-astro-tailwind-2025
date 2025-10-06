@@ -1,18 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 ---
 
 <Layout
 	title="Contact Us | HPSC"
 	description="Get in touch with the Home Performance Stakeholder Council. We're here to help with your questions about home energy efficiency, contractor certification, and more."
 	keywords="contact HPSC, home performance inquiries, energy efficiency questions, contractor support"
+	breadcrumbs={[{ label: 'Contact Us', href: '/contact' }]}
 >
 	<Fragment slot="head">
 		<!-- Cloudflare Turnstile Script -->
 		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 	</Fragment>
-	<Breadcrumbs items={[{ label: 'Contact Us', href: '/contact' }]} />
 
 	<div class="w-full">
 		<!-- Header -->

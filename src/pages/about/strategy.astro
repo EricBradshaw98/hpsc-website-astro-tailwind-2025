@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 
 // Strategic priorities organized by category
 const strategicPriorities = [
@@ -155,13 +154,11 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 	title="Strategic Plan | Home Performance Stakeholder Council"
 	description="The HPSC's strategic plan guides our work in codes & regulations, consumer education, workforce development, and contractor network operations."
 	keywords="HPSC strategy, strategic plan, industry support, workforce development, contractor network"
+	breadcrumbs={[
+		{ label: 'About', href: '/about' },
+		{ label: 'Strategy', href: '/about/strategy' },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'About', href: '/about' },
-			{ label: 'Strategy', href: '/about/strategy' },
-		]}
-	/>
 
 	<!-- Page Header -->
 	<div class="mb-12">

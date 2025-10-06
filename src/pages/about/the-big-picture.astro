@@ -1,19 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 ---
 
 <Layout
 	title="The Big Picture | Home Performance Stakeholder Council"
 	description="Learn about the science of home performance and how the HPCN network was developed for industry, by industry to advance home performance standards in British Columbia."
 	keywords="home performance, whole-home approach, HPSC, HPCN, building envelope, mechanical systems, British Columbia"
+	breadcrumbs={[
+		{ label: 'About', href: '/about' },
+		{ label: 'The Big Picture', href: '/about/the-big-picture' },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'About', href: '/about' },
-			{ label: 'The Big Picture', href: '/about/the-big-picture' },
-		]}
-	/>
 
 	<!-- Page Header -->
 	<div class="mb-12">
