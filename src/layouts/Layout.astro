@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Nav from '../components/layouts/Nav.astro';
 import Footer from '../components/layouts/Footer.astro';
-import Breadcrumbs, { type BreadcrumbItem } from '../components/layouts/Breadcrumbs.astro';
 
 export interface Props {
 	// SEO Meta Tags
@@ -20,9 +19,6 @@ export interface Props {
 	keywords?: string;
 	author?: string;
 	robots?: string;
-
-	// Breadcrumbs
-	breadcrumbs?: BreadcrumbItem[];
 }
 
 const {
@@ -40,7 +36,6 @@ const {
 	keywords,
 	author,
 	robots = 'noindex, nofollow', // DEV: Blocking search engines
-	breadcrumbs,
 } = Astro.props;
 
 const currentUrl = canonical || Astro.url.href;
@@ -53,6 +48,12 @@ const currentUrl = canonical || Astro.url.href;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
 
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
@@ -103,8 +104,7 @@ const currentUrl = canonical || Astro.url.href;
 	</head>
 	<body class="min-h-screen bg-white text-gray-900 flex flex-col">
 		<Nav />
-		<main class="flex-grow container mx-auto px-4 py-8">
-			{breadcrumbs && breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
+		<main class="flex-grow container mx-auto px-4 py-8 max-w-7xl">
 			<slot />
 		</main>
 		<Footer />
