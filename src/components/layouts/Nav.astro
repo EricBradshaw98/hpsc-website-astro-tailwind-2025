@@ -41,6 +41,17 @@ const navLinks: NavLink[] = [
 		href: '/contact',
 	},
 ];
+
+// Get current path for active link detection
+const currentPath = Astro.url.pathname;
+
+// Function to check if link is active
+function isActive(href: string): boolean {
+	if (href === '/') {
+		return currentPath === '/';
+	}
+	return currentPath.startsWith(href);
+}
 ---
 
 <!-- Top Contact Bar - Hidden on mobile, hides on scroll down, shows when at top -->
@@ -112,7 +123,11 @@ const navLinks: NavLink[] = [
 								<li class="relative group">
 									<a
 										href={link.href}
-										class="text-gray-700 hover:text-primary font-medium transition-colors block py-2"
+										class={`font-medium transition-colors block py-2 ${
+											isActive(link.href)
+												? 'text-primary border-b-2 border-primary'
+												: 'text-gray-700 hover:text-primary'
+										}`}
 									>
 										{link.label}
 									</a>
@@ -122,7 +137,11 @@ const navLinks: NavLink[] = [
 												<li>
 													<a
 														href={child.href}
-														class="block px-4 py-2 text-gray-600 hover:bg-primary hover:text-white transition-colors"
+														class={`block px-4 py-2 transition-colors ${
+															isActive(child.href)
+																? 'bg-primary text-white'
+																: 'text-gray-600 hover:bg-primary hover:text-white'
+														}`}
 													>
 														{child.label}
 													</a>
@@ -171,7 +190,11 @@ const navLinks: NavLink[] = [
 						<li>
 							<a
 								href={link.href}
-								class="text-gray-700 hover:text-primary font-medium transition-colors block py-2"
+								class={`font-medium transition-colors block py-2 ${
+									isActive(link.href)
+										? 'text-primary border-l-4 border-primary pl-2'
+										: 'text-gray-700 hover:text-primary'
+								}`}
 							>
 								{link.label}
 							</a>
@@ -181,7 +204,11 @@ const navLinks: NavLink[] = [
 										<li>
 											<a
 												href={child.href}
-												class="block py-1 text-gray-600 hover:text-primary transition-colors"
+												class={`block py-1 transition-colors ${
+													isActive(child.href)
+														? 'text-primary font-medium'
+														: 'text-gray-600 hover:text-primary'
+												}`}
 											>
 												{child.label}
 											</a>

@@ -37,3 +37,16 @@ body {
 	clip: auto;
 	white-space: normal;
 }
+
+/* Accessibility options */
+body.high-contrast {
+	filter: contrast(1.5);
+}
+
+body.increased-line-height * {
+	line-height: 2 !important;
+}
+
+body.increased-letter-spacing * {
+	letter-spacing: 0.1em !important;
+}

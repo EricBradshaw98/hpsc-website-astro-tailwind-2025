@@ -1,0 +1,242 @@
+---
+// Accessibility Tab component that slides out on hover
+---
+
+<div class="accessibility-tab-container fixed right-0 top-1/2 -translate-y-1/2 z-50">
+	<div
+		class="accessibility-tab-wrapper group flex items-center transition-transform duration-300 hover:translate-x-0"
+		style="transform: translateX(calc(100% - 48px));"
+	>
+		<!-- Tab Content Panel -->
+		<div
+			class="bg-gray-900 text-white p-6 rounded-l-lg shadow-2xl w-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+		>
+			<h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+					></path>
+				</svg>
+				Accessibility Options
+			</h2>
+
+			<!-- Font Size Controls -->
+			<div class="mb-4">
+				<label class="block text-sm font-medium mb-2">Text Size</label>
+				<div class="flex gap-2">
+					<button
+						id="decrease-font"
+						class="px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded transition-colors flex-1"
+						aria-label="Decrease text size"
+					>
+						A-
+					</button>
+					<button
+						id="reset-font"
+						class="px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded transition-colors flex-1"
+						aria-label="Reset text size"
+					>
+						A
+					</button>
+					<button
+						id="increase-font"
+						class="px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded transition-colors flex-1"
+						aria-label="Increase text size"
+					>
+						A+
+					</button>
+				</div>
+			</div>
+
+			<!-- High Contrast Toggle -->
+			<div class="mb-4">
+				<label class="flex items-center justify-between cursor-pointer">
+					<span class="text-sm font-medium">High Contrast</span>
+					<div class="relative">
+						<input type="checkbox" id="high-contrast" class="sr-only peer" />
+						<div
+							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+						>
+						</div>
+					</div>
+				</label>
+			</div>
+
+			<!-- Line Height Toggle -->
+			<div class="mb-4">
+				<label class="flex items-center justify-between cursor-pointer">
+					<span class="text-sm font-medium">Increased Line Height</span>
+					<div class="relative">
+						<input type="checkbox" id="line-height" class="sr-only peer" />
+						<div
+							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+						>
+						</div>
+					</div>
+				</label>
+			</div>
+
+			<!-- Letter Spacing Toggle -->
+			<div class="mb-4">
+				<label class="flex items-center justify-between cursor-pointer">
+					<span class="text-sm font-medium">Letter Spacing</span>
+					<div class="relative">
+						<input type="checkbox" id="letter-spacing" class="sr-only peer" />
+						<div
+							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+						>
+						</div>
+					</div>
+				</label>
+			</div>
+
+			<!-- Reset All Button -->
+			<button
+				id="reset-all"
+				class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded transition-colors font-medium"
+			>
+				Reset All Settings
+			</button>
+		</div>
+
+		<!-- Tab Handle -->
+		<div
+			class="bg-gray-900 text-white px-3 py-6 rounded-r-lg shadow-lg cursor-pointer flex items-center"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+				></path>
+			</svg>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Font size control
+	let fontSize = 16;
+	const htmlElement = document.documentElement;
+
+	document.getElementById('increase-font')?.addEventListener('click', () => {
+		fontSize = Math.min(fontSize + 2, 24);
+		htmlElement.style.fontSize = `${fontSize}px`;
+		localStorage.setItem('fontSize', fontSize.toString());
+	});
+
+	document.getElementById('decrease-font')?.addEventListener('click', () => {
+		fontSize = Math.max(fontSize - 2, 12);
+		htmlElement.style.fontSize = `${fontSize}px`;
+		localStorage.setItem('fontSize', fontSize.toString());
+	});
+
+	document.getElementById('reset-font')?.addEventListener('click', () => {
+		fontSize = 16;
+		htmlElement.style.fontSize = `${fontSize}px`;
+		localStorage.setItem('fontSize', fontSize.toString());
+	});
+
+	// High contrast toggle
+	const highContrastToggle = document.getElementById('high-contrast') as HTMLInputElement;
+	highContrastToggle?.addEventListener('change', () => {
+		if (highContrastToggle.checked) {
+			document.body.classList.add('high-contrast');
+			localStorage.setItem('highContrast', 'true');
+		} else {
+			document.body.classList.remove('high-contrast');
+			localStorage.setItem('highContrast', 'false');
+		}
+	});
+
+	// Line height toggle
+	const lineHeightToggle = document.getElementById('line-height') as HTMLInputElement;
+	lineHeightToggle?.addEventListener('change', () => {
+		if (lineHeightToggle.checked) {
+			document.body.classList.add('increased-line-height');
+			localStorage.setItem('lineHeight', 'true');
+		} else {
+			document.body.classList.remove('increased-line-height');
+			localStorage.setItem('lineHeight', 'false');
+		}
+	});
+
+	// Letter spacing toggle
+	const letterSpacingToggle = document.getElementById('letter-spacing') as HTMLInputElement;
+	letterSpacingToggle?.addEventListener('change', () => {
+		if (letterSpacingToggle.checked) {
+			document.body.classList.add('increased-letter-spacing');
+			localStorage.setItem('letterSpacing', 'true');
+		} else {
+			document.body.classList.remove('increased-letter-spacing');
+			localStorage.setItem('letterSpacing', 'false');
+		}
+	});
+
+	// Reset all settings
+	document.getElementById('reset-all')?.addEventListener('click', () => {
+		fontSize = 16;
+		htmlElement.style.fontSize = '16px';
+		document.body.classList.remove(
+			'high-contrast',
+			'increased-line-height',
+			'increased-letter-spacing'
+		);
+		if (highContrastToggle) highContrastToggle.checked = false;
+		if (lineHeightToggle) lineHeightToggle.checked = false;
+		if (letterSpacingToggle) letterSpacingToggle.checked = false;
+		localStorage.removeItem('fontSize');
+		localStorage.removeItem('highContrast');
+		localStorage.removeItem('lineHeight');
+		localStorage.removeItem('letterSpacing');
+	});
+
+	// Load saved preferences on page load
+	window.addEventListener('DOMContentLoaded', () => {
+		const savedFontSize = localStorage.getItem('fontSize');
+		if (savedFontSize) {
+			fontSize = parseInt(savedFontSize);
+			htmlElement.style.fontSize = `${fontSize}px`;
+		}
+
+		const savedHighContrast = localStorage.getItem('highContrast');
+		if (savedHighContrast === 'true') {
+			document.body.classList.add('high-contrast');
+			if (highContrastToggle) highContrastToggle.checked = true;
+		}
+
+		const savedLineHeight = localStorage.getItem('lineHeight');
+		if (savedLineHeight === 'true') {
+			document.body.classList.add('increased-line-height');
+			if (lineHeightToggle) lineHeightToggle.checked = true;
+		}
+
+		const savedLetterSpacing = localStorage.getItem('letterSpacing');
+		if (savedLetterSpacing === 'true') {
+			document.body.classList.add('increased-letter-spacing');
+			if (letterSpacingToggle) letterSpacingToggle.checked = true;
+		}
+	});
+</script>
+
+<style>
+	.accessibility-tab-wrapper:hover {
+		transform: translateX(0) !important;
+	}
+</style>
