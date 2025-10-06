@@ -2,121 +2,245 @@
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 
-// Staff members
-const staff = [
-	{
-		name: 'Tanya Ratzlaff',
-		title: 'Executive Director',
-		bio: 'Guides strategic planning, provides industry and program oversight, and leads government relations',
-		image:
-			'https://ui-avatars.com/api/?name=Tanya+Ratzlaff&size=400&background=00b6f0&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Braidey Sturgeon',
-		title: 'Manager of Industry Engagement',
-		bio: "Leads industry engagement and outreach, and spearheads the organization's justice, equity, diversity, inclusion, and Indigenous reconciliation work",
-		image:
-			'https://ui-avatars.com/api/?name=Braidey+Sturgeon&size=400&background=00b6f0&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Pubali ShomeBasu',
-		title: 'Program Manager',
-		bio: 'Leads operations for the Home Performance Contractor Network and provides strategic support',
-		image:
-			'https://ui-avatars.com/api/?name=Pubali+ShomeBasu&size=400&background=00b6f0&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Tatianna Cullen',
-		title: 'Coordinator',
-		bio: 'Provides administrative, operational, and project support',
-		image:
-			'https://ui-avatars.com/api/?name=Tatianna+Cullen&size=400&background=00b6f0&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Helena Arnold',
-		title: 'Coordinator',
-		bio: 'Provides administrative, operational, and project support',
-		image:
-			'https://ui-avatars.com/api/?name=Helena+Arnold&size=400&background=00b6f0&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Leigh McKay',
-		title: 'Coordinator',
-		bio: 'Provides administrative, operational, and project support',
-		image:
-			'https://ui-avatars.com/api/?name=Leigh+McKay&size=400&background=00b6f0&color=fff&bold=true',
-		linkedin: '#',
-	},
-];
+// Team Member Interface
+interface TeamMember {
+	name: string;
+	title: string;
+	bio?: string;
+	image: string;
+	linkedin?: string;
+	order?: number;
+}
 
-// Board of Directors
-const board = [
-	{
-		name: 'Ryan Coleman',
-		title: 'Board Chair',
-		image:
-			'https://ui-avatars.com/api/?name=Ryan+Coleman&size=400&background=0095c7&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Akua Schatz',
-		title: 'Board Member',
-		image:
-			'https://ui-avatars.com/api/?name=Akua+Schatz&size=400&background=0095c7&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Andy Cockburn',
-		title: 'Board Member',
-		image:
-			'https://ui-avatars.com/api/?name=Andy+Cockburn&size=400&background=0095c7&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Don Gulevich',
-		title: 'Board Member',
-		image:
-			'https://ui-avatars.com/api/?name=Don+Gulevich&size=400&background=0095c7&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'David Lewis',
-		title: 'Board Member',
-		image:
-			'https://ui-avatars.com/api/?name=David+Lewis&size=400&background=0095c7&color=fff&bold=true',
-		linkedin: '#',
-	},
-];
+// API Configuration
+const TEAM_API_URL = import.meta.env.PUBLIC_TEAM_API_URL;
+const TEAM_API_KEY = import.meta.env.TEAM_API_KEY;
 
-// Advisors
-const advisors = [
-	{
-		name: 'Christine Gustafson',
-		title: 'Advisor to the Board',
-		image:
-			'https://ui-avatars.com/api/?name=Christine+Gustafson&size=400&background=33c4f3&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Peter Sundberg',
-		title: 'Advisor to the Board',
-		image:
-			'https://ui-avatars.com/api/?name=Peter+Sundberg&size=400&background=33c4f3&color=fff&bold=true',
-		linkedin: '#',
-	},
-	{
-		name: 'Jovan Cheema',
-		title: 'Advisor to the Board',
-		image:
-			'https://ui-avatars.com/api/?name=Jovan+Cheema&size=400&background=33c4f3&color=fff&bold=true',
-		linkedin: '#',
-	},
-];
+// Helper function to generate placeholder avatar from random image API
+function getPlaceholderAvatar(name: string, index: number): string {
+	// Multiple placeholder API options:
+
+	// Option 1: Random professional portraits from Lorem Picsum
+	// return `https://picsum.photos/seed/${encodeURIComponent(name)}/400/400`;
+
+	// Option 2: This Person Does Not Exist (AI-generated faces)
+	// Note: Each request gets a different face, can't seed by name
+	// return `https://thispersondoesnotexist.com/`;
+
+	// Option 3: Random User Generator (real professional photos)
+	// Consistent based on seed
+	const seed = name.toLowerCase().replace(/\s+/g, '-');
+	return `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}&size=400`;
+
+	// Option 4: Pravatar (real people photos, numbered 1-70)
+	// const photoId = (index % 70) + 1;
+	// return `https://i.pravatar.cc/400?img=${photoId}`;
+
+	// Option 5: UI Avatars (current, initials-based)
+	// const color = index % 3 === 0 ? '00b6f0' : index % 3 === 1 ? '0095c7' : '33c4f3';
+	// return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=400&background=${color}&color=fff&bold=true`;
+}
+
+// Helper function to fetch from WordPress REST API
+async function fetchWordPressTeam(url: string): Promise<{ staff: TeamMember[]; board: TeamMember[]; advisors: TeamMember[] }> {
+	try {
+		const response = await fetch(`${url}/wp-json/wp/v2/team_members?per_page=100`, {
+			headers: TEAM_API_KEY ? { 'Authorization': `Bearer ${TEAM_API_KEY}` } : {},
+		});
+
+		if (!response.ok) throw new Error(`API error: ${response.status}`);
+
+		const data = await response.json();
+
+		// Transform WordPress data to our format
+		const staff: TeamMember[] = [];
+		const board: TeamMember[] = [];
+		const advisors: TeamMember[] = [];
+
+		data.forEach((member: any) => {
+			const teamMember: TeamMember = {
+				name: member.title.rendered,
+				title: member.acf?.position || member.meta?.position || 'Team Member',
+				bio: member.acf?.bio || member.content?.rendered?.replace(/<[^>]*>/g, ''),
+				image: member.acf?.photo || member.featured_media_url || getPlaceholderAvatar(member.title.rendered, 0),
+				linkedin: member.acf?.linkedin || '#',
+				order: member.acf?.order || member.menu_order || 0,
+			};
+
+			const category = member.acf?.category || member.meta?.category || 'staff';
+
+			if (category === 'board') board.push(teamMember);
+			else if (category === 'advisor') advisors.push(teamMember);
+			else staff.push(teamMember);
+		});
+
+		// Sort by order field
+		staff.sort((a, b) => (a.order || 0) - (b.order || 0));
+		board.sort((a, b) => (a.order || 0) - (b.order || 0));
+		advisors.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+		return { staff, board, advisors };
+	} catch (error) {
+		console.error('Failed to fetch from WordPress API:', error);
+		throw error;
+	}
+}
+
+// Helper function to fetch from custom JSON API
+async function fetchCustomAPI(url: string): Promise<{ staff: TeamMember[]; board: TeamMember[]; advisors: TeamMember[] }> {
+	try {
+		const response = await fetch(url, {
+			headers: TEAM_API_KEY ? { 'Authorization': `Bearer ${TEAM_API_KEY}` } : {},
+		});
+
+		if (!response.ok) throw new Error(`API error: ${response.status}`);
+
+		const data = await response.json();
+
+		// Ensure all members have fallback avatars if image is missing
+		const processMembers = (members: TeamMember[], startIndex: number) =>
+			members.map((member, index) => ({
+				...member,
+				image: member.image || getPlaceholderAvatar(member.name, startIndex + index),
+			}));
+
+		return {
+			staff: processMembers(data.staff || [], 0),
+			board: processMembers(data.board || [], 100),
+			advisors: processMembers(data.advisors || [], 200),
+		};
+	} catch (error) {
+		console.error('Failed to fetch from custom API:', error);
+		throw error;
+	}
+}
+
+// Fallback static data (used if API fails or no API configured)
+const fallbackData = {
+	staff: [
+		{
+			name: 'Tanya Ratzlaff',
+			title: 'Executive Director',
+			bio: 'Guides strategic planning, provides industry and program oversight, and leads government relations',
+			image: getPlaceholderAvatar('Tanya Ratzlaff', 0),
+			linkedin: '#',
+		},
+		{
+			name: 'Braidey Sturgeon',
+			title: 'Manager of Industry Engagement',
+			bio: "Leads industry engagement and outreach, and spearheads the organization's justice, equity, diversity, inclusion, and Indigenous reconciliation work",
+			image: getPlaceholderAvatar('Braidey Sturgeon', 1),
+			linkedin: '#',
+		},
+		{
+			name: 'Pubali ShomeBasu',
+			title: 'Program Manager',
+			bio: 'Leads operations for the Home Performance Contractor Network and provides strategic support',
+			image: getPlaceholderAvatar('Pubali ShomeBasu', 2),
+			linkedin: '#',
+		},
+		{
+			name: 'Tatianna Cullen',
+			title: 'Coordinator',
+			bio: 'Provides administrative, operational, and project support',
+			image: getPlaceholderAvatar('Tatianna Cullen', 3),
+			linkedin: '#',
+		},
+		{
+			name: 'Helena Arnold',
+			title: 'Coordinator',
+			bio: 'Provides administrative, operational, and project support',
+			image: getPlaceholderAvatar('Helena Arnold', 4),
+			linkedin: '#',
+		},
+		{
+			name: 'Leigh McKay',
+			title: 'Coordinator',
+			bio: 'Provides administrative, operational, and project support',
+			image: getPlaceholderAvatar('Leigh McKay', 5),
+			linkedin: '#',
+		},
+	],
+	board: [
+		{
+			name: 'Ryan Coleman',
+			title: 'Board Chair',
+			image: getPlaceholderAvatar('Ryan Coleman', 6),
+			linkedin: '#',
+		},
+		{
+			name: 'Akua Schatz',
+			title: 'Board Member',
+			image: getPlaceholderAvatar('Akua Schatz', 7),
+			linkedin: '#',
+		},
+		{
+			name: 'Andy Cockburn',
+			title: 'Board Member',
+			image: getPlaceholderAvatar('Andy Cockburn', 8),
+			linkedin: '#',
+		},
+		{
+			name: 'Don Gulevich',
+			title: 'Board Member',
+			image: getPlaceholderAvatar('Don Gulevich', 9),
+			linkedin: '#',
+		},
+		{
+			name: 'David Lewis',
+			title: 'Board Member',
+			image: getPlaceholderAvatar('David Lewis', 10),
+			linkedin: '#',
+		},
+	],
+	advisors: [
+		{
+			name: 'Christine Gustafson',
+			title: 'Advisor to the Board',
+			image: getPlaceholderAvatar('Christine Gustafson', 11),
+			linkedin: '#',
+		},
+		{
+			name: 'Peter Sundberg',
+			title: 'Advisor to the Board',
+			image: getPlaceholderAvatar('Peter Sundberg', 12),
+			linkedin: '#',
+		},
+		{
+			name: 'Jovan Cheema',
+			title: 'Advisor to the Board',
+			image: getPlaceholderAvatar('Jovan Cheema', 13),
+			linkedin: '#',
+		},
+	],
+};
+
+// Fetch team data from API or use fallback
+let staff: TeamMember[] = fallbackData.staff;
+let board: TeamMember[] = fallbackData.board;
+let advisors: TeamMember[] = fallbackData.advisors;
+
+if (TEAM_API_URL) {
+	try {
+		// Detect API type based on URL pattern
+		if (TEAM_API_URL.includes('wp-json')) {
+			const teamData = await fetchWordPressTeam(TEAM_API_URL);
+			staff = teamData.staff;
+			board = teamData.board;
+			advisors = teamData.advisors;
+		} else {
+			const teamData = await fetchCustomAPI(TEAM_API_URL);
+			staff = teamData.staff;
+			board = teamData.board;
+			advisors = teamData.advisors;
+		}
+	} catch (error) {
+		// Fallback data already assigned, log error in development
+		if (import.meta.env.DEV) {
+			console.error('Using fallback team data due to API error:', error);
+		}
+	}
+}
 ---
 
 <Layout
