@@ -10,8 +10,11 @@ import pagefind from 'astro-pagefind';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://homeperformance.ca', // Required for sitemap generation
+  output: 'static', // Static site generation for Pagefind compatibility
   integrations: [react(), sitemap(), pagefind()],
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    mode: 'directory',
+  }),
 
   image: {
     remotePatterns: [
