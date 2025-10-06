@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 import bcHydroLogo from '../assets/BC_Hydro.png';
 import bcLogo from '../assets/bc-logo.jpg';
 import fortisBCLogo from '../assets/FortisBC-Secondary-W-RGB_Small-480x227.png';
@@ -13,7 +12,6 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	description="Leading the way in home performance and energy efficiency solutions across British Columbia. Connect with certified contractors and access expert resources."
 	keywords="home performance, energy efficiency, British Columbia, home retrofits, contractors, sustainability"
 >
-	<Breadcrumbs items={[{ label: 'Home' }]} />
 	<!-- Hero Section -->
 	<section class="mb-16 -mx-4 md:mx-0">
 		<div
@@ -436,16 +434,16 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 	<style>
 		/* Active state for mobile */
-		.stats-card.active .group-hover\:translate-y-0 {
+		.stats-card.active [class*='translate-y-2/3'] {
 			transform: translateY(0) !important;
 		}
-		.stats-card.active .group-hover\:opacity-100 {
+		.stats-card.active [class*='opacity-0'][class*='group-hover'] {
 			opacity: 1 !important;
 		}
-		.stats-card.active .group-hover\:scale-110 {
+		.stats-card.active [class*='group-hover:scale-110'] {
 			transform: scale(1.1) !important;
 		}
-		.stats-card.active .group-hover\:bg-black\/60 {
+		.stats-card.active [class*='bg-black/50'] {
 			background-color: rgba(0, 0, 0, 0.6) !important;
 		}
 	</style>
@@ -480,13 +478,13 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				<div class="flex flex-wrap gap-4">
 					<a
 						href="/contractor-network/find"
-						class="px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 bg-white text-primary-dark hover:bg-gray-100"
+						class="px-8 py-3 rounded-lg font-semibold transition-colors bg-primary text-white hover:bg-primary-dark"
 					>
 						Find a Contractor
 					</a>
 					<a
 						href="/contact"
-						class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-all transform hover:scale-105"
+						class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
 					>
 						Contact Us
 					</a>
@@ -706,10 +704,10 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 			<div id="supporters-carousel" class="flex transition-transform duration-500 ease-in-out">
 				<!-- Slide 1 -->
 				<div
-					class="min-w-full flex flex-wrap md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
+					class="min-w-full grid grid-cols-1 md:flex md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
 				>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={bcHydroLogo}
@@ -719,7 +717,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={fortisBCLogo}
@@ -729,7 +727,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={bcLogo}
@@ -739,7 +737,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={vancityLogo}
@@ -752,10 +750,10 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 				<!-- Slide 2 -->
 				<div
-					class="min-w-full flex flex-wrap md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
+					class="min-w-full grid grid-cols-1 md:flex md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
 				>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={bcHydroLogo}
@@ -765,7 +763,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={fortisBCLogo}
@@ -775,7 +773,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={bcLogo}
@@ -785,7 +783,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						/>
 					</div>
 					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
 						<Image
 							src={vancityLogo}

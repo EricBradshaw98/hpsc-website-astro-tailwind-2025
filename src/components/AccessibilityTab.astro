@@ -4,12 +4,14 @@
 
 <div class="accessibility-tab-container fixed left-0 top-1/2 -translate-y-1/2 z-50">
 	<div
-		class="accessibility-tab-wrapper group flex items-center transition-transform duration-300 hover:translate-x-0"
+		id="accessibility-tab-wrapper"
+		class="accessibility-tab-wrapper group flex items-center transition-transform duration-300 md:hover:translate-x-0"
 		style="transform: translateX(calc(-100% + 48px));"
 	>
 		<!-- Tab Content Panel -->
 		<div
-			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+			id="accessibility-tab-panel"
+			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
 		>
 			<h2 class="text-xl font-bold mb-4 flex items-center gap-2">
 				<svg
@@ -234,6 +236,38 @@
 		localStorage.removeItem('lineHeight');
 		localStorage.removeItem('letterSpacing');
 		localStorage.removeItem('reduceMotion');
+	});
+
+	// Mobile tap support for accessibility tab
+	const tabWrapper = document.getElementById('accessibility-tab-wrapper');
+	const tabPanel = document.getElementById('accessibility-tab-panel');
+	const tabHandle = document.querySelector('.accessibility-tab-wrapper .bg-primary');
+	let isTabOpen = false;
+
+	tabHandle?.addEventListener('click', (e) => {
+		e.stopPropagation();
+		isTabOpen = !isTabOpen;
+
+		if (isTabOpen) {
+			tabWrapper?.style.setProperty('transform', 'translateX(0)');
+			tabPanel?.classList.remove('opacity-0');
+			tabPanel?.classList.add('opacity-100');
+		} else {
+			tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
+			tabPanel?.classList.remove('opacity-100');
+			tabPanel?.classList.add('opacity-0');
+		}
+	});
+
+	// Close tab when clicking outside on mobile
+	document.addEventListener('click', (e) => {
+		const target = e.target as HTMLElement;
+		if (isTabOpen && !target.closest('.accessibility-tab-wrapper')) {
+			isTabOpen = false;
+			tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
+			tabPanel?.classList.remove('opacity-100');
+			tabPanel?.classList.add('opacity-0');
+		}
 	});
 
 	// Load saved preferences on page load
