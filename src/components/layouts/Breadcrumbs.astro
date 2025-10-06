@@ -26,11 +26,7 @@ const { items } = Astro.props;
 					itemtype="https://schema.org/ListItem"
 				>
 					{item.href ? (
-						<a
-							href={item.href}
-							class="text-primary hover:underline"
-							itemprop="item"
-						>
+						<a href={item.href} class="text-primary hover:underline" itemprop="item">
 							<span itemprop="name">{item.label}</span>
 						</a>
 					) : (

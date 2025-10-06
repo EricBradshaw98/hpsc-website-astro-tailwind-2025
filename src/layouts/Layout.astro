@@ -68,33 +68,38 @@ const currentUrl = canonical || Astro.url.href;
 		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={currentUrl} />
 		<meta property="og:title" content={ogTitle || title} />
-		{(ogDescription || description) && (
-			<meta property="og:description" content={ogDescription || description} />
-		)}
+		{
+			(ogDescription || description) && (
+				<meta property="og:description" content={ogDescription || description} />
+			)
+		}
 		{ogImage && <meta property="og:image" content={ogImage} />}
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content={twitterCard} />
 		<meta name="twitter:url" content={currentUrl} />
 		<meta name="twitter:title" content={twitterTitle || ogTitle || title} />
-		{(twitterDescription || ogDescription || description) && (
-			<meta
-				name="twitter:description"
-				content={twitterDescription || ogDescription || description}
-			/>
-		)}
-		{(twitterImage || ogImage) && (
-			<meta name="twitter:image" content={twitterImage || ogImage} />
-		)}
+		{
+			(twitterDescription || ogDescription || description) && (
+				<meta
+					name="twitter:description"
+					content={twitterDescription || ogDescription || description}
+				/>
+			)
+		}
+		{(twitterImage || ogImage) && <meta name="twitter:image" content={twitterImage || ogImage} />}
 
 		<!-- JSON-LD Schema for Website -->
-		<script type="application/ld+json" set:html={JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "WebSite",
-			"url": currentUrl,
-			"name": title,
-			"description": description,
-		})} />
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'WebSite',
+				url: currentUrl,
+				name: title,
+				description: description,
+			})}
+		/>
 	</head>
 	<body class="min-h-screen bg-white text-gray-900 flex flex-col">
 		<Nav />
