@@ -8,22 +8,22 @@ const { slug } = Astro.params;
 
 export async function getStaticPaths() {
 	// When connected to WordPress, this will fetch all post slugs from the API
-	// For now, return the mock article IDs
+	// For now, return the mock article slugs
 	return [
-		{ params: { slug: '1' } },
-		{ params: { slug: '2' } },
-		{ params: { slug: '3' } },
-		{ params: { slug: '4' } },
-		{ params: { slug: '5' } },
-		{ params: { slug: '6' } },
-		{ params: { slug: '7' } },
-		{ params: { slug: '8' } },
+		{ params: { slug: 'hpsc-launches-new-contractor-certification-program' } },
+		{ params: { slug: 'new-energy-efficiency-rebates-available' } },
+		{ params: { slug: 'heat-pump-technology-advances' } },
+		{ params: { slug: 'hpsc-annual-conference-2025' } },
+		{ params: { slug: 'building-code-updates-impact-standards' } },
+		{ params: { slug: 'net-zero-heritage-home-success-story' } },
+		{ params: { slug: 'winter-preparedness-workshop-series' } },
+		{ params: { slug: 'indoor-air-quality-hidden-benefit' } },
 	];
 }
 
 // Mock article data - will be replaced with WordPress + Yoast SEO data
 const mockArticles: Record<string, any> = {
-	'1': {
+	'hpsc-launches-new-contractor-certification-program': {
 		id: 1,
 		slug: 'hpsc-launches-new-contractor-certification-program',
 		title: 'HPSC Launches New Contractor Certification Program',
@@ -64,7 +64,7 @@ const mockArticles: Record<string, any> = {
 			'The HPSC communications team is dedicated to sharing news and insights from the home performance industry.',
 		tags: ['Certification', 'Training', 'Contractors', 'Professional Development'],
 	},
-	'2': {
+	'new-energy-efficiency-rebates-available': {
 		id: 2,
 		slug: 'new-energy-efficiency-rebates-available',
 		title: 'New Energy Efficiency Rebates Available for Homeowners',
@@ -105,7 +105,9 @@ const mockArticles: Record<string, any> = {
 };
 
 // Get article by slug (in real implementation, this would query WordPress API)
-const article = mockArticles[slug || '1'] || mockArticles['1'];
+const article =
+	mockArticles[slug || 'hpsc-launches-new-contractor-certification-program'] ||
+	mockArticles['hpsc-launches-new-contractor-certification-program'];
 
 // Related articles (would be determined by category/tags in real implementation)
 const relatedArticles = Object.values(mockArticles)
@@ -283,7 +285,7 @@ const ogImage = article.image;
 						<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 							{relatedArticles.map((related: any) => (
 								<a
-									href={`/resources/news/${related.id}`}
+									href={`/resources/news/${related.slug}`}
 									class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
 								>
 									<img src={related.image} alt={related.title} class="w-full h-48 object-cover" />

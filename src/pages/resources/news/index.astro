@@ -6,6 +6,7 @@ import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 const newsArticles = [
 	{
 		id: 1,
+		slug: 'hpsc-launches-new-contractor-certification-program',
 		title: 'HPSC Launches New Contractor Certification Program',
 		excerpt:
 			'We are excited to announce the launch of our comprehensive certification program designed to elevate standards in the home performance industry.',
@@ -16,6 +17,7 @@ const newsArticles = [
 	},
 	{
 		id: 2,
+		slug: 'new-energy-efficiency-rebates-available',
 		title: 'New Energy Efficiency Rebates Available for Homeowners',
 		excerpt:
 			'CleanBC and BC Hydro have expanded their rebate programs, making energy-efficient upgrades more accessible than ever.',
@@ -26,6 +28,7 @@ const newsArticles = [
 	},
 	{
 		id: 3,
+		slug: 'heat-pump-technology-advances',
 		title: 'Heat Pump Technology Advances: What Contractors Need to Know',
 		excerpt:
 			'Recent developments in heat pump efficiency and cold-climate performance are changing the retrofit landscape.',
@@ -36,6 +39,7 @@ const newsArticles = [
 	},
 	{
 		id: 4,
+		slug: 'hpsc-annual-conference-2025',
 		title: 'HPSC Annual Conference 2025: Registration Now Open',
 		excerpt:
 			'Join us for three days of learning, networking, and innovation in the residential retrofit industry.',
@@ -46,6 +50,7 @@ const newsArticles = [
 	},
 	{
 		id: 5,
+		slug: 'building-code-updates-impact-standards',
 		title: 'Building Code Updates Impact Home Performance Standards',
 		excerpt:
 			'Understanding the latest BC Building Code changes and their implications for retrofit projects.',
@@ -56,6 +61,7 @@ const newsArticles = [
 	},
 	{
 		id: 6,
+		slug: 'net-zero-heritage-home-success-story',
 		title: 'Success Story: 100-Year-Old Home Achieves Net Zero',
 		excerpt:
 			'How one Vancouver homeowner and contractor team transformed a heritage home into a modern energy-efficient dwelling.',
@@ -66,6 +72,7 @@ const newsArticles = [
 	},
 	{
 		id: 7,
+		slug: 'winter-preparedness-workshop-series',
 		title: 'Winter Preparedness Workshop Series Announced',
 		excerpt: 'Free workshops for contractors on winter-specific retrofit challenges and solutions.',
 		image: 'https://images.unsplash.com/photo-1417816491410-d61e1546e539?w=800&h=600&fit=crop',
@@ -75,6 +82,7 @@ const newsArticles = [
 	},
 	{
 		id: 8,
+		slug: 'indoor-air-quality-hidden-benefit',
 		title: 'Indoor Air Quality: The Hidden Benefit of Energy Retrofits',
 		excerpt:
 			'Research shows that proper home performance upgrades significantly improve indoor air quality and occupant health.',
@@ -174,13 +182,13 @@ const archiveMonths = getArchiveMonths();
 										</time>
 									</div>
 									<h2 class="text-2xl font-bold text-gray-900 mb-3 hover:text-primary transition-colors">
-										<a href={`/resources/news/${article.id}`}>{article.title}</a>
+										<a href={`/resources/news/${article.slug}`}>{article.title}</a>
 									</h2>
 									<p class="text-gray-600 mb-4">{article.excerpt}</p>
 									<div class="flex items-center justify-between">
 										<span class="text-sm text-gray-500">By {article.author}</span>
 										<a
-											href={`/resources/news/${article.id}`}
+											href={`/resources/news/${article.slug}`}
 											class="text-primary font-semibold hover:underline"
 										>
 											Read More →
@@ -194,18 +202,19 @@ const archiveMonths = getArchiveMonths();
 			</div>
 
 			<!-- Pagination -->
-			<div class="mt-12 flex justify-center items-center gap-4">
-				<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed" disabled>
+			<div class="mt-12 flex justify-center items-center gap-4" id="pagination">
+				<button
+					id="prev-btn"
+					class="px-4 py-2 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed"
+					disabled
+				>
 					← Previous
 				</button>
-				<div class="flex gap-2">
-					<button class="px-4 py-2 rounded-lg bg-primary text-white">1</button>
-					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">2</button
-					>
-					<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">3</button
-					>
-				</div>
-				<button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">
+				<div class="flex gap-2" id="page-numbers"></div>
+				<button
+					id="next-btn"
+					class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200"
+				>
 					Next →
 				</button>
 			</div>
@@ -268,7 +277,7 @@ const archiveMonths = getArchiveMonths();
 					{
 						newsArticles.slice(0, 5).map((article) => (
 							<li>
-								<a href={`/resources/news/${article.id}`} class="block group">
+								<a href={`/resources/news/${article.slug}`} class="block group">
 									<h4 class="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors mb-1">
 										{article.title}
 									</h4>
@@ -368,19 +377,129 @@ const archiveMonths = getArchiveMonths();
 		});
 	}
 
+	// Pagination functionality
+	const articlesPerPage = 4;
+	let currentPage = 1;
+	let filteredArticles: Element[] = Array.from(newsArticles);
+
+	function updatePagination() {
+		// Get currently visible articles
+		filteredArticles = Array.from(newsArticles).filter(
+			(article) => !article.classList.contains('hidden')
+		);
+
+		const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+
+		// Show/hide articles based on current page
+		filteredArticles.forEach((article, index) => {
+			const startIndex = (currentPage - 1) * articlesPerPage;
+			const endIndex = currentPage * articlesPerPage;
+
+			if (index >= startIndex && index < endIndex) {
+				article.classList.remove('pagination-hidden');
+			} else {
+				article.classList.add('pagination-hidden');
+			}
+		});
+
+		// Update prev button
+		const prevBtn = document.getElementById('prev-btn');
+		if (prevBtn) {
+			if (currentPage === 1) {
+				prevBtn.classList.add('cursor-not-allowed', 'text-gray-400');
+				prevBtn.classList.remove('hover:bg-gray-200', 'text-gray-700');
+				prevBtn.setAttribute('disabled', 'true');
+			} else {
+				prevBtn.classList.remove('cursor-not-allowed', 'text-gray-400');
+				prevBtn.classList.add('hover:bg-gray-200', 'text-gray-700');
+				prevBtn.removeAttribute('disabled');
+			}
+		}
+
+		// Update next button
+		const nextBtn = document.getElementById('next-btn');
+		if (nextBtn) {
+			if (currentPage === totalPages) {
+				nextBtn.classList.add('cursor-not-allowed', 'text-gray-400');
+				nextBtn.classList.remove('hover:bg-gray-200', 'text-gray-700');
+				nextBtn.setAttribute('disabled', 'true');
+			} else {
+				nextBtn.classList.remove('cursor-not-allowed', 'text-gray-400');
+				nextBtn.classList.add('hover:bg-gray-200', 'text-gray-700');
+				nextBtn.removeAttribute('disabled');
+			}
+		}
+
+		// Update page numbers
+		const pageNumbersContainer = document.getElementById('page-numbers');
+		if (pageNumbersContainer) {
+			pageNumbersContainer.innerHTML = '';
+			for (let i = 1; i <= totalPages; i++) {
+				const pageBtn = document.createElement('button');
+				pageBtn.textContent = i.toString();
+				pageBtn.className = `px-4 py-2 rounded-lg ${
+					i === currentPage
+						? 'bg-primary text-white'
+						: 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+				}`;
+				pageBtn.addEventListener('click', () => {
+					currentPage = i;
+					updatePagination();
+					document.getElementById('news-grid')?.scrollIntoView({ behavior: 'smooth' });
+				});
+				pageNumbersContainer.appendChild(pageBtn);
+			}
+		}
+	}
+
+	// Add event listeners for prev/next
+	document.getElementById('prev-btn')?.addEventListener('click', () => {
+		if (currentPage > 1) {
+			currentPage--;
+			updatePagination();
+			document.getElementById('news-grid')?.scrollIntoView({ behavior: 'smooth' });
+		}
+	});
+
+	document.getElementById('next-btn')?.addEventListener('click', () => {
+		const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+		if (currentPage < totalPages) {
+			currentPage++;
+			updatePagination();
+			document.getElementById('news-grid')?.scrollIntoView({ behavior: 'smooth' });
+		}
+	});
+
+	// Wrap filterArticles to reset pagination
+	const originalFilterArticles = filterArticles;
+	const filterArticlesWithPagination = function (category: string) {
+		originalFilterArticles(category);
+		currentPage = 1;
+		updatePagination();
+	};
+
+	// Update event listeners to use wrapped function
 	filterButtons.forEach((button) => {
 		button.addEventListener('click', () => {
 			const category = button.getAttribute('data-category') || 'All';
-			filterArticles(category);
+			filterArticlesWithPagination(category);
 		});
 	});
 
 	sidebarCategoryButtons.forEach((button) => {
 		button.addEventListener('click', () => {
 			const category = button.getAttribute('data-category') || 'All';
-			filterArticles(category);
-			// Scroll to top of news grid
+			filterArticlesWithPagination(category);
 			document.getElementById('news-grid')?.scrollIntoView({ behavior: 'smooth' });
 		});
 	});
+
+	// Initial pagination
+	updatePagination();
 </script>
+
+<style>
+	.pagination-hidden {
+		display: none;
+	}
+</style>
