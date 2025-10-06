@@ -92,7 +92,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 			<!-- Service 1 -->
 			<div
-				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden"
+				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden border border-primary"
 			>
 				<div
 					class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none"
@@ -121,7 +121,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 			<!-- Service 2 -->
 			<div
-				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden"
+				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden border border-primary"
 			>
 				<div
 					class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none"
@@ -150,7 +150,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 			<!-- Service 3 -->
 			<div
-				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden"
+				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden border border-primary"
 			>
 				<div
 					class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none"
@@ -182,7 +182,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 			<!-- Card 1: Contractors -->
 			<div
-				class="bg-primary rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
+				class="stats-card bg-primary rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
 			>
 				<div class="aspect-square relative overflow-hidden">
 					<Image
@@ -250,7 +250,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 			<!-- Card 2: Homes Improved -->
 			<div
-				class="bg-accent-green rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
+				class="stats-card bg-accent-green rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
 			>
 				<div class="aspect-square relative overflow-hidden">
 					<Image
@@ -318,7 +318,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 			<!-- Card 3: Years of Excellence -->
 			<div
-				class="bg-accent-blue rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
+				class="stats-card bg-accent-blue rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
 			>
 				<div class="aspect-square relative overflow-hidden">
 					<Image
@@ -399,7 +399,56 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		}
 
 		setInterval(cycleHeroImages, 5000);
+
+		// Mobile touch support for stats cards
+		const statsCards = document.querySelectorAll('.stats-card');
+		let activeCard: HTMLElement | null = null;
+
+		statsCards.forEach((card) => {
+			card.addEventListener('click', (e) => {
+				const target = card as HTMLElement;
+
+				// Close other cards
+				if (activeCard && activeCard !== target) {
+					activeCard.classList.remove('active');
+				}
+
+				// Toggle current card
+				if (target.classList.contains('active')) {
+					target.classList.remove('active');
+					activeCard = null;
+				} else {
+					target.classList.add('active');
+					activeCard = target;
+				}
+			});
+		});
+
+		// Close card when clicking outside
+		document.addEventListener('click', (e) => {
+			const target = e.target as HTMLElement;
+			if (activeCard && !target.closest('.stats-card')) {
+				activeCard.classList.remove('active');
+				activeCard = null;
+			}
+		});
 	</script>
+
+	<style>
+		/* Active state for mobile */
+		.stats-card.active .group-hover\:translate-y-0 {
+			transform: translateY(0) !important;
+		}
+		.stats-card.active .group-hover\:opacity-100 {
+			opacity: 1 !important;
+		}
+		.stats-card.active .group-hover\:scale-110 {
+			transform: scale(1.1) !important;
+		}
+		.stats-card.active .group-hover\:bg-black\/60 {
+			background-color: rgba(0, 0, 0, 0.6) !important;
+		}
+	</style>
 
 	<!-- Parallax CTA Section -->
 	<section class="mb-16 -mx-4 md:mx-0 relative h-96 md:rounded-2xl overflow-hidden">
@@ -656,8 +705,12 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		<div class="relative overflow-hidden">
 			<div id="supporters-carousel" class="flex transition-transform duration-500 ease-in-out">
 				<!-- Slide 1 -->
-				<div class="min-w-full flex items-center justify-between gap-8 px-4">
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+				<div
+					class="min-w-full flex flex-wrap md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
+				>
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={bcHydroLogo}
 							alt="BC Hydro"
@@ -665,7 +718,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 							loading="lazy"
 						/>
 					</div>
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={fortisBCLogo}
 							alt="FortisBC"
@@ -673,7 +728,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 							loading="lazy"
 						/>
 					</div>
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={bcLogo}
 							alt="CleanBC"
@@ -681,7 +738,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 							loading="lazy"
 						/>
 					</div>
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={vancityLogo}
 							alt="Vancity"
@@ -692,8 +751,12 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				</div>
 
 				<!-- Slide 2 -->
-				<div class="min-w-full flex items-center justify-between gap-8 px-4">
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+				<div
+					class="min-w-full flex flex-wrap md:flex-nowrap items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
+				>
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={bcHydroLogo}
 							alt="BC Hydro"
@@ -701,7 +764,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 							loading="lazy"
 						/>
 					</div>
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={fortisBCLogo}
 							alt="FortisBC"
@@ -709,7 +774,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 							loading="lazy"
 						/>
 					</div>
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={bcLogo}
 							alt="CleanBC"
@@ -717,7 +784,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 							loading="lazy"
 						/>
 					</div>
-					<div class="bg-white p-8 rounded-lg shadow-md w-48 h-32 flex items-center justify-center">
+					<div
+						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-40 md:w-48 h-24 md:h-32 flex items-center justify-center"
+					>
 						<Image
 							src={vancityLogo}
 							alt="Vancity"

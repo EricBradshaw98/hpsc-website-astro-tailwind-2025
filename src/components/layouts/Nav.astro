@@ -187,20 +187,46 @@ function isActive(href: string): boolean {
 		>
 			<ul class="flex flex-col gap-4 pt-4">
 				{
-					navLinks.map((link) => (
+					navLinks.map((link, index) => (
 						<li>
-							<a
-								href={link.href}
-								class={`font-medium transition-colors block py-2 ${
-									isActive(link.href)
-										? 'text-primary border-l-4 border-primary pl-2'
-										: 'text-gray-700 hover:text-primary'
-								}`}
-							>
-								{link.label}
-							</a>
+							<div class="flex items-center justify-between">
+								<a
+									href={link.href}
+									class={`font-medium transition-colors block py-2 flex-grow ${
+										isActive(link.href)
+											? 'text-primary border-l-4 border-primary pl-2'
+											: 'text-gray-700 hover:text-primary'
+									}`}
+								>
+									{link.label}
+								</a>
+								{link.children && (
+									<button
+										class="mobile-submenu-toggle p-2 text-gray-600 hover:text-primary transition-colors"
+										data-submenu={`submenu-${index}`}
+										aria-label={`Toggle ${link.label} submenu`}
+									>
+										<svg
+											class="w-5 h-5 transition-transform duration-300"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M19 9l-7 7-7-7"
+											/>
+										</svg>
+									</button>
+								)}
+							</div>
 							{link.children && (
-								<ul class="ml-4 mt-2 space-y-2">
+								<ul
+									id={`submenu-${index}`}
+									class="ml-4 space-y-2 overflow-hidden transition-all duration-300 max-h-0 opacity-0"
+								>
 									{link.children.map((child) => (
 										<li>
 											<a
@@ -297,6 +323,45 @@ function isActive(href: string): boolean {
 				hamburgerLines[1].style.opacity = '1';
 				hamburgerLines[2].style.transform = 'rotate(0) translateY(0)';
 			}
+
+			// Close all submenus when main menu closes
+			const allSubmenus = document.querySelectorAll('[id^="submenu-"]');
+			const allToggleButtons = document.querySelectorAll('.mobile-submenu-toggle');
+			allSubmenus.forEach((submenu) => {
+				submenu.classList.remove('max-h-96', 'opacity-100', 'mt-2');
+				submenu.classList.add('max-h-0', 'opacity-0');
+			});
+			allToggleButtons.forEach((button) => {
+				const svg = button.querySelector('svg');
+				if (svg) svg.style.transform = 'rotate(0deg)';
+			});
 		}
+	});
+
+	// Mobile submenu toggles
+	const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
+	submenuToggles.forEach((toggle) => {
+		toggle.addEventListener('click', (e) => {
+			e.preventDefault();
+			const submenuId = toggle.getAttribute('data-submenu');
+			const submenu = document.getElementById(submenuId || '');
+			const svg = toggle.querySelector('svg');
+
+			if (submenu) {
+				const isOpen = submenu.classList.contains('max-h-96');
+
+				if (isOpen) {
+					// Close submenu
+					submenu.classList.remove('max-h-96', 'opacity-100', 'mt-2');
+					submenu.classList.add('max-h-0', 'opacity-0');
+					if (svg) svg.style.transform = 'rotate(0deg)';
+				} else {
+					// Open submenu
+					submenu.classList.remove('max-h-0', 'opacity-0');
+					submenu.classList.add('max-h-96', 'opacity-100', 'mt-2');
+					if (svg) svg.style.transform = 'rotate(180deg)';
+				}
+			}
+		});
 	});
 </script>
