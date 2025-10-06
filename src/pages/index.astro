@@ -418,9 +418,11 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 						if (entry.isIntersecting) {
 							// Add active class when card enters viewport
 							(entry.target as HTMLElement).classList.add('active');
+							console.log('Card activated:', entry.target);
 						} else {
 							// Remove active class when card leaves viewport
 							(entry.target as HTMLElement).classList.remove('active');
+							console.log('Card deactivated:', entry.target);
 						}
 					});
 				}, observerOptions);
@@ -473,36 +475,42 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	<style>
 		/* Active state for mobile - override group-hover with direct targeting */
 		@media (max-width: 767px) {
-			/* Ensure smooth transitions on mobile */
-			.stats-card .absolute.bottom-0 {
-				transition: transform 0.4s ease-out;
+			/* Disable group-hover on mobile */
+			.stats-card:hover > div {
+				transform: translateY(66.666667%);
 			}
-			.stats-card .px-6.pb-6 {
-				transition: opacity 0.3s ease-in 0.15s;
+			.stats-card:hover .opacity-0 {
+				opacity: 0;
+			}
+
+			/* Ensure smooth transitions on mobile */
+			.stats-card > div[class*='translate-y'] {
+				transition: transform 0.4s ease-out !important;
+			}
+			.stats-card .opacity-0 {
+				transition: opacity 0.3s ease-in 0.15s !important;
 			}
 
 			/* Active state - slide up the colored tab to show full content */
-			.stats-card.active > .absolute.bottom-0[class*="bg-primary"],
-			.stats-card.active > .absolute.bottom-0[class*="bg-accent-green"],
-			.stats-card.active > .absolute.bottom-0[class*="bg-accent-blue"] {
+			.stats-card.active > div[class*='translate-y'] {
 				transform: translateY(0) !important;
 			}
 
 			/* Show the hidden content when active */
-			.stats-card.active .px-6.pb-6.opacity-0 {
+			.stats-card.active .opacity-0 {
 				opacity: 1 !important;
 			}
 
 			/* Zoom the image when active */
 			.stats-card.active img {
 				transform: scale(1.1) !important;
-				transition: transform 0.5s ease-out;
+				transition: transform 0.5s ease-out !important;
 			}
 
 			/* Darken the overlay when active */
-			.stats-card.active .aspect-square > .absolute.inset-0[class*="bg-black"] {
+			.stats-card.active div[class*='bg-black'] {
 				background-color: rgba(0, 0, 0, 0.6) !important;
-				transition: background-color 0.3s ease-out;
+				transition: background-color 0.3s ease-out !important;
 			}
 		}
 	</style>
