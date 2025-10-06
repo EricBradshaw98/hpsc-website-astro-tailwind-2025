@@ -144,6 +144,9 @@ const currentUrl = canonical || Astro.url.href;
 				}
 			})(window, document);
 		</script>
+
+		<!-- Custom head content from pages -->
+		<slot name="head" />
 	</head>
 	<body class="min-h-screen bg-white text-gray-900 flex flex-col">
 		<!-- Skip to main content link for accessibility -->

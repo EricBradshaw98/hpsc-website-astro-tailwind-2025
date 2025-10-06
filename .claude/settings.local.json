@@ -14,7 +14,8 @@
       "Bash(npm run dev:*)",
       "Bash(copy:*)",
       "Bash(cp:*)",
-      "Bash(code:*)"
+      "Bash(code:*)",
+      "WebFetch(domain:developers.cloudflare.com)"
     ],
     "deny": [],
     "ask": []
