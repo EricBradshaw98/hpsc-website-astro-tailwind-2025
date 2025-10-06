@@ -22,6 +22,204 @@ export async function getStaticPaths() {
 
 // Guide content - will be fetched from WordPress later
 const guides: Record<string, any> = {
+	'heat-pump-installation-checklist': {
+		title: 'Heat Pump Installation: Complete Checklist',
+		description: 'Everything contractors need to know for a successful heat pump installation from start to finish.',
+		category: 'Contractors',
+		difficulty: 'Intermediate',
+		readTime: '15 min',
+		author: 'Technical Team',
+		date: '2025-01-05',
+		image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&h=600&fit=crop',
+		steps: [
+			{
+				title: 'Pre-Installation Site Assessment',
+				content: `<p>A thorough site assessment is critical for heat pump success. This step ensures you select the right equipment and identify potential installation challenges before starting work.</p>
+
+				<h3>What to Evaluate</h3>
+				<ul>
+					<li><strong>Electrical capacity:</strong> Verify the home has adequate electrical service (usually 200A minimum for whole-home heat pumps)</li>
+					<li><strong>Existing ductwork:</strong> Assess condition, sizing, and air leakage</li>
+					<li><strong>Outdoor unit location:</strong> Identify suitable placement considering noise, drainage, and clearances</li>
+					<li><strong>Indoor unit placement:</strong> Determine optimal locations for air handlers or heads</li>
+					<li><strong>Building envelope:</strong> Note any major air leakage or insulation issues that should be addressed first</li>
+				</ul>
+
+				<p class="bg-primary/10 p-4 rounded-lg mt-4">
+					<strong>Pro Tip:</strong> Take photos and measurements during assessment. This documentation helps with equipment selection and can prevent surprises during installation.
+				</p>`,
+			},
+			{
+				title: 'Equipment Selection and Sizing',
+				content: `<p>Proper sizing is crucial - oversized heat pumps cycle frequently and provide poor comfort, while undersized units won't meet heating/cooling needs.</p>
+
+				<h3>Sizing Process</h3>
+				<ol>
+					<li>Perform Manual J heat load calculation</li>
+					<li>Account for BC climate (use appropriate design temperatures)</li>
+					<li>Consider backup heating requirements for cold-climate systems</li>
+					<li>Select equipment rated for local climate conditions</li>
+					<li>Verify unit qualifies for available rebate programs</li>
+				</ol>
+
+				<h3>Cold Climate Considerations</h3>
+				<p>For BC installations, prioritize heat pumps with:</p>
+				<ul>
+					<li>Rated heating capacity at -15°C or lower</li>
+					<li>Variable-speed compressors for better part-load performance</li>
+					<li>Enhanced defrost cycles for wet climates</li>
+				</ul>`,
+			},
+			{
+				title: 'Obtaining Permits and Rebates',
+				content: `<p>Ensure all required permits and rebate applications are in place before beginning installation.</p>
+
+				<h3>Required Permits</h3>
+				<ul>
+					<li>Electrical permit (almost always required)</li>
+					<li>Building/HVAC permit (check local requirements)</li>
+					<li>Gas disconnect permit (if removing gas furnace)</li>
+				</ul>
+
+				<h3>Rebate Programs</h3>
+				<p>BC homeowners may be eligible for:</p>
+				<ul>
+					<li><strong>CleanBC rebates:</strong> Up to $7,000 for cold-climate heat pumps</li>
+					<li><strong>Utility incentives:</strong> BC Hydro and FortisBC programs</li>
+					<li><strong>Income-qualified programs:</strong> Enhanced rebates for eligible households</li>
+				</ul>
+
+				<p class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4">
+					<strong>Important:</strong> Pre-approval is required for most rebate programs. Submit applications before starting work.
+				</p>`,
+			},
+			{
+				title: 'Outdoor Unit Installation',
+				content: `<p>Proper outdoor unit placement and installation ensures optimal performance and longevity.</p>
+
+				<h3>Location Requirements</h3>
+				<ul>
+					<li>Minimum 24" clearance on service side, 12" on other sides</li>
+					<li>Level pad (concrete, composite, or manufacturer-approved)</li>
+					<li>Protection from roof runoff and snow loads</li>
+					<li>Away from bedroom windows (noise consideration)</li>
+					<li>Easy access for maintenance and snow clearing</li>
+				</ul>
+
+				<h3>Installation Steps</h3>
+				<ol>
+					<li>Install level pad with proper drainage</li>
+					<li>Mount unit with vibration isolators</li>
+					<li>Connect refrigerant lines (follow manufacturer specs for line sizing and insulation)</li>
+					<li>Install condensate drain with freeze protection</li>
+					<li>Run electrical supply in approved conduit</li>
+					<li>Verify unit is level and secure</li>
+				</ol>`,
+			},
+			{
+				title: 'Indoor Unit and Ductwork',
+				content: `<p>Indoor installation varies by system type but must ensure proper airflow and distribution.</p>
+
+				<h3>Ducted Systems</h3>
+				<ul>
+					<li>Assess and seal existing ductwork (target <10% leakage)</li>
+					<li>Resize supply/return as needed for heat pump airflow requirements</li>
+					<li>Install air handler with proper clearances</li>
+					<li>Add zoning controls if applicable</li>
+					<li>Ensure adequate return air pathways</li>
+				</ul>
+
+				<h3>Ductless (Mini-Split) Systems</h3>
+				<ul>
+					<li>Mount indoor heads at optimal height (typically 7-8 feet)</li>
+					<li>Ensure proper pitch for condensate drainage</li>
+					<li>Route refrigerant lines and condensate drain through minimal penetrations</li>
+					<li>Use approved line cover/conduit for exterior runs</li>
+				</ul>`,
+			},
+			{
+				title: 'Electrical Connections',
+				content: `<p>All electrical work must meet BC Electrical Code and be performed by licensed electricians.</p>
+
+				<h3>Electrical Requirements</h3>
+				<ul>
+					<li>Dedicated circuit(s) sized per equipment specifications</li>
+					<li>Proper disconnect switches at indoor and outdoor units</li>
+					<li>GFCI protection where required</li>
+					<li>Low-voltage control wiring (thermostat, communication lines)</li>
+				</ul>
+
+				<h3>Common Issues to Avoid</h3>
+				<ul>
+					<li>Undersized wire gauge causing voltage drop</li>
+					<li>Shared circuits leading to breaker trips</li>
+					<li>Missing or improper disconnect switches</li>
+					<li>Incorrect thermostat wiring</li>
+				</ul>`,
+			},
+			{
+				title: 'System Commissioning',
+				content: `<p>Proper commissioning ensures the system operates as designed and meets performance expectations.</p>
+
+				<h3>Commissioning Checklist</h3>
+				<ol>
+					<li><strong>Refrigerant charge:</strong> Verify charge using manufacturer's procedures (superheat/subcooling)</li>
+					<li><strong>Airflow:</strong> Measure and adjust to meet equipment specifications</li>
+					<li><strong>Electrical:</strong> Check voltage, amperage, and verify all safety controls function</li>
+					<li><strong>Drainage:</strong> Test condensate drains under operating conditions</li>
+					<li><strong>Controls:</strong> Program thermostat, test all modes (heating, cooling, auto)</li>
+					<li><strong>Defrost:</strong> Verify defrost cycle operates (or test initiation)</li>
+				</ol>
+
+				<h3>Performance Testing</h3>
+				<ul>
+					<li>Run system in both heating and cooling modes</li>
+					<li>Measure temperature splits across indoor coil</li>
+					<li>Check for unusual noises or vibrations</li>
+					<li>Verify proper cycling and staging</li>
+				</ul>`,
+			},
+			{
+				title: 'Homeowner Training and Documentation',
+				content: `<p>Educated homeowners are satisfied customers who will maintain their systems properly.</p>
+
+				<h3>What to Cover</h3>
+				<ul>
+					<li><strong>Thermostat operation:</strong> Programming, modes, emergency heat</li>
+					<li><strong>Filter maintenance:</strong> Location, frequency, type to use</li>
+					<li><strong>Normal operation:</strong> Expected sounds, frost formation, defrost cycles</li>
+					<li><strong>Emergency procedures:</strong> How to turn off system, when to call for service</li>
+					<li><strong>Warranty coverage:</strong> What's covered, registration requirements</li>
+				</ul>
+
+				<h3>Documentation to Provide</h3>
+				<ul>
+					<li>Equipment manuals and warranty information</li>
+					<li>Installation photos and as-built drawings</li>
+					<li>Commissioning test results</li>
+					<li>Maintenance schedule and recommendations</li>
+					<li>Rebate program documentation (if applicable)</li>
+					<li>Service contact information</li>
+				</ul>
+
+				<p class="bg-primary/10 p-4 rounded-lg mt-4">
+					<strong>Best Practice:</strong> Create a custom maintenance guide specific to the installed system. Include photos of filter locations and thermostat settings.
+				</p>`,
+			},
+		],
+		relatedGuides: [
+			{
+				slug: 'air-sealing-best-practices',
+				title: 'Air Sealing Best Practices for Contractors',
+				image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop',
+			},
+			{
+				slug: 'blower-door-testing-guide',
+				title: 'Complete Guide to Blower Door Testing',
+				image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=300&fit=crop',
+			},
+		],
+	},
 	'getting-started-with-home-energy-assessments': {
 		title: 'Getting Started with Home Energy Assessments',
 		description: 'A comprehensive guide to understanding and preparing for your home energy assessment.',
