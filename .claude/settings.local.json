@@ -18,7 +18,8 @@
 			"WebFetch(domain:developers.cloudflare.com)",
 			"Bash(git checkout:*)",
 			"Bash(cat:*)",
-			"WebFetch(domain:guides.co)"
+			"WebFetch(domain:guides.co)",
+			"Bash(npm audit:*)"
 		],
 		"deny": [],
 		"ask": []

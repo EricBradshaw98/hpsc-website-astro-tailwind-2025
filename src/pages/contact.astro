@@ -461,13 +461,11 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 	}
 
 	(window as any).onTurnstileSuccess = function (token: string) {
-		console.log('Turnstile success');
 		turnstileToken = token;
 		updateSubmitButton();
 	};
 
 	(window as any).onTurnstileError = function (errorCode: string) {
-		console.error('Turnstile error:', errorCode);
 		turnstileToken = null;
 		updateSubmitButton();
 		const formMessage = document.getElementById('form-message') as HTMLDivElement;
@@ -480,7 +478,6 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 	};
 
 	(window as any).onTurnstileExpired = function () {
-		console.log('Turnstile expired');
 		turnstileToken = null;
 		updateSubmitButton();
 	};
