@@ -234,7 +234,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 									<p class="text-gray-600 leading-relaxed">{item.description}</p>
 
 									<div class="mt-6 pt-6 border-t border-gray-100">
-										<details class="group">
+										<details class="group strategy-details">
 											<summary class="cursor-pointer list-none flex items-center justify-between text-primary font-semibold hover:text-primary-dark transition-colors">
 												<span class="flex items-center gap-2">
 													<svg
@@ -253,7 +253,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 													Updates & Progress
 												</span>
 												<svg
-													class="w-5 h-5 transition-transform group-open:rotate-180"
+													class="w-5 h-5 transition-transform duration-300 group-open:rotate-180"
 													fill="none"
 													stroke="currentColor"
 													viewBox="0 0 24 24"
@@ -266,11 +266,60 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 													/>
 												</svg>
 											</summary>
-											<div class="mt-4 p-4 bg-gray-50 rounded-lg">
-												<p class="text-gray-500 text-sm italic">
-													Updates will be posted here as progress is made on this strategic
-													priority.
-												</p>
+											<div class="details-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+												<div class="mt-4 p-4 bg-gray-50 rounded-lg">
+													<div class="space-y-3">
+														<div class="flex items-start gap-2">
+															<svg
+																class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"
+																fill="none"
+																stroke="currentColor"
+																viewBox="0 0 24 24"
+															>
+																<path
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	stroke-width="2"
+																	d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+																></path>
+															</svg>
+															<p class="text-gray-700 text-sm">
+																<strong>Status:</strong> In Progress
+															</p>
+														</div>
+														<div class="flex items-start gap-2">
+															<svg
+																class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"
+																fill="none"
+																stroke="currentColor"
+																viewBox="0 0 24 24"
+															>
+																<path
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	stroke-width="2"
+																	d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+																></path>
+															</svg>
+															<p class="text-gray-700 text-sm">
+																<strong>Last Updated:</strong> {
+																	new Date().toLocaleDateString('en-US', {
+																		year: 'numeric',
+																		month: 'long',
+																		day: 'numeric',
+																	})
+																}
+															</p>
+														</div>
+														<div class="mt-4 pt-4 border-t border-gray-200">
+															<p class="text-gray-600 text-sm leading-relaxed">
+																The HPSC is actively working on this strategic priority. Updates will
+																be posted here as milestones are achieved. Check back regularly for the
+																latest progress on this initiative.
+															</p>
+														</div>
+													</div>
+												</div>
 											</div>
 										</details>
 									</div>
@@ -340,3 +389,43 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 		</div>
 	</section>
 </Layout>
+
+<script>
+	// Smooth animation for details/summary dropdowns
+	document.addEventListener('DOMContentLoaded', () => {
+		const detailsElements = document.querySelectorAll('.strategy-details');
+
+		detailsElements.forEach((details) => {
+			const summary = details.querySelector('summary');
+			const content = details.querySelector('.details-content');
+
+			if (!summary || !content) return;
+
+			summary.addEventListener('click', (e) => {
+				e.preventDefault();
+
+				if (details.hasAttribute('open')) {
+					// Closing: animate out then close
+					content.style.maxHeight = '0px';
+					content.style.opacity = '0';
+
+					setTimeout(() => {
+						details.removeAttribute('open');
+					}, 300);
+				} else {
+					// Opening: open then animate in
+					details.setAttribute('open', '');
+
+					// Force a reflow
+					void content.offsetHeight;
+
+					// Set max-height to actual content height for smooth animation
+					const contentHeight = content.scrollHeight;
+					content.style.maxHeight = `${contentHeight}px`;
+					content.style.opacity = '1';
+				}
+			});
+		});
+	});
+</script>
+
