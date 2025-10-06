@@ -1,0 +1,416 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
+import { Image } from 'astro:assets';
+
+// Guide list - will be fetched from WordPress later
+const guides = [
+	{
+		slug: 'getting-started-with-home-energy-assessments',
+		title: 'Getting Started with Home Energy Assessments',
+		description: 'A comprehensive guide to understanding and preparing for your home energy assessment.',
+		category: 'Homeowners',
+		steps: 5,
+		readTime: '10 min',
+		difficulty: 'Beginner',
+		image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop',
+		author: 'HPSC Team',
+		date: '2025-01-06',
+		featured: true,
+	},
+	{
+		slug: 'heat-pump-installation-checklist',
+		title: 'Heat Pump Installation: Complete Checklist',
+		description: 'Everything contractors need to know for a successful heat pump installation from start to finish.',
+		category: 'Contractors',
+		steps: 8,
+		readTime: '15 min',
+		difficulty: 'Intermediate',
+		image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop',
+		author: 'Technical Team',
+		date: '2025-01-05',
+		featured: false,
+	},
+	{
+		slug: 'understanding-rebate-programs',
+		title: 'Understanding BC Energy Rebate Programs',
+		description: 'Navigate the available rebates and incentives for home energy efficiency upgrades.',
+		category: 'Homeowners',
+		steps: 4,
+		readTime: '8 min',
+		difficulty: 'Beginner',
+		image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop',
+		author: 'Policy Team',
+		date: '2025-01-04',
+		featured: false,
+	},
+	{
+		slug: 'air-sealing-best-practices',
+		title: 'Air Sealing Best Practices for Contractors',
+		description: 'Advanced techniques and common pitfalls to avoid when air sealing residential buildings.',
+		category: 'Contractors',
+		steps: 10,
+		readTime: '20 min',
+		difficulty: 'Advanced',
+		image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop',
+		author: 'HPSC Team',
+		date: '2025-01-03',
+		featured: true,
+	},
+	{
+		slug: 'choosing-the-right-insulation',
+		title: 'Choosing the Right Insulation for Your Home',
+		description: 'Compare different insulation types and learn which is best for your specific needs.',
+		category: 'Homeowners',
+		steps: 6,
+		readTime: '12 min',
+		difficulty: 'Beginner',
+		image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop',
+		author: 'HPSC Team',
+		date: '2025-01-02',
+		featured: false,
+	},
+	{
+		slug: 'blower-door-testing-guide',
+		title: 'Complete Guide to Blower Door Testing',
+		description: 'Step-by-step instructions for conducting accurate blower door tests and interpreting results.',
+		category: 'Contractors',
+		steps: 12,
+		readTime: '25 min',
+		difficulty: 'Advanced',
+		image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop',
+		author: 'Technical Team',
+		date: '2025-01-01',
+		featured: false,
+	},
+	{
+		slug: 'hpsc-certification-application',
+		title: 'How to Apply for HPSC Contractor Certification',
+		description: 'Complete walkthrough of the HPSC contractor certification application process.',
+		category: 'Contractors',
+		steps: 7,
+		readTime: '18 min',
+		difficulty: 'Intermediate',
+		image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop',
+		author: 'HPSC Team',
+		date: '2024-12-28',
+		featured: false,
+	},
+	{
+		slug: 'winter-energy-saving-tips',
+		title: '10 Simple Winter Energy Saving Tips',
+		description: 'Easy-to-implement strategies to reduce your energy bills during the cold months.',
+		category: 'Homeowners',
+		steps: 10,
+		readTime: '15 min',
+		difficulty: 'Beginner',
+		image: 'https://images.unsplash.com/photo-1483664852095-d6cc6870702d?w=600&h=400&fit=crop',
+		author: 'HPSC Team',
+		date: '2024-12-25',
+		featured: false,
+	},
+	{
+		slug: 'moisture-management-essentials',
+		title: 'Moisture Management Essentials',
+		description: 'Prevent moisture problems in retrofits with proper planning and execution techniques.',
+		category: 'Contractors',
+		steps: 9,
+		readTime: '22 min',
+		difficulty: 'Advanced',
+		image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop',
+		author: 'Technical Team',
+		date: '2024-12-20',
+		featured: false,
+	},
+];
+
+// Group guides by category
+const guidesByCategory = guides.reduce((acc: Record<string, any[]>, guide) => {
+	if (!acc[guide.category]) {
+		acc[guide.category] = [];
+	}
+	acc[guide.category].push(guide);
+	return acc;
+}, {});
+
+// Get featured guides
+const featuredGuides = guides.filter(g => g.featured);
+---
+
+<Layout
+	title="Guides | HPSC Resources"
+	description="Step-by-step guides for homeowners, contractors, and industry professionals on home performance and energy efficiency."
+	keywords="HPSC guides, home energy guides, contractor guides, energy efficiency tutorials"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'Resources', href: '/resources' },
+			{ label: 'Guides', href: '/resources/guides' },
+		]}
+	/>
+
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Guides</h1>
+		<p class="text-xl text-gray-600 max-w-3xl">
+			Step-by-step guides to help you navigate home performance, energy efficiency, and contractor certification.
+		</p>
+	</div>
+
+	<!-- Search and Filter -->
+	<div class="mb-12 flex flex-col md:flex-row gap-4">
+		<div class="flex-1">
+			<div class="relative">
+				<svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+				</svg>
+				<input
+					type="text"
+					id="search-input"
+					placeholder="Search guides..."
+					class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+				/>
+			</div>
+		</div>
+		<select
+			id="category-filter"
+			class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
+		>
+			<option value="all">All Categories</option>
+			{Object.keys(guidesByCategory).map((category) => <option value={category}>{category}</option>)}
+		</select>
+		<select
+			id="difficulty-filter"
+			class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
+		>
+			<option value="all">All Levels</option>
+			<option value="Beginner">Beginner</option>
+			<option value="Intermediate">Intermediate</option>
+			<option value="Advanced">Advanced</option>
+		</select>
+	</div>
+
+	<!-- Featured Guides -->
+	{featuredGuides.length > 0 && (
+		<section class="mb-16">
+			<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+				<svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+				</svg>
+				Featured Guides
+			</h2>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				{featuredGuides.map((guide: any) => (
+					<a
+						href={`/resources/guides/${guide.slug}`}
+						class="guide-card featured-guide group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-primary/20 hover:border-primary"
+						data-title={guide.title.toLowerCase()}
+						data-category={guide.category}
+						data-difficulty={guide.difficulty}
+					>
+						<div class="grid md:grid-cols-2 gap-0">
+							<div class="relative h-64 md:h-auto overflow-hidden">
+								<Image
+									src={guide.image}
+									alt={guide.title}
+									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+									width={600}
+									height={400}
+									loading="eager"
+								/>
+								<div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">
+									Featured
+								</div>
+							</div>
+							<div class="p-8 flex flex-col justify-between">
+								<div>
+									<div class="flex items-center gap-2 mb-3">
+										<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+											{guide.category}
+										</span>
+										<span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-semibold rounded-full">
+											{guide.difficulty}
+										</span>
+									</div>
+									<h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+										{guide.title}
+									</h3>
+									<p class="text-gray-600 mb-4 leading-relaxed">
+										{guide.description}
+									</p>
+								</div>
+								<div class="flex items-center justify-between text-sm text-gray-500">
+									<div class="flex items-center gap-4">
+										<span class="flex items-center gap-1">
+											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+											</svg>
+											{guide.steps} steps
+										</span>
+										<span class="flex items-center gap-1">
+											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+											</svg>
+											{guide.readTime}
+										</span>
+									</div>
+									<span class="text-primary font-medium group-hover:underline">Start Guide →</span>
+								</div>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</section>
+	)}
+
+	<!-- Guides by Category -->
+	{
+		Object.entries(guidesByCategory).map(([category, categoryGuides]) => (
+			<section class="mb-12" data-category-section={category}>
+				<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+					<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+						/>
+					</svg>
+					{category}
+				</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{categoryGuides.filter((g: any) => !g.featured).map((guide: any) => (
+						<a
+							href={`/resources/guides/${guide.slug}`}
+							class="guide-card group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary"
+							data-title={guide.title.toLowerCase()}
+							data-category={guide.category}
+							data-difficulty={guide.difficulty}
+						>
+							<div class="relative h-48 overflow-hidden">
+								<Image
+									src={guide.image}
+									alt={guide.title}
+									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+									width={600}
+									height={400}
+									loading="lazy"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+								<div class="absolute bottom-4 left-4 right-4">
+									<div class="flex items-center gap-2">
+										<span class="px-2 py-1 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-semibold rounded">
+											{guide.difficulty}
+										</span>
+										<span class="px-2 py-1 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-semibold rounded flex items-center gap-1">
+											<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+											</svg>
+											{guide.readTime}
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center gap-2 mb-3">
+									<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+										{guide.category}
+									</span>
+									<span class="text-xs text-gray-500">• {guide.steps} steps</span>
+								</div>
+								<h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
+									{guide.title}
+								</h3>
+								<p class="text-sm text-gray-600 mb-4 line-clamp-2">
+									{guide.description}
+								</p>
+								<div class="flex items-center justify-between text-sm">
+									<span class="text-gray-500">By {guide.author}</span>
+									<span class="text-primary font-medium group-hover:underline">Start →</span>
+								</div>
+							</div>
+						</a>
+					))}
+				</div>
+			</section>
+		))
+	}
+
+	<!-- No Results Message -->
+	<div id="no-results" class="hidden text-center py-12">
+		<svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+			></path>
+		</svg>
+		<p class="text-xl text-gray-600 mb-2">No guides found</p>
+		<p class="text-gray-500">Try adjusting your search or filters</p>
+	</div>
+</Layout>
+
+<script>
+	// Search and filter functionality
+	const searchInput = document.getElementById('search-input') as HTMLInputElement;
+	const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement;
+	const difficultyFilter = document.getElementById('difficulty-filter') as HTMLSelectElement;
+	const guideCards = document.querySelectorAll('.guide-card');
+	const categorySections = document.querySelectorAll('[data-category-section]');
+	const noResults = document.getElementById('no-results');
+
+	function filterGuides() {
+		const searchTerm = searchInput.value.toLowerCase();
+		const selectedCategory = categoryFilter.value;
+		const selectedDifficulty = difficultyFilter.value;
+		let visibleCount = 0;
+
+		guideCards.forEach((card) => {
+			const title = card.getAttribute('data-title') || '';
+			const category = card.getAttribute('data-category') || '';
+			const difficulty = card.getAttribute('data-difficulty') || '';
+
+			const matchesSearch = title.includes(searchTerm);
+			const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+			const matchesDifficulty = selectedDifficulty === 'all' || difficulty === selectedDifficulty;
+
+			if (matchesSearch && matchesCategory && matchesDifficulty) {
+				(card as HTMLElement).style.display = 'block';
+				visibleCount++;
+			} else {
+				(card as HTMLElement).style.display = 'none';
+			}
+		});
+
+		// Show/hide category sections
+		categorySections.forEach((section) => {
+			const sectionCategory = section.getAttribute('data-category-section');
+			const visibleCardsInSection = section.querySelectorAll(
+				`.guide-card:not([style*="display: none"])`
+			);
+
+			if (
+				visibleCardsInSection.length > 0 &&
+				(selectedCategory === 'all' || sectionCategory === selectedCategory)
+			) {
+				(section as HTMLElement).style.display = 'block';
+			} else {
+				(section as HTMLElement).style.display = 'none';
+			}
+		});
+
+		// Show/hide no results message
+		if (noResults) {
+			if (visibleCount === 0) {
+				noResults.classList.remove('hidden');
+			} else {
+				noResults.classList.add('hidden');
+			}
+		}
+	}
+
+	searchInput?.addEventListener('input', filterGuides);
+	categoryFilter?.addEventListener('change', filterGuides);
+	difficultyFilter?.addEventListener('change', filterGuides);
+</script>

@@ -1,0 +1,432 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+	// Will fetch from WordPress later - for now return sample slugs
+	return [
+		{ params: { slug: 'getting-started-with-home-energy-assessments' } },
+		{ params: { slug: 'heat-pump-installation-checklist' } },
+		{ params: { slug: 'understanding-rebate-programs' } },
+		{ params: { slug: 'air-sealing-best-practices' } },
+		{ params: { slug: 'choosing-the-right-insulation' } },
+		{ params: { slug: 'blower-door-testing-guide' } },
+		{ params: { slug: 'hpsc-certification-application' } },
+		{ params: { slug: 'winter-energy-saving-tips' } },
+		{ params: { slug: 'moisture-management-essentials' } },
+	];
+}
+
+// Guide content - will be fetched from WordPress later
+const guides: Record<string, any> = {
+	'getting-started-with-home-energy-assessments': {
+		title: 'Getting Started with Home Energy Assessments',
+		description: 'A comprehensive guide to understanding and preparing for your home energy assessment.',
+		category: 'Homeowners',
+		difficulty: 'Beginner',
+		readTime: '10 min',
+		author: 'HPSC Team',
+		date: '2025-01-06',
+		image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=600&fit=crop',
+		steps: [
+			{
+				title: 'What is a Home Energy Assessment?',
+				content: `<p>A home energy assessment (also called an energy audit) is a comprehensive evaluation of your home's energy use. A certified energy advisor will inspect your home to identify where you're losing energy and money.</p>
+
+				<p>During the assessment, the advisor will:</p>
+				<ul>
+					<li>Conduct a blower door test to measure air leakage</li>
+					<li>Use thermal imaging to detect insulation gaps</li>
+					<li>Inspect heating and cooling systems</li>
+					<li>Review windows, doors, and building envelope</li>
+					<li>Assess ventilation and indoor air quality</li>
+				</ul>
+
+				<p>The results will help you prioritize energy upgrades and qualify for rebates.</p>`,
+			},
+			{
+				title: 'Why Get an Energy Assessment?',
+				content: `<p>An energy assessment provides multiple benefits:</p>
+
+				<h3>Financial Benefits</h3>
+				<ul>
+					<li><strong>Lower energy bills:</strong> Identify the upgrades that will save you the most money</li>
+					<li><strong>Rebate eligibility:</strong> Required for most BC energy efficiency rebate programs</li>
+					<li><strong>Increased home value:</strong> Energy-efficient homes command higher resale prices</li>
+				</ul>
+
+				<h3>Comfort Improvements</h3>
+				<ul>
+					<li>Eliminate drafts and cold spots</li>
+					<li>Improve indoor air quality</li>
+					<li>Reduce moisture and mold risks</li>
+					<li>Better temperature consistency</li>
+				</ul>
+
+				<h3>Environmental Impact</h3>
+				<p>Reducing your home's energy use directly lowers your carbon footprint and contributes to BC's climate action goals.</p>`,
+			},
+			{
+				title: 'Preparing for Your Assessment',
+				content: `<p>Follow these steps to prepare for your energy assessment:</p>
+
+				<h3>Before the Appointment</h3>
+				<ol>
+					<li><strong>Gather utility bills:</strong> Collect 12 months of energy bills if available</li>
+					<li><strong>List concerns:</strong> Note any comfort issues (drafts, cold rooms, high bills)</li>
+					<li><strong>Clear access:</strong> Ensure the advisor can access attic, crawlspace, and mechanical room</li>
+					<li><strong>Secure pets:</strong> Keep pets in a separate room during the assessment</li>
+				</ol>
+
+				<h3>What to Have Ready</h3>
+				<ul>
+					<li>Recent energy bills (gas and electricity)</li>
+					<li>Information about recent renovations</li>
+					<li>Details on heating/cooling equipment age</li>
+					<li>Any warranties or documentation for major systems</li>
+				</ul>`,
+			},
+			{
+				title: 'During the Assessment',
+				content: `<p>The assessment typically takes 2-3 hours. Here's what to expect:</p>
+
+				<h3>The Process</h3>
+				<ol>
+					<li><strong>Initial walkthrough:</strong> The advisor tours your home and asks about your energy concerns</li>
+					<li><strong>Blower door test:</strong> A large fan temporarily seals in a doorway to measure air leakage</li>
+					<li><strong>Thermal imaging:</strong> Infrared camera reveals heat loss and insulation gaps</li>
+					<li><strong>Equipment inspection:</strong> Detailed review of furnace, water heater, and other systems</li>
+					<li><strong>Measurements:</strong> Room dimensions, window counts, and building details</li>
+				</ol>
+
+				<h3>Questions to Ask</h3>
+				<ul>
+					<li>What are my home's biggest energy losses?</li>
+					<li>Which upgrades should I prioritize?</li>
+					<li>What rebates am I eligible for?</li>
+					<li>How much could I save annually?</li>
+					<li>Can you recommend certified contractors?</li>
+				</ul>`,
+			},
+			{
+				title: 'Understanding Your Report',
+				content: `<p>Within 2 weeks, you'll receive a detailed energy assessment report.</p>
+
+				<h3>Report Contents</h3>
+				<ul>
+					<li><strong>Energy rating:</strong> Your home's current energy performance score</li>
+					<li><strong>Upgrade recommendations:</strong> Prioritized list of improvements</li>
+					<li><strong>Cost estimates:</strong> Approximate costs for each upgrade</li>
+					<li><strong>Savings projections:</strong> Expected annual energy savings</li>
+					<li><strong>Rebate information:</strong> Available incentives for each upgrade</li>
+				</ul>
+
+				<h3>Next Steps</h3>
+				<ol>
+					<li>Review recommendations with your family</li>
+					<li>Determine your budget and priorities</li>
+					<li>Contact HPSC-certified contractors for quotes</li>
+					<li>Apply for rebates before starting work</li>
+					<li>Schedule a post-retrofit assessment to verify improvements</li>
+				</ol>
+
+				<p class="bg-primary/10 p-4 rounded-lg mt-4">
+					<strong>Pro Tip:</strong> Keep your assessment report - you'll need it to apply for rebates and it's valuable documentation for future home sales.
+				</p>`,
+			},
+		],
+		relatedGuides: [
+			{
+				slug: 'understanding-rebate-programs',
+				title: 'Understanding BC Energy Rebate Programs',
+				image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop',
+			},
+			{
+				slug: 'choosing-the-right-insulation',
+				title: 'Choosing the Right Insulation for Your Home',
+				image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=300&fit=crop',
+			},
+		],
+	},
+};
+
+const guide = guides[slug || 'getting-started-with-home-energy-assessments'] || guides['getting-started-with-home-energy-assessments'];
+
+const formattedDate = new Date(guide.date).toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+const pageTitle = `${guide.title} | HPSC Guides`;
+---
+
+<Layout
+	title={pageTitle}
+	description={guide.description}
+	keywords={`${guide.category}, guide, tutorial, HPSC`}
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'Resources', href: '/resources' },
+			{ label: 'Guides', href: '/resources/guides' },
+			{ label: guide.title, href: `/resources/guides/${slug}` },
+		]}
+	/>
+
+	<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+		<!-- Main Content -->
+		<article class="lg:col-span-3">
+			<!-- Header -->
+			<header class="mb-8">
+				<div class="flex flex-wrap items-center gap-3 mb-4">
+					<span class="px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">
+						{guide.category}
+					</span>
+					<span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-semibold rounded-full">
+						{guide.difficulty}
+					</span>
+					<span class="text-sm text-gray-500">
+						{guide.steps.length} steps • {guide.readTime}
+					</span>
+				</div>
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+					{guide.title}
+				</h1>
+				<p class="text-xl text-gray-600 mb-4">{guide.description}</p>
+				<div class="flex items-center gap-4 text-sm text-gray-500">
+					<span>By {guide.author}</span>
+					<span>•</span>
+					<time datetime={guide.date}>{formattedDate}</time>
+				</div>
+			</header>
+
+			<!-- Featured Image -->
+			<div class="mb-12 rounded-2xl overflow-hidden shadow-lg">
+				<Image
+					src={guide.image}
+					alt={guide.title}
+					class="w-full h-auto"
+					width={1200}
+					height={600}
+					loading="eager"
+				/>
+			</div>
+
+			<!-- Steps -->
+			<div class="space-y-12">
+				{guide.steps.map((step: any, index: number) => (
+					<div id={`step-${index + 1}`} class="scroll-mt-24">
+						<div class="flex items-start gap-4 mb-6">
+							<div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg">
+								{index + 1}
+							</div>
+							<div class="flex-1">
+								<h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+									{step.title}
+								</h2>
+							</div>
+						</div>
+						<div class="pl-0 md:pl-16">
+							<div
+								class="prose prose-lg max-w-none prose-headings:font-bold prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-ul:my-4 prose-li:my-2 prose-ol:my-4 prose-strong:text-gray-900"
+								set:html={step.content}
+							/>
+						</div>
+						{index < guide.steps.length - 1 && (
+							<div class="mt-8 pt-8 border-b border-gray-200"></div>
+						)}
+					</div>
+				))}
+			</div>
+
+			<!-- Guide Complete -->
+			<div class="mt-12 p-8 bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl border-2 border-primary/20">
+				<div class="flex items-center gap-3 mb-4">
+					<svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+					</svg>
+					<h3 class="text-2xl font-bold text-gray-900">Guide Complete!</h3>
+				</div>
+				<p class="text-gray-700 mb-6">
+					You've completed this guide. Ready to take the next step in your home performance journey?
+				</p>
+				<div class="flex flex-wrap gap-4">
+					<a
+						href="/resources/guides"
+						class="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+					>
+						Browse More Guides
+					</a>
+					<a
+						href="/contact"
+						class="px-6 py-3 bg-white border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
+					>
+						Contact Us
+					</a>
+				</div>
+			</div>
+
+			<!-- Related Guides -->
+			{guide.relatedGuides && guide.relatedGuides.length > 0 && (
+				<div class="mt-12 pt-8 border-t border-gray-200">
+					<h2 class="text-2xl font-bold text-gray-900 mb-6">Related Guides</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						{guide.relatedGuides.map((related: any) => (
+							<a
+								href={`/resources/guides/${related.slug}`}
+								class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 hover:border-primary"
+							>
+								<Image
+									src={related.image}
+									alt={related.title}
+									class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+									width={400}
+									height={300}
+									loading="lazy"
+								/>
+								<div class="p-4">
+									<h3 class="font-bold text-gray-900 group-hover:text-primary transition-colors">
+										{related.title}
+									</h3>
+								</div>
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+		</article>
+
+		<!-- Sidebar -->
+		<aside class="lg:col-span-1">
+			<div class="sticky top-24 space-y-6">
+				<!-- Progress Tracker -->
+				<div class="bg-white rounded-2xl shadow-md p-6">
+					<h3 class="text-lg font-bold text-gray-900 mb-4">Progress</h3>
+					<div class="space-y-3">
+						{guide.steps.map((step: any, index: number) => (
+							<a
+								href={`#step-${index + 1}`}
+								class="step-link block group"
+								data-step={index + 1}
+							>
+								<div class="flex items-center gap-3">
+									<div class="flex-shrink-0 w-8 h-8 border-2 border-gray-300 rounded-full flex items-center justify-center text-sm font-semibold text-gray-400 group-hover:border-primary group-hover:text-primary transition-colors">
+										{index + 1}
+									</div>
+									<div class="flex-1 text-sm text-gray-600 group-hover:text-primary transition-colors line-clamp-2">
+										{step.title}
+									</div>
+								</div>
+							</a>
+						))}
+					</div>
+				</div>
+
+				<!-- Guide Info -->
+				<div class="bg-gray-50 rounded-2xl p-6">
+					<h3 class="text-lg font-bold text-gray-900 mb-4">Guide Information</h3>
+					<dl class="space-y-3 text-sm">
+						<div>
+							<dt class="font-semibold text-gray-700">Category</dt>
+							<dd class="text-gray-600">{guide.category}</dd>
+						</div>
+						<div>
+							<dt class="font-semibold text-gray-700">Difficulty</dt>
+							<dd class="text-gray-600">{guide.difficulty}</dd>
+						</div>
+						<div>
+							<dt class="font-semibold text-gray-700">Reading Time</dt>
+							<dd class="text-gray-600">{guide.readTime}</dd>
+						</div>
+						<div>
+							<dt class="font-semibold text-gray-700">Total Steps</dt>
+							<dd class="text-gray-600">{guide.steps.length}</dd>
+						</div>
+					</dl>
+				</div>
+
+				<!-- Back Button -->
+				<a
+					href="/resources/guides"
+					class="block bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow"
+				>
+					<div class="flex items-center gap-3 text-primary font-semibold">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M15 19l-7-7 7-7"
+							></path>
+						</svg>
+						Back to All Guides
+					</div>
+				</a>
+			</div>
+		</aside>
+	</div>
+</Layout>
+
+<script>
+	// Progress tracking
+	const stepLinks = document.querySelectorAll('.step-link');
+	const steps = document.querySelectorAll('[id^="step-"]');
+
+	// Intersection Observer for progress tracking
+	const observerOptions = {
+		root: null,
+		rootMargin: '-20% 0px -70% 0px',
+		threshold: 0,
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const stepId = entry.target.id;
+				const stepNumber = stepId.replace('step-', '');
+
+				// Update active state
+				stepLinks.forEach((link) => {
+					const linkStep = link.getAttribute('data-step');
+					const circle = link.querySelector('div > div');
+					const text = link.querySelector('div > div:last-child');
+
+					if (linkStep === stepNumber) {
+						circle?.classList.remove('border-gray-300', 'text-gray-400');
+						circle?.classList.add('border-primary', 'bg-primary', 'text-white');
+						text?.classList.remove('text-gray-600');
+						text?.classList.add('text-primary', 'font-semibold');
+					} else {
+						circle?.classList.remove('border-primary', 'bg-primary', 'text-white');
+						circle?.classList.add('border-gray-300', 'text-gray-400');
+						text?.classList.remove('text-primary', 'font-semibold');
+						text?.classList.add('text-gray-600');
+					}
+				});
+			}
+		});
+	}, observerOptions);
+
+	// Observe all steps
+	steps.forEach((step) => {
+		observer.observe(step);
+	});
+
+	// Smooth scroll for step links
+	stepLinks.forEach((link) => {
+		link.addEventListener('click', (e) => {
+			e.preventDefault();
+			const href = link.getAttribute('href');
+			if (href) {
+				const target = document.querySelector(href);
+				if (target) {
+					target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}
+			}
+		});
+	});
+</script>
