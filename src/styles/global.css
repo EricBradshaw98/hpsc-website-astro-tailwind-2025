@@ -3,3 +3,14 @@
 body {
 	font-family: 'Montserrat', Helvetica, Arial, Lucida, sans-serif;
 }
+
+/* Fix text selection highlight color */
+::selection {
+	background-color: #00b6f0;
+	color: white;
+}
+
+::-moz-selection {
+	background-color: #00b6f0;
+	color: white;
+}
