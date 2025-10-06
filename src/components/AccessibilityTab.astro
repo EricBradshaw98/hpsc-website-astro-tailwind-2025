@@ -99,6 +99,20 @@
 				</label>
 			</div>
 
+			<!-- Reduce Motion Toggle -->
+			<div class="mb-4">
+				<label class="flex items-center justify-between cursor-pointer">
+					<span class="text-sm font-medium">Reduce Motion</span>
+					<div class="relative">
+						<input type="checkbox" id="reduce-motion" class="sr-only peer" />
+						<div
+							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+						>
+						</div>
+					</div>
+				</label>
+			</div>
+
 			<!-- Reset All Button -->
 			<button
 				id="reset-all"
@@ -110,7 +124,7 @@
 
 		<!-- Tab Handle -->
 		<div
-			class="bg-gray-900 text-white px-3 py-6 rounded-r-lg shadow-lg cursor-pointer flex items-center"
+			class="bg-primary text-white px-3 py-6 rounded-r-lg shadow-2xl cursor-pointer flex items-center border-2 border-white"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -189,6 +203,18 @@
 		}
 	});
 
+	// Reduce motion toggle
+	const reduceMotionToggle = document.getElementById('reduce-motion') as HTMLInputElement;
+	reduceMotionToggle?.addEventListener('change', () => {
+		if (reduceMotionToggle.checked) {
+			document.body.classList.add('reduce-motion');
+			localStorage.setItem('reduceMotion', 'true');
+		} else {
+			document.body.classList.remove('reduce-motion');
+			localStorage.setItem('reduceMotion', 'false');
+		}
+	});
+
 	// Reset all settings
 	document.getElementById('reset-all')?.addEventListener('click', () => {
 		fontSize = 16;
@@ -196,15 +222,18 @@
 		document.body.classList.remove(
 			'high-contrast',
 			'increased-line-height',
-			'increased-letter-spacing'
+			'increased-letter-spacing',
+			'reduce-motion'
 		);
 		if (highContrastToggle) highContrastToggle.checked = false;
 		if (lineHeightToggle) lineHeightToggle.checked = false;
 		if (letterSpacingToggle) letterSpacingToggle.checked = false;
+		if (reduceMotionToggle) reduceMotionToggle.checked = false;
 		localStorage.removeItem('fontSize');
 		localStorage.removeItem('highContrast');
 		localStorage.removeItem('lineHeight');
 		localStorage.removeItem('letterSpacing');
+		localStorage.removeItem('reduceMotion');
 	});
 
 	// Load saved preferences on page load
@@ -231,6 +260,12 @@
 		if (savedLetterSpacing === 'true') {
 			document.body.classList.add('increased-letter-spacing');
 			if (letterSpacingToggle) letterSpacingToggle.checked = true;
+		}
+
+		const savedReduceMotion = localStorage.getItem('reduceMotion');
+		if (savedReduceMotion === 'true') {
+			document.body.classList.add('reduce-motion');
+			if (reduceMotionToggle) reduceMotionToggle.checked = true;
 		}
 	});
 </script>
