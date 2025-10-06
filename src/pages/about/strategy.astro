@@ -1,0 +1,340 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
+
+// Strategic priorities organized by category
+const strategicPriorities = [
+	{
+		category: 'Codes, By-Laws, Permits & Regulations',
+		color: 'primary',
+		items: [
+			{
+				type: 'Advocacy',
+				title: 'Standards & Regulations',
+				description:
+					'Respond to opportunities to advocate for governments to make and enforce better standards, bylaws, regulations, and permitting processes and facilitate industry input where needed. Consider proactive lobbying activities as appropriate.',
+			},
+			{
+				type: 'Advocacy',
+				title: 'Alterations Code Consultation',
+				description:
+					'Actively engage in the alterations code consultation process, facilitating feedback from industry and Sector Councils.',
+			},
+		],
+	},
+	{
+		category: 'Consumer Education & Marketing',
+		color: 'blue',
+		items: [
+			{
+				type: 'Advocacy',
+				title: 'Home Energy Labelling',
+				description:
+					'Actively advocate for the wider adoption of Home Energy Labelling/Rating Systems and accompanying homeowner and stakeholder awareness.',
+			},
+			{
+				type: 'Advocacy',
+				title: 'House-as-a-System Education',
+				description:
+					'Actively advocate for consumer-facing stakeholders to educate homeowners on the importance of retrofitting with a house-as-a-system approach and hiring an HPCN member.',
+			},
+			{
+				type: 'Action',
+				title: 'HPCN Search Tool',
+				description:
+					'Continue to develop, refine, and promote both the HPCN homeowner search tool and homeowner-facing information about the search tool and hiring an HPCN contractor.',
+			},
+		],
+	},
+	{
+		category: 'Industry Support & Workforce Development',
+		color: 'green',
+		items: [
+			{
+				type: 'Advocacy',
+				title: 'Workforce Development Funding',
+				description:
+					'Actively advocate for increased funding, support, and subsidies for skills and workforce development.',
+			},
+			{
+				type: 'Action',
+				title: 'Workforce Attraction Research',
+				description:
+					'Research and explore workforce attraction in BC with a specific focus on entry level, young, under represented, and out-of-province workers.',
+			},
+			{
+				type: 'Action',
+				title: 'HVAC Roadmap Implementation',
+				description:
+					'Actively coordinate next steps, actions, and options for a residential HVAC trade or certification in BC as per the new HVAC Roadmap.',
+			},
+			{
+				type: 'Action',
+				title: 'Home Performance Contractor Definition',
+				description:
+					"Develop a definition of a home performance contractor and continue to promote the HPSC's brand and mandate to industry stakeholders.",
+			},
+			{
+				type: 'Action',
+				title: 'JEDI Engagement Roadmap',
+				description:
+					'Develop an indigenous and justice, equity, inclusion, and diversity (JEDI) engagement roadmap for the HPSC.',
+			},
+			{
+				type: 'Action',
+				title: 'Retrofit Sector Expansion',
+				description:
+					'Explore working with additional retrofit sectors e.g. plumbers (hot water tanks, air-to-water heat pumps), solar PV, electricians.',
+			},
+		],
+	},
+	{
+		category: 'Contractor Network (HPCN) Operations',
+		color: 'orange',
+		items: [
+			{
+				type: 'Advocacy',
+				title: 'Site Visit Enhancement',
+				description:
+					'Actively work with program partners to inform and enhance site visits and explore opportunities to improve the HPCN contractor management protocol through information sharing and/or the HPCN developing their own site visits.',
+			},
+			{
+				type: 'Advocacy',
+				title: 'Rebate Program Requirements',
+				description:
+					'Actively advocate for additional and future rebate programs to include the HPCN as a mandatory requirement and to incentivize house-as-a-system retrofits through measures that reduce costs for homeowners and/or contractors, collaborating with industry on program design.',
+			},
+			{
+				type: 'Action',
+				title: 'Network Promotion',
+				description: 'Promote the HPCN to contractors and regional stakeholders.',
+			},
+			{
+				type: 'Action',
+				title: 'Contractor Onboarding',
+				description:
+					'Onboard contractors to the HPCN, especially from rural and northern areas, and increase the number of trained installers per company.',
+			},
+			{
+				type: 'Action',
+				title: 'Advanced Training Programs',
+				description: 'Implement advanced training for Window and Door installers.',
+			},
+			{
+				type: 'Action',
+				title: 'Quality Assurance',
+				description:
+					'Execute contractor management: administer rolling spot and prompted checks as part of the ongoing contractor management process.',
+			},
+			{
+				type: 'Action',
+				title: 'Training Pathway Development',
+				description:
+					'Work with industry stakeholders to develop and launch a training pathway for Energy Advisors and General Retrofit contractors and open the HPCN to these sectors.',
+			},
+			{
+				type: 'Action',
+				title: 'Training Review & Integration',
+				description:
+					'Review and update HPCN training. Integrate into available micro-credential programs.',
+			},
+		],
+	},
+];
+
+// Color mappings for badges
+const colorMap: Record<string, { bg: string; text: string; border: string }> = {
+	primary: { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary' },
+	blue: { bg: 'bg-blue/10', text: 'text-blue', border: 'border-blue' },
+	green: { bg: 'bg-green/10', text: 'text-green', border: 'border-green' },
+	orange: { bg: 'bg-orange/10', text: 'text-orange', border: 'border-orange' },
+};
+---
+
+<Layout
+	title="Strategic Plan | Home Performance Stakeholder Council"
+	description="The HPSC's strategic plan guides our work in codes & regulations, consumer education, workforce development, and contractor network operations."
+	keywords="HPSC strategy, strategic plan, industry support, workforce development, contractor network"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'About', href: '/about' },
+			{ label: 'Strategy', href: '/about/strategy' },
+		]}
+	/>
+
+	<!-- Page Header -->
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Strategy</h1>
+		<div class="prose prose-lg max-w-4xl">
+			<p class="text-xl text-gray-700 leading-relaxed">
+				The HPSC's work is guided by the Strategic Plan below. The plan was developed in
+				collaboration with the HPSC's Industry Advisory Committee and Sector Councils, as well as
+				the Board of Directors.
+			</p>
+			<p class="text-lg text-gray-600 mt-4">
+				It is a <strong>living document</strong>, updated annually to reflect updates and changes
+				to strategic priorities.
+			</p>
+		</div>
+	</div>
+
+	<!-- Strategic Priorities -->
+	<div class="space-y-16">
+		{
+			strategicPriorities.map((priority, categoryIndex) => (
+				<section>
+					<div class="mb-8">
+						<h2 class="text-3xl font-bold text-gray-900 mb-2">{priority.category}</h2>
+						<div class={`w-20 h-1 ${colorMap[priority.color].border} border-t-4 rounded`} />
+					</div>
+
+					<div class="space-y-6">
+						{priority.items.map((item, itemIndex) => (
+							<div class="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow overflow-hidden">
+								<div class="p-6 md:p-8">
+									<div class="flex items-start gap-4 mb-4">
+										<span
+											class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${colorMap[priority.color].bg} ${colorMap[priority.color].text}`}
+										>
+											{item.type}
+										</span>
+										{item.type === 'Advocacy' ? (
+											<svg
+												class={`w-6 h-6 flex-shrink-0 ${colorMap[priority.color].text}`}
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+												/>
+											</svg>
+										) : (
+											<svg
+												class={`w-6 h-6 flex-shrink-0 ${colorMap[priority.color].text}`}
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M13 10V3L4 14h7v7l9-11h-7z"
+												/>
+											</svg>
+										)}
+									</div>
+
+									<h3 class="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+									<p class="text-gray-600 leading-relaxed">{item.description}</p>
+
+									<div class="mt-6 pt-6 border-t border-gray-100">
+										<details class="group">
+											<summary class="cursor-pointer list-none flex items-center justify-between text-primary font-semibold hover:text-primary-dark transition-colors">
+												<span class="flex items-center gap-2">
+													<svg
+														class="w-5 h-5"
+														fill="none"
+														stroke="currentColor"
+														viewBox="0 0 24 24"
+													>
+														<path
+															stroke-linecap="round"
+															stroke-linejoin="round"
+															stroke-width="2"
+															d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+														/>
+													</svg>
+													Updates & Progress
+												</span>
+												<svg
+													class="w-5 h-5 transition-transform group-open:rotate-180"
+													fill="none"
+													stroke="currentColor"
+													viewBox="0 0 24 24"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														stroke-width="2"
+														d="M19 9l-7 7-7-7"
+													/>
+												</svg>
+											</summary>
+											<div class="mt-4 p-4 bg-gray-50 rounded-lg">
+												<p class="text-gray-500 text-sm italic">
+													Updates will be posted here as progress is made on this strategic
+													priority.
+												</p>
+											</div>
+										</details>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</section>
+			))
+		}
+	</div>
+
+	<!-- Download CTA -->
+	<section class="mt-20">
+		<div class="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
+			<div class="flex flex-col md:flex-row items-center justify-between gap-6">
+				<div class="flex-1">
+					<h2 class="text-2xl font-bold text-gray-900 mb-2">
+						Download the Full Strategic Plan
+					</h2>
+					<p class="text-gray-600">
+						Access the complete strategic plan document with detailed timelines and metrics.
+					</p>
+				</div>
+				<a
+					href="/documents/hpsc-strategic-plan.pdf"
+					class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
+				>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+						/>
+					</svg>
+					Download PDF
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Get Involved CTA -->
+	<section class="mt-12">
+		<div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white text-center">
+			<h2 class="text-3xl font-bold mb-4">Help Shape Our Strategy</h2>
+			<p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+				We welcome input from industry stakeholders. Get involved in shaping the future of home
+				performance in BC.
+			</p>
+			<div class="flex flex-wrap gap-4 justify-center">
+				<a
+					href="/about/get-involved"
+					class="px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+				>
+					Get Involved
+				</a>
+				<a
+					href="/contact"
+					class="px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors"
+				>
+					Contact Us
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>
