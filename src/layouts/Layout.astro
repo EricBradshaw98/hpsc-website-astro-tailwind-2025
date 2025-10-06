@@ -2,7 +2,13 @@
 import '../styles/global.css';
 import Nav from '../components/layouts/Nav.astro';
 import Footer from '../components/layouts/Footer.astro';
+import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 import CookieBanner from '../components/CookieBanner.astro';
+
+export interface BreadcrumbItem {
+	label: string;
+	href: string;
+}
 
 export interface Props {
 	// SEO Meta Tags
@@ -20,6 +26,9 @@ export interface Props {
 	keywords?: string;
 	author?: string;
 	robots?: string;
+	// Breadcrumbs
+	breadcrumbs?: BreadcrumbItem[];
+	showBreadcrumbs?: boolean; // Set to false to hide breadcrumbs (e.g., homepage)
 }
 
 const {
@@ -37,9 +46,32 @@ const {
 	keywords,
 	author,
 	robots = 'noindex, nofollow', // DEV: Blocking search engines
+	breadcrumbs,
+	showBreadcrumbs = true,
 } = Astro.props;
 
 const currentUrl = canonical || Astro.url.href;
+
+// Auto-generate breadcrumbs from URL if not provided
+function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
+	const segments = pathname.split('/').filter(Boolean);
+	const items: BreadcrumbItem[] = [];
+
+	let currentPath = '';
+	for (const segment of segments) {
+		currentPath += `/${segment}`;
+		const label = segment
+			.split('-')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+		items.push({ label, href: currentPath });
+	}
+
+	return items;
+}
+
+const finalBreadcrumbs = breadcrumbs || generateBreadcrumbs(Astro.url.pathname);
+const isHomepage = Astro.url.pathname === '/';
 
 // Get environment variables for analytics
 const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
@@ -165,6 +197,9 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		</a>
 		<Nav />
 		<main id="main-content" class="flex-grow container mx-auto px-4 py-8 max-w-7xl">
+			{showBreadcrumbs && !isHomepage && finalBreadcrumbs.length > 0 && (
+				<Breadcrumbs items={finalBreadcrumbs} />
+			)}
 			<slot />
 		</main>
 		<Footer />

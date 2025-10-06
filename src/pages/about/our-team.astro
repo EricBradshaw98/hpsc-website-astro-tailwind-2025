@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 
 // Team Member Interface
 interface TeamMember {
@@ -229,13 +228,11 @@ if (TEAM_API_URL) {
 	title="Our Team | Home Performance Stakeholder Council"
 	description="Meet the dedicated team behind HPSC - our staff, board of directors, and advisors working to advance home performance standards across British Columbia."
 	keywords="HPSC team, staff, board of directors, leadership, British Columbia"
+	breadcrumbs={[
+		{ label: 'About', href: '/about' },
+		{ label: 'Our Team', href: '/about/our-team' },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'About', href: '/about' },
-			{ label: 'Our Team', href: '/about/our-team' },
-		]}
-	/>
 
 	<!-- Page Header -->
 	<div class="mb-12">

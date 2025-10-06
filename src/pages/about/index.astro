@@ -1,14 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
 ---
 
 <Layout
 	title="About the HPSC | Home Performance Stakeholder Council"
 	description="The Home Performance Stakeholder Council (HPSC) is a not-for-profit society that supports the growth of the home performance industry in British Columbia."
 	keywords="HPSC, home performance, British Columbia, not-for-profit, energy efficiency, retrofits, house-as-a-system"
+	breadcrumbs={[{ label: 'About', href: '/about' }]}
 >
-	<Breadcrumbs items={[{ label: 'About', href: '/about' }]} />
+	
 
 	<!-- Page Header -->
 	<div class="mb-16">

@@ -473,12 +473,18 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	<style>
 		/* Active state for mobile - override group-hover with direct targeting */
 		@media (max-width: 767px) {
-			/* Disable group-hover on mobile */
-			.stats-card:hover > div {
-				transform: translateY(66.666667%);
+			/* Disable ALL hover effects on mobile by using !important */
+			.stats-card:hover > div[class*='translate-y'] {
+				transform: translateY(66.666667%) !important;
 			}
 			.stats-card:hover .opacity-0 {
-				opacity: 0;
+				opacity: 0 !important;
+			}
+			.stats-card:hover img {
+				transform: scale(1) !important;
+			}
+			.stats-card:hover div[class*='bg-black'] {
+				background-color: rgba(0, 0, 0, 0.5) !important;
 			}
 
 			/* Ensure smooth transitions on mobile */
@@ -512,7 +518,6 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 			}
 		}
 	</style>
-
 	<!-- Parallax CTA Section -->
 	<section class="mb-16 -mx-4 md:mx-0 relative min-h-80 md:h-80 md:rounded-2xl overflow-hidden">
 		<!-- Parallax Background -->
