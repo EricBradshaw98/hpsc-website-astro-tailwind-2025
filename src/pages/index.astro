@@ -397,38 +397,49 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 		}
 
 		setInterval(cycleHeroImages, 5000);
+	</script>
 
-		// Mobile touch support for stats cards
-		const statsCards = document.querySelectorAll('.stats-card');
-		let activeCard: HTMLElement | null = null;
+	<script>
+		// Mobile touch support for stats cards - runs after DOM is ready
+		document.addEventListener('DOMContentLoaded', function() {
+			const statsCards = document.querySelectorAll('.stats-card');
+			let activeCard: HTMLElement | null = null;
 
-		statsCards.forEach((card) => {
-			card.addEventListener('click', (e) => {
-				const target = card as HTMLElement;
+			statsCards.forEach((card) => {
+				// Handle both click and touch events
+				const handleToggle = (e: Event) => {
+					e.stopPropagation();
+					const target = card as HTMLElement;
 
-				// Close other cards
-				if (activeCard && activeCard !== target) {
+					// Close other cards
+					statsCards.forEach((otherCard) => {
+						if (otherCard !== target && otherCard.classList.contains('active')) {
+							otherCard.classList.remove('active');
+						}
+					});
+
+					// Toggle current card
+					if (target.classList.contains('active')) {
+						target.classList.remove('active');
+						activeCard = null;
+					} else {
+						target.classList.add('active');
+						activeCard = target;
+					}
+				};
+
+				card.addEventListener('click', handleToggle);
+				card.addEventListener('touchstart', handleToggle, { passive: true });
+			});
+
+			// Close card when clicking outside
+			document.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement;
+				if (activeCard && !target.closest('.stats-card')) {
 					activeCard.classList.remove('active');
-				}
-
-				// Toggle current card
-				if (target.classList.contains('active')) {
-					target.classList.remove('active');
 					activeCard = null;
-				} else {
-					target.classList.add('active');
-					activeCard = target;
 				}
 			});
-		});
-
-		// Close card when clicking outside
-		document.addEventListener('click', (e) => {
-			const target = e.target as HTMLElement;
-			if (activeCard && !target.closest('.stats-card')) {
-				activeCard.classList.remove('active');
-				activeCard = null;
-			}
 		});
 	</script>
 
