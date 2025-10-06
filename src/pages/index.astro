@@ -401,7 +401,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 	<script>
 		// Mobile touch support for stats cards - runs after DOM is ready
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			const statsCards = document.querySelectorAll('.stats-card');
 			let activeCard: HTMLElement | null = null;
 
@@ -446,16 +446,28 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	<style>
 		/* Active state for mobile - override group-hover with direct targeting */
 		@media (max-width: 767px) {
-			.stats-card.active .absolute.bottom-0 {
+			/* Disable hover effects on mobile */
+			.stats-card:not(.active):hover > div[class*="translate-y"] {
+				transform: translateY(66.666667%) !important;
+			}
+			.stats-card:not(.active):hover .opacity-0 {
+				opacity: 0 !important;
+			}
+
+			/* Active state - slide up the colored tab */
+			.stats-card.active > div[class*="translate-y-2/3"] {
 				transform: translateY(0) !important;
 			}
+			/* Show the hidden content */
 			.stats-card.active .opacity-0 {
 				opacity: 1 !important;
 			}
+			/* Zoom the image */
 			.stats-card.active img {
 				transform: scale(1.1) !important;
 			}
-			.stats-card.active .absolute.inset-0.bg-black\/50 {
+			/* Darken the overlay */
+			.stats-card.active > div > div[class*="bg-black"] {
 				background-color: rgba(0, 0, 0, 0.6) !important;
 			}
 		}
@@ -808,9 +820,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				</div>
 
 				<!-- Slide 3 - CleanBC (mobile only) -->
-				<div
-					class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4"
-				>
+				<div class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4">
 					<div
 						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
@@ -824,9 +834,7 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 				</div>
 
 				<!-- Slide 4 - Vancity (mobile only) -->
-				<div
-					class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4"
-				>
+				<div class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4">
 					<div
 						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
 					>
