@@ -473,7 +473,15 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 	<style>
 		/* Active state for mobile - override group-hover with direct targeting */
 		@media (max-width: 767px) {
-			/* Active state - slide up the colored tab to show content */
+			/* Ensure smooth transitions on mobile */
+			.stats-card .absolute.bottom-0 {
+				transition: transform 0.4s ease-out;
+			}
+			.stats-card .px-6.pb-6 {
+				transition: opacity 0.3s ease-in 0.15s;
+			}
+
+			/* Active state - slide up the colored tab to show full content */
 			.stats-card.active > .absolute.bottom-0[class*="bg-primary"],
 			.stats-card.active > .absolute.bottom-0[class*="bg-accent-green"],
 			.stats-card.active > .absolute.bottom-0[class*="bg-accent-blue"] {
@@ -488,11 +496,13 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 			/* Zoom the image when active */
 			.stats-card.active img {
 				transform: scale(1.1) !important;
+				transition: transform 0.5s ease-out;
 			}
 
 			/* Darken the overlay when active */
 			.stats-card.active .aspect-square > .absolute.inset-0[class*="bg-black"] {
 				background-color: rgba(0, 0, 0, 0.6) !important;
+				transition: background-color 0.3s ease-out;
 			}
 		}
 	</style>
