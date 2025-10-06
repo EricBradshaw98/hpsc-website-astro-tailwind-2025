@@ -102,6 +102,48 @@ const currentUrl = canonical || Astro.url.href;
 				description: description,
 			})}
 		/>
+
+		<!-- Marker.io Feedback Widget -->
+		<script is:inline>
+			window.markerConfig = {
+				project: '68e3e2d8b41dfc82a3e25eea',
+				source: 'snippet',
+			};
+
+			!(function (e, r, a) {
+				if (!e.__Marker) {
+					e.__Marker = {};
+					var t = [],
+						n = { __cs: t };
+					[
+						'show',
+						'hide',
+						'isVisible',
+						'capture',
+						'cancelCapture',
+						'unload',
+						'reload',
+						'isExtensionInstalled',
+						'setReporter',
+						'clearReporter',
+						'setCustomData',
+						'on',
+						'off',
+					].forEach(function (e) {
+						n[e] = function () {
+							var r = Array.prototype.slice.call(arguments);
+							r.unshift(e), t.push(r);
+						};
+					}),
+						(e.Marker = n);
+					var s = r.createElement('script');
+					(s.async = 1),
+						(s.src = 'https://edge.marker.io/latest/shim.js');
+					var i = r.getElementsByTagName('script')[0];
+					i.parentNode.insertBefore(s, i);
+				}
+			})(window, document);
+		</script>
 	</head>
 	<body class="min-h-screen bg-white text-gray-900 flex flex-col">
 		<!-- Skip to main content link for accessibility -->
