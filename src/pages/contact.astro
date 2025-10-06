@@ -16,9 +16,9 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 	<div class="max-w-7xl mx-auto">
 		<!-- Header -->
-		<div class="text-center mb-12">
+		<div class="mb-12">
 			<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get in Touch</h1>
-			<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+			<p class="text-xl text-gray-600 max-w-3xl">
 				Have questions about home performance, contractor certification, or energy efficiency
 				programs? We're here to help.
 			</p>
@@ -279,45 +279,108 @@ import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 
 		<!-- FAQ Section -->
 		<div class="bg-gray-50 rounded-2xl p-8 md:p-12 mb-16">
-			<h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-				Frequently Asked Questions
-			</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-				<div>
-					<h3 class="text-lg font-semibold text-gray-900 mb-2">
-						How quickly will I receive a response?
-					</h3>
-					<p class="text-gray-600">
+			<h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+			<div class="space-y-4 max-w-4xl">
+				<!-- FAQ Item 1 -->
+				<details class="group bg-white rounded-lg shadow-sm">
+					<summary
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+					>
+						<span>How quickly will I receive a response?</span>
+						<svg
+							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</summary>
+					<div class="px-6 pb-6 text-gray-600">
 						We typically respond to all inquiries within 1-2 business days. For urgent matters,
-						please call us directly.
-					</p>
-				</div>
-				<div>
-					<h3 class="text-lg font-semibold text-gray-900 mb-2">
-						Do you offer technical support?
-					</h3>
-					<p class="text-gray-600">
+						please call us directly at (604) 755-3469.
+					</div>
+				</details>
+
+				<!-- FAQ Item 2 -->
+				<details class="group bg-white rounded-lg shadow-sm">
+					<summary
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+					>
+						<span>Do you offer technical support?</span>
+						<svg
+							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</summary>
+					<div class="px-6 pb-6 text-gray-600">
 						Yes! Our technical team is available to help contractors and homeowners with questions
 						about energy assessments, retrofits, and building science.
-					</p>
-				</div>
-				<div>
-					<h3 class="text-lg font-semibold text-gray-900 mb-2">Can I visit your office?</h3>
-					<p class="text-gray-600">
+					</div>
+				</details>
+
+				<!-- FAQ Item 3 -->
+				<details class="group bg-white rounded-lg shadow-sm">
+					<summary
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+					>
+						<span>Can I visit your office?</span>
+						<svg
+							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</summary>
+					<div class="px-6 pb-6 text-gray-600">
 						We welcome visitors! Please contact us in advance to schedule an appointment and ensure
 						someone will be available to assist you.
-					</p>
-				</div>
-				<div>
-					<h3 class="text-lg font-semibold text-gray-900 mb-2">
-						How do I become a certified contractor?
-					</h3>
-					<p class="text-gray-600">
+					</div>
+				</details>
+
+				<!-- FAQ Item 4 -->
+				<details class="group bg-white rounded-lg shadow-sm">
+					<summary
+						class="flex justify-between items-center cursor-pointer p-6 font-semibold text-gray-900 hover:text-primary transition-colors"
+					>
+						<span>How do I become a certified contractor?</span>
+						<svg
+							class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</summary>
+					<div class="px-6 pb-6 text-gray-600">
 						Visit our <a href="/contractor-network/certification" class="text-primary hover:underline"
 							>certification page</a
 						> or contact us using the subject "Contractor Certification" for detailed information.
-					</p>
-				</div>
+					</div>
+				</details>
 			</div>
 		</div>
 	</div>
