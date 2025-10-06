@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:homeperformance.ca)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Tailwind config with homeperformance.ca theme and SEO layout\n\n- Extract color scheme from homeperformance.ca website (primary blue #00b6f0 with accent colors)\n- Create Tailwind config with full color palette\n- Build comprehensive Layout component with Yoast-style SEO support (meta tags, OG, Twitter, JSON-LD)\n- Add Breadcrumbs component with Schema.org structured data\n- Update index page with example usage\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

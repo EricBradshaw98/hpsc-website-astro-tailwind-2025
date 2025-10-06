@@ -1,11 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Example of how to use the layout with SEO and breadcrumbs
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Home Performance Sciences Canada"
+	description="Professional home performance services across Canada"
+	keywords="home performance, energy efficiency, Canada"
+	breadcrumbs={[
+		{ label: 'Home', href: '/' },
+	]}
+>
+	<h1 class="text-4xl font-bold text-primary mb-6">
+		Welcome to Home Performance Sciences Canada
+	</h1>
+	<p class="text-lg text-gray-700">
+		Your content goes here...
+	</p>
 </Layout>
