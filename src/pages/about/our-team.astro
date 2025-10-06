@@ -1,0 +1,278 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/layouts/Breadcrumbs.astro';
+
+// Staff members
+const staff = [
+	{
+		name: 'Tanya Ratzlaff',
+		title: 'Executive Director',
+		bio: 'Guides strategic planning, provides industry and program oversight, and leads government relations',
+		image: 'https://ui-avatars.com/api/?name=Tanya+Ratzlaff&size=400&background=00b6f0&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Braidey Sturgeon',
+		title: 'Manager of Industry Engagement',
+		bio: "Leads industry engagement and outreach, and spearheads the organization's justice, equity, diversity, inclusion, and Indigenous reconciliation work",
+		image: 'https://ui-avatars.com/api/?name=Braidey+Sturgeon&size=400&background=00b6f0&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Pubali ShomeBasu',
+		title: 'Program Manager',
+		bio: 'Leads operations for the Home Performance Contractor Network and provides strategic support',
+		image: 'https://ui-avatars.com/api/?name=Pubali+ShomeBasu&size=400&background=00b6f0&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Tatianna Cullen',
+		title: 'Coordinator',
+		bio: 'Provides administrative, operational, and project support',
+		image: 'https://ui-avatars.com/api/?name=Tatianna+Cullen&size=400&background=00b6f0&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Helena Arnold',
+		title: 'Coordinator',
+		bio: 'Provides administrative, operational, and project support',
+		image: 'https://ui-avatars.com/api/?name=Helena+Arnold&size=400&background=00b6f0&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Leigh McKay',
+		title: 'Coordinator',
+		bio: 'Provides administrative, operational, and project support',
+		image: 'https://ui-avatars.com/api/?name=Leigh+McKay&size=400&background=00b6f0&color=fff&bold=true',
+		linkedin: '#',
+	},
+];
+
+// Board of Directors
+const board = [
+	{
+		name: 'Ryan Coleman',
+		title: 'Board Chair',
+		image: 'https://ui-avatars.com/api/?name=Ryan+Coleman&size=400&background=0095c7&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Akua Schatz',
+		title: 'Board Member',
+		image: 'https://ui-avatars.com/api/?name=Akua+Schatz&size=400&background=0095c7&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Andy Cockburn',
+		title: 'Board Member',
+		image: 'https://ui-avatars.com/api/?name=Andy+Cockburn&size=400&background=0095c7&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Don Gulevich',
+		title: 'Board Member',
+		image: 'https://ui-avatars.com/api/?name=Don+Gulevich&size=400&background=0095c7&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'David Lewis',
+		title: 'Board Member',
+		image: 'https://ui-avatars.com/api/?name=David+Lewis&size=400&background=0095c7&color=fff&bold=true',
+		linkedin: '#',
+	},
+];
+
+// Advisors
+const advisors = [
+	{
+		name: 'Christine Gustafson',
+		title: 'Advisor to the Board',
+		image: 'https://ui-avatars.com/api/?name=Christine+Gustafson&size=400&background=33c4f3&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Peter Sundberg',
+		title: 'Advisor to the Board',
+		image: 'https://ui-avatars.com/api/?name=Peter+Sundberg&size=400&background=33c4f3&color=fff&bold=true',
+		linkedin: '#',
+	},
+	{
+		name: 'Jovan Cheema',
+		title: 'Advisor to the Board',
+		image: 'https://ui-avatars.com/api/?name=Jovan+Cheema&size=400&background=33c4f3&color=fff&bold=true',
+		linkedin: '#',
+	},
+];
+---
+
+<Layout
+	title="Our Team | Home Performance Stakeholder Council"
+	description="Meet the dedicated team behind HPSC - our staff, board of directors, and advisors working to advance home performance standards across British Columbia."
+	keywords="HPSC team, staff, board of directors, leadership, British Columbia"
+>
+	<Breadcrumbs
+		items={[
+			{ label: 'About', href: '/about' },
+			{ label: 'Our Team', href: '/about/our-team' },
+		]}
+	/>
+
+	<!-- Page Header -->
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Team</h1>
+		<p class="text-xl text-gray-600 max-w-3xl">
+			Meet the passionate individuals driving home performance excellence across British Columbia.
+		</p>
+	</div>
+
+	<!-- Indigenous Acknowledgment -->
+	<div class="mb-16 p-6 md:p-8 bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl border-l-4 border-primary">
+		<p class="text-gray-700 leading-relaxed">
+			The HPSC recognizes and acknowledges with deep appreciation the unique history, languages,
+			and cultures of the 203 First Nations across British Columbia on whose territories we live,
+			work, play, and learn.
+		</p>
+	</div>
+
+	<!-- Staff Section -->
+	<section class="mb-20">
+		<div class="mb-8">
+			<h2 class="text-3xl font-bold text-gray-900 mb-2">Staff</h2>
+			<div class="w-20 h-1 bg-primary rounded"></div>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{
+				staff.map((member) => (
+					<div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
+						<div class="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 overflow-hidden">
+							<img
+								src={member.image}
+								alt={member.name}
+								class="w-full h-full object-cover"
+								loading="lazy"
+							/>
+						</div>
+						<div class="p-6">
+							<h3 class="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
+							<p class="text-primary font-semibold mb-3">{member.title}</p>
+							<p class="text-gray-600 text-sm leading-relaxed mb-4">{member.bio}</p>
+							<a
+								href={member.linkedin}
+								class="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors text-sm font-semibold"
+								aria-label={`${member.name}'s LinkedIn profile`}
+							>
+								<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+								</svg>
+								LinkedIn
+							</a>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- Board of Directors Section -->
+	<section class="mb-20">
+		<div class="mb-8">
+			<h2 class="text-3xl font-bold text-gray-900 mb-2">Board of Directors</h2>
+			<div class="w-20 h-1 bg-primary rounded"></div>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+			{
+				board.map((member) => (
+					<div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
+						<div class="aspect-square bg-gradient-to-br from-primary-dark/10 to-primary-dark/5 overflow-hidden">
+							<img
+								src={member.image}
+								alt={member.name}
+								class="w-full h-full object-cover"
+								loading="lazy"
+							/>
+						</div>
+						<div class="p-6">
+							<h3 class="text-lg font-bold text-gray-900 mb-1">{member.name}</h3>
+							<p class="text-primary-dark font-semibold text-sm mb-3">{member.title}</p>
+							<a
+								href={member.linkedin}
+								class="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors text-sm font-semibold"
+								aria-label={`${member.name}'s LinkedIn profile`}
+							>
+								<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+								</svg>
+								LinkedIn
+							</a>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- Advisors Section -->
+	<section class="mb-12">
+		<div class="mb-8">
+			<h2 class="text-3xl font-bold text-gray-900 mb-2">Advisors to the Board</h2>
+			<div class="w-20 h-1 bg-primary rounded"></div>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{
+				advisors.map((member) => (
+					<div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
+						<div class="aspect-square bg-gradient-to-br from-primary-light/20 to-primary-light/10 overflow-hidden">
+							<img
+								src={member.image}
+								alt={member.name}
+								class="w-full h-full object-cover"
+								loading="lazy"
+							/>
+						</div>
+						<div class="p-6">
+							<h3 class="text-lg font-bold text-gray-900 mb-1">{member.name}</h3>
+							<p class="text-primary-light font-semibold text-sm mb-3">{member.title}</p>
+							<a
+								href={member.linkedin}
+								class="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors text-sm font-semibold"
+								aria-label={`${member.name}'s LinkedIn profile`}
+							>
+								<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+								</svg>
+								LinkedIn
+							</a>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- Call to Action -->
+	<section class="mt-20">
+		<div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white text-center">
+			<h2 class="text-3xl font-bold mb-4">Join Our Mission</h2>
+			<p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+				Interested in contributing to home performance excellence in British Columbia?
+			</p>
+			<div class="flex flex-wrap gap-4 justify-center">
+				<a
+					href="/about/get-involved"
+					class="px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+				>
+					Get Involved
+				</a>
+				<a
+					href="/contact"
+					class="px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors"
+				>
+					Contact Us
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>
