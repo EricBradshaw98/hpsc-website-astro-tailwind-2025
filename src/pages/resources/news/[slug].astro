@@ -111,9 +111,18 @@ const article =
 	mockArticles['hpsc-launches-new-contractor-certification-program'];
 
 // Related articles (would be determined by category/tags in real implementation)
-const relatedArticles = Object.values(mockArticles)
+// First try to get articles from the same category
+let relatedArticles = Object.values(mockArticles)
 	.filter((a: any) => a.id !== article.id && a.category === article.category)
 	.slice(0, 3);
+
+// If we don't have 3 related articles from the same category, fill with other articles
+if (relatedArticles.length < 3) {
+	const otherArticles = Object.values(mockArticles)
+		.filter((a: any) => a.id !== article.id && !relatedArticles.find((r: any) => r.id === a.id))
+		.slice(0, 3 - relatedArticles.length);
+	relatedArticles = [...relatedArticles, ...otherArticles];
+}
 
 // Format date
 const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
