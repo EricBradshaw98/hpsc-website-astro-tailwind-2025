@@ -1,0 +1,447 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+---
+
+<Layout
+	title="The Big Picture | HPSC"
+	description="Understanding the Home Performance Contractor Network (HPCN) and how it supports quality home performance work across British Columbia."
+	keywords="HPCN, home performance, contractor network, building envelope, mechanical systems, energy efficiency, BC retrofits"
+	breadcrumbs={[{ label: 'The Big Picture', href: '/the-big-picture' }]}
+>
+	<!-- Page Header -->
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">The Big Picture</h1>
+		<p class="text-xl text-gray-700 leading-relaxed max-w-4xl">
+			Understanding the Home Performance Contractor Network and its role in advancing quality home
+			performance work across British Columbia.
+		</p>
+	</div>
+
+	<!-- What is Home Performance -->
+	<section class="mb-16">
+		<div class="bg-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
+			<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">What is Home Performance?</h2>
+			<div class="space-y-4 text-gray-700 leading-relaxed">
+				<p class="text-lg">
+					Home performance is a whole-home approach to building new homes or improving existing
+					ones. It considers the interactions between:
+				</p>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+					<div class="bg-white rounded-xl p-6 shadow-sm border border-primary/20">
+						<div class="flex items-start gap-4">
+							<div
+								class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+							>
+								<svg
+									class="w-6 h-6 text-primary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+									></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="font-bold text-gray-900 mb-2">Building Envelope</h3>
+								<p class="text-gray-600 text-sm">
+									Walls, windows, doors, roof, and foundation that protect from the elements
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-white rounded-xl p-6 shadow-sm border border-primary/20">
+						<div class="flex items-start gap-4">
+							<div
+								class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+							>
+								<svg
+									class="w-6 h-6 text-primary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+									></path>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="font-bold text-gray-900 mb-2">Mechanical Systems</h3>
+								<p class="text-gray-600 text-sm">
+									Heating, cooling, ventilation, and water heating equipment
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-white rounded-xl p-6 shadow-sm border border-primary/20">
+						<div class="flex items-start gap-4">
+							<div
+								class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+							>
+								<svg
+									class="w-6 h-6 text-primary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+									></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="font-bold text-gray-900 mb-2">Occupant Behavior</h3>
+								<p class="text-gray-600 text-sm">
+									How people use and interact with their home systems
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-white rounded-xl p-6 shadow-sm border border-primary/20">
+						<div class="flex items-start gap-4">
+							<div
+								class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+							>
+								<svg
+									class="w-6 h-6 text-primary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="font-bold text-gray-900 mb-2">Environmental Conditions</h3>
+								<p class="text-gray-600 text-sm">
+									Climate, weather patterns, and local environmental factors
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Background -->
+	<section class="mb-16">
+		<h2 class="text-3xl font-bold text-gray-900 mb-8">Background</h2>
+		<div class="bg-white rounded-2xl p-8 shadow-md border border-primary/20">
+			<div class="space-y-6 text-gray-700 leading-relaxed">
+				<p class="text-lg">
+					The concept of a Home Performance Contractor Network emerged from the HPSC Working
+					Roadmap, developed through extensive stakeholder engagement including:
+				</p>
+				<ul class="space-y-3 ml-6">
+					<li class="flex items-start gap-3">
+						<svg
+							class="w-6 h-6 text-primary flex-shrink-0 mt-0.5"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg>
+						<span>Comprehensive stakeholder interviews</span>
+					</li>
+					<li class="flex items-start gap-3">
+						<svg
+							class="w-6 h-6 text-primary flex-shrink-0 mt-0.5"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg>
+						<span>Industry workshops and collaborative sessions</span>
+					</li>
+					<li class="flex items-start gap-3">
+						<svg
+							class="w-6 h-6 text-primary flex-shrink-0 mt-0.5"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg>
+						<span>Detailed contractor and homeowner surveys</span>
+					</li>
+				</ul>
+				<p class="text-lg">
+					The primary goal is to create a robust accreditation and quality assurance system for
+					residential retrofit contractors across British Columbia, ensuring homeowners have access
+					to qualified professionals.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Development -->
+	<section class="mb-16">
+		<h2 class="text-3xl font-bold text-gray-900 mb-8">Network Development</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+			<div class="bg-white rounded-xl p-6 shadow-md border border-primary/20">
+				<h3 class="text-xl font-bold text-gray-900 mb-4">Sector Councils</h3>
+				<p class="text-gray-700 mb-4">
+					Criteria were developed by Sector Councils representing five key retrofit sectors:
+				</p>
+				<div class="space-y-2">
+					<div class="flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						<span class="text-gray-700">Fenestration (Windows & Doors)</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						<span class="text-gray-700">HVAC Systems</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						<span class="text-gray-700">Insulation</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						<span class="text-gray-700">Renovation/Retrofit</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="w-2 h-2 rounded-full bg-primary"></span>
+						<span class="text-gray-700">Energy Advisors</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="bg-white rounded-xl p-6 shadow-md border border-primary/20">
+				<h3 class="text-xl font-bold text-gray-900 mb-4">Continuous Improvement</h3>
+				<p class="text-gray-700">
+					The network is designed to evolve and improve qualification criteria over time, ensuring
+					standards keep pace with industry advancements, new technologies, and best practices in
+					home performance work.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- HPCN and Rebate Programs -->
+	<section class="mb-16">
+		<h2 class="text-3xl font-bold text-gray-900 mb-8">HPCN and Rebate/Incentive Programs</h2>
+		<div class="bg-gradient-to-br from-primary/10 to-accent-blue/10 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
+			<div class="space-y-6 text-gray-700 leading-relaxed">
+				<p class="text-lg">
+					The Home Performance Contractor Network provides a centralized database of accredited
+					contractors that utilities and government agencies can leverage for their rebate and
+					incentive programs.
+				</p>
+				<div class="bg-white rounded-xl p-6 shadow-sm">
+					<h3 class="font-bold text-gray-900 mb-3">How It Works:</h3>
+					<ul class="space-y-3 ml-6">
+						<li class="flex items-start gap-3">
+							<svg
+								class="w-6 h-6 text-primary flex-shrink-0 mt-0.5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+							<span>
+								Network membership provides baseline qualification for program eligibility
+							</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg
+								class="w-6 h-6 text-primary flex-shrink-0 mt-0.5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+							<span>
+								Individual programs may have additional specific requirements
+							</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg
+								class="w-6 h-6 text-primary flex-shrink-0 mt-0.5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+							<span>
+								Contractors maintain their accreditation through ongoing quality assurance
+							</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Looking Ahead -->
+	<section class="mb-16">
+		<h2 class="text-3xl font-bold text-gray-900 mb-8">Looking Ahead</h2>
+		<div class="bg-white rounded-2xl p-8 shadow-md border border-primary/20">
+			<div class="space-y-6 text-gray-700 leading-relaxed">
+				<p class="text-lg">
+					The Home Performance Contractor Network will continue to evolve and expand as we work
+					toward our vision of a thriving, sustainable home performance industry in British
+					Columbia.
+				</p>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<div class="text-center p-6 bg-primary/5 rounded-xl">
+						<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+							<svg
+								class="w-8 h-8 text-primary"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+								></path>
+							</svg>
+						</div>
+						<h3 class="font-bold text-gray-900 mb-2">Ongoing Evaluation</h3>
+						<p class="text-sm text-gray-600">
+							Regular assessment and refinement of network standards
+						</p>
+					</div>
+
+					<div class="text-center p-6 bg-primary/5 rounded-xl">
+						<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+							<svg
+								class="w-8 h-8 text-primary"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+								></path>
+							</svg>
+						</div>
+						<h3 class="font-bold text-gray-900 mb-2">Stakeholder Engagement</h3>
+						<p class="text-sm text-gray-600">
+							Continuous dialogue with industry partners and contractors
+						</p>
+					</div>
+
+					<div class="text-center p-6 bg-primary/5 rounded-xl">
+						<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+							<svg
+								class="w-8 h-8 text-primary"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+							</svg>
+						</div>
+						<h3 class="font-bold text-gray-900 mb-2">Industry Advancement</h3>
+						<p class="text-sm text-gray-600">
+							Foundation for achieving home performance industry goals
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="mb-16">
+		<div
+			class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white"
+		>
+			<h2 class="text-3xl font-bold mb-4">Join the Network</h2>
+			<p class="text-xl mb-8 text-white/90 max-w-2xl">
+				Ready to become part of BC's premier network of home performance contractors? Start your
+				application today.
+			</p>
+			<div class="flex flex-wrap gap-4">
+				<a
+					href="https://app.registeredbccontractor.ca/profiles"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+				>
+					Apply Now
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+						></path>
+					</svg>
+				</a>
+				<a
+					href="/contractor-network"
+					class="inline-flex items-center gap-2 px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors"
+				>
+					Learn More About HPCN
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>

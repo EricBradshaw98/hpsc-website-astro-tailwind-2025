@@ -1,6 +1,5 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 import { Image } from 'astro:assets';
 
 // Guide list - will be fetched from WordPress later
@@ -146,15 +145,13 @@ const featuredGuides = guides.filter((g) => g.featured);
 
 <Layout
 	title="Guides | HPSC Resources"
-	description="Step-by-step guides for homeowners, contractors, and industry professionals on home performance and energy efficiency."
-	keywords="HPSC guides, home energy guides, contractor guides, energy efficiency tutorials"
+	description="Browse our comprehensive guides on home performance, energy efficiency, and retrofit best practices for contractors and homeowners in British Columbia."
+	keywords="home performance guides, energy efficiency resources, retrofit guides, contractor resources, homeowner guides"
+	breadcrumbs={[
+		{ label: 'Resources', href: '/resources' },
+		{ label: 'Guides', href: '/resources/guides' },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'Resources', href: '/resources' },
-			{ label: 'Guides', href: '/resources/guides' },
-		]}
-	/>
 
 	<div class="mb-12">
 		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Guides</h1>

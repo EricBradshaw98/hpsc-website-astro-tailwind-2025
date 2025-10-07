@@ -1,0 +1,541 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// Mock training programs data
+const trainingPrograms = [
+	{
+		id: 1,
+		title: 'Building Science Fundamentals',
+		category: 'Core Training',
+		duration: '3 days',
+		level: 'Beginner to Intermediate',
+		format: 'In-person',
+		description:
+			'Comprehensive introduction to building science principles including heat transfer, air movement, moisture management, and building envelope performance.',
+		image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop',
+		topics: [
+			'Heat transfer and thermal bridging',
+			'Air leakage and air barriers',
+			'Moisture management strategies',
+			'Building envelope assessment',
+		],
+		price: 'Subsidized for HPCN members',
+	},
+	{
+		id: 2,
+		title: 'Advanced Air Sealing Techniques',
+		category: 'Technical Skills',
+		duration: '2 days',
+		level: 'Intermediate',
+		format: 'Hands-on Workshop',
+		description:
+			'Practical training on advanced air sealing techniques, blower door testing, and quality assurance protocols for residential retrofits.',
+		image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+		topics: [
+			'Blower door setup and testing',
+			'Air sealing materials and application',
+			'Common air leakage locations',
+			'Quality assurance protocols',
+		],
+		price: '$450',
+	},
+	{
+		id: 3,
+		title: 'Heat Pump Installation & Optimization',
+		category: 'HVAC',
+		duration: '2 days',
+		level: 'Intermediate to Advanced',
+		format: 'In-person',
+		description:
+			'Deep dive into heat pump technology, proper sizing, installation best practices, and system optimization for cold climates.',
+		image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&h=600&fit=crop',
+		topics: [
+			'Heat pump technology overview',
+			'Load calculations and sizing',
+			'Installation best practices',
+			'Cold climate optimization',
+		],
+		price: '$495',
+	},
+	{
+		id: 4,
+		title: 'Energy Advisor Certification Prep',
+		category: 'Certification',
+		duration: '5 days',
+		level: 'Advanced',
+		format: 'Hybrid (Online + In-person)',
+		description:
+			'Comprehensive preparation course for NRCan Energy Advisor certification, covering technical knowledge and practical assessment skills.',
+		image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop',
+		topics: [
+			'HOT2000 modeling software',
+			'Home energy assessment protocols',
+			'Report writing and recommendations',
+			'NRCan certification requirements',
+		],
+		price: '$1,200',
+	},
+	{
+		id: 5,
+		title: 'Ventilation Systems Design',
+		category: 'HVAC',
+		duration: '1 day',
+		level: 'Intermediate',
+		format: 'Online',
+		description:
+			'Understanding mechanical ventilation requirements, system selection, and proper installation for residential applications.',
+		image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop',
+		topics: [
+			'Ventilation standards (CSA F326, ASHRAE 62.2)',
+			'HRV and ERV systems',
+			'System sizing and selection',
+			'Installation and commissioning',
+		],
+		price: '$250',
+	},
+	{
+		id: 6,
+		title: 'Business Development for Contractors',
+		category: 'Business Skills',
+		duration: '1 day',
+		level: 'All Levels',
+		format: 'Online',
+		description:
+			'Essential business skills for home performance contractors including marketing, customer relations, and business growth strategies.',
+		image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+		topics: [
+			'Marketing and lead generation',
+			'Customer communication strategies',
+			'Project management basics',
+			'Financial planning and pricing',
+		],
+		price: '$195',
+	},
+];
+
+// Training categories
+const categories = ['All', ...new Set(trainingPrograms.map((p) => p.category))];
+---
+
+<Layout
+	title="Training & Professional Development | HPSC"
+	description="Professional training programs and workshops for home performance contractors, energy advisors, and building professionals in British Columbia."
+	keywords="home performance training, contractor education, energy advisor certification, building science courses, HVAC training, retrofit training"
+	breadcrumbs={[{ label: 'Training', href: '/training' }]}
+>
+	<!-- Page Header -->
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+			Training & Professional Development
+		</h1>
+		<p class="text-xl text-gray-700 leading-relaxed max-w-4xl">
+			Advance your skills and credentials with our comprehensive training programs designed for
+			home performance professionals across British Columbia.
+		</p>
+	</div>
+
+	<!-- Benefits Section -->
+	<section class="mb-16">
+		<div class="bg-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
+			<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Why Choose HPSC Training?</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<div class="flex items-start gap-4">
+					<div
+						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+					>
+						<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-2">Industry-Leading Instructors</h3>
+						<p class="text-gray-600 text-sm">
+							Learn from experienced professionals with decades of combined expertise
+						</p>
+					</div>
+				</div>
+
+				<div class="flex items-start gap-4">
+					<div
+						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+					>
+						<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+							></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-2">Subsidized Programs</h3>
+						<p class="text-gray-600 text-sm">
+							HPCN members receive significant discounts on training courses
+						</p>
+					</div>
+				</div>
+
+				<div class="flex items-start gap-4">
+					<div
+						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+					>
+						<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+							></path>
+						</svg>
+					</div>
+					<div>
+						<h3 class="font-bold text-gray-900 mb-2">Recognized Credentials</h3>
+						<p class="text-gray-600 text-sm">
+							Certificates recognized by utilities, government programs, and industry
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Filter Section -->
+	<section class="mb-8">
+		<div class="flex flex-wrap items-center gap-3">
+			<span class="text-gray-700 font-semibold">Filter by:</span>
+			{
+				categories.map((category) => (
+					<button
+						data-category={category}
+						class={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all ${
+							category === 'All'
+								? 'bg-primary text-white'
+								: 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+						}`}
+					>
+						{category}
+					</button>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- Training Programs Grid -->
+	<section class="mb-16">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="programs-grid">
+			{
+				trainingPrograms.map((program) => (
+					<article
+						data-category={program.category}
+						class="training-program bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-200"
+					>
+						<div class="relative h-48 overflow-hidden">
+							<Image
+								src={program.image}
+								alt={program.title}
+								class="w-full h-full object-cover"
+								width={800}
+								height={600}
+								loading="lazy"
+							/>
+							<div class="absolute top-4 right-4">
+								<span class="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">
+									{program.category}
+								</span>
+							</div>
+						</div>
+						<div class="p-6">
+							<h3 class="text-xl font-bold text-gray-900 mb-3">{program.title}</h3>
+							<div class="space-y-2 mb-4">
+								<div class="flex items-center gap-2 text-sm text-gray-600">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+										/>
+									</svg>
+									<span>{program.duration}</span>
+								</div>
+								<div class="flex items-center gap-2 text-sm text-gray-600">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M13 10V3L4 14h7v7l9-11h-7z"
+										/>
+									</svg>
+									<span>{program.level}</span>
+								</div>
+								<div class="flex items-center gap-2 text-sm text-gray-600">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+										/>
+									</svg>
+									<span>{program.format}</span>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm mb-4">{program.description}</p>
+							<div class="mb-4">
+								<h4 class="font-semibold text-gray-900 text-sm mb-2">Topics covered:</h4>
+								<ul class="space-y-1">
+									{program.topics.slice(0, 3).map((topic) => (
+										<li class="flex items-start gap-2 text-xs text-gray-600">
+											<svg
+												class="w-3 h-3 text-primary flex-shrink-0 mt-0.5"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+												/>
+											</svg>
+											<span>{topic}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+							<div class="pt-4 border-t border-gray-200 flex items-center justify-between">
+								<span class="text-lg font-bold text-primary">{program.price}</span>
+								<a
+									href="/contact"
+									class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-semibold"
+								>
+									Register
+								</a>
+							</div>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- Upcoming Training Calendar -->
+	<section class="mb-16">
+		<h2 class="text-3xl font-bold text-gray-900 mb-8">Upcoming Training Sessions</h2>
+		<div class="bg-white rounded-2xl shadow-md p-8 border border-gray-200">
+			<div class="space-y-4">
+				<div class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-gray-50 rounded-lg">
+					<div class="flex-1">
+						<h3 class="text-lg font-bold text-gray-900 mb-1">
+							Building Science Fundamentals
+						</h3>
+						<div class="flex flex-wrap gap-4 text-sm text-gray-600">
+							<span class="flex items-center gap-1">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+									/>
+								</svg>
+								October 15-17, 2025
+							</span>
+							<span class="flex items-center gap-1">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+									/>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+									/>
+								</svg>
+								Vancouver, BC
+							</span>
+						</div>
+					</div>
+					<div class="mt-4 md:mt-0">
+						<span class="inline-block px-3 py-1 bg-green text-white text-sm font-semibold rounded-full">
+							Registration Open
+						</span>
+					</div>
+				</div>
+
+				<div class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-gray-50 rounded-lg">
+					<div class="flex-1">
+						<h3 class="text-lg font-bold text-gray-900 mb-1">
+							Advanced Air Sealing Techniques
+						</h3>
+						<div class="flex flex-wrap gap-4 text-sm text-gray-600">
+							<span class="flex items-center gap-1">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+									/>
+								</svg>
+								October 22-23, 2025
+							</span>
+							<span class="flex items-center gap-1">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+									/>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+									/>
+								</svg>
+								Kelowna, BC
+							</span>
+						</div>
+					</div>
+					<div class="mt-4 md:mt-0">
+						<span class="inline-block px-3 py-1 bg-green text-white text-sm font-semibold rounded-full">
+							Registration Open
+						</span>
+					</div>
+				</div>
+
+				<div class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-gray-50 rounded-lg">
+					<div class="flex-1">
+						<h3 class="text-lg font-bold text-gray-900 mb-1">
+							Heat Pump Installation & Optimization
+						</h3>
+						<div class="flex flex-wrap gap-4 text-sm text-gray-600">
+							<span class="flex items-center gap-1">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+									/>
+								</svg>
+								November 5-6, 2025
+							</span>
+							<span class="flex items-center gap-1">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+									/>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+									/>
+								</svg>
+								Victoria, BC
+							</span>
+						</div>
+					</div>
+					<div class="mt-4 md:mt-0">
+						<span class="inline-block px-3 py-1 bg-orange text-white text-sm font-semibold rounded-full">
+							Coming Soon
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="mt-6 text-center">
+				<a href="/events" class="text-primary font-semibold hover:underline">
+					View Full Training Calendar →
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section>
+		<div
+			class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white"
+		>
+			<h2 class="text-3xl font-bold mb-4">Ready to Advance Your Skills?</h2>
+			<p class="text-xl mb-8 text-white/90 max-w-2xl">
+				Join hundreds of contractors and professionals who have elevated their expertise through
+				HPSC training programs.
+			</p>
+			<div class="flex flex-wrap gap-4">
+				<a
+					href="/contact"
+					class="inline-flex items-center gap-2 px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+				>
+					Register for Training
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+					</svg>
+				</a>
+				<a
+					href="/contractor-network"
+					class="inline-flex items-center gap-2 px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors"
+				>
+					Learn About HPCN Benefits
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	// Filter functionality
+	const filterButtons = document.querySelectorAll('.filter-btn');
+	const programs = document.querySelectorAll('.training-program');
+
+	function filterPrograms(category: string) {
+		programs.forEach((program) => {
+			const programCategory = program.getAttribute('data-category');
+			if (category === 'All' || programCategory === category) {
+				program.classList.remove('hidden');
+			} else {
+				program.classList.add('hidden');
+			}
+		});
+
+		// Update button styles
+		filterButtons.forEach((btn) => {
+			const btnCategory = btn.getAttribute('data-category');
+			if (btnCategory === category) {
+				btn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+				btn.classList.add('bg-primary', 'text-white');
+			} else {
+				btn.classList.remove('bg-primary', 'text-white');
+				btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+			}
+		});
+	}
+
+	filterButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const category = button.getAttribute('data-category') || 'All';
+			filterPrograms(category);
+		});
+	});
+</script>

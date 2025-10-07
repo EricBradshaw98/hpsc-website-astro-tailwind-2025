@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
-import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 
 // This will be replaced with WordPress API data later
 // For now, we'll use the slug from the URL to fetch mock data
@@ -145,14 +144,12 @@ const ogImage = article.image;
 	ogImage={ogImage}
 	ogType="article"
 	keywords={article.tags.join(', ')}
+	breadcrumbs={[
+		{ label: 'Resources', href: '/resources' },
+		{ label: 'News & Updates', href: '/resources/news' },
+		{ label: article.title, href: `/resources/news/${slug}` },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'Resources', href: '/resources' },
-			{ label: 'News & Updates', href: '/resources/news' },
-			{ label: article.title, href: `/resources/news/${slug}` },
-		]}
-	/>
 
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 		<!-- Main Article Content -->

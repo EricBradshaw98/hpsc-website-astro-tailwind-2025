@@ -1,6 +1,5 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 
 // Document list - this could be fetched from a CMS or database later
 const documents = [
@@ -28,13 +27,11 @@ const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) =
 	title="Documents | HPSC Resources"
 	description="Access important documents, guides, and resources from the Home Performance Stakeholder Council."
 	keywords="HPSC documents, PDF resources, guides, home performance, energy efficiency"
+	breadcrumbs={[
+		{ label: 'Resources', href: '/resources' },
+		{ label: 'Documents', href: '/resources/documents' },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'Resources', href: '/resources' },
-			{ label: 'Documents', href: '/resources/documents' },
-		]}
-	/>
 
 	<div class="mb-12">
 		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Documents & Resources</h1>

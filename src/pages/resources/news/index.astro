@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
-import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 
 // Mock news data - this would eventually come from a CMS or API
 const newsArticles = [
@@ -114,14 +113,12 @@ const archiveMonths = getArchiveMonths();
 <Layout
 	title="News & Updates | Home Performance Stakeholder Council"
 	description="Stay informed with the latest news, updates, and insights from the home performance industry in British Columbia."
-	keywords="home performance news, energy efficiency updates, BC retrofit news, HPSC updates"
+	keywords="home performance news, energy efficiency updates, BC retrofit news, HPSC updates, contractor news, energy advisor updates"
+	breadcrumbs={[
+		{ label: 'Resources', href: '/resources' },
+		{ label: 'News & Updates', href: '/resources/news' },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'Resources', href: '/resources' },
-			{ label: 'News & Updates', href: '/resources/news' },
-		]}
-	/>
 
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 		<!-- Main Content -->

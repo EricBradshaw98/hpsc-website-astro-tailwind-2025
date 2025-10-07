@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
-import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 
 const { slug } = Astro.params;
 
@@ -1380,15 +1379,13 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 <Layout
 	title={pageTitle}
 	description={guide.description}
-	keywords={`${guide.category}, guide, tutorial, HPSC`}
+	keywords={`${guide.category}, guide, tutorial, HPSC, home performance, energy efficiency, retrofit`}
+	breadcrumbs={[
+		{ label: 'Resources', href: '/resources' },
+		{ label: 'Guides', href: '/resources/guides' },
+		{ label: guide.title, href: `/resources/guides/${slug}` },
+	]}
 >
-	<Breadcrumbs
-		items={[
-			{ label: 'Resources', href: '/resources' },
-			{ label: 'Guides', href: '/resources/guides' },
-			{ label: guide.title, href: `/resources/guides/${slug}` },
-		]}
-	/>
 
 	<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 		<!-- Main Content -->

@@ -1,6 +1,5 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Breadcrumbs from '../../../components/layouts/Breadcrumbs.astro';
 
 const { slug } = Astro.params;
 
@@ -38,14 +37,16 @@ const pageTitle = `${doc.title} | HPSC Documents`;
 const pageDescription = doc.description;
 ---
 
-<Layout title={pageTitle} description={pageDescription} keywords="HPSC, documents, PDF, resources">
-	<Breadcrumbs
-		items={[
-			{ label: 'Resources', href: '/resources' },
-			{ label: 'Documents', href: '/resources/documents' },
-			{ label: doc.title, href: `/resources/documents/${slug}` },
-		]}
-	/>
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	keywords="HPSC, documents, PDF, resources"
+	breadcrumbs={[
+		{ label: 'Resources', href: '/resources' },
+		{ label: 'Documents', href: '/resources/documents' },
+		{ label: doc.title, href: `/resources/documents/${slug}` },
+	]}
+>
 
 	<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 		<!-- Main PDF Viewer -->
