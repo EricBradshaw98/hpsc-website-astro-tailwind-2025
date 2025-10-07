@@ -1,0 +1,37 @@
+---
+export interface NetworkSectorCardProps {
+	title: string;
+	icon: string; // SVG path
+	status?: 'open' | 'coming-soon';
+}
+
+interface Props extends NetworkSectorCardProps {}
+
+const { title, icon, status = 'open' } = Astro.props;
+
+const borderColor = status === 'coming-soon' ? 'border-orange/20' : 'border-primary/20';
+const iconColor = status === 'coming-soon' ? 'text-orange/10' : 'text-primary/10';
+
+// WordPress ACF Mapping:
+// ACF Group: network_sector_card
+// - title (Text)
+// - icon (Text - SVG path)
+// - status (Select: open, coming-soon)
+---
+
+<div
+	class={`relative overflow-hidden bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow border-2 ${borderColor}`}
+>
+	<svg
+		class={`absolute -right-2 -bottom-2 w-20 h-20 ${iconColor} pointer-events-none`}
+		fill="none"
+		stroke="currentColor"
+		viewBox="0 0 24 24"
+	>
+		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={icon}></path>
+	</svg>
+	<div class="relative z-10">
+		<h4 class="text-xl font-bold text-gray-900">{title}</h4>
+		{status === 'coming-soon' && <span class="text-sm text-orange font-semibold mt-1 inline-block">Coming Soon</span>}
+	</div>
+</div>

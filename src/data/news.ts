@@ -16,7 +16,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'hpsc-launches-new-contractor-certification-program',
 		title: 'HPSC Launches New Contractor Certification Program',
-		excerpt: 'We are excited to announce the launch of our comprehensive certification program designed to elevate standards in the home performance industry.',
+		excerpt:
+			'We are excited to announce the launch of our comprehensive certification program designed to elevate standards in the home performance industry.',
 		content: `
 			<p>The Home Performance Stakeholder Council is proud to announce the launch of our new contractor certification program, a comprehensive initiative designed to elevate professional standards across British Columbia's home performance industry.</p>
 
@@ -54,7 +55,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'new-energy-efficiency-rebates-available',
 		title: 'New Energy Efficiency Rebates Available for Homeowners',
-		excerpt: 'CleanBC and BC Hydro have expanded their rebate programs, making energy-efficient upgrades more accessible than ever.',
+		excerpt:
+			'CleanBC and BC Hydro have expanded their rebate programs, making energy-efficient upgrades more accessible than ever.',
 		content: `
 			<p>Great news for BC homeowners! CleanBC and BC Hydro have announced significant expansions to their energy efficiency rebate programs, making it more affordable than ever to upgrade your home.</p>
 
@@ -97,7 +99,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'heat-pump-technology-advances',
 		title: 'Heat Pump Technology Advances: What Contractors Need to Know',
-		excerpt: 'Recent developments in heat pump efficiency and cold-climate performance are changing the retrofit landscape.',
+		excerpt:
+			'Recent developments in heat pump efficiency and cold-climate performance are changing the retrofit landscape.',
 		content: `
 			<p>Heat pump technology has made remarkable advances in recent years, particularly in cold-climate performance. Here's what contractors need to know about the latest developments.</p>
 
@@ -134,7 +137,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'building-code-updates-2025',
 		title: 'Important Building Code Updates for 2025',
-		excerpt: 'BC Building Code introduces new energy efficiency requirements that impact home performance contractors.',
+		excerpt:
+			'BC Building Code introduces new energy efficiency requirements that impact home performance contractors.',
 		content: `
 			<p>The BC Building Code has introduced significant updates for 2025 that will impact home performance contractors and the work they do.</p>
 
@@ -161,7 +165,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'annual-conference-2025-announcement',
 		title: 'Annual Home Performance Conference 2025 - Save the Date',
-		excerpt: 'Join us November 15-17 for the premier home performance industry event in British Columbia.',
+		excerpt:
+			'Join us November 15-17 for the premier home performance industry event in British Columbia.',
 		content: `
 			<p>We're excited to announce that the 2025 Home Performance Conference will be held November 15-17 at the Vancouver Convention Centre.</p>
 
@@ -186,7 +191,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'indoor-air-quality-importance',
 		title: 'The Growing Importance of Indoor Air Quality',
-		excerpt: 'As homes become more airtight, understanding and addressing indoor air quality is essential for contractor success.',
+		excerpt:
+			'As homes become more airtight, understanding and addressing indoor air quality is essential for contractor success.',
 		content: `
 			<p>With modern homes becoming increasingly airtight for energy efficiency, indoor air quality has never been more important.</p>
 
@@ -248,7 +254,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'net-zero-retrofit-case-study',
 		title: 'Case Study: Achieving Net-Zero in a 1970s Home',
-		excerpt: 'How one Vancouver homeowner transformed a 50-year-old house into a net-zero energy home.',
+		excerpt:
+			'How one Vancouver homeowner transformed a 50-year-old house into a net-zero energy home.',
 		content: `
 			<p>A comprehensive deep energy retrofit transformed a typical 1970s Vancouver home into a net-zero energy residence. Here's how it was done.</p>
 
@@ -277,7 +284,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'contractor-spotlight-green-solutions',
 		title: 'Contractor Spotlight: Green Solutions Ltd',
-		excerpt: 'Meet the award-winning contractor setting new standards in sustainable home performance.',
+		excerpt:
+			'Meet the award-winning contractor setting new standards in sustainable home performance.',
 		content: `
 			<p>This month we spotlight Green Solutions Ltd, a Victoria-based contractor that has completed over 500 successful retrofit projects.</p>
 
@@ -304,7 +312,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'summer-energy-saving-tips',
 		title: 'Summer Energy Saving Tips for BC Homeowners',
-		excerpt: 'Simple strategies to keep your home cool and reduce energy costs during summer months.',
+		excerpt:
+			'Simple strategies to keep your home cool and reduce energy costs during summer months.',
 		content: `
 			<p>While BC summers are generally mild, strategic energy management can still reduce costs and improve comfort.</p>
 
@@ -335,7 +344,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'indigenous-housing-partnership',
 		title: 'HPSC Announces Partnership with Indigenous Housing Providers',
-		excerpt: 'New initiative brings home performance standards and training to Indigenous communities across BC.',
+		excerpt:
+			'New initiative brings home performance standards and training to Indigenous communities across BC.',
 		content: `
 			<p>We are honored to announce a new partnership with Indigenous housing providers to bring home performance training and standards to communities across British Columbia.</p>
 
@@ -362,7 +372,8 @@ export const newsArticles: NewsArticle[] = [
 	{
 		slug: 'moisture-management-best-practices',
 		title: 'Moisture Management: Essential Best Practices for BC Contractors',
-		excerpt: 'Understanding and managing moisture is critical for successful home performance work in BC climate.',
+		excerpt:
+			'Understanding and managing moisture is critical for successful home performance work in BC climate.',
 		content: `
 			<p>BC's wet climate makes moisture management a critical consideration for all home performance work.</p>
 
@@ -395,13 +406,13 @@ export const newsArticles: NewsArticle[] = [
 
 // Get all unique categories
 export function getCategories(): string[] {
-	const categories = newsArticles.map(article => article.category);
+	const categories = newsArticles.map((article) => article.category);
 	return [...new Set(categories)].sort();
 }
 
 // Get all unique years
 export function getArchiveYears(): number[] {
-	const years = newsArticles.map(article => article.date.getFullYear());
+	const years = newsArticles.map((article) => article.date.getFullYear());
 	return [...new Set(years)].sort((a, b) => b - a);
 }
 
@@ -415,12 +426,12 @@ export function filterArticles(
 
 	// Filter by category
 	if (category) {
-		filtered = filtered.filter(article => article.category === category);
+		filtered = filtered.filter((article) => article.category === category);
 	}
 
 	// Filter by year
 	if (year) {
-		filtered = filtered.filter(article => article.date.getFullYear() === year);
+		filtered = filtered.filter((article) => article.date.getFullYear() === year);
 	}
 
 	// Sort

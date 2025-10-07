@@ -1,0 +1,64 @@
+---
+export interface NavigationLink {
+	label: string;
+	href: string;
+	icon: string; // SVG path
+	color: 'primary' | 'blue' | 'green' | 'orange';
+}
+
+export interface StrategyNavigationProps {
+	heading: string;
+	headingIcon: string; // SVG path
+	links: NavigationLink[];
+}
+
+interface Props extends StrategyNavigationProps {}
+
+const { heading, headingIcon, links } = Astro.props;
+
+// WordPress ACF Mapping:
+// ACF Group: strategy_navigation
+// - heading (Text)
+// - heading_icon (Text - SVG path)
+// - links (Repeater) -> label, href, icon, color
+
+const colorMap = {
+	primary: 'hover:bg-primary/5 hover:border-primary/30',
+	blue: 'hover:bg-blue/5 hover:border-blue/30',
+	green: 'hover:bg-green/5 hover:border-green/30',
+	orange: 'hover:bg-orange/5 hover:border-orange/30',
+};
+
+const iconColorMap = {
+	primary: 'text-primary',
+	blue: 'text-blue',
+	green: 'text-green',
+	orange: 'text-orange',
+};
+---
+
+<div class="mb-12 p-6 bg-white rounded-2xl shadow-md border border-gray-100">
+	<h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+		<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={headingIcon} />
+		</svg>
+		{heading}
+	</h3>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+		{
+			links.map((link) => (
+				<a
+					href={link.href}
+					class={`flex items-center gap-3 p-4 rounded-xl border-2 border-gray-100 ${colorMap[link.color]} transition-all group`}
+				>
+					<div class={`w-10 h-10 ${iconColorMap[link.color]} bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={link.icon} />
+						</svg>
+					</div>
+					<span class="font-semibold text-gray-700 text-sm">{link.label}</span>
+				</a>
+			))
+		}
+	</div>
+</div>

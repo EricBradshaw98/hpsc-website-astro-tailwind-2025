@@ -1,0 +1,44 @@
+---
+export interface EligibilityRequirementsProps {
+	heading: string;
+	description: string;
+	requirements: string[];
+}
+
+interface Props extends EligibilityRequirementsProps {}
+
+const { heading, description, requirements } = Astro.props;
+
+// WordPress ACF Mapping:
+// ACF Group: eligibility_requirements
+// - heading (Text)
+// - description (Text)
+// - requirements (Repeater: text)
+---
+
+<section class="mb-16">
+	<h2 class="text-3xl font-bold text-gray-900 mb-8">{heading}</h2>
+	<div class="bg-white rounded-2xl p-8 shadow-md border-2 border-primary/20">
+		<p class="text-lg text-gray-700 mb-6">{description}</p>
+		<ul class="space-y-4">
+			{
+				requirements.map((requirement) => (
+					<li class="flex items-start gap-4">
+						<div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+							<svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+								<path
+									fill-rule="evenodd"
+									d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</div>
+						<div class="flex-1">
+							<span class="text-gray-700 text-lg">{requirement}</span>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

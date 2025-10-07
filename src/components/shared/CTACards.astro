@@ -1,0 +1,71 @@
+---
+export interface CTACard {
+	title: string;
+	description: string;
+	link: {
+		text: string;
+		href: string;
+	};
+	icon: string; // SVG path data
+	colorClass: string; // e.g., 'primary', 'blue', 'green'
+}
+
+export interface CTACardsProps {
+	cards: CTACard[];
+}
+
+interface Props extends CTACardsProps {}
+
+const { cards } = Astro.props;
+---
+
+<section>
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+		{
+			cards.map((card) => (
+				<a
+					href={card.link.href}
+					class={`group bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-${card.colorClass} transition-colors shadow-sm hover:shadow-md`}
+				>
+					<div
+						class={`w-12 h-12 bg-${card.colorClass}/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-${card.colorClass} group-hover:scale-110 transition-all`}
+					>
+						<svg
+							class={`w-6 h-6 text-${card.colorClass} group-hover:text-white transition-colors`}
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={card.icon} />
+						</svg>
+					</div>
+					<h3
+						class={`text-xl font-bold text-gray-900 mb-2 group-hover:text-${card.colorClass} transition-colors`}
+					>
+						{card.title}
+					</h3>
+					<p class="text-gray-600 text-sm mb-4">{card.description}</p>
+					<span
+						class={`inline-flex items-center gap-2 text-${card.colorClass} font-semibold group-hover:gap-3 transition-all`}
+					>
+						{card.link.text}
+						<svg
+							class="w-4 h-4"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M17 8l4 4m0 0l-4 4m4-4H3"
+							/>
+						</svg>
+					</span>
+				</a>
+			))
+		}
+	</div>
+</section>

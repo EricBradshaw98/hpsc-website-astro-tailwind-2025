@@ -1,0 +1,39 @@
+---
+import StrategyCard, { type StrategyCardProps } from './StrategyCard.astro';
+
+export interface StrategyCategoryProps {
+	category: string;
+	color: string; // primary, blue, green, orange
+	items: StrategyCardProps[];
+}
+
+interface Props extends StrategyCategoryProps {}
+
+const { category, color, items } = Astro.props;
+
+// WordPress ACF Mapping:
+// ACF Group: strategy_category
+// - category_name (Text)
+// - category_color (Select: primary/blue/green/orange)
+// - priorities (Repeater) -> array of StrategyCardProps
+
+const colorMap: Record<string, string> = {
+	primary: 'bg-primary',
+	blue: 'bg-blue',
+	green: 'bg-green',
+	orange: 'bg-orange',
+};
+
+const underlineColor = colorMap[color] || colorMap.primary;
+---
+
+<section class="mb-16">
+	<div class="mb-8">
+		<h2 class="text-3xl font-bold text-gray-900 mb-2">{category}</h2>
+		<div class={`w-20 h-1 ${underlineColor} rounded`}></div>
+	</div>
+
+	<div class="grid grid-cols-1 gap-6">
+		{items.map((item) => <StrategyCard {...item} color={color} />)}
+	</div>
+</section>

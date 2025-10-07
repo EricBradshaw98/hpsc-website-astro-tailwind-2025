@@ -134,7 +134,13 @@ import Layout from '../layouts/Layout.astro';
 					</button>
 
 					<!-- Success/Error Messages -->
-					<div id="form-message" class="hidden p-4 rounded-lg text-sm font-medium" role="alert">
+					<div
+						id="form-message"
+						class="hidden p-4 rounded-lg text-sm font-medium"
+						role="alert"
+						aria-live="polite"
+						aria-atomic="true"
+					>
 					</div>
 				</form>
 			</div>
@@ -155,6 +161,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -189,6 +196,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -216,6 +224,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -243,6 +252,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -293,6 +303,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -320,6 +331,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -347,6 +359,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -374,6 +387,7 @@ import Layout from '../layouts/Layout.astro';
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								<path
 									stroke-linecap="round"
@@ -405,6 +419,7 @@ import Layout from '../layouts/Layout.astro';
 									fill="none"
 									stroke="currentColor"
 									viewBox="0 0 24 24"
+									aria-hidden="true"
 								>
 									<path
 										stroke-linecap="round"
@@ -464,7 +479,7 @@ import Layout from '../layouts/Layout.astro';
 		updateSubmitButton();
 	};
 
-	(window as any).onTurnstileError = function (errorCode: string) {
+	(window as any).onTurnstileError = function () {
 		turnstileToken = null;
 		updateSubmitButton();
 		const formMessage = document.getElementById('form-message') as HTMLDivElement;
@@ -546,7 +561,7 @@ import Layout from '../layouts/Layout.astro';
 			setTimeout(() => {
 				formMessage.className = 'hidden';
 			}, 5000);
-		} catch (error) {
+		} catch {
 			// Show error message
 			formMessage.className =
 				'block p-4 rounded-lg text-sm font-medium bg-red-50 text-red-800 border border-red-200';

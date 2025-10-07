@@ -1,0 +1,63 @@
+---
+export interface IndustrySectionProps {
+	heading: string;
+	paragraphs: string[];
+	timeline: {
+		year: string;
+		title: string;
+		description: string;
+	};
+}
+
+interface Props extends IndustrySectionProps {}
+
+const { heading, paragraphs, timeline } = Astro.props;
+---
+
+<section class="mb-16">
+	<div class="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-md">
+		<div class="flex items-start gap-4 mb-6">
+			<div class="w-12 h-12 bg-blue rounded-xl flex items-center justify-center flex-shrink-0">
+				<svg
+					class="w-6 h-6 text-white"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+					></path>
+				</svg>
+			</div>
+			<div class="flex-1">
+				<h2 class="text-3xl font-bold text-gray-900 mb-4">{heading}</h2>
+				<div class="prose prose-lg max-w-none space-y-4">
+					{paragraphs.map((paragraph) => <p class="text-gray-700 leading-relaxed">{paragraph}</p>)}
+				</div>
+			</div>
+		</div>
+
+		<!-- Timeline -->
+		<div class="mt-8 pt-8 border-t border-gray-200">
+			<div class="flex items-center gap-4">
+				<div
+					class="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-lg shadow-lg"
+				>
+					{timeline.year}
+				</div>
+				<div>
+					<p class="text-sm font-semibold text-primary uppercase tracking-wide">
+						{timeline.title}
+					</p>
+					<p class="text-gray-700">
+						{timeline.description}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

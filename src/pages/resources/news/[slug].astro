@@ -150,7 +150,40 @@ const ogImage = article.image;
 		{ label: article.title, href: `/resources/news/${slug}` },
 	]}
 >
-
+	<Fragment slot="head">
+		<!-- JSON-LD Schema for Article -->
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'Article',
+				headline: article.title,
+				description: article.excerpt,
+				image: article.image,
+				datePublished: article.date,
+				dateModified: article.date,
+				author: {
+					'@type': 'Person',
+					name: article.author,
+					description: article.authorBio,
+				},
+				publisher: {
+					'@type': 'Organization',
+					name: 'Home Performance Stakeholder Council',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://homeperformance.ca/logo.png',
+					},
+				},
+				mainEntityOfPage: {
+					'@type': 'WebPage',
+					'@id': `https://homeperformance.ca/resources/news/${slug}`,
+				},
+				articleSection: article.category,
+				keywords: article.tags.join(', '),
+			})}
+		/>
+	</Fragment>
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 		<!-- Main Article Content -->
 		<article class="lg:col-span-2">

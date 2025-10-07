@@ -1,0 +1,103 @@
+---
+export interface PerformanceFactor {
+	name: string;
+	icon: string; // SVG path data
+	colorClass: string; // e.g., 'bg-primary/10 text-primary'
+}
+
+export interface HomePerformanceSectionProps {
+	heading: string;
+	description: string;
+	learnMoreLink: {
+		text: string;
+		href: string;
+	};
+	factors: PerformanceFactor[];
+}
+
+interface Props extends HomePerformanceSectionProps {}
+
+const { heading, description, learnMoreLink, factors } = Astro.props;
+---
+
+<section class="mb-16">
+	<div
+		class="bg-gradient-to-br from-primary/5 to-blue/5 rounded-2xl p-8 md:p-12 border border-primary/10"
+	>
+		<div class="flex items-start gap-4 mb-6">
+			<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
+				<svg
+					class="w-6 h-6 text-white"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+					></path>
+				</svg>
+			</div>
+			<div class="flex-1">
+				<h2 class="text-3xl font-bold text-gray-900 mb-4">{heading}</h2>
+				<div class="prose prose-lg max-w-none">
+					<p class="text-gray-700 leading-relaxed mb-4">
+						{description}
+					</p>
+					<a
+						href={learnMoreLink.href}
+						class="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark transition-colors"
+						aria-label={learnMoreLink.text}
+					>
+						{learnMoreLink.text}
+						<svg
+							class="w-5 h-5"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Key Performance Factors -->
+		<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+			{
+				factors.map((factor) => (
+					<div class="bg-white rounded-xl p-4 text-center shadow-sm">
+						<div
+							class={`w-10 h-10 ${factor.colorClass} rounded-lg flex items-center justify-center mx-auto mb-2`}
+						>
+							<svg
+								class={`w-5 h-5 ${factor.colorClass.split(' ')[1]}`}
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d={factor.icon}
+								/>
+							</svg>
+						</div>
+						<p class="text-sm font-semibold text-gray-900">{factor.name}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

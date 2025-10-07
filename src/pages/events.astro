@@ -61,12 +61,7 @@ const events = [
 		image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1200&h=800&fit=crop',
 		status: 'Registration Open',
 		price: 'Free',
-		highlights: [
-			'Expert presenters',
-			'Live Q&A',
-			'Recording available',
-			'Free for all attendees',
-		],
+		highlights: ['Expert presenters', 'Live Q&A', 'Recording available', 'Free for all attendees'],
 	},
 	{
 		id: 4,
@@ -190,7 +185,9 @@ function formatDate(dateString: string, endDateString?: string | null) {
 
 	<!-- Featured Event -->
 	<section class="mb-16">
-		<div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl overflow-hidden shadow-2xl">
+		<div
+			class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl overflow-hidden shadow-2xl"
+		>
 			<div class="grid grid-cols-1 lg:grid-cols-2">
 				<div class="relative h-96 lg:h-auto">
 					<Image
@@ -211,7 +208,13 @@ function formatDate(dateString: string, endDateString?: string | null) {
 					<h2 class="text-3xl md:text-4xl font-bold mb-4">{events[0].title}</h2>
 					<div class="space-y-2 mb-6">
 						<div class="flex items-center gap-2">
-							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg
+								class="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								aria-hidden="true"
+							>
 								<path
 									stroke-linecap="round"
 									stroke-linejoin="round"
@@ -222,7 +225,13 @@ function formatDate(dateString: string, endDateString?: string | null) {
 							<span>{formatDate(events[0].date, events[0].endDate)}</span>
 						</div>
 						<div class="flex items-center gap-2">
-							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg
+								class="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								aria-hidden="true"
+							>
 								<path
 									stroke-linecap="round"
 									stroke-linejoin="round"
@@ -233,8 +242,7 @@ function formatDate(dateString: string, endDateString?: string | null) {
 									stroke-linecap="round"
 									stroke-linejoin="round"
 									stroke-width="2"
-									d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-								></path>
+									d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
 							</svg>
 							<span>{events[0].location}</span>
 						</div>
@@ -245,7 +253,13 @@ function formatDate(dateString: string, endDateString?: string | null) {
 						class="inline-flex items-center gap-2 px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-colors"
 					>
 						Register Now
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg
+							class="w-5 h-5"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -301,6 +315,7 @@ function formatDate(dateString: string, endDateString?: string | null) {
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
+										aria-hidden="true"
 									>
 										<path
 											stroke-linecap="round"
@@ -317,6 +332,7 @@ function formatDate(dateString: string, endDateString?: string | null) {
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
+										aria-hidden="true"
 									>
 										<path
 											stroke-linecap="round"
@@ -333,6 +349,7 @@ function formatDate(dateString: string, endDateString?: string | null) {
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
+										aria-hidden="true"
 									>
 										<path
 											stroke-linecap="round"
@@ -360,6 +377,7 @@ function formatDate(dateString: string, endDateString?: string | null) {
 												fill="none"
 												stroke="currentColor"
 												viewBox="0 0 24 24"
+												aria-hidden="true"
 											>
 												<path
 													stroke-linecap="round"
@@ -378,6 +396,7 @@ function formatDate(dateString: string, endDateString?: string | null) {
 								<a
 									href="/contact"
 									class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-semibold"
+									aria-label={`${event.status === 'Registration Open' ? 'Register for' : 'Learn more about'} ${event.title}`}
 								>
 									{event.status === 'Registration Open' ? 'Register' : 'Learn More'}
 								</a>

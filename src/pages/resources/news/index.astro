@@ -119,7 +119,6 @@ const archiveMonths = getArchiveMonths();
 		{ label: 'News & Updates', href: '/resources/news' },
 	]}
 >
-
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 		<!-- Main Content -->
 		<div class="lg:col-span-2">
@@ -158,7 +157,11 @@ const archiveMonths = getArchiveMonths();
 							data-category={article.category}
 							class="news-article bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
 						>
-							<a href={`/resources/news/${article.slug}`} class="block md:flex">
+							<a
+								href={`/resources/news/${article.slug}`}
+								class="block md:flex"
+								aria-label={`Read more about ${article.title}`}
+							>
 								<div class="md:w-2/5">
 									<Image
 										src={article.image}
@@ -305,7 +308,13 @@ const archiveMonths = getArchiveMonths();
 									class="text-gray-700 hover:text-primary transition-colors flex items-center justify-between"
 								>
 									<span>{month}</span>
-									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<svg
+										class="w-4 h-4"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
 										<path
 											stroke-linecap="round"
 											stroke-linejoin="round"

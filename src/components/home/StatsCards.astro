@@ -1,0 +1,230 @@
+---
+import { Image } from 'astro:assets';
+
+export interface StatCard {
+	emoji: string;
+	statNumber: string;
+	title: string;
+	description: string;
+	details: string;
+	detailsSubtext: string;
+	image: {
+		src: string;
+		alt: string;
+	};
+	bgColor: string; // e.g., 'bg-primary', 'bg-accent-green', 'bg-accent-blue'
+	textColor: string; // e.g., 'text-primary', 'text-accent-green'
+	link: {
+		text: string;
+		href: string;
+	};
+}
+
+export interface StatsCardsProps {
+	stats: StatCard[];
+}
+
+interface Props extends StatsCardsProps {}
+
+const { stats } = Astro.props;
+---
+
+<section class="mb-16 -mx-4 md:mx-0">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+		{
+			stats.map((stat) => (
+				<div
+					class={`stats-card ${stat.bgColor} rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary`}
+					role="button"
+					tabindex="0"
+					aria-label={`Learn more about ${stat.title}`}
+					onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
+				>
+					<div class="aspect-square relative overflow-hidden">
+						<Image
+							src={stat.image.src}
+							alt={stat.image.alt}
+							class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							width={600}
+							height={600}
+							loading="lazy"
+						/>
+						<div class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300" />
+					</div>
+
+					<div
+						class={`absolute bottom-0 left-0 right-0 ${stat.bgColor} transform translate-y-2/3 group-hover:translate-y-0 transition-transform duration-400 ease-out`}
+					>
+						<div class="p-6">
+							<div class="flex items-center justify-between">
+								<div class="flex items-center gap-3">
+									<div
+										class={`w-8 h-8 bg-white rounded-lg flex items-center justify-center ${stat.textColor} text-xl`}
+									>
+										{stat.emoji}
+									</div>
+									<div class="text-white">
+										<span class="font-bold text-lg">{stat.statNumber}</span>
+									</div>
+								</div>
+								<button
+									class={`w-8 h-8 bg-white rounded-full flex items-center justify-center ${stat.textColor} text-xl font-bold hover:bg-gray-100 transition-colors`}
+									aria-label={`Expand ${stat.title} information`}
+									tabindex="-1"
+								>
+									+
+								</button>
+							</div>
+						</div>
+
+						<div class="px-6 pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150">
+							<div class="text-white text-sm leading-relaxed mb-4">{stat.description}</div>
+							<div class="text-white font-semibold mb-2">{stat.details}</div>
+							<div class="text-white/90 text-xs mb-4">{stat.detailsSubtext}</div>
+							<a
+								href={stat.link.href}
+								class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-primary px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 border-2 border-white"
+							>
+								{stat.link.text}
+								<svg
+									class="w-4 h-4"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+									aria-hidden="true"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M9 5l7 7-7 7"
+									/>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+			))
+		}
+	</div>
+</section>
+
+<script>
+	// Mobile touch support for stats cards - runs after DOM is ready
+	document.addEventListener('DOMContentLoaded', function () {
+		const statsCards = document.querySelectorAll('.stats-card');
+		const isMobile = window.innerWidth < 768;
+
+		if (isMobile) {
+			// On mobile: Use Intersection Observer to auto-expand cards in viewport
+			const observerOptions = {
+				root: null,
+				rootMargin: '0px',
+				threshold: 0.5, // Card needs to be 50% visible
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						// Add active class when card enters viewport
+						(entry.target as HTMLElement).classList.add('active');
+					} else {
+						// Remove active class when card leaves viewport
+						(entry.target as HTMLElement).classList.remove('active');
+					}
+				});
+			}, observerOptions);
+
+			// Observe all stats cards
+			statsCards.forEach((card) => {
+				observer.observe(card);
+			});
+		} else {
+			// On desktop: Keep the original click/touch behavior
+			let activeCard: HTMLElement | null = null;
+
+			statsCards.forEach((card) => {
+				const handleToggle = (e: Event) => {
+					e.stopPropagation();
+					const target = card as HTMLElement;
+
+					// Close other cards
+					statsCards.forEach((otherCard) => {
+						if (otherCard !== target && otherCard.classList.contains('active')) {
+							otherCard.classList.remove('active');
+						}
+					});
+
+					// Toggle current card
+					if (target.classList.contains('active')) {
+						target.classList.remove('active');
+						activeCard = null;
+					} else {
+						target.classList.add('active');
+						activeCard = target;
+					}
+				};
+
+				card.addEventListener('click', handleToggle);
+			});
+
+			// Close card when clicking outside
+			document.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement;
+				if (activeCard && !target.closest('.stats-card')) {
+					activeCard.classList.remove('active');
+					activeCard = null;
+				}
+			});
+		}
+	});
+</script>
+
+<style>
+	/* Active state for mobile - override group-hover with direct targeting */
+	@media (max-width: 767px) {
+		/* Disable ALL hover effects on mobile by using !important */
+		.stats-card:hover > div[class*='translate-y'] {
+			transform: translateY(66.666667%) !important;
+		}
+		.stats-card:hover .opacity-0 {
+			opacity: 0 !important;
+		}
+		.stats-card:hover img {
+			transform: scale(1) !important;
+		}
+		.stats-card:hover div[class*='bg-black'] {
+			background-color: rgba(0, 0, 0, 0.5) !important;
+		}
+
+		/* Ensure smooth transitions on mobile */
+		.stats-card > div[class*='translate-y'] {
+			transition: transform 0.4s ease-out !important;
+		}
+		.stats-card .opacity-0 {
+			transition: opacity 0.3s ease-in 0.15s !important;
+		}
+
+		/* Active state - slide up the colored tab to show full content */
+		.stats-card.active > div[class*='translate-y'] {
+			transform: translateY(0) !important;
+		}
+
+		/* Show the hidden content when active */
+		.stats-card.active .opacity-0 {
+			opacity: 1 !important;
+		}
+
+		/* Zoom the image when active */
+		.stats-card.active img {
+			transform: scale(1.1) !important;
+			transition: transform 0.5s ease-out !important;
+		}
+
+		/* Darken the overlay when active */
+		.stats-card.active div[class*='bg-black'] {
+			background-color: rgba(0, 0, 0, 0.6) !important;
+			transition: background-color 0.3s ease-out !important;
+		}
+	}
+</style>

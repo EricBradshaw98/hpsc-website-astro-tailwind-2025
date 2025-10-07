@@ -1,0 +1,24 @@
+---
+import ServiceCard, { type ServiceCardProps } from '../shared/ServiceCard.astro';
+
+export interface ServicesSectionProps {
+	heading: string;
+	description: string;
+	services: ServiceCardProps[];
+}
+
+interface Props extends ServicesSectionProps {}
+
+const { heading, description, services } = Astro.props;
+---
+
+<section class="mb-16 px-2 md:px-0">
+	<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{heading}</h2>
+	<p class="text-lg text-gray-600 mb-12">
+		{description}
+	</p>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+		{services.map((service) => <ServiceCard {...service} />)}
+	</div>
+</section>

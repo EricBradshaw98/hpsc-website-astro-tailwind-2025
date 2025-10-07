@@ -1,0 +1,33 @@
+---
+import NewsCard, { type NewsCardProps } from '../shared/NewsCard.astro';
+
+export interface LatestNewsProps {
+	heading: string;
+	viewAllLink: {
+		text: string;
+		href: string;
+	};
+	articles: NewsCardProps[];
+}
+
+interface Props extends LatestNewsProps {}
+
+const { heading, viewAllLink, articles } = Astro.props;
+---
+
+<section class="mb-16">
+	<div class="flex items-center justify-between mb-8">
+		<h2 class="text-3xl md:text-4xl font-bold text-gray-900">{heading}</h2>
+		<a
+			href={viewAllLink.href}
+			class="text-primary font-medium hover:underline"
+			aria-label={viewAllLink.text}
+		>
+			{viewAllLink.text} →
+		</a>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+		{articles.map((article) => <NewsCard {...article} />)}
+	</div>
+</section>

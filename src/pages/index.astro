@@ -1,1305 +1,293 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import ServicesSection from '../components/home/ServicesSection.astro';
+import StatsCards from '../components/home/StatsCards.astro';
+import ParallaxCTA from '../components/home/ParallaxCTA.astro';
+import WeWorkWithSection from '../components/home/WeWorkWithSection.astro';
+import SupportersCarousel from '../components/home/SupportersCarousel.astro';
+import LatestNews from '../components/home/LatestNews.astro';
+
+// Import images
 import bcHydroLogo from '../assets/BC_Hydro.png';
 import bcLogo from '../assets/bc-logo.jpg';
 import fortisBCLogo from '../assets/FortisBC-Secondary-W-RGB_Small-480x227.png';
 import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
+
+// TODO: Replace with WordPress API call
+// const wpData = await fetch('https://your-wp-site.com/wp-json/wp/v2/pages/home').then(r => r.json());
+
+// Hero Section Data - Will come from WordPress ACF fields
+const heroData = {
+	title: 'Building a More Energy-Efficient Future',
+	description:
+		'Connecting homeowners with certified contractors to deliver proven home performance solutions across British Columbia.',
+	images: [
+		{
+			src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&h=800&fit=crop',
+			alt: 'Modern two-story home with large windows showcasing energy-efficient design and natural lighting',
+		},
+		{
+			src: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1920&h=800&fit=crop',
+			alt: 'Contemporary home exterior with sustainable materials and efficient insulation features',
+		},
+		{
+			src: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&h=800&fit=crop',
+			alt: 'Beautiful residential home demonstrating home performance and energy efficiency standards',
+		},
+	],
+	ctas: [
+		{
+			text: 'Find a Contractor',
+			href: '/contractor-network/find-a-contractor',
+			style: 'primary' as const,
+		},
+		{ text: 'Learn More', href: '/about', style: 'secondary' as const },
+	],
+};
+
+// Services Section Data - WordPress CPT "services"
+const servicesData = {
+	heading: 'What We Do',
+	description:
+		'The HPSC brings together industry leaders, government, and contractors to advance home performance standards across BC.',
+	services: [
+		{
+			title: 'Contractor Network',
+			description:
+				"Access BC's largest network of certified home performance contractors committed to quality and excellence.",
+			link: { text: 'Explore Network', href: '/contractor-network' },
+			icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+		},
+		{
+			title: 'Resources & Training',
+			description:
+				'Industry-leading resources, training programs, and best practices for home performance professionals.',
+			link: { text: 'View Resources', href: '/resources' },
+			icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+		},
+		{
+			title: 'Industry Standards',
+			description:
+				'Setting and maintaining high standards for home performance work throughout British Columbia.',
+			link: { text: 'Learn About Our Strategy', href: '/about/strategy' },
+			icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+		},
+	],
+};
+
+// Stats Cards Data - WordPress ACF repeater
+const statsData = {
+	stats: [
+		{
+			emoji: '👷',
+			statNumber: '500+ Contractors',
+			title: 'Certified Contractors',
+			description:
+				'Our network of certified contractors are trusted professionals trained in home performance and energy efficiency.',
+			details: 'Certified Contractors',
+			detailsSubtext: 'Trusted professionals across BC',
+			image: {
+				src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=600&fit=crop',
+				alt: 'Professional contractors installing home performance upgrades and energy-efficient systems',
+			},
+			bgColor: 'bg-primary',
+			textColor: 'text-primary',
+			link: { text: 'Find a Contractor', href: '/contractor-network' },
+		},
+		{
+			emoji: '🏠',
+			statNumber: '10,000+ Homes',
+			title: 'Homes Improved',
+			description:
+				'Over ten thousand homes have been retrofitted with energy-efficient upgrades through our network.',
+			details: 'Homes Improved',
+			detailsSubtext: 'Energy-efficient retrofits completed',
+			image: {
+				src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=600&fit=crop',
+				alt: 'Residential homes that have been retrofitted with energy-efficient upgrades and improvements',
+			},
+			bgColor: 'bg-accent-green',
+			textColor: 'text-accent-green',
+			link: { text: 'Learn More', href: '/resources' },
+		},
+		{
+			emoji: '🏆',
+			statNumber: '15+ Years',
+			title: 'Years of Excellence',
+			description:
+				"Since 2010, we've been leading the home performance industry with innovative standards and best practices.",
+			details: 'Years of Excellence',
+			detailsSubtext: 'Leading the industry since 2010',
+			image: {
+				src: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=600&fit=crop',
+				alt: 'High-quality home construction demonstrating 15 years of industry excellence and standards',
+			},
+			bgColor: 'bg-accent-blue',
+			textColor: 'text-accent-blue',
+			link: { text: 'Our Story', href: '/about' },
+		},
+	],
+};
+
+// Parallax CTA Data - WordPress ACF
+const parallaxCTAData = {
+	backgroundImage:
+		'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1920&h=800&fit=crop',
+	heading: 'Ready to Improve Your Home?',
+	description:
+		'Connect with a certified contractor today and start your journey to a more energy-efficient, comfortable home.',
+	ctas: [
+		{
+			text: 'Find a Contractor',
+			href: '/contractor-network/find-a-contractor',
+			style: 'primary' as const,
+		},
+		{ text: 'Contact Us', href: '/contact', style: 'secondary' as const },
+	],
+};
+
+// We Work With Section Data - WordPress ACF
+const weWorkWithData = {
+	heading: 'We Work With',
+	description:
+		'Collaborating across the residential retrofit industry with key stakeholders and sectors.',
+	industry: 'Residential Retrofit',
+	stakeholders: [
+		{ label: 'Contractors' },
+		{ label: 'Manufacturers' },
+		{ label: 'Suppliers' },
+		{ label: 'Industry associations' },
+		{ label: 'Program administrators' },
+		{ label: 'Other leaders' },
+	],
+	sectors: [
+		{
+			name: 'Insulation',
+			icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+		},
+		{
+			name: 'HVAC',
+			icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+		},
+		{
+			name: 'Windows',
+			icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
+		},
+		{
+			name: 'Electrical',
+			icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+		},
+		{
+			name: 'Solar',
+			icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z',
+		},
+		{
+			name: 'Quality',
+			icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+		},
+	],
+};
+
+// Supporters Data - WordPress ACF repeater
+const supportersData = {
+	heading: 'Our Supporters',
+	description:
+		'Our funding and program partners support the Home Performance Stakeholder Council with a primary goal to determine what government, utilities, and other key players can do to create a more sustainable home performance industry in British Columbia.',
+	supporters: [
+		{ name: 'BC Hydro', logo: bcHydroLogo, alt: 'BC Hydro' },
+		{ name: 'FortisBC', logo: fortisBCLogo, alt: 'FortisBC' },
+		{ name: 'CleanBC', logo: bcLogo, alt: 'CleanBC' },
+		{ name: 'Vancity', logo: vancityLogo, alt: 'Vancity' },
+	],
+};
+
+// Latest News Data - WordPress REST API /wp-json/wp/v2/posts?per_page=6
+const latestNewsData = {
+	heading: 'Latest News',
+	viewAllLink: { text: 'View All', href: '/resources/news' },
+	articles: [
+		{
+			title: 'HPSC Launches New Contractor Certification Program',
+			slug: 'hpsc-launches-new-contractor-certification-program',
+			excerpt:
+				'We are excited to announce the launch of our comprehensive certification program designed to elevate standards in the home performance industry.',
+			date: '2025-09-15',
+			featuredImage: {
+				src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop',
+				alt: 'Professional contractor examining home energy systems as part of new HPSC certification program',
+			},
+		},
+		{
+			title: 'New Energy Efficiency Rebates Available for Homeowners',
+			slug: 'new-energy-efficiency-rebates-available',
+			excerpt:
+				'CleanBC and BC Hydro have expanded their rebate programs, making energy-efficient upgrades more accessible than ever.',
+			date: '2025-09-10',
+			featuredImage: {
+				src: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=400&fit=crop',
+				alt: 'Energy-efficient home eligible for new rebate programs from CleanBC and BC Hydro',
+			},
+		},
+		{
+			title: 'Heat Pump Technology Advances: What Contractors Need to Know',
+			slug: 'heat-pump-technology-advances',
+			excerpt:
+				'Recent developments in heat pump efficiency and cold-climate performance are changing the retrofit landscape.',
+			date: '2025-09-05',
+			featuredImage: {
+				src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop',
+				alt: 'Heat Pump Technology Advances',
+			},
+		},
+		{
+			title: 'Insulation Best Practices for 2025',
+			slug: 'insulation-best-practices-2025',
+			excerpt:
+				'Updated guidelines and best practices for insulation contractors, including new materials and installation techniques.',
+			date: '2025-08-28',
+			featuredImage: {
+				src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop',
+				alt: 'Insulation Best Practices for 2025',
+			},
+		},
+		{
+			title: 'Windows and Doors: Energy Star Certification Updates',
+			slug: 'windows-doors-energy-star-updates',
+			excerpt:
+				'New Energy Star requirements for windows and doors will improve energy efficiency across BC homes.',
+			date: '2025-08-22',
+			featuredImage: {
+				src: 'https://images.unsplash.com/photo-1597218868981-1b68e15f0065?w=600&h=400&fit=crop',
+				alt: 'Windows and Doors Energy Star Updates',
+			},
+		},
+		{
+			title: 'New Solar and Battery Storage Incentives Announced',
+			slug: 'solar-battery-storage-incentives',
+			excerpt:
+				'BC announces expanded incentives for residential solar installations and battery storage systems.',
+			date: '2025-08-15',
+			featuredImage: {
+				src: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop',
+				alt: 'Solar and Battery Storage Incentives',
+			},
+		},
+	],
+};
 ---
 
 <Layout
 	title="Home Performance Stakeholder Council | Energy Efficiency Experts in BC"
 	description="Leading the way in home performance and energy efficiency solutions across British Columbia. Connect with certified contractors and access expert resources."
 	keywords="home performance, energy efficiency, British Columbia, home retrofits, contractors, sustainability"
+	fullWidth={true}
 >
-	<!-- Hero Section -->
-	<section class="mb-16 -mx-4 md:mx-0 md:mt-4">
-		<div
-			class="rounded-none md:rounded-2xl px-4 md:px-16 py-20 md:py-24 text-white relative overflow-hidden"
-		>
-			<!-- Background Images with Gradient Overlay -->
-			<div class="absolute inset-0 z-0">
-				<Image
-					id="hero-img-1"
-					src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&h=800&fit=crop"
-					alt="Energy Efficient Home"
-					class="hero-image w-full h-full object-cover absolute inset-0 opacity-100 transition-opacity duration-1000"
-					width={1920}
-					height={800}
-					loading="eager"
-				/>
-				<Image
-					id="hero-img-2"
-					src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1920&h=800&fit=crop"
-					alt="Modern Home Exterior"
-					class="hero-image w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-1000"
-					width={1920}
-					height={800}
-					loading="eager"
-				/>
-				<Image
-					id="hero-img-3"
-					src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&h=800&fit=crop"
-					alt="Sustainable Home"
-					class="hero-image w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-1000"
-					width={1920}
-					height={800}
-					loading="eager"
-				/>
-				<div
-					class="absolute inset-0 z-10"
-					style="background: linear-gradient(to right, #00b6f0 0%, rgba(0, 182, 240, 0.95) 40%, rgba(0, 182, 240, 0.7) 70%, rgba(0, 182, 240, 0.4) 100%);"
-				>
-				</div>
-			</div>
-			<div class="w-full relative z-10">
-				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-					Building a More Energy-Efficient Future
-				</h1>
-				<p class="text-xl md:text-2xl mb-8 text-white/90">
-					Connecting homeowners with certified contractors to deliver proven home performance
-					solutions across British Columbia.
-				</p>
-				<div class="flex flex-wrap gap-4">
-					<a
-						href="/contractor-network/find"
-						class="px-8 py-3 rounded-lg font-semibold transition-colors bg-primary text-white hover:bg-primary-dark border-2 border-white"
-					>
-						Find a Contractor
-					</a>
-					<a
-						href="/about"
-						class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
-						aria-label="Learn more about the Home Performance Stakeholder Council"
-					>
-						Learn More
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Services Section -->
-	<section class="mb-16 px-2 md:px-0">
-		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What We Do</h2>
-		<p class="text-lg text-gray-600 mb-12">
-			The HPSC brings together industry leaders, government, and contractors to advance home
-			performance standards across BC.
-		</p>
-
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-			<!-- Service 1 -->
-			<div
-				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden border border-primary"
-			>
-				<div
-					class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none"
-				>
-					<svg class="w-64 h-64 text-primary" fill="currentColor" viewBox="0 0 24 24">
-						<path
-							d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-						></path>
-					</svg>
-				</div>
-				<div class="relative z-10">
-					<h3 class="text-xl font-semibold mb-3">Contractor Network</h3>
-					<p class="text-gray-600 mb-4">
-						Access BC's largest network of certified home performance contractors committed to
-						quality and excellence.
-					</p>
-					<a
-						href="/contractor-network"
-						class="text-primary font-medium hover:underline"
-						aria-label="Explore our contractor network"
-					>
-						Explore Network →
-					</a>
-				</div>
-			</div>
-
-			<!-- Service 2 -->
-			<div
-				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden border border-primary"
-			>
-				<div
-					class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none"
-				>
-					<svg class="w-64 h-64 text-primary" fill="currentColor" viewBox="0 0 24 24">
-						<path
-							d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-						></path>
-					</svg>
-				</div>
-				<div class="relative z-10">
-					<h3 class="text-xl font-semibold mb-3">Resources & Training</h3>
-					<p class="text-gray-600 mb-4">
-						Industry-leading resources, training programs, and best practices for home performance
-						professionals.
-					</p>
-					<a
-						href="/resources"
-						class="text-primary font-medium hover:underline"
-						aria-label="View resources and training programs"
-					>
-						View Resources →
-					</a>
-				</div>
-			</div>
-
-			<!-- Service 3 -->
-			<div
-				class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow relative overflow-hidden border border-primary"
-			>
-				<div
-					class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none"
-				>
-					<svg class="w-64 h-64 text-primary" fill="currentColor" viewBox="0 0 24 24">
-						<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-					</svg>
-				</div>
-				<div class="relative z-10">
-					<h3 class="text-xl font-semibold mb-3">Industry Standards</h3>
-					<p class="text-gray-600 mb-4">
-						Setting and maintaining high standards for home performance work throughout British
-						Columbia.
-					</p>
-					<a
-						href="/about/strategy"
-						class="text-primary font-medium hover:underline"
-						aria-label="Learn about our industry standards strategy"
-					>
-						Learn About Our Strategy →
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Stats Section with Interactive Cards -->
-	<section class="mb-16 -mx-4 md:mx-0">
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-			<!-- Card 1: Contractors -->
-			<div
-				class="stats-card bg-primary rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
-			>
-				<div class="aspect-square relative overflow-hidden">
-					<Image
-						src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=600&fit=crop"
-						alt="Certified Contractors"
-						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-						width={600}
-						height={600}
-						loading="lazy"
-					/>
-					<div
-						class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"
-					>
-					</div>
-				</div>
-
-				<div
-					class="absolute bottom-0 left-0 right-0 bg-primary transform translate-y-2/3 group-hover:translate-y-0 transition-transform duration-400 ease-out"
-				>
-					<div class="p-6">
-						<div class="flex items-center justify-between">
-							<div class="flex items-center gap-3">
-								<div
-									class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-primary text-xl"
-								>
-									👷
-								</div>
-								<div class="text-white">
-									<span class="font-bold text-lg">500+ Contractors</span>
-								</div>
-							</div>
-							<button
-								class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-primary text-xl font-bold hover:bg-gray-100 transition-colors"
-							>
-								+
-							</button>
-						</div>
-					</div>
-
-					<div
-						class="px-6 pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
-					>
-						<div class="text-white text-sm leading-relaxed mb-4">
-							Our network of certified contractors are trusted professionals trained in home
-							performance and energy efficiency.
-						</div>
-						<div class="text-white font-semibold mb-2">Certified Contractors</div>
-						<div class="text-white/90 text-xs mb-4">Trusted professionals across BC</div>
-						<a
-							href="/contractor-network"
-							class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-primary px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 border-2 border-white"
-						>
-							Find a Contractor
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 5l7 7-7 7"></path>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Card 2: Homes Improved -->
-			<div
-				class="stats-card bg-accent-green rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
-			>
-				<div class="aspect-square relative overflow-hidden">
-					<Image
-						src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=600&fit=crop"
-						alt="Homes Improved"
-						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-						width={600}
-						height={600}
-						loading="lazy"
-					/>
-					<div
-						class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"
-					>
-					</div>
-				</div>
-
-				<div
-					class="absolute bottom-0 left-0 right-0 bg-accent-green transform translate-y-2/3 group-hover:translate-y-0 transition-transform duration-400 ease-out"
-				>
-					<div class="p-6">
-						<div class="flex items-center justify-between">
-							<div class="flex items-center gap-3">
-								<div
-									class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-accent-green text-xl"
-								>
-									🏠
-								</div>
-								<div class="text-white">
-									<span class="font-bold text-lg">10,000+ Homes</span>
-								</div>
-							</div>
-							<button
-								class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-accent-green text-xl font-bold hover:bg-gray-100 transition-colors"
-							>
-								+
-							</button>
-						</div>
-					</div>
-
-					<div
-						class="px-6 pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
-					>
-						<div class="text-white text-sm leading-relaxed mb-4">
-							Over ten thousand homes have been retrofitted with energy-efficient upgrades through
-							our network.
-						</div>
-						<div class="text-white font-semibold mb-2">Homes Improved</div>
-						<div class="text-white/90 text-xs mb-4">Energy-efficient retrofits completed</div>
-						<a
-							href="/resources"
-							class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-accent-green px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200"
-						>
-							Learn More
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 5l7 7-7 7"></path>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Card 3: Years of Excellence -->
-			<div
-				class="stats-card bg-accent-blue rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary"
-			>
-				<div class="aspect-square relative overflow-hidden">
-					<Image
-						src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=600&fit=crop"
-						alt="Years of Excellence"
-						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-						width={600}
-						height={600}
-						loading="lazy"
-					/>
-					<div
-						class="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"
-					>
-					</div>
-				</div>
-
-				<div
-					class="absolute bottom-0 left-0 right-0 bg-accent-blue transform translate-y-2/3 group-hover:translate-y-0 transition-transform duration-400 ease-out"
-				>
-					<div class="p-6">
-						<div class="flex items-center justify-between">
-							<div class="flex items-center gap-3">
-								<div
-									class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-accent-blue text-xl"
-								>
-									🏆
-								</div>
-								<div class="text-white">
-									<span class="font-bold text-lg">15+ Years</span>
-								</div>
-							</div>
-							<button
-								class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-accent-blue text-xl font-bold hover:bg-gray-100 transition-colors"
-							>
-								+
-							</button>
-						</div>
-					</div>
-
-					<div
-						class="px-6 pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
-					>
-						<div class="text-white text-sm leading-relaxed mb-4">
-							Since 2010, we've been leading the home performance industry with innovative standards
-							and best practices.
-						</div>
-						<div class="text-white font-semibold mb-2">Years of Excellence</div>
-						<div class="text-white/90 text-xs mb-4">Leading the industry since 2010</div>
-						<a
-							href="/about"
-							class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-accent-blue px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200"
-						>
-							Our Story
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 5l7 7-7 7"></path>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<script>
-		// Hero image carousel
-		const heroImages = document.querySelectorAll('.hero-image');
-		let currentHeroIndex = 0;
-		const totalHeroImages = heroImages.length;
-
-		function cycleHeroImages() {
-			heroImages[currentHeroIndex].style.opacity = '0';
-			currentHeroIndex = (currentHeroIndex + 1) % totalHeroImages;
-			heroImages[currentHeroIndex].style.opacity = '1';
-		}
-
-		setInterval(cycleHeroImages, 5000);
-	</script>
-
-	<script>
-		// Mobile touch support for stats cards - runs after DOM is ready
-		document.addEventListener('DOMContentLoaded', function () {
-			const statsCards = document.querySelectorAll('.stats-card');
-			const isMobile = window.innerWidth < 768;
-
-			if (isMobile) {
-				// On mobile: Use Intersection Observer to auto-expand cards in viewport
-				const observerOptions = {
-					root: null,
-					rootMargin: '0px',
-					threshold: 0.5, // Card needs to be 50% visible
-				};
-
-				const observer = new IntersectionObserver((entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							// Add active class when card enters viewport
-							(entry.target as HTMLElement).classList.add('active');
-						} else {
-							// Remove active class when card leaves viewport
-							(entry.target as HTMLElement).classList.remove('active');
-						}
-					});
-				}, observerOptions);
-
-				// Observe all stats cards
-				statsCards.forEach((card) => {
-					observer.observe(card);
-				});
-			} else {
-				// On desktop: Keep the original click/touch behavior
-				let activeCard: HTMLElement | null = null;
-
-				statsCards.forEach((card) => {
-					const handleToggle = (e: Event) => {
-						e.stopPropagation();
-						const target = card as HTMLElement;
-
-						// Close other cards
-						statsCards.forEach((otherCard) => {
-							if (otherCard !== target && otherCard.classList.contains('active')) {
-								otherCard.classList.remove('active');
-							}
-						});
-
-						// Toggle current card
-						if (target.classList.contains('active')) {
-							target.classList.remove('active');
-							activeCard = null;
-						} else {
-							target.classList.add('active');
-							activeCard = target;
-						}
-					};
-
-					card.addEventListener('click', handleToggle);
-				});
-
-				// Close card when clicking outside
-				document.addEventListener('click', (e) => {
-					const target = e.target as HTMLElement;
-					if (activeCard && !target.closest('.stats-card')) {
-						activeCard.classList.remove('active');
-						activeCard = null;
-					}
-				});
-			}
-		});
-	</script>
-
-	<style>
-		/* Active state for mobile - override group-hover with direct targeting */
-		@media (max-width: 767px) {
-			/* Disable ALL hover effects on mobile by using !important */
-			.stats-card:hover > div[class*='translate-y'] {
-				transform: translateY(66.666667%) !important;
-			}
-			.stats-card:hover .opacity-0 {
-				opacity: 0 !important;
-			}
-			.stats-card:hover img {
-				transform: scale(1) !important;
-			}
-			.stats-card:hover div[class*='bg-black'] {
-				background-color: rgba(0, 0, 0, 0.5) !important;
-			}
-
-			/* Ensure smooth transitions on mobile */
-			.stats-card > div[class*='translate-y'] {
-				transition: transform 0.4s ease-out !important;
-			}
-			.stats-card .opacity-0 {
-				transition: opacity 0.3s ease-in 0.15s !important;
-			}
-
-			/* Active state - slide up the colored tab to show full content */
-			.stats-card.active > div[class*='translate-y'] {
-				transform: translateY(0) !important;
-			}
-
-			/* Show the hidden content when active */
-			.stats-card.active .opacity-0 {
-				opacity: 1 !important;
-			}
-
-			/* Zoom the image when active */
-			.stats-card.active img {
-				transform: scale(1.1) !important;
-				transition: transform 0.5s ease-out !important;
-			}
-
-			/* Darken the overlay when active */
-			.stats-card.active div[class*='bg-black'] {
-				background-color: rgba(0, 0, 0, 0.6) !important;
-				transition: background-color 0.3s ease-out !important;
-			}
-		}
-	</style>
-	<!-- Parallax CTA Section -->
-	<section class="mb-16 -mx-4 md:mx-0 relative min-h-80 md:h-80 md:rounded-2xl overflow-hidden">
-		<!-- Parallax Background -->
-		<div
-			id="parallax-bg"
-			class="absolute inset-0 bg-cover bg-center transform scale-110"
-			style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1920&h=800&fit=crop');"
-		>
-		</div>
-
-		<!-- Gradient Overlay -->
-		<div
-			class="absolute inset-0"
-			style="background: linear-gradient(135deg, rgba(0, 182, 240, 0.9) 0%, rgba(0, 146, 192, 0.85) 100%);"
-		>
-		</div>
-
-		<!-- Content -->
-		<div class="relative z-10 h-full flex items-center px-4 md:px-16 py-8 md:py-0">
-			<div class="w-full">
-				<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-					Ready to Improve Your Home?
-				</h2>
-				<p class="text-lg md:text-xl text-white/95 mb-8">
-					Connect with a certified contractor today and start your journey to a more
-					energy-efficient, comfortable home.
-				</p>
-				<div class="flex flex-wrap gap-4">
-					<a
-						href="/contractor-network/find"
-						class="px-8 py-3 rounded-lg font-semibold transition-colors bg-primary text-white hover:bg-primary-dark border-2 border-white"
-					>
-						Find a Contractor
-					</a>
-					<a
-						href="/contact"
-						class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
-					>
-						Contact Us
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<script>
-		// Parallax scroll effect
-		window.addEventListener('scroll', () => {
-			const parallaxBg = document.getElementById('parallax-bg');
-			if (parallaxBg) {
-				const scrolled = window.pageYOffset;
-				const parallaxSpeed = 0.5;
-				parallaxBg.style.transform = `translateY(${scrolled * parallaxSpeed}px) scale(1.1)`;
-			}
-		});
-	</script>
-
-	<!-- We Work With Section -->
-	<section class="mb-16 px-2 md:px-0">
-		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">We Work With</h2>
-		<p class="text-lg text-gray-600 mb-12">
-			Collaborating across the residential retrofit industry with key stakeholders and sectors.
-		</p>
-
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-			<!-- Industry Card -->
-			<div
-				class="bg-linear-to-br from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary"
-			>
-				<h3 class="text-2xl font-bold text-gray-900 mb-4">Industry</h3>
-				<div class="text-xl font-semibold text-primary">Residential Retrofit</div>
-			</div>
-
-			<!-- Stakeholders Card -->
-			<div class="bg-gray-50 rounded-2xl p-8 border border-primary">
-				<h3 class="text-2xl font-bold text-gray-900 mb-4">Stakeholders</h3>
-				<div class="flex flex-wrap gap-3 text-gray-700">
-					<span class="inline-flex items-center gap-2">
-						<span class="w-2 h-2 rounded-full bg-primary"></span>
-						Contractors
-					</span>
-					<span class="inline-flex items-center gap-2">
-						<span class="w-2 h-2 rounded-full bg-primary"></span>
-						Manufacturers
-					</span>
-					<span class="inline-flex items-center gap-2">
-						<span class="w-2 h-2 rounded-full bg-primary"></span>
-						Suppliers
-					</span>
-					<span class="inline-flex items-center gap-2">
-						<span class="w-2 h-2 rounded-full bg-primary"></span>
-						Industry associations
-					</span>
-					<span class="inline-flex items-center gap-2">
-						<span class="w-2 h-2 rounded-full bg-primary"></span>
-						Program administrators
-					</span>
-					<span class="inline-flex items-center gap-2">
-						<span class="w-2 h-2 rounded-full bg-primary"></span>
-						Other leaders
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<!-- Sectors Card -->
-		<div class="bg-white rounded-2xl p-8 border border-primary shadow-sm">
-			<h3 class="text-2xl font-bold text-gray-900 mb-6">Sectors</h3>
-			<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-				<!-- Sector Icon 1 -->
-				<div class="flex flex-col items-center text-center group cursor-pointer">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
-					>
-						<svg
-							class="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-							></path>
-						</svg>
-					</div>
-					<span class="text-sm font-medium text-gray-700">Insulation</span>
-				</div>
-
-				<!-- Sector Icon 2 -->
-				<div class="flex flex-col items-center text-center group cursor-pointer">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
-					>
-						<svg
-							class="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-							></path>
-						</svg>
-					</div>
-					<span class="text-sm font-medium text-gray-700">HVAC</span>
-				</div>
-
-				<!-- Sector Icon 3 -->
-				<div class="flex flex-col items-center text-center group cursor-pointer">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
-					>
-						<svg
-							class="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-							></path>
-						</svg>
-					</div>
-					<span class="text-sm font-medium text-gray-700">Windows</span>
-				</div>
-
-				<!-- Sector Icon 4 -->
-				<div class="flex flex-col items-center text-center group cursor-pointer">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
-					>
-						<svg
-							class="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-						</svg>
-					</div>
-					<span class="text-sm font-medium text-gray-700">Electrical</span>
-				</div>
-
-				<!-- Sector Icon 5 -->
-				<div class="flex flex-col items-center text-center group cursor-pointer">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
-					>
-						<svg
-							class="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-							></path>
-						</svg>
-					</div>
-					<span class="text-sm font-medium text-gray-700">Solar</span>
-				</div>
-
-				<!-- Sector Icon 6 -->
-				<div class="flex flex-col items-center text-center group cursor-pointer">
-					<div
-						class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300"
-					>
-						<svg
-							class="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-						</svg>
-					</div>
-					<span class="text-sm font-medium text-gray-700">Quality</span>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Our Supporters Carousel -->
-	<section class="mb-16">
-		<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Supporters</h2>
-		<p class="text-lg text-gray-600 mb-12">
-			Our funding and program partners support the Home Performance Stakeholder Council with a
-			primary goal to determine what government, utilities, and other key players can do to create a
-			more sustainable home performance industry in British Columbia.
-		</p>
-
-		<!-- Carousel Container -->
-		<div class="relative overflow-hidden">
-			<div id="supporters-carousel" class="flex transition-transform duration-500 ease-in-out">
-				<!-- Slide 1 - BC Hydro (mobile) / All 4 logos (desktop) -->
-				<div
-					class="min-w-full flex items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
-				>
-					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
-					>
-						<Image
-							src={bcHydroLogo}
-							alt="BC Hydro"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-					<div
-						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
-					>
-						<Image
-							src={fortisBCLogo}
-							alt="FortisBC"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-					<div
-						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
-					>
-						<Image
-							src={bcLogo}
-							alt="CleanBC"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-					<div
-						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
-					>
-						<Image
-							src={vancityLogo}
-							alt="Vancity"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-				</div>
-
-				<!-- Slide 2 - FortisBC (mobile) / All 4 logos (desktop) -->
-				<div
-					class="min-w-full flex items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
-				>
-					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
-					>
-						<Image
-							src={fortisBCLogo}
-							alt="FortisBC"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-					<div
-						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
-					>
-						<Image
-							src={bcHydroLogo}
-							alt="BC Hydro"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-					<div
-						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
-					>
-						<Image
-							src={bcLogo}
-							alt="CleanBC"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-					<div
-						class="hidden md:flex bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 items-center justify-center"
-					>
-						<Image
-							src={vancityLogo}
-							alt="Vancity"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-				</div>
-
-				<!-- Slide 3 - CleanBC (mobile only) -->
-				<div class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4">
-					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
-					>
-						<Image
-							src={bcLogo}
-							alt="CleanBC"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-				</div>
-
-				<!-- Slide 4 - Vancity (mobile only) -->
-				<div class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4">
-					<div
-						class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center"
-					>
-						<Image
-							src={vancityLogo}
-							alt="Vancity"
-							class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
-							loading="lazy"
-						/>
-					</div>
-				</div>
-			</div>
-
-			<!-- Dots Indicator - 4 dots on mobile, 2 on desktop -->
-			<div class="flex justify-center gap-2 mt-6">
-				<button
-					class="carousel-dot w-11 h-11 rounded-full bg-primary/30 transition-all flex items-center justify-center"
-					data-index="0"
-					aria-label="Go to slide 1"
-				>
-					<span class="w-3 h-3 rounded-full bg-primary"></span>
-				</button>
-				<button
-					class="carousel-dot w-11 h-11 rounded-full bg-gray-300/30 transition-all flex items-center justify-center"
-					data-index="1"
-					aria-label="Go to slide 2"
-				>
-					<span class="w-3 h-3 rounded-full bg-gray-300"></span>
-				</button>
-				<button
-					class="carousel-dot md:hidden w-11 h-11 rounded-full bg-gray-300/30 transition-all flex items-center justify-center"
-					data-index="2"
-					aria-label="Go to slide 3"
-				>
-					<span class="w-3 h-3 rounded-full bg-gray-300"></span>
-				</button>
-				<button
-					class="carousel-dot md:hidden w-11 h-11 rounded-full bg-gray-300/30 transition-all flex items-center justify-center"
-					data-index="3"
-					aria-label="Go to slide 4"
-				>
-					<span class="w-3 h-3 rounded-full bg-gray-300"></span>
-				</button>
-			</div>
-		</div>
-	</section>
-
-	<script>
-		// Supporters Carousel
-		const carousel = document.getElementById('supporters-carousel');
-		const prevBtn = document.getElementById('prev-btn');
-		const nextBtn = document.getElementById('next-btn');
-		const dots = document.querySelectorAll('.carousel-dot');
-		let currentIndex = 0;
-		let startX = 0;
-		let isDragging = false;
-
-		// Get total slides based on screen size
-		function getTotalSlides() {
-			return window.innerWidth < 768 ? 4 : 2;
-		}
-
-		function updateCarousel() {
-			if (carousel) {
-				carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-				dots.forEach((dot, index) => {
-					const span = dot.querySelector('span');
-					if (index === currentIndex) {
-						dot.classList.remove('bg-gray-300/30');
-						dot.classList.add('bg-primary/30');
-						span?.classList.remove('bg-gray-300');
-						span?.classList.add('bg-primary');
-					} else {
-						dot.classList.remove('bg-primary/30');
-						dot.classList.add('bg-gray-300/30');
-						span?.classList.remove('bg-primary');
-						span?.classList.add('bg-gray-300');
-					}
-				});
-			}
-		}
-
-		prevBtn?.addEventListener('click', () => {
-			const totalSlides = getTotalSlides();
-			currentIndex = currentIndex > 0 ? currentIndex - 1 : totalSlides - 1;
-			updateCarousel();
-		});
-
-		nextBtn?.addEventListener('click', () => {
-			const totalSlides = getTotalSlides();
-			currentIndex = currentIndex < totalSlides - 1 ? currentIndex + 1 : 0;
-			updateCarousel();
-		});
-
-		dots.forEach((dot) => {
-			dot.addEventListener('click', (e) => {
-				const target = e.currentTarget as HTMLElement;
-				currentIndex = parseInt(target.dataset.index || '0');
-				updateCarousel();
-			});
-		});
-
-		// Reset to first slide on resize to prevent being stuck on non-existent slides
-		window.addEventListener('resize', () => {
-			const totalSlides = getTotalSlides();
-			if (currentIndex >= totalSlides) {
-				currentIndex = 0;
-				updateCarousel();
-			}
-		});
-
-		// Drag/Swipe functionality
-		carousel?.addEventListener('mousedown', (e) => {
-			isDragging = true;
-			startX = e.pageX;
-			if (carousel) {
-				carousel.style.cursor = 'grabbing';
-			}
-		});
-
-		carousel?.addEventListener('touchstart', (e) => {
-			isDragging = true;
-			startX = e.touches[0].pageX;
-		});
-
-		carousel?.addEventListener('mousemove', (_e) => {
-			if (!isDragging) return;
-			_e.preventDefault();
-		});
-
-		carousel?.addEventListener('touchmove', (_e) => {
-			if (!isDragging) return;
-		});
-
-		const handleDragEnd = (endX: number) => {
-			if (!isDragging) return;
-			isDragging = false;
-			if (carousel) {
-				carousel.style.cursor = 'grab';
-			}
-
-			const diff = startX - endX;
-			const threshold = 50;
-			const totalSlides = getTotalSlides();
-
-			if (diff > threshold && currentIndex < totalSlides - 1) {
-				currentIndex++;
-				updateCarousel();
-			} else if (diff < -threshold && currentIndex > 0) {
-				currentIndex--;
-				updateCarousel();
-			}
-		};
-
-		carousel?.addEventListener('mouseup', (e) => {
-			handleDragEnd(e.pageX);
-		});
-
-		carousel?.addEventListener('touchend', (e) => {
-			handleDragEnd(e.changedTouches[0].pageX);
-		});
-
-		carousel?.addEventListener('mouseleave', () => {
-			if (isDragging) {
-				isDragging = false;
-				if (carousel) {
-					carousel.style.cursor = 'grab';
-				}
-			}
-		});
-
-		if (carousel) {
-			carousel.style.cursor = 'grab';
-		}
-
-		// Auto-play carousel
-		setInterval(() => {
-			if (!isDragging) {
-				currentIndex = currentIndex < getTotalSlides() - 1 ? currentIndex + 1 : 0;
-				updateCarousel();
-			}
-		}, 5000);
-	</script>
-
-	<!-- Latest News -->
-	<section class="mb-16">
-		<div class="flex items-center justify-between mb-8">
-			<h2 class="text-3xl md:text-4xl font-bold text-gray-900">Latest News</h2>
-			<a
-				href="/resources/news"
-				class="text-primary font-medium hover:underline"
-				aria-label="View all news and updates"
-			>
-				View All →
-			</a>
-		</div>
-
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-			<!-- News Item 1 -->
-			<article
-				class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-			>
-				<a href="/resources/news/hpsc-launches-new-contractor-certification-program">
-					<div class="h-48 overflow-hidden">
-						<Image
-							src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop"
-							alt="HPSC Launches New Contractor Certification Program"
-							class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-							width={600}
-							height={400}
-							loading="lazy"
-						/>
-					</div>
-				</a>
-				<div class="p-6">
-					<div class="text-sm text-gray-500 mb-2">September 15, 2025</div>
-					<a href="/resources/news/hpsc-launches-new-contractor-certification-program">
-						<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
-							HPSC Launches New Contractor Certification Program
-						</h3>
-					</a>
-					<p class="text-gray-600 mb-4">
-						We are excited to announce the launch of our comprehensive certification program
-						designed to elevate standards in the home performance industry.
-					</p>
-					<a
-						href="/resources/news/hpsc-launches-new-contractor-certification-program"
-						class="text-primary font-medium hover:underline"
-						aria-label="Read more about HPSC's new contractor certification program"
-					>
-						Read More →
-					</a>
-				</div>
-			</article>
-
-			<!-- News Item 2 -->
-			<article
-				class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-			>
-				<a href="/resources/news/new-energy-efficiency-rebates-available">
-					<div class="h-48 overflow-hidden">
-						<Image
-							src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=400&fit=crop"
-							alt="New Energy Efficiency Rebates Available for Homeowners"
-							class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-							width={600}
-							height={400}
-							loading="lazy"
-						/>
-					</div>
-				</a>
-				<div class="p-6">
-					<div class="text-sm text-gray-500 mb-2">September 10, 2025</div>
-					<a href="/resources/news/new-energy-efficiency-rebates-available">
-						<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
-							New Energy Efficiency Rebates Available for Homeowners
-						</h3>
-					</a>
-					<p class="text-gray-600 mb-4">
-						CleanBC and BC Hydro have expanded their rebate programs, making energy-efficient
-						upgrades more accessible than ever.
-					</p>
-					<a
-						href="/resources/news/new-energy-efficiency-rebates-available"
-						class="text-primary font-medium hover:underline"
-						aria-label="Read more about new energy efficiency rebates for homeowners"
-					>
-						Read More →
-					</a>
-				</div>
-			</article>
-
-			<!-- News Item 3 -->
-			<article
-				class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-			>
-				<a href="/resources/news/heat-pump-technology-advances">
-					<div class="h-48 overflow-hidden">
-						<Image
-							src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop"
-							alt="Heat Pump Technology Advances"
-							class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-							width={600}
-							height={400}
-							loading="lazy"
-						/>
-					</div>
-				</a>
-				<div class="p-6">
-					<div class="text-sm text-gray-500 mb-2">September 5, 2025</div>
-					<a href="/resources/news/heat-pump-technology-advances">
-						<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
-							Heat Pump Technology Advances: What Contractors Need to Know
-						</h3>
-					</a>
-					<p class="text-gray-600 mb-4">
-						Recent developments in heat pump efficiency and cold-climate performance are changing
-						the retrofit landscape.
-					</p>
-					<a
-						href="/resources/news/heat-pump-technology-advances"
-						class="text-primary font-medium hover:underline"
-						aria-label="Read more about heat pump technology advances for contractors"
-					>
-						Read More →
-					</a>
-				</div>
-			</article>
-
-			<!-- News Item 4 -->
-			<article
-				class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-			>
-				<a href="/resources/news/insulation-best-practices-2025">
-					<div class="h-48 overflow-hidden">
-						<Image
-							src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop"
-							alt="Insulation Best Practices for 2025"
-							class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-							width={600}
-							height={400}
-							loading="lazy"
-						/>
-					</div>
-				</a>
-				<div class="p-6">
-					<div class="text-sm text-gray-500 mb-2">August 28, 2025</div>
-					<a href="/resources/news/insulation-best-practices-2025">
-						<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
-							Insulation Best Practices for 2025
-						</h3>
-					</a>
-					<p class="text-gray-600 mb-4">
-						Updated guidelines and best practices for insulation contractors, including new
-						materials and installation techniques.
-					</p>
-					<a
-						href="/resources/news/insulation-best-practices-2025"
-						class="text-primary font-medium hover:underline"
-						aria-label="Read more about insulation best practices for 2025"
-					>
-						Read More →
-					</a>
-				</div>
-			</article>
-
-			<!-- News Item 5 -->
-			<article
-				class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-			>
-				<a href="/resources/news/windows-doors-energy-star-updates">
-					<div class="h-48 overflow-hidden">
-						<Image
-							src="https://images.unsplash.com/photo-1597218868981-1b68e15f0065?w=600&h=400&fit=crop"
-							alt="Windows and Doors Energy Star Updates"
-							class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-							width={600}
-							height={400}
-							loading="lazy"
-						/>
-					</div>
-				</a>
-				<div class="p-6">
-					<div class="text-sm text-gray-500 mb-2">August 22, 2025</div>
-					<a href="/resources/news/windows-doors-energy-star-updates">
-						<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
-							Windows and Doors: Energy Star Certification Updates
-						</h3>
-					</a>
-					<p class="text-gray-600 mb-4">
-						New Energy Star requirements for windows and doors will improve energy efficiency
-						across BC homes.
-					</p>
-					<a
-						href="/resources/news/windows-doors-energy-star-updates"
-						class="text-primary font-medium hover:underline"
-						aria-label="Read more about windows and doors Energy Star updates"
-					>
-						Read More →
-					</a>
-				</div>
-			</article>
-
-			<!-- News Item 6 -->
-			<article
-				class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-			>
-				<a href="/resources/news/solar-battery-storage-incentives">
-					<div class="h-48 overflow-hidden">
-						<Image
-							src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop"
-							alt="Solar and Battery Storage Incentives"
-							class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-							width={600}
-							height={400}
-							loading="lazy"
-						/>
-					</div>
-				</a>
-				<div class="p-6">
-					<div class="text-sm text-gray-500 mb-2">August 15, 2025</div>
-					<a href="/resources/news/solar-battery-storage-incentives">
-						<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
-							New Solar and Battery Storage Incentives Announced
-						</h3>
-					</a>
-					<p class="text-gray-600 mb-4">
-						BC announces expanded incentives for residential solar installations and battery
-						storage systems.
-					</p>
-					<a
-						href="/resources/news/solar-battery-storage-incentives"
-						class="text-primary font-medium hover:underline"
-						aria-label="Read more about solar and battery storage incentives"
-					>
-						Read More →
-					</a>
-				</div>
-			</article>
-		</div>
-	</section>
+	<HeroSection {...heroData} />
+	<ServicesSection {...servicesData} />
+	<StatsCards {...statsData} />
+	<ParallaxCTA {...parallaxCTAData} />
+	<WeWorkWithSection {...weWorkWithData} />
+	<SupportersCarousel {...supportersData} />
+	<LatestNews {...latestNewsData} />
 </Layout>

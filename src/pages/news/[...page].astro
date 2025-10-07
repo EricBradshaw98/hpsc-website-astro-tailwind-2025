@@ -1,13 +1,10 @@
 ---
 import type { GetStaticPaths, Page } from 'astro';
 import Layout from '../../layouts/Layout.astro';
-import { newsArticles, getCategories, getArchiveYears, filterArticles, type NewsArticle } from '../../data/news';
+import { getCategories, getArchiveYears, filterArticles, type NewsArticle } from '../../data/news';
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const ARTICLES_PER_PAGE = 9;
-
-	// Get URL parameters from the request
-	const params = new URLSearchParams();
 
 	// Get unique categories and years
 	const categories = getCategories();

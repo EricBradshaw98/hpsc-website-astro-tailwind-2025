@@ -1,0 +1,17 @@
+---
+export interface PageHeaderProps {
+	title: string;
+	description: string;
+}
+
+interface Props extends PageHeaderProps {}
+
+const { title, description } = Astro.props;
+---
+
+<div class="mb-16">
+	<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{title}</h1>
+	<p class="text-xl text-gray-700 leading-relaxed max-w-4xl">
+		{description}
+	</p>
+</div>

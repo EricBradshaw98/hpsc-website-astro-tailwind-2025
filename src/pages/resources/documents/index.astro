@@ -32,7 +32,6 @@ const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) =
 		{ label: 'Documents', href: '/resources/documents' },
 	]}
 >
-
 	<div class="mb-12">
 		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Documents & Resources</h1>
 		<p class="text-xl text-gray-600 max-w-3xl">
@@ -69,7 +68,13 @@ const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) =
 		Object.entries(documentsByCategory).map(([category, docs]) => (
 			<section class="mb-12" data-category={category}>
 				<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-					<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"

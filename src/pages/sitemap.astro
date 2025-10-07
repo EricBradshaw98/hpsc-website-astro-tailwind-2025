@@ -1,0 +1,287 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Get all static pages by reading the pages directory
+const pages = await Astro.glob('./**/*.astro');
+
+// Filter and organize pages
+const pagesBySection: Record<string, Array<{ title: string; url: string }>> = {
+	'Main Pages': [],
+	About: [],
+	'Contractor Network': [],
+	Resources: [],
+	'Legal & Policies': [],
+	Other: [],
+};
+
+// Process each page
+for (const page of pages) {
+	const url = page.url;
+	if (!url) continue;
+
+	// Skip certain pages
+	if (
+		url.includes('[') ||
+		url === '/sitemap' ||
+		url === '/404' ||
+		url === '/search' ||
+		url.includes('/_')
+	) {
+		continue;
+	}
+
+	// Extract page title from URL
+	let title =
+		url
+			.split('/')
+			.filter(Boolean)
+			.pop()
+			?.replace(/-/g, ' ')
+			.replace(/\b\w/g, (l) => l.toUpperCase()) || 'Home';
+
+	if (url === '/') title = 'Home';
+
+	// Categorize pages
+	if (
+		url === '/' ||
+		url === '/contact' ||
+		url === '/the-big-picture' ||
+		url === '/get-involved' ||
+		url === '/training' ||
+		url === '/events'
+	) {
+		pagesBySection['Main Pages'].push({ title, url });
+	} else if (url.startsWith('/about')) {
+		pagesBySection['About'].push({ title, url });
+	} else if (url.startsWith('/contractor-network')) {
+		pagesBySection['Contractor Network'].push({ title, url });
+	} else if (url.startsWith('/resources')) {
+		pagesBySection['Resources'].push({ title, url });
+	} else if (
+		url === '/privacy' ||
+		url === '/terms' ||
+		url === '/disclaimers' ||
+		url === '/cookies' ||
+		url === '/accessibility'
+	) {
+		pagesBySection['Legal & Policies'].push({ title, url });
+	} else {
+		pagesBySection['Other'].push({ title, url });
+	}
+}
+
+// Sort pages within each section
+for (const section in pagesBySection) {
+	pagesBySection[section].sort((a, b) => a.title.localeCompare(b.title));
+}
+
+// Custom titles for better readability
+const customTitles: Record<string, string> = {
+	'/': 'Home',
+	'/about': 'About HPSC',
+	'/about/our-team': 'Our Team',
+	'/about/strategy': 'Strategic Plan',
+	'/about/strategy-creative': 'Strategic Plan (Creative)',
+	'/contractor-network': 'Contractor Network',
+	'/contractor-network/find-a-contractor': 'Find a Contractor',
+	'/resources': 'Resources',
+	'/resources/news': 'News & Articles',
+	'/resources/documents': 'Documents Library',
+	'/resources/guides': 'Guides & Resources',
+	'/the-big-picture': 'The Big Picture',
+	'/get-involved': 'Get Involved',
+	'/training': 'Training & Education',
+	'/events': 'Events & Workshops',
+	'/contact': 'Contact Us',
+	'/privacy': 'Privacy Policy',
+	'/terms': 'Terms of Service',
+	'/disclaimers': 'Disclaimers',
+	'/cookies': 'Cookie Policy',
+	'/accessibility': 'Accessibility Statement',
+};
+
+// Apply custom titles
+for (const section in pagesBySection) {
+	pagesBySection[section] = pagesBySection[section].map((page) => ({
+		...page,
+		title: customTitles[page.url] || page.title,
+	}));
+}
+
+// Remove empty sections
+const sections = Object.entries(pagesBySection).filter(([, sectionPages]) => sectionPages.length > 0);
+---
+
+<Layout
+	title="Site Map | HPSC"
+	description="Complete site map of all pages on the Home Performance Stakeholder Council website. Find the information you need quickly and easily."
+	keywords="sitemap, site navigation, HPSC pages, website structure"
+	breadcrumbs={[{ label: 'Site Map', href: '/sitemap' }]}
+>
+	<div class="w-full">
+		<!-- Header -->
+		<div class="mb-12">
+			<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Site Map</h1>
+			<p class="text-xl text-gray-600 max-w-3xl">
+				Browse all pages on the HPSC website. This sitemap is automatically updated as new pages are
+				added.
+			</p>
+		</div>
+
+		<!-- Quick Navigation -->
+		<div class="bg-primary/5 rounded-xl p-6 mb-12 border border-primary/20">
+			<h2 class="text-lg font-semibold text-gray-900 mb-4">Jump to Section:</h2>
+			<div class="flex flex-wrap gap-3">
+				{
+					sections.map(([section]) => (
+						<a
+							href={`#${section.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}
+							class="px-4 py-2 bg-white text-primary border border-primary/30 rounded-lg hover:bg-primary hover:text-white transition-colors text-sm font-medium"
+						>
+							{section}
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- Sitemap Sections -->
+		<div class="space-y-12">
+			{
+				sections.map(([section, pages]) => (
+					<section
+						id={section.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}
+						class="scroll-mt-20"
+					>
+						<h2 class="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-primary/20">
+							{section}
+						</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+							{pages.map((page) => (
+								<a
+									href={page.url}
+									class="group flex items-start gap-3 p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all"
+								>
+									<svg
+										class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+										/>
+									</svg>
+									<div class="flex-1 min-w-0">
+										<h3 class="font-semibold text-gray-900 group-hover:text-primary transition-colors">
+											{page.title}
+										</h3>
+										<p class="text-sm text-gray-500 truncate">{page.url}</p>
+									</div>
+									<svg
+										class="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0 mt-1"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M9 5l7 7-7 7"
+										/>
+									</svg>
+								</a>
+							))}
+						</div>
+					</section>
+				))
+			}
+		</div>
+
+		<!-- Additional Resources -->
+		<section class="mt-16 pt-12 border-t-2 border-gray-200">
+			<h2 class="text-2xl font-bold text-gray-900 mb-6">Additional Resources</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<a
+					href="/search"
+					class="group flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-primary hover:shadow-lg transition-all"
+				>
+					<div
+						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+					>
+						<svg
+							class="w-6 h-6 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+						</svg>
+					</div>
+					<div>
+						<h3
+							class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors mb-2"
+						>
+							Search the Site
+						</h3>
+						<p class="text-sm text-gray-600">
+							Can't find what you're looking for? Use our search feature to find specific content.
+						</p>
+					</div>
+				</a>
+
+				<a
+					href="/contact"
+					class="group flex items-start gap-4 p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-primary hover:shadow-lg transition-all"
+				>
+					<div
+						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
+					>
+						<svg
+							class="w-6 h-6 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+							></path>
+						</svg>
+					</div>
+					<div>
+						<h3
+							class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors mb-2"
+						>
+							Contact Us
+						</h3>
+						<p class="text-sm text-gray-600">
+							Have a question or need assistance? Get in touch with our team.
+						</p>
+					</div>
+				</a>
+			</div>
+		</section>
+
+		<!-- Last Updated -->
+		<div class="mt-12 pt-8 border-t border-gray-200">
+			<p class="text-sm text-gray-500 text-center">
+				This sitemap is automatically generated and updated with each site build.
+			</p>
+		</div>
+	</div>
+</Layout>

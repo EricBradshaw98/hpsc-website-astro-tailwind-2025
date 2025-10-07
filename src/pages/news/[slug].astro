@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import { newsArticles, type NewsArticle } from '../../data/news';
 
 export const getStaticPaths = (() => {
-	return newsArticles.map(article => ({
+	return newsArticles.map((article) => ({
 		params: { slug: article.slug },
 		props: { article },
 	}));
@@ -23,7 +23,7 @@ function formatDate(date: Date): string {
 
 // Get related articles (same category, excluding current)
 const relatedArticles = newsArticles
-	.filter(a => a.category === article.category && a.slug !== article.slug)
+	.filter((a) => a.category === article.category && a.slug !== article.slug)
 	.sort((a, b) => b.date.getTime() - a.date.getTime())
 	.slice(0, 3);
 ---
@@ -32,17 +32,53 @@ const relatedArticles = newsArticles
 	title={`${article.title} | HPSC News`}
 	description={article.excerpt}
 	keywords={article.tags.join(', ')}
+	ogType="article"
+	ogImage={article.image}
 	breadcrumbs={[
 		{ label: 'News', href: '/news' },
 		{ label: article.title, href: `/news/${article.slug}` },
 	]}
 >
-
+	<Fragment slot="head">
+		<!-- JSON-LD Schema for Article -->
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'Article',
+				headline: article.title,
+				description: article.excerpt,
+				image: article.image,
+				datePublished: article.date.toISOString(),
+				dateModified: article.date.toISOString(),
+				author: {
+					'@type': 'Person',
+					name: article.author,
+				},
+				publisher: {
+					'@type': 'Organization',
+					name: 'Home Performance Stakeholder Council',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://homeperformance.ca/logo.png',
+					},
+				},
+				mainEntityOfPage: {
+					'@type': 'WebPage',
+					'@id': `https://homeperformance.ca/news/${article.slug}`,
+				},
+				articleSection: article.category,
+				keywords: article.tags.join(', '),
+			})}
+		/>
+	</Fragment>
 	<!-- Article Header -->
 	<article class="mb-16">
 		<div class="mb-8">
 			<div class="flex items-center gap-3 mb-4">
-				<span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-semibold">
+				<span
+					class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-semibold"
+				>
 					{article.category}
 				</span>
 				<span class="text-gray-500">{formatDate(article.date)}</span>
@@ -82,11 +118,13 @@ const relatedArticles = newsArticles
 		<div class="mt-12 pt-8 border-t border-gray-200">
 			<h3 class="text-sm font-semibold text-gray-700 mb-3">Tags:</h3>
 			<div class="flex flex-wrap gap-2">
-				{article.tags.map(tag => (
-					<span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
-						{tag}
-					</span>
-				))}
+				{
+					article.tags.map((tag) => (
+						<span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
+							{tag}
+						</span>
+					))
+				}
 			</div>
 		</div>
 
@@ -126,51 +164,51 @@ const relatedArticles = newsArticles
 	</article>
 
 	<!-- Related Articles -->
-	{relatedArticles.length > 0 && (
-		<section class="mb-16">
-			<h2 class="text-3xl font-bold text-gray-900 mb-8">Related Articles</h2>
+	{
+		relatedArticles.length > 0 && (
+			<section class="mb-16">
+				<h2 class="text-3xl font-bold text-gray-900 mb-8">Related Articles</h2>
 
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				{relatedArticles.map((related) => (
-					<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-						<a href={`/news/${related.slug}`}>
-							<div class="h-48 overflow-hidden">
-								<img
-									src={related.image}
-									alt={related.title}
-									class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-									loading="lazy"
-								/>
-							</div>
-						</a>
-						<div class="p-6">
-							<div class="flex items-center gap-2 mb-2">
-								<span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded">
-									{related.category}
-								</span>
-								<span class="text-sm text-gray-500">{formatDate(related.date)}</span>
-							</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					{relatedArticles.map((related) => (
+						<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
 							<a href={`/news/${related.slug}`}>
-								<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
-									{related.title}
-								</h3>
+								<div class="h-48 overflow-hidden">
+									<img
+										src={related.image}
+										alt={related.title}
+										class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+										loading="lazy"
+									/>
+								</div>
 							</a>
-							<p class="text-gray-600 mb-4 line-clamp-3">
-								{related.excerpt}
-							</p>
-							<a
-								href={`/news/${related.slug}`}
-								class="text-primary font-medium hover:underline"
-								aria-label={`Read more about ${related.title}`}
-							>
-								Read More →
-							</a>
-						</div>
-					</article>
-				))}
-			</div>
-		</section>
-	)}
+							<div class="p-6">
+								<div class="flex items-center gap-2 mb-2">
+									<span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded">
+										{related.category}
+									</span>
+									<span class="text-sm text-gray-500">{formatDate(related.date)}</span>
+								</div>
+								<a href={`/news/${related.slug}`}>
+									<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
+										{related.title}
+									</h3>
+								</a>
+								<p class="text-gray-600 mb-4 line-clamp-3">{related.excerpt}</p>
+								<a
+									href={`/news/${related.slug}`}
+									class="text-primary font-medium hover:underline"
+									aria-label={`Read more about ${related.title}`}
+								>
+									Read More →
+								</a>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+		)
+	}
 
 	<!-- Back to News -->
 	<div class="text-center">

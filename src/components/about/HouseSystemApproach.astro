@@ -1,0 +1,54 @@
+---
+export interface SystemCard {
+	title: string;
+	description: string;
+	icon: string; // SVG path data
+	colorClass: string; // e.g., 'from-primary/5 to-primary/10 border-primary/20'
+	bgColor: string; // e.g., 'bg-primary'
+}
+
+export interface HouseSystemApproachProps {
+	heading: string;
+	systems: SystemCard[];
+}
+
+interface Props extends HouseSystemApproachProps {}
+
+const { heading, systems } = Astro.props;
+---
+
+<section class="mb-16">
+	<h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+		{heading}
+	</h2>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+		{
+			systems.map((system) => (
+				<div
+					class={`bg-gradient-to-br ${system.colorClass} rounded-2xl p-6 border-2 hover:border-opacity-100 transition-colors`}
+				>
+					<div
+						class={`w-12 h-12 ${system.bgColor} rounded-xl flex items-center justify-center mb-4`}
+					>
+						<svg
+							class="w-6 h-6 text-white"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d={system.icon}
+							/>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-2">{system.title}</h3>
+					<p class="text-gray-600 text-sm">{system.description}</p>
+				</div>
+			))
+		}
+	</div>
+</section>

@@ -1,0 +1,172 @@
+---
+export interface StrategyCardProps {
+	type: 'Advocacy' | 'Action';
+	title: string;
+	description: string;
+	color: string; // primary, blue, green, orange
+	icon?: string; // SVG path data
+	hasDetails?: boolean;
+}
+
+interface Props extends StrategyCardProps {}
+
+const { type, title, description, color, icon, hasDetails = true } = Astro.props;
+
+// WordPress ACF Mapping:
+// ACF Group: strategy_priority
+// - priority_type (Radio: advocacy/action)
+// - priority_title (Text)
+// - priority_description (Textarea)
+// - priority_color (Select: primary/blue/green/orange)
+// - priority_icon (Text - SVG path)
+// - show_details (True/False)
+
+const colorMap: Record<string, { bg: string; text: string; border: string; badge: string }> = {
+	primary: {
+		bg: 'bg-primary/10',
+		text: 'text-primary',
+		border: 'border-primary',
+		badge: 'bg-primary text-white',
+	},
+	blue: {
+		bg: 'bg-blue/10',
+		text: 'text-blue',
+		border: 'border-blue',
+		badge: 'bg-blue text-white',
+	},
+	green: {
+		bg: 'bg-green/10',
+		text: 'text-green',
+		border: 'border-green',
+		badge: 'bg-green text-white',
+	},
+	orange: {
+		bg: 'bg-orange/10',
+		text: 'text-orange',
+		border: 'border-orange',
+		badge: 'bg-orange text-white',
+	},
+};
+
+const colors = colorMap[color] || colorMap.primary;
+---
+
+<div
+	class={`rounded-xl ${colors.bg} p-6 border-2 ${colors.border} hover:shadow-lg transition-shadow`}
+>
+	<div class="flex items-start justify-between gap-4 mb-4">
+		<div class="flex-1">
+			<span
+				class={`inline-block px-3 py-1 ${colors.badge} text-xs font-semibold rounded-full mb-3`}
+			>
+				{type}
+			</span>
+			<h3 class="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+		</div>
+		{
+			icon && (
+				<div
+					class={`flex-shrink-0 w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center`}
+				>
+					<svg
+						class={`w-6 h-6 ${colors.text}`}
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon} />
+					</svg>
+				</div>
+			)
+		}
+	</div>
+
+	<p class="text-gray-700 leading-relaxed mb-4">{description}</p>
+
+	{
+		hasDetails && (
+			<details class="strategy-details group">
+				<summary class="cursor-pointer flex items-center justify-between gap-2 text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors">
+					<span class="flex items-center gap-2">
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+							/>
+						</svg>
+						Updates & Progress
+					</span>
+					<svg
+						class="w-5 h-5 transition-transform duration-300 group-open:rotate-180"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M19 9l-7 7-7-7"
+						/>
+					</svg>
+				</summary>
+				<div class="details-content overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+					<div class="mt-4 p-4 bg-gray-50 rounded-lg">
+						<div class="space-y-3">
+							<div class="flex items-start gap-2">
+								<svg
+									class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+								<p class="text-gray-700 text-sm">
+									<strong>Status:</strong> In Progress
+								</p>
+							</div>
+							<div class="flex items-start gap-2">
+								<svg
+									class="w-5 h-5 text-primary flex-shrink-0 mt-0.5"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+									/>
+								</svg>
+								<p class="text-gray-700 text-sm">
+									<strong>Last Updated:</strong>{' '}
+									{new Date().toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric',
+									})}
+								</p>
+							</div>
+							<div class="mt-4 pt-4 border-t border-gray-200">
+								<p class="text-gray-600 text-sm leading-relaxed">
+									The HPSC is actively working on this strategic priority. Updates will be posted
+									here as milestones are achieved. Check back regularly for the latest progress on
+									this initiative.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</details>
+		)
+	}
+</div>

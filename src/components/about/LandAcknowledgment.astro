@@ -1,0 +1,48 @@
+---
+export interface LandAcknowledgmentProps {
+	heading: string;
+	message: string;
+}
+
+interface Props extends LandAcknowledgmentProps {}
+
+const { heading, message } = Astro.props;
+---
+
+<section class="mb-16">
+	<div
+		class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 md:p-12 text-white relative overflow-hidden"
+	>
+		<div class="absolute inset-0 opacity-10">
+			<svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+				<defs>
+					<pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+						<path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"></path>
+					</pattern>
+				</defs>
+				<rect width="100" height="100" fill="url(#grid)"></rect>
+			</svg>
+		</div>
+		<div class="relative z-10 max-w-4xl">
+			<div class="flex items-start gap-4 mb-4">
+				<svg
+					class="w-8 h-8 text-primary flex-shrink-0"
+					fill="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+					></path>
+					<circle cx="12" cy="12" r="3"></circle>
+				</svg>
+				<div>
+					<h2 class="text-2xl font-bold mb-4">{heading}</h2>
+					<p class="text-lg text-gray-100 leading-relaxed">
+						{message}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

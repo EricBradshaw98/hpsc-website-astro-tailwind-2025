@@ -97,3 +97,218 @@ body.reduce-motion *::after {
 		scroll-behavior: auto !important;
 	}
 }
+
+/* Enhanced Focus Indicators for WCAG 2.1 AA Compliance */
+/* Base focus style for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible,
+summary:focus-visible,
+details:focus-visible {
+	outline: 3px solid #00b6f0;
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+/* Special focus for primary buttons */
+button.bg-primary:focus-visible,
+a.bg-primary:focus-visible {
+	outline: 3px solid #ffffff;
+	outline-offset: 2px;
+	box-shadow: 0 0 0 6px rgba(0, 182, 240, 0.4);
+}
+
+/* Focus for cards and interactive divs */
+.group:focus-within,
+[role="button"]:focus-visible {
+	outline: 3px solid #00b6f0;
+	outline-offset: 2px;
+}
+
+/* Skip links enhancement */
+.skip-link {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	background: #00b6f0;
+	color: white;
+	padding: 8px 16px;
+	text-decoration: none;
+	font-weight: 600;
+	z-index: 100;
+	border-radius: 0 0 4px 0;
+	transition: top 0.2s;
+}
+
+.skip-link:focus {
+	top: 0;
+	outline: 3px solid #ffffff;
+	outline-offset: 2px;
+}
+
+/* Keyboard-only focus (hide focus from mouse users) */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	a:focus-visible,
+	button:focus-visible,
+	input:focus-visible,
+	textarea:focus-visible,
+	select:focus-visible {
+		outline-width: 4px;
+		outline-offset: 3px;
+	}
+}
+
+/* ========================================
+   Global Transitions & Animations
+   ======================================== */
+
+/* Consistent transition timing functions */
+:root {
+	--transition-fast: 150ms;
+	--transition-normal: 300ms;
+	--transition-slow: 500ms;
+	--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* View Transitions API - Page transitions */
+@view-transition {
+	navigation: auto;
+}
+
+/* Fade transition for page changes */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: var(--transition-normal);
+	animation-timing-function: var(--ease-smooth);
+}
+
+::view-transition-old(root) {
+	animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+	animation-name: fade-in;
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* Slide up animation for cards and sections */
+@keyframes slide-up {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Scale animation for hover effects */
+@keyframes scale-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Global hover transitions for interactive elements */
+a,
+button,
+.transition-colors,
+.transition-transform,
+.transition-shadow,
+.transition-all {
+	transition-timing-function: var(--ease-smooth);
+}
+
+/* Consistent hover effects for cards */
+.hover\:shadow-xl,
+.hover\:shadow-lg,
+.hover\:shadow-md {
+	transition: box-shadow var(--transition-normal) var(--ease-smooth),
+		transform var(--transition-normal) var(--ease-smooth);
+}
+
+/* Smooth scale transformations */
+.hover\:scale-105,
+.hover\:scale-110 {
+	transition: transform var(--transition-normal) var(--ease-smooth);
+}
+
+/* Image lazy load fade-in */
+img[loading="lazy"] {
+	animation: fade-in var(--transition-slow) var(--ease-smooth);
+}
+
+/* Skeleton loading animation */
+@keyframes skeleton-pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+.skeleton {
+	animation: skeleton-pulse 2s var(--ease-smooth) infinite;
+	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background-size: 200% 100%;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Respect prefers-reduced-motion for all animations */
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none !important;
+	}
+
+	html {
+		scroll-behavior: auto;
+	}
+
+	img[loading="lazy"] {
+		animation: none;
+	}
+
+	.skeleton {
+		animation: none;
+	}
+}

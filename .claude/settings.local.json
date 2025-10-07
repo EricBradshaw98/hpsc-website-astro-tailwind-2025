@@ -19,7 +19,14 @@
 			"Bash(git checkout:*)",
 			"Bash(cat:*)",
 			"WebFetch(domain:guides.co)",
-			"Bash(npm audit:*)"
+			"Bash(npm audit:*)",
+			"Bash(pwsh:*)",
+			"Bash(find:*)",
+			"Bash(for:*)",
+			"Bash(do [ -f \"$file\" ])",
+			"Bash(done)",
+			"Bash(ls:*)",
+			"Bash(mkdir:*)"
 		],
 		"deny": [],
 		"ask": []

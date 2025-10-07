@@ -1,0 +1,34 @@
+---
+import TeamMemberCard, { type TeamMember } from './TeamMemberCard.astro';
+
+export interface TeamSectionProps {
+	title: string;
+	members: TeamMember[];
+	variant?: 'staff' | 'board' | 'advisor';
+	gridCols?: string; // Tailwind grid class
+}
+
+interface Props extends TeamSectionProps {}
+
+const { title, members, variant = 'staff', gridCols } = Astro.props;
+
+// Default grid based on variant
+const defaultGrid = {
+	staff: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+	board: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5',
+	advisor: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+};
+
+const grid = gridCols || defaultGrid[variant];
+---
+
+<section class="mb-20">
+	<div class="mb-8">
+		<h2 class="text-3xl font-bold text-gray-900 mb-2">{title}</h2>
+		<div class="w-20 h-1 bg-primary rounded"></div>
+	</div>
+
+	<div class={`grid ${grid} gap-8`}>
+		{members.map((member) => <TeamMemberCard {...member} variant={variant} />)}
+	</div>
+</section>

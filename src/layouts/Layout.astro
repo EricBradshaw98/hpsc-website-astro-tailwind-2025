@@ -1,9 +1,11 @@
 ---
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 import Nav from '../components/layouts/Nav.astro';
 import Footer from '../components/layouts/Footer.astro';
 import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 import CookieBanner from '../components/CookieBanner.astro';
+import AccessibilityTab from '../components/AccessibilityTab.astro';
 
 export interface BreadcrumbItem {
 	label: string;
@@ -29,6 +31,8 @@ export interface Props {
 	// Breadcrumbs
 	breadcrumbs?: BreadcrumbItem[];
 	showBreadcrumbs?: boolean; // Set to false to hide breadcrumbs (e.g., homepage)
+	// Layout options
+	fullWidth?: boolean; // Set to true for pages with full-width sections (e.g., homepage)
 }
 
 const {
@@ -45,12 +49,15 @@ const {
 	twitterImage,
 	keywords,
 	author,
-	robots = 'noindex, nofollow', // DEV: Blocking search engines
+	robots = import.meta.env.PROD ? 'index, follow' : 'noindex, nofollow',
 	breadcrumbs,
 	showBreadcrumbs = true,
+	fullWidth = false,
 } = Astro.props;
 
 const currentUrl = canonical || Astro.url.href;
+const siteUrl = 'https://homeperformance.ca';
+const defaultOgImage = ogImage || `${siteUrl}/og-default.jpg`;
 
 // Auto-generate breadcrumbs from URL if not provided
 function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
@@ -62,7 +69,7 @@ function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
 		currentPath += `/${segment}`;
 		const label = segment
 			.split('-')
-			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 		items.push({ label, href: currentPath });
 	}
@@ -84,6 +91,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="view-transition" content="same-origin" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -115,7 +123,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 				<meta property="og:description" content={ogDescription || description} />
 			)
 		}
-		{ogImage && <meta property="og:image" content={ogImage} />}
+		<meta property="og:image" content={defaultOgImage} />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content={twitterCard} />
@@ -129,7 +137,73 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 				/>
 			)
 		}
-		{(twitterImage || ogImage) && <meta name="twitter:image" content={twitterImage || ogImage} />}
+		<meta name="twitter:image" content={twitterImage || defaultOgImage} />
+
+		<!-- JSON-LD Schema for Organization -->
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'Organization',
+				name: 'Home Performance Stakeholder Council',
+				alternateName: 'HPSC',
+				url: 'https://homeperformance.ca',
+				logo: 'https://homeperformance.ca/logo.png',
+				description: 'Leading the way in home performance and energy efficiency solutions across British Columbia.',
+				email: 'info@homeperformance.ca',
+				telephone: '+1-604-755-3469',
+				address: {
+					'@type': 'PostalAddress',
+					addressLocality: 'Vancouver',
+					addressRegion: 'BC',
+					addressCountry: 'CA',
+				},
+				sameAs: [
+					'https://facebook.com/hpsc',
+					'https://twitter.com/hpsc',
+					'https://linkedin.com/company/hpsc',
+					'https://instagram.com/hpsc',
+					'https://youtube.com/@hpsc',
+				],
+			})}
+		/>
+
+		<!-- JSON-LD Schema for LocalBusiness -->
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'LocalBusiness',
+				'@id': 'https://homeperformance.ca/#organization',
+				name: 'Home Performance Stakeholder Council',
+				alternateName: 'HPSC',
+				description: 'Leading the way in home performance and energy efficiency solutions across British Columbia.',
+				url: 'https://homeperformance.ca',
+				telephone: '+1-604-755-3469',
+				email: 'info@homeperformance.ca',
+				address: {
+					'@type': 'PostalAddress',
+					streetAddress: '',
+					addressLocality: 'Vancouver',
+					addressRegion: 'BC',
+					postalCode: '',
+					addressCountry: 'CA',
+				},
+				geo: {
+					'@type': 'GeoCoordinates',
+					latitude: 49.2827,
+					longitude: -123.1207,
+				},
+				openingHoursSpecification: {
+					'@type': 'OpeningHoursSpecification',
+					dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+					opens: '09:00',
+					closes: '17:00',
+				},
+				priceRange: '$$',
+				image: 'https://homeperformance.ca/logo.png',
+			})}
+		/>
 
 		<!-- JSON-LD Schema for Website -->
 		<script
@@ -137,11 +211,50 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 			set:html={JSON.stringify({
 				'@context': 'https://schema.org',
 				'@type': 'WebSite',
-				url: currentUrl,
-				name: title,
-				description: description,
+				url: 'https://homeperformance.ca',
+				name: 'Home Performance Stakeholder Council',
+				description: 'Leading the way in home performance and energy efficiency solutions across British Columbia.',
+				publisher: {
+					'@type': 'Organization',
+					name: 'Home Performance Stakeholder Council',
+				},
+				potentialAction: {
+					'@type': 'SearchAction',
+					target: 'https://homeperformance.ca/search?q={search_term_string}',
+					'query-input': 'required name=search_term_string',
+				},
 			})}
 		/>
+
+		<!-- JSON-LD Schema for BreadcrumbList -->
+		{
+			finalBreadcrumbs.length > 0 && !isHomepage && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify({
+						'@context': 'https://schema.org',
+						'@type': 'BreadcrumbList',
+						itemListElement: [
+							{
+								'@type': 'ListItem',
+								position: 1,
+								name: 'Home',
+								item: siteUrl,
+							},
+							...finalBreadcrumbs.map((crumb, idx) => ({
+								'@type': 'ListItem',
+								position: idx + 2,
+								name: crumb.label,
+								item: `${siteUrl}${crumb.href}`,
+							})),
+						],
+					})}
+				/>
+			)
+		}
+
+		<!-- Astro View Transitions for smooth page navigation -->
+		<ViewTransitions />
 
 		<!-- Marker.io Feedback Widget -->
 		<script is:inline>
@@ -150,7 +263,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 				source: 'snippet',
 			};
 
-			!(function (e, r, a) {
+			!(function (e, r, _a) {
 				if (!e.__Marker) {
 					e.__Marker = {};
 					var t = [],
@@ -188,22 +301,36 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<slot name="head" />
 	</head>
 	<body class="min-h-screen bg-white text-gray-900 flex flex-col">
-		<!-- Skip to main content link for accessibility -->
-		<a
-			href="#main-content"
-			class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg"
-		>
-			Skip to main content
-		</a>
+		<!-- Skip links for accessibility -->
+		<div class="skip-links">
+			<a href="#main-content" class="skip-link"> Skip to main content </a>
+			<a href="#main-navigation" class="skip-link"> Skip to navigation </a>
+			<a href="#footer" class="skip-link"> Skip to footer </a>
+		</div>
 		<Nav />
-		<main id="main-content" class="flex-grow container mx-auto px-4 py-8 max-w-7xl">
-			{showBreadcrumbs && !isHomepage && finalBreadcrumbs.length > 0 && (
-				<Breadcrumbs items={finalBreadcrumbs} />
-			)}
-			<slot />
+		<main id="main-content" class="flex-grow">
+			{
+				fullWidth ? (
+					<>
+						{showBreadcrumbs && !isHomepage && finalBreadcrumbs.length > 0 && (
+							<div class="container mx-auto px-4 max-w-7xl">
+								<Breadcrumbs items={finalBreadcrumbs} />
+							</div>
+						)}
+						<slot />
+					</>
+				) : (
+					<div class="container mx-auto px-4 py-8 max-w-7xl">
+						{showBreadcrumbs && !isHomepage && finalBreadcrumbs.length > 0 && (
+							<Breadcrumbs items={finalBreadcrumbs} />
+						)}
+						<slot />
+					</div>
+				)
+			}
 		</main>
 		<Footer />
 		<CookieBanner />
-		<!-- <AccessibilityTab /> -->
+		<AccessibilityTab />
 	</body>
 </html>

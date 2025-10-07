@@ -1,0 +1,224 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface Supporter {
+	name: string;
+	logo: string | ImageMetadata; // Can be URL string or imported image
+	alt: string;
+}
+
+export interface SupportersCarouselProps {
+	heading: string;
+	description: string;
+	supporters: Supporter[];
+}
+
+interface Props extends SupportersCarouselProps {}
+
+const { heading, description, supporters } = Astro.props;
+---
+
+<section class="mb-16" aria-label="Our supporters">
+	<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{heading}</h2>
+	<p class="text-lg text-gray-600 mb-12">
+		{description}
+	</p>
+
+	<!-- Carousel Container -->
+	<div class="relative overflow-hidden" role="region" aria-label="Supporters carousel" aria-live="polite">
+		<div id="supporters-carousel" class="flex transition-transform duration-500 ease-in-out">
+			<!-- Slide 1 - First supporter (mobile) / All supporters (desktop) -->
+			<div
+				class="min-w-full flex items-center justify-center md:justify-between gap-4 md:gap-8 px-4"
+			>
+				{
+					supporters.map((supporter, index) => (
+						<div
+							class={`bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center ${index > 0 ? 'hidden md:flex' : ''}`}
+						>
+							<Image
+								src={supporter.logo}
+								alt={supporter.alt}
+								class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
+								loading="lazy"
+							/>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- Additional slides for mobile (one supporter per slide) -->
+			{
+				supporters.slice(1).map((supporter) => (
+					<div class="min-w-full md:hidden flex items-center justify-center gap-4 md:gap-8 px-4">
+						<div class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center">
+							<Image
+								src={supporter.logo}
+								alt={supporter.alt}
+								class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
+								loading="lazy"
+							/>
+						</div>
+					</div>
+				))
+			}
+
+			<!-- Slide 2 for desktop - rotated order -->
+			<div class="min-w-full hidden md:flex items-center justify-between gap-4 md:gap-8 px-4">
+				{
+					[supporters[1], supporters[0], ...supporters.slice(2)].map((supporter) => (
+						<div class="bg-white p-4 md:p-8 rounded-lg shadow-md w-full md:w-48 h-24 md:h-32 flex items-center justify-center">
+							<Image
+								src={supporter.logo}
+								alt={supporter.alt}
+								class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all"
+								loading="lazy"
+							/>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- Dots Indicator -->
+		<div class="flex justify-center gap-2 mt-6">
+			{
+				Array.from({ length: supporters.length }).map((_, index) => (
+					<button
+						class={`carousel-dot w-11 h-11 rounded-full transition-all flex items-center justify-center ${index === 0 ? 'bg-primary/30' : 'bg-gray-300/30'} ${index > 1 ? 'md:hidden' : ''}`}
+						data-index={index.toString()}
+						aria-label={`Go to slide ${index + 1}`}
+					>
+						<span class={`w-3 h-3 rounded-full ${index === 0 ? 'bg-primary' : 'bg-gray-300'}`} />
+					</button>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<script>
+	// Supporters Carousel
+	const carousel = document.getElementById('supporters-carousel');
+	const dots = document.querySelectorAll('.carousel-dot');
+	let currentIndex = 0;
+	let startX = 0;
+	let isDragging = false;
+
+	// Get total slides based on screen size
+	function getTotalSlides() {
+		const supporters = carousel?.querySelectorAll('.min-w-full');
+		return supporters ? supporters.length : 0;
+	}
+
+	function updateCarousel() {
+		if (carousel) {
+			carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+			dots.forEach((dot, index) => {
+				const span = dot.querySelector('span');
+				if (index === currentIndex) {
+					dot.classList.remove('bg-gray-300/30');
+					dot.classList.add('bg-primary/30');
+					span?.classList.remove('bg-gray-300');
+					span?.classList.add('bg-primary');
+				} else {
+					dot.classList.remove('bg-primary/30');
+					dot.classList.add('bg-gray-300/30');
+					span?.classList.remove('bg-primary');
+					span?.classList.add('bg-gray-300');
+				}
+			});
+		}
+	}
+
+	dots.forEach((dot) => {
+		dot.addEventListener('click', (e) => {
+			const target = e.currentTarget as HTMLElement;
+			currentIndex = parseInt(target.dataset.index || '0');
+			updateCarousel();
+		});
+	});
+
+	// Reset to first slide on resize to prevent being stuck on non-existent slides
+	window.addEventListener('resize', () => {
+		const totalSlides = getTotalSlides();
+		if (currentIndex >= totalSlides) {
+			currentIndex = 0;
+			updateCarousel();
+		}
+	});
+
+	// Drag/Swipe functionality
+	carousel?.addEventListener('mousedown', (e) => {
+		isDragging = true;
+		startX = e.pageX;
+		if (carousel) {
+			carousel.style.cursor = 'grabbing';
+		}
+	});
+
+	carousel?.addEventListener('touchstart', (e) => {
+		isDragging = true;
+		startX = e.touches[0].pageX;
+	});
+
+	carousel?.addEventListener('mousemove', (_e) => {
+		if (!isDragging) return;
+		_e.preventDefault();
+	});
+
+	carousel?.addEventListener('touchmove', (_e) => {
+		if (!isDragging) return;
+	});
+
+	const handleDragEnd = (endX: number) => {
+		if (!isDragging) return;
+		isDragging = false;
+		if (carousel) {
+			carousel.style.cursor = 'grab';
+		}
+
+		const diff = startX - endX;
+		const threshold = 50;
+		const totalSlides = getTotalSlides();
+
+		if (diff > threshold && currentIndex < totalSlides - 1) {
+			currentIndex++;
+			updateCarousel();
+		} else if (diff < -threshold && currentIndex > 0) {
+			currentIndex--;
+			updateCarousel();
+		}
+	};
+
+	carousel?.addEventListener('mouseup', (e) => {
+		handleDragEnd(e.pageX);
+	});
+
+	carousel?.addEventListener('touchend', (e) => {
+		handleDragEnd(e.changedTouches[0].pageX);
+	});
+
+	carousel?.addEventListener('mouseleave', () => {
+		if (isDragging) {
+			isDragging = false;
+			if (carousel) {
+				carousel.style.cursor = 'grab';
+			}
+		}
+	});
+
+	if (carousel) {
+		carousel.style.cursor = 'grab';
+	}
+
+	// Auto-play carousel
+	setInterval(() => {
+		if (!isDragging) {
+			currentIndex = currentIndex < getTotalSlides() - 1 ? currentIndex + 1 : 0;
+			updateCarousel();
+		}
+	}, 5000);
+</script>

@@ -1,0 +1,62 @@
+---
+export interface ApplyCTAProps {
+	heading: string;
+	description: string;
+	primaryCTA: {
+		text: string;
+		href: string;
+		icon: string; // SVG path
+	};
+	secondaryCTA: {
+		text: string;
+		href: string;
+	};
+}
+
+interface Props extends ApplyCTAProps {}
+
+const { heading, description, primaryCTA, secondaryCTA } = Astro.props;
+
+// WordPress ACF Mapping:
+// ACF Group: apply_cta
+// - heading (Text)
+// - description (Textarea)
+// - primary_cta (Group: text, href, icon)
+// - secondary_cta (Group: text, href)
+---
+
+<section class="mb-16">
+	<div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white">
+		<h2 class="text-3xl font-bold mb-4">{heading}</h2>
+		<p class="text-xl mb-8 text-white/90 max-w-2xl">{description}</p>
+		<div class="flex flex-wrap gap-4">
+			<a
+				href={primaryCTA.href}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center gap-2 px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+			>
+				{primaryCTA.text}
+				<svg
+					class="w-5 h-5"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d={primaryCTA.icon}></path>
+				</svg>
+			</a>
+			<a
+				href={secondaryCTA.href}
+				class="inline-flex items-center gap-2 px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors"
+			>
+				{secondaryCTA.text}
+			</a>
+		</div>
+	</div>
+</section>

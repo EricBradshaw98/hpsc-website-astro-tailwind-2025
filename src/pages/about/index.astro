@@ -1,5 +1,153 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/shared/PageHeader.astro';
+import HomePerformanceSection from '../../components/about/HomePerformanceSection.astro';
+import IndustrySection from '../../components/about/IndustrySection.astro';
+import HouseSystemApproach from '../../components/about/HouseSystemApproach.astro';
+import LandAcknowledgment from '../../components/about/LandAcknowledgment.astro';
+import CTACards from '../../components/shared/CTACards.astro';
+
+// TODO: Replace with WordPress API call
+// const wpData = await fetch('https://your-wp.com/wp-json/wp/v2/pages/about').then(r => r.json());
+
+// Page Header Data - WordPress ACF
+const pageHeaderData = {
+	title: 'About the HPSC',
+	description:
+		'The Home Performance Stakeholder Council (HPSC) is a not-for-profit society that supports the growth of the home performance industry in British Columbia (BC), Canada. Our mission is to increase the supply and demand of qualified home performance service providers by supporting market growth, capacity building, and quality workmanship.',
+};
+
+// Home Performance Section Data - WordPress ACF
+const homePerformanceData = {
+	heading: 'Home Performance',
+	description:
+		'Home performance is determined by the energy efficiency, comfort, health, safety, and durability of a home. Retrofitting with a whole-home, or house-as-a-system approach, is key to improving home performance. This includes addressing the building envelope, mechanical systems, occupant behaviour, and environmental conditions to make the home as safe, comfortable, efficient, and durable as possible.',
+	learnMoreLink: {
+		text: 'Learn more about home performance',
+		href: '/resources',
+	},
+	factors: [
+		{
+			name: 'Energy Efficiency',
+			icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+			colorClass: 'bg-primary/10 text-primary',
+		},
+		{
+			name: 'Comfort',
+			icon: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+			colorClass: 'bg-blue/10 text-blue',
+		},
+		{
+			name: 'Health',
+			icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+			colorClass: 'bg-green/10 text-green',
+		},
+		{
+			name: 'Safety',
+			icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+			colorClass: 'bg-orange/10 text-orange',
+		},
+		{
+			name: 'Durability',
+			icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+			colorClass: 'bg-purple/10 text-purple',
+		},
+	],
+};
+
+// Industry Section Data - WordPress ACF
+const industrySectionData = {
+	heading: 'About the Industry',
+	paragraphs: [
+		'The home performance industry is made up of stakeholders that support a whole-home, or house-as-a-system, approach to residential retrofits. This holistic approach recognizes that to improve the performance of homes in BC, retrofits need to be implemented with the entire house system in mind to avoid unintended consequences of isolated retrofits.',
+		'Although this holistic approach has always been important, historically, most homeowners in BC have only been completing single energy retrofits in isolation from other home retrofits. The HPSC was established in 2015 to serve as the lead industry facilitator to increase the supply and demand for BC contractors to deliver quality, affordable services for consumers that focus on whole-home performance.',
+	],
+	timeline: {
+		year: '2015',
+		title: 'HPSC Established',
+		description: 'Serving as the lead industry facilitator for whole-home performance in BC',
+	},
+};
+
+// House System Approach Data - WordPress ACF repeater
+const houseSystemData = {
+	heading: 'The House-as-a-System Approach',
+	systems: [
+		{
+			title: 'Building Envelope',
+			description:
+				'Walls, windows, doors, insulation, and air sealing to optimize thermal performance',
+			icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+			colorClass: 'from-primary/5 to-primary/10 border-primary/20 hover:border-primary/40',
+			bgColor: 'bg-primary',
+		},
+		{
+			title: 'Mechanical Systems',
+			description: 'HVAC, ventilation, hot water, and renewable energy systems working in harmony',
+			icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z',
+			colorClass: 'from-blue/5 to-blue/10 border-blue/20 hover:border-blue/40',
+			bgColor: 'bg-blue',
+		},
+		{
+			title: 'Occupant Behaviour',
+			description:
+				'How residents use and maintain their home affects overall performance and efficiency',
+			icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+			colorClass: 'from-green/5 to-green/10 border-green/20 hover:border-green/40',
+			bgColor: 'bg-green',
+		},
+		{
+			title: 'Environmental Conditions',
+			description: 'Climate, weather patterns, and site conditions unique to each location',
+			icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+			colorClass: 'from-orange/5 to-orange/10 border-orange/20 hover:border-orange/40',
+			bgColor: 'bg-orange',
+		},
+	],
+};
+
+// Land Acknowledgment Data - WordPress ACF
+const landAcknowledgmentData = {
+	heading: 'Land Acknowledgment',
+	message:
+		'The HPSC recognizes and acknowledges with deep appreciation the unique history, languages, and cultures of the 203 First Nations across British Columbia on whose territories we live, work, play, and learn.',
+};
+
+// CTA Cards Data - WordPress ACF repeater
+const ctaCardsData = {
+	cards: [
+		{
+			title: 'Our Team',
+			description: 'Meet the dedicated staff and board members driving our mission forward',
+			link: {
+				text: 'Learn more',
+				href: '/about/our-team',
+			},
+			icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+			colorClass: 'primary',
+		},
+		{
+			title: 'Our Strategy',
+			description: "Explore our strategic priorities and how we're building BC's energy future",
+			link: {
+				text: 'View strategy',
+				href: '/about/strategy',
+			},
+			icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+			colorClass: 'blue',
+		},
+		{
+			title: 'Resources',
+			description: 'Access guides, documents, and news about home performance in BC',
+			link: {
+				text: 'Explore resources',
+				href: '/resources',
+			},
+			icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+			colorClass: 'green',
+		},
+	],
+};
 ---
 
 <Layout
@@ -8,448 +156,10 @@ import Layout from '../../layouts/Layout.astro';
 	keywords="HPSC, home performance, British Columbia, not-for-profit, energy efficiency, retrofits, house-as-a-system"
 	breadcrumbs={[{ label: 'About', href: '/about' }]}
 >
-	
-
-	<!-- Page Header -->
-	<div class="mb-16">
-		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About the HPSC</h1>
-		<p class="text-xl text-gray-700 leading-relaxed max-w-4xl">
-			The Home Performance Stakeholder Council (HPSC) is a not-for-profit society that supports the
-			growth of the home performance industry in British Columbia (BC), Canada. Our mission is to
-			increase the supply and demand of qualified home performance service providers by supporting
-			market growth, capacity building, and quality workmanship.
-		</p>
-	</div>
-
-	<!-- Home Performance Section -->
-	<section class="mb-16">
-		<div
-			class="bg-gradient-to-br from-primary/5 to-blue/5 rounded-2xl p-8 md:p-12 border border-primary/10"
-		>
-			<div class="flex items-start gap-4 mb-6">
-				<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
-					<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-						></path>
-					</svg>
-				</div>
-				<div class="flex-1">
-					<h2 class="text-3xl font-bold text-gray-900 mb-4">Home Performance</h2>
-					<div class="prose prose-lg max-w-none">
-						<p class="text-gray-700 leading-relaxed mb-4">
-							Home performance is determined by the energy efficiency, comfort, health, safety, and
-							durability of a home. Retrofitting with a whole-home, or house-as-a-system approach,
-							is key to improving home performance. This includes addressing the building envelope,
-							mechanical systems, occupant behaviour, and environmental conditions to make the home
-							as safe, comfortable, efficient, and durable as possible.
-						</p>
-						<a
-							href="/resources"
-							class="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark transition-colors"
-						>
-							Learn more about home performance
-							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Key Performance Factors -->
-			<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
-				<div class="bg-white rounded-xl p-4 text-center shadow-sm">
-					<div
-						class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-2"
-					>
-						<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-						</svg>
-					</div>
-					<p class="text-sm font-semibold text-gray-900">Energy Efficiency</p>
-				</div>
-				<div class="bg-white rounded-xl p-4 text-center shadow-sm">
-					<div
-						class="w-10 h-10 bg-blue/10 rounded-lg flex items-center justify-center mx-auto mb-2"
-					>
-						<svg class="w-5 h-5 text-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-							></path>
-						</svg>
-					</div>
-					<p class="text-sm font-semibold text-gray-900">Comfort</p>
-				</div>
-				<div class="bg-white rounded-xl p-4 text-center shadow-sm">
-					<div
-						class="w-10 h-10 bg-green/10 rounded-lg flex items-center justify-center mx-auto mb-2"
-					>
-						<svg class="w-5 h-5 text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-							></path>
-						</svg>
-					</div>
-					<p class="text-sm font-semibold text-gray-900">Health</p>
-				</div>
-				<div class="bg-white rounded-xl p-4 text-center shadow-sm">
-					<div
-						class="w-10 h-10 bg-orange/10 rounded-lg flex items-center justify-center mx-auto mb-2"
-					>
-						<svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-							></path>
-						</svg>
-					</div>
-					<p class="text-sm font-semibold text-gray-900">Safety</p>
-				</div>
-				<div class="bg-white rounded-xl p-4 text-center shadow-sm">
-					<div
-						class="w-10 h-10 bg-purple/10 rounded-lg flex items-center justify-center mx-auto mb-2"
-					>
-						<svg class="w-5 h-5 text-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-							></path>
-						</svg>
-					</div>
-					<p class="text-sm font-semibold text-gray-900">Durability</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- About the Industry Section -->
-	<section class="mb-16">
-		<div class="bg-white rounded-2xl p-8 md:p-12 border border-gray-100 shadow-md">
-			<div class="flex items-start gap-4 mb-6">
-				<div class="w-12 h-12 bg-blue rounded-xl flex items-center justify-center flex-shrink-0">
-					<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-						></path>
-					</svg>
-				</div>
-				<div class="flex-1">
-					<h2 class="text-3xl font-bold text-gray-900 mb-4">About the Industry</h2>
-					<div class="prose prose-lg max-w-none space-y-4">
-						<p class="text-gray-700 leading-relaxed">
-							The home performance industry is made up of stakeholders that support a whole-home, or
-							house-as-a-system, approach to residential retrofits. This holistic approach
-							recognizes that to improve the performance of homes in BC, retrofits need to be
-							implemented with the entire house system in mind to avoid unintended consequences of
-							isolated retrofits.
-						</p>
-						<p class="text-gray-700 leading-relaxed">
-							Although this holistic approach has always been important, historically, most
-							homeowners in BC have only been completing single energy retrofits in isolation from
-							other home retrofits. The HPSC was established in 2015 to serve as the lead industry
-							facilitator to increase the supply and demand for BC contractors to deliver quality,
-							affordable services for consumers that focus on whole-home performance.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Timeline -->
-			<div class="mt-8 pt-8 border-t border-gray-200">
-				<div class="flex items-center gap-4">
-					<div
-						class="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-lg shadow-lg"
-					>
-						2015
-					</div>
-					<div>
-						<p class="text-sm font-semibold text-primary uppercase tracking-wide">
-							HPSC Established
-						</p>
-						<p class="text-gray-700">
-							Serving as the lead industry facilitator for whole-home performance in BC
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- House-as-a-System Approach -->
-	<section class="mb-16">
-		<h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-			The House-as-a-System Approach
-		</h2>
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-			<div
-				class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-6 border-2 border-primary/20 hover:border-primary/40 transition-colors"
-			>
-				<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4">
-					<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-2">Building Envelope</h3>
-				<p class="text-gray-600 text-sm">
-					Walls, windows, doors, insulation, and air sealing to optimize thermal performance
-				</p>
-			</div>
-
-			<div
-				class="bg-gradient-to-br from-blue/5 to-blue/10 rounded-2xl p-6 border-2 border-blue/20 hover:border-blue/40 transition-colors"
-			>
-				<div class="w-12 h-12 bg-blue rounded-xl flex items-center justify-center mb-4">
-					<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-						></path>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-2">Mechanical Systems</h3>
-				<p class="text-gray-600 text-sm">
-					HVAC, ventilation, hot water, and renewable energy systems working in harmony
-				</p>
-			</div>
-
-			<div
-				class="bg-gradient-to-br from-green/5 to-green/10 rounded-2xl p-6 border-2 border-green/20 hover:border-green/40 transition-colors"
-			>
-				<div class="w-12 h-12 bg-green rounded-xl flex items-center justify-center mb-4">
-					<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-2">Occupant Behaviour</h3>
-				<p class="text-gray-600 text-sm">
-					How residents use and maintain their home affects overall performance and efficiency
-				</p>
-			</div>
-
-			<div
-				class="bg-gradient-to-br from-orange/5 to-orange/10 rounded-2xl p-6 border-2 border-orange/20 hover:border-orange/40 transition-colors"
-			>
-				<div class="w-12 h-12 bg-orange rounded-xl flex items-center justify-center mb-4">
-					<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-2">Environmental Conditions</h3>
-				<p class="text-gray-600 text-sm">
-					Climate, weather patterns, and site conditions unique to each location
-				</p>
-			</div>
-		</div>
-	</section>
-
-	<!-- Indigenous Acknowledgment -->
-	<section class="mb-16">
-		<div
-			class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 md:p-12 text-white relative overflow-hidden"
-		>
-			<div class="absolute inset-0 opacity-10">
-				<svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-					<defs>
-						<pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-							<path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"></path>
-						</pattern>
-					</defs>
-					<rect width="100" height="100" fill="url(#grid)"></rect>
-				</svg>
-			</div>
-			<div class="relative z-10 max-w-4xl">
-				<div class="flex items-start gap-4 mb-4">
-					<svg class="w-8 h-8 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-						<path
-							d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-						></path>
-						<circle cx="12" cy="12" r="3"></circle>
-					</svg>
-					<div>
-						<h2 class="text-2xl font-bold mb-4">Land Acknowledgment</h2>
-						<p class="text-lg text-gray-100 leading-relaxed">
-							The HPSC recognizes and acknowledges with deep appreciation the unique history,
-							languages, and cultures of the 203 First Nations across British Columbia on whose
-							territories we live, work, play, and learn.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Learn More CTAs -->
-	<section>
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-			<a
-				href="/about/our-team"
-				class="group bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-primary transition-colors shadow-sm hover:shadow-md"
-			>
-				<div
-					class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all"
-				>
-					<svg
-						class="w-6 h-6 text-primary group-hover:text-white transition-colors"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-					Our Team
-				</h3>
-				<p class="text-gray-600 text-sm mb-4">
-					Meet the dedicated staff and board members driving our mission forward
-				</p>
-				<span
-					class="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all"
-				>
-					Learn more
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-					</svg>
-				</span>
-			</a>
-
-			<a
-				href="/about/strategy"
-				class="group bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-blue transition-colors shadow-sm hover:shadow-md"
-			>
-				<div
-					class="w-12 h-12 bg-blue/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue group-hover:scale-110 transition-all"
-				>
-					<svg
-						class="w-6 h-6 text-blue group-hover:text-white transition-colors"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue transition-colors">
-					Our Strategy
-				</h3>
-				<p class="text-gray-600 text-sm mb-4">
-					Explore our strategic priorities and how we're building BC's energy future
-				</p>
-				<span
-					class="inline-flex items-center gap-2 text-blue font-semibold group-hover:gap-3 transition-all"
-				>
-					View strategy
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-					</svg>
-				</span>
-			</a>
-
-			<a
-				href="/resources"
-				class="group bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-green transition-colors shadow-sm hover:shadow-md"
-			>
-				<div
-					class="w-12 h-12 bg-green/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green group-hover:scale-110 transition-all"
-				>
-					<svg
-						class="w-6 h-6 text-green group-hover:text-white transition-colors"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green transition-colors">
-					Resources
-				</h3>
-				<p class="text-gray-600 text-sm mb-4">
-					Access guides, documents, and news about home performance in BC
-				</p>
-				<span
-					class="inline-flex items-center gap-2 text-green font-semibold group-hover:gap-3 transition-all"
-				>
-					Explore resources
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-					</svg>
-				</span>
-			</a>
-		</div>
-	</section>
+	<PageHeader {...pageHeaderData} />
+	<HomePerformanceSection {...homePerformanceData} />
+	<IndustrySection {...industrySectionData} />
+	<HouseSystemApproach {...houseSystemData} />
+	<LandAcknowledgment {...landAcknowledgmentData} />
+	<CTACards {...ctaCardsData} />
 </Layout>

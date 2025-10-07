@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
 ---
 
 <Layout
@@ -13,24 +12,28 @@ import { Image } from 'astro:assets';
 	<div class="mb-12">
 		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Get Involved</h1>
 		<p class="text-xl text-gray-700 leading-relaxed max-w-4xl">
-			Join the HPSC's mission to advance home performance across British Columbia. Whether you
-			want to stay informed, actively participate, or shape industry strategy, there are many ways
-			to contribute to our collective success.
+			Join the HPSC's mission to advance home performance across British Columbia. Whether you want
+			to stay informed, actively participate, or shape industry strategy, there are many ways to
+			contribute to our collective success.
 		</p>
 	</div>
 
 	<!-- Why Get Involved Section -->
 	<section class="mb-16">
 		<div class="bg-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
-			<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-				Why Get Involved with HPSC?
-			</h2>
+			<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Why Get Involved with HPSC?</h2>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 				<div class="flex items-start gap-4">
 					<div
 						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
 					>
-						<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg
+							class="w-6 h-6 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -51,13 +54,18 @@ import { Image } from 'astro:assets';
 					<div
 						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
 					>
-						<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg
+							class="w-6 h-6 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
-								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-							></path>
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 						</svg>
 					</div>
 					<div>
@@ -72,13 +80,18 @@ import { Image } from 'astro:assets';
 					<div
 						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
 					>
-						<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg
+							class="w-6 h-6 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
-								d="M13 10V3L4 14h7v7l9-11h-7z"
-							></path>
+								d="M13 10V3L4 14h7v7l9-11h-7z"></path>
 						</svg>
 					</div>
 					<div>
@@ -93,22 +106,257 @@ import { Image } from 'astro:assets';
 	</section>
 
 	<!-- Engagement Options -->
-	<section class="mb-16">
-		<h2 class="text-3xl font-bold text-gray-900 mb-8">Ways to Get Involved</h2>
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-		<!-- Stay Connected -->
-		<div
-			class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
-		>
-			<div class="flex items-start gap-4 mb-4">
-				<div
-					class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
+	<section class="mb-16 relative">
+		<!-- Background SVG Icons -->
+		<div class="absolute inset-0 overflow-hidden pointer-events-none opacity-5" aria-hidden="true">
+			<svg
+				class="absolute top-0 left-10 w-64 h-64 text-primary"
+				fill="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+				></path>
+			</svg>
+			<svg
+				class="absolute top-20 right-10 w-72 h-72 text-primary"
+				fill="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+				></path>
+			</svg>
+			<svg
+				class="absolute bottom-40 left-1/4 w-80 h-80 text-primary"
+				fill="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+				></path>
+			</svg>
+			<svg
+				class="absolute bottom-20 right-1/4 w-64 h-64 text-primary"
+				fill="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+				></path>
+			</svg>
+		</div>
+
+		<h2 class="text-3xl font-bold text-gray-900 mb-8 relative z-10">Ways to Get Involved</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+			<!-- Stay Connected -->
+			<div
+				class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
+			>
+				<div class="flex items-start gap-4 mb-4">
+					<div
+						class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
+					>
+						<svg
+							class="w-8 h-8 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+							></path>
+						</svg>
+					</div>
+					<div class="flex-1">
+						<h2 class="text-2xl font-bold text-gray-900 mb-2">Stay Connected</h2>
+					</div>
+				</div>
+				<p class="text-gray-600 mb-6 leading-relaxed">
+					Sign up for our monthly email newsletter to receive updates on industry news, events,
+					training, and more.
+				</p>
+				<a
+					href="https://homeperformance.ca/e-news-sign-up/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
 				>
+					Sign Up
 					<svg
-						class="w-8 h-8 text-primary"
+						class="w-4 h-4"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+						></path>
+					</svg>
+				</a>
+			</div>
+
+			<!-- Actively Engage -->
+			<div
+				class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
+			>
+				<div class="flex items-start gap-4 mb-4">
+					<div
+						class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
+					>
+						<svg
+							class="w-8 h-8 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+							></path>
+						</svg>
+					</div>
+					<div class="flex-1">
+						<h2 class="text-2xl font-bold text-gray-900 mb-2">Actively Engage</h2>
+					</div>
+				</div>
+				<p class="text-gray-600 mb-6 leading-relaxed">
+					Share your ideas and interact with industry stakeholders through events, discussion
+					forums, surveys, and more.
+				</p>
+				<a
+					href="https://guides.co/register?ref=hpsc"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
+				>
+					Join us on Guides
+					<svg
+						class="w-4 h-4"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+						></path>
+					</svg>
+				</a>
+			</div>
+
+			<!-- Share your Expertise -->
+			<div
+				class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
+			>
+				<div class="flex items-start gap-4 mb-4">
+					<div
+						class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
+					>
+						<svg
+							class="w-8 h-8 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+							></path>
+						</svg>
+					</div>
+					<div class="flex-1">
+						<h2 class="text-2xl font-bold text-gray-900 mb-2">Share your Expertise</h2>
+					</div>
+				</div>
+				<p class="text-gray-600 mb-6 leading-relaxed">
+					Join a Sector Council and help shape advocacy, training, and quality assurance for the
+					home performance industry.
+				</p>
+				<a
+					href="https://guides.co/g/home-performance-and-the-hpsc/209674"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
+					aria-label="Learn more about joining a Sector Council"
+				>
+					Learn More
+					<svg
+						class="w-4 h-4"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+						></path>
+					</svg>
+				</a>
+			</div>
+
+			<!-- Offer Strategic Guidance -->
+			<div
+				class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
+			>
+				<div class="flex items-start gap-4 mb-4">
+					<div
+						class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
+					>
+						<svg
+							class="w-8 h-8 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+							></path>
+						</svg>
+					</div>
+					<div class="flex-1">
+						<h2 class="text-2xl font-bold text-gray-900 mb-2">Offer Strategic Guidance</h2>
+					</div>
+				</div>
+				<p class="text-gray-600 mb-6 leading-relaxed">
+					Participate in the Industry Advisory Committee to help shape the strategy of the HPSC and
+					home performance industry.
+				</p>
+				<a
+					href="mailto:info@homeperformance.ca"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
+				>
+					Contact Us
+					<svg
+						class="w-4 h-4"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
 					>
 						<path
 							stroke-linecap="round"
@@ -117,174 +365,8 @@ import { Image } from 'astro:assets';
 							d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
 						></path>
 					</svg>
-				</div>
-				<div class="flex-1">
-					<h2 class="text-2xl font-bold text-gray-900 mb-2">Stay Connected</h2>
-				</div>
+				</a>
 			</div>
-			<p class="text-gray-600 mb-6 leading-relaxed">
-				Sign up for our monthly email newsletter to receive updates on industry news, events,
-				training, and more.
-			</p>
-			<a
-				href="https://homeperformance.ca/e-news-sign-up/"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
-			>
-				Sign Up
-				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-					></path>
-				</svg>
-			</a>
-		</div>
-
-		<!-- Actively Engage -->
-		<div
-			class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
-		>
-			<div class="flex items-start gap-4 mb-4">
-				<div
-					class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
-				>
-					<svg
-						class="w-8 h-8 text-primary"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-						></path>
-					</svg>
-				</div>
-				<div class="flex-1">
-					<h2 class="text-2xl font-bold text-gray-900 mb-2">Actively Engage</h2>
-				</div>
-			</div>
-			<p class="text-gray-600 mb-6 leading-relaxed">
-				Share your ideas and interact with industry stakeholders through events, discussion forums,
-				surveys, and more.
-			</p>
-			<a
-				href="https://guides.co/register?ref=hpsc"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
-			>
-				Join us on Guides
-				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-					></path>
-				</svg>
-			</a>
-		</div>
-
-		<!-- Share your Expertise -->
-		<div
-			class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
-		>
-			<div class="flex items-start gap-4 mb-4">
-				<div
-					class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
-				>
-					<svg
-						class="w-8 h-8 text-primary"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-						></path>
-					</svg>
-				</div>
-				<div class="flex-1">
-					<h2 class="text-2xl font-bold text-gray-900 mb-2">Share your Expertise</h2>
-				</div>
-			</div>
-			<p class="text-gray-600 mb-6 leading-relaxed">
-				Join a Sector Council and help shape advocacy, training, and quality assurance for the
-				home performance industry.
-			</p>
-			<a
-				href="https://guides.co/g/home-performance-and-the-hpsc/209674"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
-			>
-				Learn More
-				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-					></path>
-				</svg>
-			</a>
-		</div>
-
-		<!-- Offer Strategic Guidance -->
-		<div
-			class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow border-2 border-primary/20"
-		>
-			<div class="flex items-start gap-4 mb-4">
-				<div
-					class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"
-				>
-					<svg
-						class="w-8 h-8 text-primary"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-						></path>
-					</svg>
-				</div>
-				<div class="flex-1">
-					<h2 class="text-2xl font-bold text-gray-900 mb-2">Offer Strategic Guidance</h2>
-				</div>
-			</div>
-			<p class="text-gray-600 mb-6 leading-relaxed">
-				Participate in the Industry Advisory Committee to help shape the strategy of the HPSC and
-				home performance industry.
-			</p>
-			<a
-				href="mailto:info@homeperformance.ca"
-				class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
-			>
-				Contact Us
-				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-					></path>
-				</svg>
-			</a>
-		</div>
 		</div>
 	</section>
 
@@ -293,9 +375,17 @@ import { Image } from 'astro:assets';
 		<h2 class="text-3xl font-bold text-gray-900 mb-8">Other Ways to Participate</h2>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 			<!-- Attend Events -->
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+			>
 				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-					<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -306,8 +396,8 @@ import { Image } from 'astro:assets';
 				</div>
 				<h3 class="text-lg font-bold text-gray-900 mb-2">Attend Events & Training</h3>
 				<p class="text-gray-600 text-sm mb-4">
-					Participate in conferences, workshops, and training sessions to expand your knowledge
-					and network.
+					Participate in conferences, workshops, and training sessions to expand your knowledge and
+					network.
 				</p>
 				<a href="/events" class="text-primary font-semibold hover:underline text-sm">
 					View Events →
@@ -315,9 +405,17 @@ import { Image } from 'astro:assets';
 			</div>
 
 			<!-- Join HPCN -->
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+			>
 				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-					<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -328,18 +426,29 @@ import { Image } from 'astro:assets';
 				</div>
 				<h3 class="text-lg font-bold text-gray-900 mb-2">Become an HPCN Member</h3>
 				<p class="text-gray-600 text-sm mb-4">
-					Join the Home Performance Contractor Network to access exclusive benefits and
-					recognition.
+					Join the Home Performance Contractor Network to access exclusive benefits and recognition.
 				</p>
-				<a href="/contractor-network" class="text-primary font-semibold hover:underline text-sm">
+				<a
+					href="/contractor-network"
+					class="text-primary font-semibold hover:underline text-sm"
+					aria-label="Learn more about joining the Home Performance Contractor Network"
+				>
 					Learn More →
 				</a>
 			</div>
 
 			<!-- Provide Feedback -->
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+			>
 				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-					<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -381,7 +490,13 @@ import { Image } from 'astro:assets';
 					class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg whitespace-nowrap"
 				>
 					Apply Now
-					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg
+						class="w-5 h-5"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"

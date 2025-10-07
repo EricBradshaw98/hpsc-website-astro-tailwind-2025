@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+
+export interface NewsCardProps {
+	title: string;
+	slug: string;
+	excerpt: string;
+	date: string;
+	featuredImage: {
+		src: string;
+		alt: string;
+	};
+	category?: string;
+}
+
+interface Props extends NewsCardProps {}
+
+const { title, slug, excerpt, date, featuredImage, category } = Astro.props;
+
+// Format date for display
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+---
+
+<article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+	<a href={`/resources/news/${slug}`}>
+		<div class="h-48 overflow-hidden">
+			<Image
+				src={featuredImage.src}
+				alt={featuredImage.alt}
+				class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+				width={600}
+				height={400}
+				loading="lazy"
+			/>
+		</div>
+	</a>
+	<div class="p-6">
+		<div class="flex items-center gap-2 mb-2">
+			<div class="text-sm text-gray-500">{formattedDate}</div>
+			{
+				category && (
+					<>
+						<span class="text-gray-300">•</span>
+						<div class="text-sm text-primary font-medium">{category}</div>
+					</>
+				)
+			}
+		</div>
+		<a href={`/resources/news/${slug}`}>
+			<h3 class="text-xl font-semibold mb-2 hover:text-primary transition-colors">
+				{title}
+			</h3>
+		</a>
+		<p class="text-gray-600 mb-4 line-clamp-3">
+			{excerpt}
+		</p>
+		<a
+			href={`/resources/news/${slug}`}
+			class="text-primary font-medium hover:underline"
+			aria-label={`Read more about ${title}`}
+		>
+			Read More →
+		</a>
+	</div>
+</article>
