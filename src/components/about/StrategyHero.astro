@@ -40,15 +40,24 @@ const colorMap = {
 ---
 
 <div class="mb-16 relative">
-	<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-blue/5 to-green/5 rounded-3xl -z-10">
+	<div
+		class="absolute inset-0 bg-gradient-to-br from-primary/5 via-blue/5 to-green/5 rounded-3xl -z-10"
+	>
 	</div>
 	<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center p-8 md:p-12">
 		<div>
 			<div
 				class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4"
 			>
-				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={badge.icon} />
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={badge.icon}
+					></path>
 				</svg>
 				{badge.text}
 			</div>
@@ -58,8 +67,14 @@ const colorMap = {
 			<div class="space-y-4">
 				<p class="text-xl text-gray-700 leading-relaxed">{description}</p>
 				<p class="text-lg text-gray-600 flex items-start gap-2">
-					<svg class="w-6 h-6 text-primary flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={note.icon} />
+					<svg
+						class="w-6 h-6 text-primary flex-shrink-0 mt-1"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={note.icon}
+						></path>
 					</svg>
 					<span set:html={note.text} />
 				</p>
@@ -77,9 +92,16 @@ const colorMap = {
 							<div
 								class={`bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform ${index % 2 === 1 ? 'mt-8' : ''}`}
 							>
-								<div class={`w-12 h-12 ${colorMap[card.color]} rounded-xl flex items-center justify-center mb-3`}>
+								<div
+									class={`w-12 h-12 ${colorMap[card.color]} rounded-xl flex items-center justify-center mb-3`}
+								>
 									<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={card.icon} />
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d={card.icon}
+										/>
 									</svg>
 								</div>
 								<p class="text-sm font-semibold text-gray-700">{card.label}</p>

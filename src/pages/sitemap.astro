@@ -109,7 +109,9 @@ for (const section in pagesBySection) {
 }
 
 // Remove empty sections
-const sections = Object.entries(pagesBySection).filter(([, sectionPages]) => sectionPages.length > 0);
+const sections = Object.entries(pagesBySection).filter(
+	([, sectionPages]) => sectionPages.length > 0
+);
 ---
 
 <Layout

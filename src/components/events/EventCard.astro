@@ -16,8 +16,19 @@ interface Props {
 	highlights: string[];
 }
 
-const { title, type, date, endDate, time, location, description, image, status, price, highlights } =
-	Astro.props;
+const {
+	title,
+	type,
+	date,
+	endDate,
+	time,
+	location,
+	description,
+	image,
+	status,
+	price,
+	highlights,
+} = Astro.props;
 
 // Format dates
 function formatDate(dateString: string, endDateString?: string | null) {

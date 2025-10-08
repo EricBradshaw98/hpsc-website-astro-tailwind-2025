@@ -1,8 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ContractorCard, {
-	type ContractorCardProps,
-} from '../../components/contractornetwork/ContractorCard.astro';
 
 // API Configuration for contractor search (will be used when API is integrated)
 // const CONTRACTOR_API_URL = import.meta.env.PUBLIC_CONTRACTOR_API_URL;
@@ -122,60 +119,132 @@ import ContractorCard, {
 		<h2 class="text-3xl font-bold text-gray-900 mb-8">How to Use the Search Tool</h2>
 
 		<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-100 relative overflow-hidden"
+			>
+				<!-- Background Number -->
 				<div
-					class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4"
+					class="absolute right-2 bottom-2 text-[120px] font-bold text-primary/5 leading-none pointer-events-none"
 				>
 					1
 				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Select Service</h3>
-				<p class="text-gray-600 text-sm">
-					Choose the type of service you need from the dropdown menu.
-				</p>
+				<!-- Background Image -->
+				<div class="absolute inset-0 opacity-5 pointer-events-none">
+					<img
+						src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop"
+						alt=""
+						class="w-full h-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+				<div class="relative z-10">
+					<h3 class="text-lg font-bold text-gray-900 mb-2">Select Service</h3>
+					<p class="text-gray-600 text-sm">
+						Choose the type of service you need from the dropdown menu.
+					</p>
+				</div>
 			</div>
 
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-100 relative overflow-hidden"
+			>
+				<!-- Background Number -->
 				<div
-					class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4"
+					class="absolute right-2 bottom-2 text-[120px] font-bold text-primary/5 leading-none pointer-events-none"
 				>
 					2
 				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Choose Location</h3>
-				<p class="text-gray-600 text-sm">Select your region to find contractors in your area.</p>
+				<!-- Background Image -->
+				<div class="absolute inset-0 opacity-5 pointer-events-none">
+					<img
+						src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&h=300&fit=crop"
+						alt=""
+						class="w-full h-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+				<div class="relative z-10">
+					<h3 class="text-lg font-bold text-gray-900 mb-2">Choose Location</h3>
+					<p class="text-gray-600 text-sm">Select your region to find contractors in your area.</p>
+				</div>
 			</div>
 
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-100 relative overflow-hidden"
+			>
+				<!-- Background Number -->
 				<div
-					class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4"
+					class="absolute right-2 bottom-2 text-[120px] font-bold text-primary/5 leading-none pointer-events-none"
 				>
 					3
 				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Review Results</h3>
-				<p class="text-gray-600 text-sm">
-					Browse through the list of qualified contractors in your area.
-				</p>
+				<!-- Background Image -->
+				<div class="absolute inset-0 opacity-5 pointer-events-none">
+					<img
+						src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=400&h=300&fit=crop"
+						alt=""
+						class="w-full h-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+				<div class="relative z-10">
+					<h3 class="text-lg font-bold text-gray-900 mb-2">Review Results</h3>
+					<p class="text-gray-600 text-sm">
+						Browse through the list of qualified contractors in your area.
+					</p>
+				</div>
 			</div>
 
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-100 relative overflow-hidden"
+			>
+				<!-- Background Number -->
 				<div
-					class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4"
+					class="absolute right-2 bottom-2 text-[120px] font-bold text-primary/5 leading-none pointer-events-none"
 				>
 					4
 				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Contact Contractors</h3>
-				<p class="text-gray-600 text-sm">
-					Reach out to contractors directly to discuss your project.
-				</p>
+				<!-- Background Image -->
+				<div class="absolute inset-0 opacity-5 pointer-events-none">
+					<img
+						src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop"
+						alt=""
+						class="w-full h-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+				<div class="relative z-10">
+					<h3 class="text-lg font-bold text-gray-900 mb-2">Contact Contractors</h3>
+					<p class="text-gray-600 text-sm">
+						Reach out to contractors directly to discuss your project.
+					</p>
+				</div>
 			</div>
 
-			<div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+			<div
+				class="bg-white rounded-xl shadow-md p-6 border border-gray-100 relative overflow-hidden"
+			>
+				<!-- Background Number -->
 				<div
-					class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4"
+					class="absolute right-2 bottom-2 text-[120px] font-bold text-primary/5 leading-none pointer-events-none"
 				>
 					5
 				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Share Feedback</h3>
-				<p class="text-gray-600 text-sm">After your project, let us know about your experience.</p>
+				<!-- Background Image -->
+				<div class="absolute inset-0 opacity-5 pointer-events-none">
+					<img
+						src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop"
+						alt=""
+						class="w-full h-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+				<div class="relative z-10">
+					<h3 class="text-lg font-bold text-gray-900 mb-2">Share Feedback</h3>
+					<p class="text-gray-600 text-sm">
+						After your project, let us know about your experience.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>

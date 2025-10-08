@@ -1,0 +1,35 @@
+---
+export interface SearchTipCardProps {
+	title: string;
+	description: string;
+	icon: string; // SVG path data
+	iconColor?: string; // Tailwind color class (e.g., 'primary', 'blue', 'green', 'orange')
+}
+
+interface Props extends SearchTipCardProps {}
+
+const { title, description, icon, iconColor = 'primary' } = Astro.props;
+---
+
+<div class="bg-white rounded-xl p-6 border border-gray-200">
+	<div class="flex items-start gap-3 mb-3">
+		<div
+			class={`w-10 h-10 bg-${iconColor}/10 rounded-lg flex items-center justify-center flex-shrink-0`}
+		>
+			<svg
+				class={`w-5 h-5 text-${iconColor}`}
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+			</svg>
+		</div>
+		<div>
+			<h3 class="font-semibold text-gray-900 mb-1">{title}</h3>
+			<p class="text-sm text-gray-600">
+				{description}
+			</p>
+		</div>
+	</div>
+</div>

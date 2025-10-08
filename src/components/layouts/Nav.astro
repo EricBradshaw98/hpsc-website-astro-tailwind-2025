@@ -115,7 +115,14 @@ function isActive(href: string): boolean {
 			<!-- Logo -->
 			<div class="flex-shrink-0">
 				<a href="/" class="flex items-center">
-					<Image src={logo} alt="HPSC Logo" class="h-12 w-auto" width={200} height={48} transition:persist="logo" />
+					<Image
+						src={logo}
+						alt="HPSC Logo"
+						class="h-12 w-auto"
+						width={200}
+						height={48}
+						transition:persist="logo"
+					/>
 				</a>
 			</div>
 
@@ -125,8 +132,10 @@ function isActive(href: string): boolean {
 				class="lg:hidden flex flex-col gap-2 w-8 h-8 justify-center items-center"
 				aria-label="Toggle menu"
 			>
-				<span class="hamburger-line w-6 h-0.5 bg-primary transition-all duration-500 ease-in-out"></span>
-				<span class="hamburger-line w-6 h-0.5 bg-primary transition-all duration-500 ease-in-out"></span>
+				<span class="hamburger-line w-6 h-0.5 bg-primary transition-all duration-500 ease-in-out"
+				></span>
+				<span class="hamburger-line w-6 h-0.5 bg-primary transition-all duration-500 ease-in-out"
+				></span>
 			</button>
 
 			<!-- Desktop Navigation -->

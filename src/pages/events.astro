@@ -277,12 +277,9 @@ function formatDate(dateString: string, endDateString?: string | null) {
 	<section class="mb-16">
 		<h2 class="text-3xl font-bold text-gray-900 mb-8">Upcoming Events</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-grid">
-			{
-				events.slice(1).map((event) => <EventCard {...event} />)
-			}
+			{events.slice(1).map((event) => <EventCard {...event} />)}
 		</div>
 	</section>
-
 
 	<!-- Newsletter CTA -->
 	<section>

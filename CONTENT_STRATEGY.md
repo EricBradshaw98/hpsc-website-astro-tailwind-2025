@@ -1,6 +1,7 @@
 # Content Strategy & WordPress Integration Guide
 
 ## Date: January 2025
+
 ## Purpose: Content Management & CMS Integration Roadmap
 
 ---
@@ -18,6 +19,7 @@ This document outlines the content strategy, WordPress integration plan, and com
 ## Page Inventory & Status
 
 ### ✅ Fully Componentized (6 pages - 25%)
+
 1. **Homepage** (`/`) - 285 lines (was 1,330)
    - Components: 7 (HeroSection, StatsCards, ServicesGrid, SupportersCarousel, LatestNews, CallToAction, Welcome)
    - Content Source: Ready for WordPress
@@ -45,6 +47,7 @@ This document outlines the content strategy, WordPress integration plan, and com
 ### 🔄 Needs Componentization (18 pages - 75%)
 
 #### High Priority (Large, Complex Pages)
+
 7. **Training** (`/training`) - 622 lines
    - Needs: TrainingProgramCard, CategoryFilter, BenefitsGrid
    - Content: 6 training programs (mock)
@@ -62,6 +65,7 @@ This document outlines the content strategy, WordPress integration plan, and com
     - Content: 6 involvement options (mock)
 
 #### Medium Priority (Moderate Size)
+
 11. **Search** (`/search`) - 275 lines
     - Needs: SearchForm, SearchResults, SearchFilters
     - Content: Pagefind integration (working)
@@ -71,6 +75,7 @@ This document outlines the content strategy, WordPress integration plan, and com
     - Content: Mock contractors (ready for API)
 
 #### Low Priority (Small/Static Pages)
+
 13. **Contact** (`/contact`) - Functional forms
 14. **Privacy Policy** (`/privacy`) - Static legal content
 15. **Terms of Service** (`/terms`) - Static legal content
@@ -81,6 +86,7 @@ This document outlines the content strategy, WordPress integration plan, and com
 20. **404** (`/404`) - Static error page
 
 #### Dynamic Pages (Working)
+
 21-24. **News Articles** (`/news/[slug]`, `/news/[...page]`) - Working with mock data
 25-28. **Resource Guides** (`/resources/guides/[slug]`) - Working with mock data
 29-32. **Resource Documents** (`/resources/documents/[slug]`) - Working with mock data
@@ -92,74 +98,79 @@ This document outlines the content strategy, WordPress integration plan, and com
 ### Content Components (To Be Created)
 
 #### 1. Training Components
+
 ```typescript
 // TrainingProgramCard.astro
 interface Props {
-  title: string;
-  category: string;
-  duration: string;
-  level: string;
-  format: string;
-  description: string;
-  image: string;
-  topics: string[];
-  price: string;
-  link?: string;
+	title: string;
+	category: string;
+	duration: string;
+	level: string;
+	format: string;
+	description: string;
+	image: string;
+	topics: string[];
+	price: string;
+	link?: string;
 }
 ```
 
 #### 2. Event Components
+
 ```typescript
 // EventCard.astro
 interface Props {
-  title: string;
-  date: Date;
-  time: string;
-  location: string;
-  type: 'workshop' | 'webinar' | 'conference' | 'networking';
-  description: string;
-  image: string;
-  price?: string;
-  registrationLink?: string;
-  spotsRemaining?: number;
+	title: string;
+	date: Date;
+	time: string;
+	location: string;
+	type: 'workshop' | 'webinar' | 'conference' | 'networking';
+	description: string;
+	image: string;
+	price?: string;
+	registrationLink?: string;
+	spotsRemaining?: number;
 }
 ```
 
 #### 3. Resource Components
+
 ```typescript
 // ResourceCategoryCard.astro
 interface Props {
-  title: string;
-  description: string;
-  icon: string;
-  count: number;
-  href: string;
-  color?: string;
+	title: string;
+	description: string;
+	icon: string;
+	count: number;
+	href: string;
+	color?: string;
 }
 ```
 
 #### 4. Filter Components
+
 ```typescript
 // CategoryFilter.astro
 interface Props {
-  categories: string[];
-  activeCategory?: string;
-  onChange?: string; // JavaScript function name
+	categories: string[];
+	activeCategory?: string;
+	onChange?: string; // JavaScript function name
 }
 ```
 
 #### 5. Search Components
+
 ```typescript
 // SearchForm.astro
 interface Props {
-  placeholder?: string;
-  autofocus?: boolean;
+	placeholder?: string;
+	autofocus?: boolean;
 }
 
 // SearchResults.astro
 interface Props {
-  results: any[]; // Pagefind results
-  query: string;
+	results: any[]; // Pagefind results
+	query: string;
 }
 ```
 
@@ -170,6 +181,7 @@ interface Props {
 ### Phase 1: Content Types Setup (Week 1-2)
 
 #### Custom Post Types
+
 1. **News Articles** (already structured)
    - Fields: title, excerpt, content, featured_image, author, date, category, tags
    - API Endpoint: `/wp-json/wp/v2/news`
@@ -201,25 +213,27 @@ interface Props {
 ### Phase 2: API Integration (Week 3-4)
 
 #### Fetch Functions
+
 ```typescript
 // src/lib/wordpress.ts
 export async function fetchNews() {
-  const response = await fetch(`${WP_API_URL}/news`);
-  return response.json();
+	const response = await fetch(`${WP_API_URL}/news`);
+	return response.json();
 }
 
 export async function fetchTrainingPrograms() {
-  const response = await fetch(`${WP_API_URL}/training`);
-  return response.json();
+	const response = await fetch(`${WP_API_URL}/training`);
+	return response.json();
 }
 
 export async function fetchEvents() {
-  const response = await fetch(`${WP_API_URL}/events`);
-  return response.json();
+	const response = await fetch(`${WP_API_URL}/events`);
+	return response.json();
 }
 ```
 
 #### Build-time Data Fetching
+
 ```astro
 ---
 // pages/training.astro
@@ -242,30 +256,35 @@ const programs = await fetchTrainingPrograms();
 ### Current Mock Data Sources
 
 #### News Articles (12 articles)
+
 - **Source**: `src/data/news.ts`
 - **Fields**: Complete (ready for WordPress)
 - **Images**: Unsplash (placeholder)
 - **Status**: ✅ Structure ready for API
 
 #### Training Programs (6 programs)
+
 - **Source**: Inline in `pages/training.astro`
 - **Fields**: Complete
 - **Images**: Unsplash (placeholder)
 - **Status**: 🔄 Needs extraction to data file
 
 #### Events (8 events)
+
 - **Source**: Inline in `pages/events.astro`
 - **Fields**: Complete
 - **Images**: Unsplash (placeholder)
 - **Status**: 🔄 Needs extraction to data file
 
 #### Resource Guides (9 guides)
+
 - **Source**: Inline in `pages/resources/guides/[slug].astro`
 - **Fields**: Complete with content
 - **Images**: Unsplash (placeholder)
 - **Status**: 🔄 Needs extraction to data file
 
 #### Team Members (3 members)
+
 - **Source**: `src/data/team.ts`
 - **Fields**: Complete
 - **Images**: UI Avatars (placeholder)
@@ -276,42 +295,52 @@ const programs = await fetchTrainingPrograms();
 ## Content Consistency Issues
 
 ### 1. Varying Depth of Content
+
 **Problem**: Some pages highly detailed (homepage, about) while others sparse (contact, legal)
 
 **Solution**:
+
 - Create content templates for each page type
 - Define minimum content requirements
 - Use consistent section structures
 
 ### 2. Image Inconsistency
+
 **Problem**: Mix of Unsplash, UI Avatars, local images
 
 **Solution**:
+
 - Define image requirements (size, format, alt text)
 - Create image library in WordPress Media
 - Use consistent image optimization (WebP, lazy loading)
 
 ### 3. Call-to-Action Inconsistency
+
 **Problem**: Different CTA styles and placements across pages
 
 **Solution**:
+
 - Create `CallToAction.astro` component (exists)
 - Define standard CTA patterns (primary, secondary, tertiary)
 - Use consistently across all pages
 
 ### 4. Missing Content Sections
+
 **Training Page** needs:
+
 - Instructor profiles
 - Student testimonials
 - Certification pathways
 - Schedule/calendar
 
 **Events Page** needs:
+
 - Past events archive
 - Event categories explanation
 - Registration process details
 
 **Resources Page** needs:
+
 - Featured resources
 - Resource submission process
 - Resource categories explanation
@@ -321,16 +350,19 @@ const programs = await fetchTrainingPrograms();
 ## Componentization Priority
 
 ### Phase 1 (High Impact - This Week)
+
 1. ✅ Training page components
 2. ✅ Events page components
 3. ✅ Resources index components
 
 ### Phase 2 (Medium Impact - Next Week)
+
 4. Search page components
 5. Contractor search enhancements
 6. Get Involved improvements
 
 ### Phase 3 (Polish - Week 3)
+
 7. Legal page consistency
 8. Contact form enhancements
 9. Content refinement
@@ -340,6 +372,7 @@ const programs = await fetchTrainingPrograms();
 ## Content Guidelines
 
 ### Writing Style
+
 - **Tone**: Professional, helpful, accessible
 - **Voice**: Active voice, second person when appropriate
 - **Length**:
@@ -348,6 +381,7 @@ const programs = await fetchTrainingPrograms();
   - Page content: 300-500 words per section
 
 ### SEO Requirements
+
 - **Title**: 50-60 characters
 - **Meta Description**: 150-160 characters
 - **Keywords**: 3-5 primary, 5-10 secondary
@@ -355,6 +389,7 @@ const programs = await fetchTrainingPrograms();
 - **Alt Text**: Descriptive, 125 characters max
 
 ### Image Requirements
+
 - **Hero Images**: 1920x1080px, WebP, < 200 KB
 - **Card Images**: 800x600px, WebP, < 100 KB
 - **Thumbnails**: 400x300px, WebP, < 50 KB
@@ -365,6 +400,7 @@ const programs = await fetchTrainingPrograms();
 ## WordPress Setup Checklist
 
 ### Required Plugins
+
 - [ ] **Advanced Custom Fields Pro** - Custom fields
 - [ ] **Custom Post Type UI** - Custom post types
 - [ ] **WP REST API** - API access
@@ -373,6 +409,7 @@ const programs = await fetchTrainingPrograms();
 - [ ] **WPGraphQL** (optional) - GraphQL API
 
 ### API Configuration
+
 - [ ] Enable REST API
 - [ ] Configure CORS headers
 - [ ] Set up authentication (if needed)
@@ -380,6 +417,7 @@ const programs = await fetchTrainingPrograms();
 - [ ] Test all endpoints
 
 ### Content Import
+
 - [ ] Prepare CSV/JSON exports
 - [ ] Map fields to WordPress
 - [ ] Import media files
@@ -391,6 +429,7 @@ const programs = await fetchTrainingPrograms();
 ## Build Process Updates
 
 ### Current Build
+
 ```bash
 1. Fetch data at build time (mock data)
 2. Generate 56 static pages
@@ -400,6 +439,7 @@ const programs = await fetchTrainingPrograms();
 ```
 
 ### Future Build (with WordPress)
+
 ```bash
 1. Fetch data from WordPress API
 2. Transform data to match interfaces
@@ -416,18 +456,21 @@ const programs = await fetchTrainingPrograms();
 ## Testing Strategy
 
 ### Component Testing
+
 1. Test each component in isolation
 2. Verify props interface matches data
 3. Test responsive behavior
 4. Check accessibility
 
 ### Integration Testing
+
 1. Test full pages with components
 2. Verify data flow from WordPress
 3. Test build process end-to-end
 4. Check SEO meta tags
 
 ### Performance Testing
+
 1. Measure build time with real data
 2. Check bundle size impact
 3. Verify image optimization
@@ -438,24 +481,28 @@ const programs = await fetchTrainingPrograms();
 ## Content Migration Timeline
 
 ### Week 1: Component Creation
+
 - [ ] Create training components
 - [ ] Create events components
 - [ ] Create resource components
 - [ ] Create filter components
 
 ### Week 2: Data Extraction
+
 - [ ] Extract training data to `src/data/training.ts`
 - [ ] Extract events data to `src/data/events.ts`
 - [ ] Extract resources data to `src/data/resources.ts`
 - [ ] Update pages to use data files
 
 ### Week 3: WordPress Setup
+
 - [ ] Install and configure WordPress
 - [ ] Create custom post types
 - [ ] Import mock data to WordPress
 - [ ] Test API endpoints
 
 ### Week 4: API Integration
+
 - [ ] Create WordPress fetch functions
 - [ ] Update pages to fetch from API
 - [ ] Test build process
@@ -466,18 +513,21 @@ const programs = await fetchTrainingPrograms();
 ## Success Metrics
 
 ### Content Completeness
+
 - ✅ All pages have consistent structure
 - ✅ All images optimized and alt text
 - ✅ All sections have meaningful content
 - ✅ All CTAs properly placed
 
 ### WordPress Integration
+
 - ✅ All custom post types created
 - ✅ All data successfully migrated
 - ✅ API endpoints working
 - ✅ Build process automated
 
 ### Performance
+
 - ✅ Build time < 15s with real data
 - ✅ Bundle size unchanged
 - ✅ All images optimized
@@ -490,6 +540,7 @@ const programs = await fetchTrainingPrograms();
 The HPSC website has a **solid foundation** with 25% componentization complete. The remaining 75% follows established patterns and can be systematically componentized. WordPress integration is straightforward with existing data structures already matching WordPress custom post types.
 
 ### Immediate Next Steps:
+
 1. Create shared component library
 2. Componentize training, events, resources pages
 3. Extract mock data to data files
@@ -502,6 +553,7 @@ The HPSC website has a **solid foundation** with 25% componentization complete. 
 ## Contact
 
 For content questions:
+
 - Content Strategy: HPSC Marketing Team
 - WordPress Setup: DevOps Team
 - Component Development: Claude Code Implementation

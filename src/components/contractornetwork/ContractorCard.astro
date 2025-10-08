@@ -24,16 +24,10 @@ const { name, services, location, phone, email, website } = Astro.props;
 		{location}
 	</p>
 	<div class="flex flex-wrap gap-4 mt-4">
-		<a
-			href={`tel:${phone}`}
-			class="text-primary hover:text-primary-dark font-semibold text-sm"
-		>
+		<a href={`tel:${phone}`} class="text-primary hover:text-primary-dark font-semibold text-sm">
 			{phone}
 		</a>
-		<a
-			href={`mailto:${email}`}
-			class="text-primary hover:text-primary-dark font-semibold text-sm"
-		>
+		<a href={`mailto:${email}`} class="text-primary hover:text-primary-dark font-semibold text-sm">
 			{email}
 		</a>
 		<a

@@ -32,6 +32,10 @@ const iconColor = status === 'coming-soon' ? 'text-orange/10' : 'text-primary/10
 	</svg>
 	<div class="relative z-10">
 		<h4 class="text-xl font-bold text-gray-900">{title}</h4>
-		{status === 'coming-soon' && <span class="text-sm text-orange font-semibold mt-1 inline-block">Coming Soon</span>}
+		{
+			status === 'coming-soon' && (
+				<span class="text-sm text-orange font-semibold mt-1 inline-block">Coming Soon</span>
+			)
+		}
 	</div>
 </div>
