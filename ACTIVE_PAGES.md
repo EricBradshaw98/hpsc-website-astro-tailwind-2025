@@ -20,20 +20,24 @@ The following pages are fully functional and accessible:
 All other pages redirect to the `/coming-soon` page, including:
 
 ### About Section
+
 - About the HPSC - `/about`
 - Strategy - `/about/strategy`
 - Get Involved - `/get-involved`
 
 ### Contractor Network Section
+
 - About the Network - `/contractor-network`
 - The Big Picture - `/the-big-picture`
 
 ### Resources Section
+
 - All Resources - `/resources`
 - Training - `/training`
 - Events - `/events`
 
 ### Legal & Policies
+
 - Site Map - `/sitemap`
 - Privacy Policy - `/privacy`
 - Disclaimers - `/disclaimers`
