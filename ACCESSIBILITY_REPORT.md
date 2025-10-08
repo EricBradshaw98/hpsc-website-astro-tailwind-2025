@@ -1,15 +1,15 @@
 # Accessibility Audit Report
 
-**Date:** 2025-10-08T14:15:17.059Z
+**Date:** 2025-10-08T14:22:06.283Z
 **Standard:** WCAG 2.1 Level AA
-**Total Issues:** 562
+**Total Issues:** 564
 **Pages Audited:** 13
 
 ## Summary by Page
 
 | Page | Issues |
 |------|--------|
-| Home | ⚠️ 57 |
+| Home | ⚠️ 59 |
 | About | ⚠️ 35 |
 | Our Team | ⚠️ 59 |
 | Strategy | ⚠️ 47 |
@@ -28,7 +28,7 @@
 | Type | Count |
 |------|-------|
 | warning | 399 |
-| error | 163 |
+| error | 165 |
 
 ## Detailed Issues
 
@@ -140,7 +140,7 @@ Skip to footer
 20. **This element's text is placed on a background image. Ensure the contrast ratio between the text and all covered parts of the image are at least 3:1.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.BgImage`
    - Selector: `#main-content > section:nth-child(8) > div:nth-child(3) > div:nth-child(1) > div`
-   - Context: `<div class="text-xl font-semibold text-primary">Residential Retrofit</div>...`
+   - Context: `<div class="text-xl font-semibold text-primary-dark">Residential Retrofit</div>...`
 
 21. **If this element contains a navigation section, it is recommended that it be marked up as a list.**
    - Code: `WCAG2AA.Principle1.Guideline1_3.1_3_1.H48`
@@ -247,87 +247,97 @@ Skip to footer
    - Selector: `#notifications-root`
    - Context: `<iframe data-v-6be13180="" id="notifications-root" title="Marker.io notification overlay" data-marke...`
 
-#### error (16)
+#### error (18)
 
 1. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 3:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #949494.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail`
    - Selector: `#main-content > section:nth-child(1) > div > div:nth-child(2) > h1`
-   - Context: `<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg"> Building a More Energy-E...`
+   - Context: `<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style="text-shadow: 2px 2px 4px rgba(0,0...`
 
-2. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #767676.**
+2. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 3:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #949494.**
+   - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail`
+   - Selector: `#main-content > section:nth-child(1) > div > div:nth-child(2) > p`
+   - Context: `<p class="text-xl md:text-2xl mb-8" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);"> Connecting ho...`
+
+3. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #767676.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(1) > div > div:nth-child(2) > nav > ul > li:nth-child(2) > a`
    - Context: `<a href="/about" class="inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semi...`
 
-3. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+4. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(3) > div > div:nth-child(1) > div:nth-child(2) > a`
-   - Context: `<a href="/contractor-network" class="text-primary font-medium hover:underline" aria-label="Explore N...`
+   - Context: `<a href="/contractor-network" class="text-primary-dark font-medium hover:underline" aria-label="Expl...`
 
-4. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > a`
-   - Context: `<a href="/resources" class="text-primary font-medium hover:underline" aria-label="View Resources"> V...`
+   - Context: `<a href="/resources" class="text-primary-dark font-medium hover:underline" aria-label="View Resource...`
 
-5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(3) > div > div:nth-child(3) > div:nth-child(2) > a`
-   - Context: `<a href="/about/strategy" class="text-primary font-medium hover:underline" aria-label="Learn About O...`
+   - Context: `<a href="/about/strategy" class="text-primary-dark font-medium hover:underline" aria-label="Learn Ab...`
 
-6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 3:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #949494.**
+7. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 3:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #949494.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail`
    - Selector: `#main-content > section:nth-child(6) > div:nth-child(3) > div > h2`
-   - Context: `<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg"> Ready to Impr...`
+   - Context: `<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6" style="text-shadow: 2px 2px 4...`
 
-7. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #767676.**
+8. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #767676.**
+   - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
+   - Selector: `#main-content > section:nth-child(6) > div:nth-child(3) > div > p`
+   - Context: `<p class="text-lg md:text-xl text-white mb-8" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);"> Con...`
+
+9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 1:1. Recommendation:  change text colour to #767676.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(6) > div:nth-child(3) > div > nav > ul > li:nth-child(2) > a`
    - Context: `<a href="/contact" class="inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-se...`
 
-8. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+10. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(11) > div:nth-child(1) > a`
-   - Context: `<a href="/resources/news" class="text-primary font-medium hover:underline" aria-label="View All"> Vi...`
+   - Context: `<a href="/resources/news" class="text-primary-dark font-medium hover:underline" aria-label="View All...`
 
-9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+11. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(11) > div:nth-child(2) > article:nth-child(1) > div > a:nth-child(4)`
-   - Context: `<a href="/resources/news/hpsc-launches-new-contractor-certification-program" class="text-primary fon...`
+   - Context: `<a href="/resources/news/hpsc-launches-new-contractor-certification-program" class="text-primary-dar...`
 
-10. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+12. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(11) > div:nth-child(2) > article:nth-child(2) > div > a:nth-child(4)`
-   - Context: `<a href="/resources/news/new-energy-efficiency-rebates-available" class="text-primary font-medium ho...`
+   - Context: `<a href="/resources/news/new-energy-efficiency-rebates-available" class="text-primary-dark font-medi...`
 
-11. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+13. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(11) > div:nth-child(2) > article:nth-child(3) > div > a:nth-child(4)`
-   - Context: `<a href="/resources/news/heat-pump-technology-advances" class="text-primary font-medium hover:underl...`
+   - Context: `<a href="/resources/news/heat-pump-technology-advances" class="text-primary-dark font-medium hover:u...`
 
-12. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+14. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(11) > div:nth-child(2) > article:nth-child(4) > div > a:nth-child(4)`
-   - Context: `<a href="/resources/news/insulation-best-practices-2025" class="text-primary font-medium hover:under...`
+   - Context: `<a href="/resources/news/insulation-best-practices-2025" class="text-primary-dark font-medium hover:...`
 
-13. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+15. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(11) > div:nth-child(2) > article:nth-child(5) > div > a:nth-child(4)`
-   - Context: `<a href="/resources/news/windows-doors-energy-star-updates" class="text-primary font-medium hover:un...`
+   - Context: `<a href="/resources/news/windows-doors-energy-star-updates" class="text-primary-dark font-medium hov...`
 
-14. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+16. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > section:nth-child(11) > div:nth-child(2) > article:nth-child(6) > div > a:nth-child(4)`
-   - Context: `<a href="/resources/news/solar-battery-storage-incentives" class="text-primary font-medium hover:und...`
+   - Context: `<a href="/resources/news/solar-battery-storage-incentives" class="text-primary-dark font-medium hove...`
 
-15. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+17. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-16. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+18. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### About
 
@@ -506,15 +516,15 @@ Skip to footer
    - Selector: `#main-content > div > section:nth-child(7) > div > a:nth-child(1) > span`
    - Context: `<span class="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-...`
 
-4. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+4. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Our Team
 
@@ -814,15 +824,15 @@ Interested in contributing to ...</p>...`
    - Selector: `#main-content > div > section:nth-child(7) > div > div > a:nth-child(1)`
    - Context: `<a href="/get-involved" class="px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gra...`
 
-32. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+32. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-33. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+33. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Strategy
 
@@ -1061,15 +1071,15 @@ Skip to footer
    - Selector: `#main-content > div > section:nth-child(5) > div > div > a:nth-child(1)`
    - Context: `<a href="/about/get-involved" class="px-8 py-3 bg-white text-primary rounded-lg font-semibold hover:...`
 
-19. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+19. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-20. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+20. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Contact
 
@@ -1238,15 +1248,15 @@ Skip to footer
    - Selector: `#main-content > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > p:nth-child(5) > a`
    - Context: `<a href="tel:+16047553469" class="text-primary hover:underline" data-astro-cid-uw5kdbxl="">(604) 755...`
 
-8. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+8. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Find a Contractor
 
@@ -1568,15 +1578,15 @@ Ongoing training in home perfo...</p>...`
    - Selector: `#feedback-form > div:nth-child(7) > label > a`
    - Context: `<a href="/privacy-policy" class="text-primary hover:text-primary-dark underline">Privacy Policy</a>...`
 
-5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Contractor Network
 
@@ -1740,15 +1750,15 @@ Skip to footer
    - Selector: `#main-content > div > section:nth-child(11) > div > div:nth-child(2) > div > div > h2`
    - Context: `<h2 class="text-2xl font-bold mb-4"></h2>...`
 
-4. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+4. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Resources
 
@@ -1967,15 +1977,15 @@ Can't find the resource you're...</p>...`
    - Selector: `#main-content > div > section:nth-child(6) > div > div > div > a:nth-child(1)`
    - Context: `<a href="/contact" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-primary rounded-lg ...`
 
-10. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+10. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-11. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+11. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### News Index
 
@@ -2225,15 +2235,15 @@ Get industry updates, training...</p>...`
    - Selector: `#main-content > div > div > aside > div:nth-child(2) > form > input`
    - Context: `<input type="search" name="q" placeholder="Search articles..." class="w-full pl-10 pr-4 py-2 border ...`
 
-17. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+17. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-18. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+18. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Guides Index
 
@@ -2437,60 +2447,60 @@ Skip to footer
    - Selector: `#difficulty-filter`
    - Context: `<select id="difficulty-filter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus...`
 
-9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(4) > div > a:nth-child(1) > div > div:nth-child(2) > div:nth-child(2) > span`
-   - Context: `<span class="text-primary font-medium group-hover:underline"> Start Guide → </span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline"> Start Guide → </span>...`
 
-10. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+10. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(4) > div > a:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > span`
-   - Context: `<span class="text-primary font-medium group-hover:underline"> Start Guide → </span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline"> Start Guide → </span>...`
 
-11. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+11. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(5) > div > a:nth-child(1) > div:nth-child(2) > div:nth-child(4) > span:nth-child(2)`
-   - Context: `<span class="text-primary font-medium group-hover:underline">Start →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">Start →</span>...`
 
-12. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+12. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(5) > div > a:nth-child(2) > div:nth-child(2) > div:nth-child(4) > span:nth-child(2)`
-   - Context: `<span class="text-primary font-medium group-hover:underline">Start →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">Start →</span>...`
 
-13. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+13. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(5) > div > a:nth-child(3) > div:nth-child(2) > div:nth-child(4) > span:nth-child(2)`
-   - Context: `<span class="text-primary font-medium group-hover:underline">Start →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">Start →</span>...`
 
-14. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+14. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(6) > div > a:nth-child(1) > div:nth-child(2) > div:nth-child(4) > span:nth-child(2)`
-   - Context: `<span class="text-primary font-medium group-hover:underline">Start →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">Start →</span>...`
 
-15. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+15. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(6) > div > a:nth-child(2) > div:nth-child(2) > div:nth-child(4) > span:nth-child(2)`
-   - Context: `<span class="text-primary font-medium group-hover:underline">Start →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">Start →</span>...`
 
-16. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+16. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(6) > div > a:nth-child(3) > div:nth-child(2) > div:nth-child(4) > span:nth-child(2)`
-   - Context: `<span class="text-primary font-medium group-hover:underline">Start →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">Start →</span>...`
 
-17. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+17. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section:nth-child(6) > div > a:nth-child(4) > div:nth-child(2) > div:nth-child(4) > span:nth-child(2)`
-   - Context: `<span class="text-primary font-medium group-hover:underline">Start →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">Start →</span>...`
 
-18. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+18. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-19. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+19. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Documents Index
 
@@ -2649,20 +2659,20 @@ Skip to footer
    - Selector: `#category-filter`
    - Context: `<select id="category-filter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:r...`
 
-7. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change text colour to #0080a9.**
+7. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change text colour to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#main-content > div > section > div > a > div:nth-child(2) > div:nth-child(4) > span`
-   - Context: `<span class="text-primary font-medium group-hover:underline">View →</span>...`
+   - Context: `<span class="text-primary-dark font-medium group-hover:underline">View →</span>...`
 
-8. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+8. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+9. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### Coming Soon
 
@@ -2831,15 +2841,15 @@ Skip to footer
    - Selector: `#main-content > div:nth-child(1) > nav > ol > li > a > span`
    - Context: `<span itemprop="name">Coming Soon</span>...`
 
-5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
 ### 404 Page
 
@@ -2998,13 +3008,13 @@ Skip to footer
    - Selector: `#main-content > div > div > p > a`
    - Context: `<a href="/contact" class="text-primary hover:underline font-medium">contact us</a>...`
 
-5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+5. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#cookie-accept-btn`
-   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary text-white round...`
+   - Context: `<button id="cookie-accept-btn" class="flex-1 md:flex-initial px-6 py-2.5 bg-primary-dark text-white ...`
 
-6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 2.35:1. Recommendation:  change background to #0080a9.**
+6. **This element has insufficient contrast at this conformance level. Expected a contrast ratio of at least 4.5:1, but text in this element has a contrast ratio of 3.43:1. Recommendation:  change background to #007faa.**
    - Code: `WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail`
    - Selector: `#reset-all`
-   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded t...`
+   - Context: `<button id="reset-all" class="w-full px-4 py-2 bg-primary-dark hover:bg-primary-900 text-white round...`
 
