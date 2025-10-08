@@ -9,15 +9,17 @@ export default {
 			},
 			colors: {
 				primary: {
-					DEFAULT: '#00b6f0',
-					light: '#33c4f3',
-					dark: '#0095c7',
+					DEFAULT: '#0080a9', // WCAG AA compliant (was #00b6f0)
+					light: '#00b6f0', // Original color for backgrounds only
+					lighter: '#33c4f3',
+					dark: '#006d90',
+					darker: '#0095c7',
 					50: '#e6f7fd',
 					100: '#b3e8fa',
 					200: '#80d9f7',
 					300: '#4dcaf4',
 					400: '#1abcf1',
-					500: '#00b6f0',
+					500: '#0080a9', // WCAG AA compliant
 					600: '#0092c0',
 					700: '#006d90',
 					800: '#004960',
@@ -28,8 +30,10 @@ export default {
 					pink: '#f78da7',
 					red: '#cf2e2e',
 					orange: '#ff6900',
-					green: '#00d084',
-					blue: '#0693e3',
+					green: '#008857', // WCAG AA compliant (was #00d084)
+					'green-light': '#00d084', // Original for backgrounds
+					blue: '#007cc2', // WCAG AA compliant (was #0693e3)
+					'blue-light': '#0693e3', // Original for backgrounds
 					purple: '#9b51e0',
 				},
 			},
