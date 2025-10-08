@@ -32,7 +32,7 @@ const { backgroundImage, heading, description, ctas } = Astro.props;
 	<!-- Content -->
 	<div class="relative z-10 h-full flex items-center px-4 md:px-16 py-8 md:py-0">
 		<div class="w-full">
-			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">
 				{heading}
 			</h2>
 			<p class="text-lg md:text-xl text-white/95 mb-8">
@@ -48,7 +48,7 @@ const { backgroundImage, heading, description, ctas } = Astro.props;
 									class={
 										cta.style === 'primary'
 											? 'inline-block px-8 py-3 rounded-lg font-semibold transition-colors bg-white text-primary-900 hover:bg-primary-50 shadow-lg'
-											: 'inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-900 transition-colors'
+											: 'inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-900 transition-colors shadow-md'
 									}
 								>
 									{cta.text}

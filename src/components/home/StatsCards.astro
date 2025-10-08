@@ -59,7 +59,7 @@ const { stats } = Astro.props;
 							<div class="flex items-center justify-between">
 								<div class="flex items-center gap-3">
 									<div
-										class={`w-8 h-8 bg-white rounded-lg flex items-center justify-center ${stat.textColor} text-xl`}
+										class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-gray-800 text-xl"
 									>
 										{stat.emoji}
 									</div>
@@ -68,7 +68,7 @@ const { stats } = Astro.props;
 									</div>
 								</div>
 								<button
-									class={`w-8 h-8 bg-white rounded-full flex items-center justify-center ${stat.textColor} text-xl font-bold hover:bg-gray-100 transition-colors`}
+									class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 text-xl font-bold hover:bg-gray-100 transition-colors"
 									aria-label={`Expand ${stat.title} information`}
 									tabindex="-1"
 								>
@@ -83,7 +83,7 @@ const { stats } = Astro.props;
 							<div class="text-white/90 text-xs mb-4">{stat.detailsSubtext}</div>
 							<a
 								href={stat.link.href}
-								class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-primary px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 border-2 border-white"
+								class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-primary-900 px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 border-2 border-white"
 							>
 								{stat.link.text}
 								<svg

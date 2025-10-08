@@ -22,7 +22,8 @@
       "Bash(npm audit:*)",
       "Bash(git pull:*)",
       "Bash(git stash:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

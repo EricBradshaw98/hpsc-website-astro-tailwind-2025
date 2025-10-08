@@ -244,7 +244,7 @@ function buildSortUrl(newSort: 'date' | 'title'): string {
 							<div class="flex items-center justify-between">
 								<a
 									href={`/news/${article.slug}`}
-									class="text-primary font-medium hover:underline"
+									class="text-primary-dark font-medium hover:underline"
 									aria-label={`Read more about ${article.title}`}
 								>
 									Read More →
@@ -306,7 +306,7 @@ function buildSortUrl(newSort: 'date' | 'title'): string {
 	) : (
 		<div class="bg-gray-50 rounded-lg p-12 text-center">
 			<p class="text-xl text-gray-600 mb-4">No articles found matching your filters.</p>
-			<a href="/news" class="text-primary font-medium hover:underline">
+			<a href="/news" class="text-primary-dark font-medium hover:underline">
 				Clear filters and view all articles →
 			</a>
 		</div>
