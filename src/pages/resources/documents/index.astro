@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import DocumentCard, { type DocumentCardProps } from '../../../components/resources/DocumentCard.astro';
 
 // Document list - this could be fetched from a CMS or database later
 const documents = [
@@ -13,17 +14,6 @@ const documents = [
 		fileType: 'pdf', // Options: 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
 	},
 ];
-
-// File type icon paths
-const fileTypeIcons: Record<string, string> = {
-	pdf: 'M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z',
-	doc: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
-	docx: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
-	xls: 'M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
-	xlsx: 'M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
-	ppt: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
-	pptx: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
-};
 
 // Group documents by category
 const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) => {
@@ -97,53 +87,7 @@ const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) =
 					{category}
 				</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{docs.map((doc: any) => (
-						<a
-							href={`/resources/documents/${doc.slug}`}
-							class="document-card group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary relative"
-							data-title={doc.title.toLowerCase()}
-							data-category={doc.category}
-						>
-							<!-- Background SVG Icon -->
-							<div class="absolute right-0 bottom-0 opacity-5 pointer-events-none">
-								<svg
-									class="w-48 h-48 text-primary"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="1.5"
-										d={fileTypeIcons[doc.fileType] || fileTypeIcons.pdf}
-									/>
-								</svg>
-							</div>
-							<div class="p-6 relative z-10">
-								<div class="flex items-start justify-between mb-4">
-									<span class="text-xs text-gray-500 font-medium uppercase bg-gray-100 px-2 py-1 rounded">
-										{doc.fileType.toUpperCase()}
-									</span>
-									<span class="text-xs text-gray-500 font-medium">{doc.fileSize}</span>
-								</div>
-								<h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-									{doc.title}
-								</h3>
-								<p class="text-sm text-gray-600 mb-4 line-clamp-2">{doc.description}</p>
-								<div class="flex items-center justify-between text-sm text-gray-500">
-									<time datetime={doc.date}>
-										{new Date(doc.date).toLocaleDateString('en-US', {
-											month: 'short',
-											day: 'numeric',
-											year: 'numeric',
-										})}
-									</time>
-									<span class="text-primary font-medium group-hover:underline">View →</span>
-								</div>
-							</div>
-						</a>
-					))}
+					{docs.map((doc: any) => <DocumentCard {...doc} />)}
 				</div>
 			</section>
 		))
