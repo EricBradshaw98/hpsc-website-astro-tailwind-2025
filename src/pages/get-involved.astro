@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import InvolvementCard, {
 	type InvolvementCardProps,
 } from '../components/involvement/InvolvementCard.astro';
+import OpportunityCard, {
+	type OpportunityCardProps,
+} from '../components/involvement/OpportunityCard.astro';
 
 const involvementOptions: InvolvementCardProps[] = [
 	{
@@ -40,6 +43,33 @@ const involvementOptions: InvolvementCardProps[] = [
 		ctaText: 'Contact Us',
 		ctaHref: 'mailto:info@homeperformance.ca',
 		external: false,
+	},
+];
+
+const additionalOpportunities: OpportunityCardProps[] = [
+	{
+		icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+		title: 'Attend Events & Training',
+		description:
+			'Participate in conferences, workshops, and training sessions to expand your knowledge and network.',
+		linkText: 'View Events',
+		linkHref: '/events',
+	},
+	{
+		icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+		title: 'Become an HPCN Member',
+		description:
+			'Join the Home Performance Contractor Network to access exclusive benefits and recognition.',
+		linkText: 'Learn More',
+		linkHref: '/contractor-network',
+		ariaLabel: 'Learn more about joining the Home Performance Contractor Network',
+	},
+	{
+		icon: 'M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z',
+		title: 'Share Your Feedback',
+		description: 'Help us improve by sharing your thoughts, ideas, and suggestions for the industry.',
+		linkText: 'Contact Us',
+		linkHref: '/contact',
 	},
 ];
 ---
@@ -199,97 +229,7 @@ const involvementOptions: InvolvementCardProps[] = [
 	<section class="mb-16">
 		<h2 class="text-3xl font-bold text-gray-900 mb-8">Other Ways to Participate</h2>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-			<!-- Attend Events -->
-			<div
-				class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-			>
-				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-					<svg
-						class="w-6 h-6 text-primary"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Attend Events & Training</h3>
-				<p class="text-gray-600 text-sm mb-4">
-					Participate in conferences, workshops, and training sessions to expand your knowledge and
-					network.
-				</p>
-				<a href="/events" class="text-primary font-semibold hover:underline text-sm">
-					View Events →
-				</a>
-			</div>
-
-			<!-- Join HPCN -->
-			<div
-				class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-			>
-				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-					<svg
-						class="w-6 h-6 text-primary"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Become an HPCN Member</h3>
-				<p class="text-gray-600 text-sm mb-4">
-					Join the Home Performance Contractor Network to access exclusive benefits and recognition.
-				</p>
-				<a
-					href="/contractor-network"
-					class="text-primary font-semibold hover:underline text-sm"
-					aria-label="Learn more about joining the Home Performance Contractor Network"
-				>
-					Learn More →
-				</a>
-			</div>
-
-			<!-- Provide Feedback -->
-			<div
-				class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-			>
-				<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-					<svg
-						class="w-6 h-6 text-primary"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-						></path>
-					</svg>
-				</div>
-				<h3 class="text-lg font-bold text-gray-900 mb-2">Share Your Feedback</h3>
-				<p class="text-gray-600 text-sm mb-4">
-					Help us improve by sharing your thoughts, ideas, and suggestions for the industry.
-				</p>
-				<a href="/contact" class="text-primary font-semibold hover:underline text-sm">
-					Contact Us →
-				</a>
-			</div>
+			{additionalOpportunities.map((opportunity) => <OpportunityCard {...opportunity} />)}
 		</div>
 	</section>
 

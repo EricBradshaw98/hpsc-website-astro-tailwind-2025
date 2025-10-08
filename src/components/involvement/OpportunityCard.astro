@@ -1,0 +1,39 @@
+---
+export interface OpportunityCardProps {
+	icon: string;
+	title: string;
+	description: string;
+	linkText: string;
+	linkHref: string;
+	ariaLabel?: string;
+}
+
+interface Props extends OpportunityCardProps {}
+
+const { icon, title, description, linkText, linkHref, ariaLabel } = Astro.props;
+---
+
+<div
+	class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+>
+	<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+		<svg
+			class="w-6 h-6 text-primary"
+			fill="none"
+			stroke="currentColor"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+		</svg>
+	</div>
+	<h3 class="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+	<p class="text-gray-600 text-sm mb-4">{description}</p>
+	<a
+		href={linkHref}
+		class="text-primary font-semibold hover:underline text-sm"
+		aria-label={ariaLabel}
+	>
+		{linkText} →
+	</a>
+</div>
