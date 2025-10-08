@@ -1,6 +1,40 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import ResourceCategoryCard from '../../components/resources/ResourceCategoryCard.astro';
+
+// Resource categories data
+const resourceCategories = [
+	{
+		title: 'News & Updates',
+		description:
+			'Stay informed with the latest news, announcements, and industry updates from HPSC and the home performance sector.',
+		href: '/resources/news',
+		image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop',
+		icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
+		linkText: 'Explore News',
+		loading: 'eager' as const,
+	},
+	{
+		title: 'Guides & Best Practices',
+		description:
+			'Comprehensive guides covering building science, energy efficiency, retrofit techniques, and industry best practices.',
+		href: '/resources/guides',
+		image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop',
+		icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+		linkText: 'Browse Guides',
+		loading: 'lazy' as const,
+	},
+	{
+		title: 'Documents & Forms',
+		description:
+			'Access important documents, forms, technical specifications, and downloadable resources for contractors and homeowners.',
+		href: '/resources/documents',
+		image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop',
+		icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+		linkText: 'View Documents',
+		loading: 'lazy' as const,
+	},
+];
 ---
 
 <Layout
@@ -21,188 +55,7 @@ import { Image } from 'astro:assets';
 	<!-- Resource Categories -->
 	<section class="mb-16">
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-			<!-- News & Updates -->
-			<a
-				href="/resources/news"
-				class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 hover:border-primary"
-			>
-				<div class="relative h-64 overflow-hidden">
-					<Image
-						src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop"
-						alt="News & Updates"
-						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-						width={800}
-						height={600}
-						loading="eager"
-					/>
-					<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-					<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-						<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-							<svg
-								class="w-6 h-6 text-white"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-								aria-hidden="true"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-								></path>
-							</svg>
-						</div>
-						<h2 class="text-2xl font-bold mb-2">News & Updates</h2>
-					</div>
-				</div>
-				<div class="p-6">
-					<p class="text-gray-600 mb-4">
-						Stay informed with the latest news, announcements, and industry updates from HPSC and
-						the home performance sector.
-					</p>
-					<span
-						class="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all"
-					>
-						Explore News
-						<svg
-							class="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-						</svg>
-					</span>
-				</div>
-			</a>
-
-			<!-- Guides & Best Practices -->
-			<a
-				href="/resources/guides"
-				class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 hover:border-primary"
-			>
-				<div class="relative h-64 overflow-hidden">
-					<Image
-						src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
-						alt="Guides & Best Practices"
-						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-						width={800}
-						height={600}
-						loading="lazy"
-					/>
-					<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-					<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-						<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-							<svg
-								class="w-6 h-6 text-white"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-								aria-hidden="true"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-								></path>
-							</svg>
-						</div>
-						<h2 class="text-2xl font-bold mb-2">Guides & Best Practices</h2>
-					</div>
-				</div>
-				<div class="p-6">
-					<p class="text-gray-600 mb-4">
-						Comprehensive guides covering building science, energy efficiency, retrofit techniques,
-						and industry best practices.
-					</p>
-					<span
-						class="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all"
-					>
-						Browse Guides
-						<svg
-							class="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-						</svg>
-					</span>
-				</div>
-			</a>
-
-			<!-- Documents & Forms -->
-			<a
-				href="/resources/documents"
-				class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 hover:border-primary"
-			>
-				<div class="relative h-64 overflow-hidden">
-					<Image
-						src="https://images.unsplash.com/photo-1568667256549-094345857637?w=800&h=600&fit=crop"
-						alt="Documents & Forms"
-						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-						width={800}
-						height={600}
-						loading="lazy"
-					/>
-					<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-					<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-						<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-							<svg
-								class="w-6 h-6 text-white"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-								aria-hidden="true"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-								></path>
-							</svg>
-						</div>
-						<h2 class="text-2xl font-bold mb-2">Documents & Forms</h2>
-					</div>
-				</div>
-				<div class="p-6">
-					<p class="text-gray-600 mb-4">
-						Access essential documents, application forms, technical specifications, and
-						certification materials.
-					</p>
-					<span
-						class="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all"
-					>
-						View Documents
-						<svg
-							class="w-5 h-5"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-						</svg>
-					</span>
-				</div>
-			</a>
+			{resourceCategories.map((category) => <ResourceCategoryCard {...category} />)}
 		</div>
 	</section>
 

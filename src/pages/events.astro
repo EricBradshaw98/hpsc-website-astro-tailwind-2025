@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
+import EventCard from '../components/events/EventCard.astro';
 
 // Mock events data
 const events = [
@@ -277,136 +278,11 @@ function formatDate(dateString: string, endDateString?: string | null) {
 		<h2 class="text-3xl font-bold text-gray-900 mb-8">Upcoming Events</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-grid">
 			{
-				events.slice(1).map((event) => (
-					<article
-						data-type={event.type}
-						class="event-card bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200"
-					>
-						<div class="relative h-48 overflow-hidden">
-							<Image
-								src={event.image}
-								alt={event.title}
-								class="w-full h-full object-cover"
-								width={1200}
-								height={800}
-								loading="lazy"
-							/>
-							<div class="absolute top-4 left-4">
-								<span class="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">
-									{event.type}
-								</span>
-							</div>
-							<div class="absolute top-4 right-4">
-								<span
-									class={`px-3 py-1 text-white text-xs font-semibold rounded-full ${
-										event.status === 'Registration Open' ? 'bg-green' : 'bg-orange'
-									}`}
-								>
-									{event.status}
-								</span>
-							</div>
-						</div>
-						<div class="p-6">
-							<h3 class="text-xl font-bold text-gray-900 mb-3">{event.title}</h3>
-							<div class="space-y-2 mb-4">
-								<div class="flex items-start gap-2 text-sm text-gray-600">
-									<svg
-										class="w-4 h-4 flex-shrink-0 mt-0.5"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-										aria-hidden="true"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-										/>
-									</svg>
-									<span>{formatDate(event.date, event.endDate)}</span>
-								</div>
-								<div class="flex items-start gap-2 text-sm text-gray-600">
-									<svg
-										class="w-4 h-4 flex-shrink-0 mt-0.5"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-										aria-hidden="true"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-										/>
-									</svg>
-									<span>{event.time}</span>
-								</div>
-								<div class="flex items-start gap-2 text-sm text-gray-600">
-									<svg
-										class="w-4 h-4 flex-shrink-0 mt-0.5"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-										aria-hidden="true"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-										/>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-										/>
-									</svg>
-									<span>{event.location}</span>
-								</div>
-							</div>
-							<p class="text-gray-600 text-sm mb-4">{event.description}</p>
-							<div class="mb-4">
-								<ul class="space-y-1">
-									{event.highlights.slice(0, 3).map((highlight) => (
-										<li class="flex items-start gap-2 text-xs text-gray-600">
-											<svg
-												class="w-3 h-3 text-primary flex-shrink-0 mt-0.5"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-												aria-hidden="true"
-											>
-												<path
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													stroke-width="2"
-													d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-												/>
-											</svg>
-											<span>{highlight}</span>
-										</li>
-									))}
-								</ul>
-							</div>
-							<div class="pt-4 border-t border-gray-200 flex items-center justify-between">
-								<span class="text-lg font-bold text-primary">{event.price}</span>
-								<a
-									href="/contact"
-									class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-semibold"
-									aria-label={`${event.status === 'Registration Open' ? 'Register for' : 'Learn more about'} ${event.title}`}
-								>
-									{event.status === 'Registration Open' ? 'Register' : 'Learn More'}
-								</a>
-							</div>
-						</div>
-					</article>
-				))
+				events.slice(1).map((event) => <EventCard {...event} />)
 			}
 		</div>
 	</section>
+
 
 	<!-- Newsletter CTA -->
 	<section>

@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import TrainingProgramCard from '../components/training/TrainingProgramCard.astro';
 
 // Mock training programs data
 const trainingPrograms = [
@@ -247,119 +247,7 @@ const categories = ['All', ...new Set(trainingPrograms.map((p) => p.category))];
 	<!-- Training Programs Grid -->
 	<section class="mb-16">
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="programs-grid">
-			{
-				trainingPrograms.map((program) => (
-					<article
-						data-category={program.category}
-						class="training-program bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-200"
-					>
-						<div class="relative h-48 overflow-hidden">
-							<Image
-								src={program.image}
-								alt={program.title}
-								class="w-full h-full object-cover"
-								width={800}
-								height={600}
-								loading="lazy"
-							/>
-							<div class="absolute top-4 right-4">
-								<span class="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">
-									{program.category}
-								</span>
-							</div>
-						</div>
-						<div class="p-6">
-							<h3 class="text-xl font-bold text-gray-900 mb-3">{program.title}</h3>
-							<div class="space-y-2 mb-4">
-								<div class="flex items-center gap-2 text-sm text-gray-600">
-									<svg
-										class="w-4 h-4"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-										aria-hidden="true"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-										/>
-									</svg>
-									<span>{program.duration}</span>
-								</div>
-								<div class="flex items-center gap-2 text-sm text-gray-600">
-									<svg
-										class="w-4 h-4"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-										aria-hidden="true"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M13 10V3L4 14h7v7l9-11h-7z"
-										/>
-									</svg>
-									<span>{program.level}</span>
-								</div>
-								<div class="flex items-center gap-2 text-sm text-gray-600">
-									<svg
-										class="w-4 h-4"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-										aria-hidden="true"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-										/>
-									</svg>
-									<span>{program.format}</span>
-								</div>
-							</div>
-							<p class="text-gray-600 text-sm mb-4">{program.description}</p>
-							<div class="mb-4">
-								<h4 class="font-semibold text-gray-900 text-sm mb-2">Topics covered:</h4>
-								<ul class="space-y-1">
-									{program.topics.slice(0, 3).map((topic) => (
-										<li class="flex items-start gap-2 text-xs text-gray-600">
-											<svg
-												class="w-3 h-3 text-primary flex-shrink-0 mt-0.5"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-											>
-												<path
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													stroke-width="2"
-													d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-												/>
-											</svg>
-											<span>{topic}</span>
-										</li>
-									))}
-								</ul>
-							</div>
-							<div class="pt-4 border-t border-gray-200 flex items-center justify-between">
-								<span class="text-lg font-bold text-primary">{program.price}</span>
-								<a
-									href="/contact"
-									class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-semibold"
-								>
-									Register
-								</a>
-							</div>
-						</div>
-					</article>
-				))
-			}
+			{trainingPrograms.map((program) => <TrainingProgramCard {...program} />)}
 		</div>
 	</section>
 

@@ -300,7 +300,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<!-- Custom head content from pages -->
 		<slot name="head" />
 	</head>
-	<body class="min-h-screen bg-white text-gray-900 flex flex-col">
+	<body class="min-h-screen bg-white text-gray-900 flex flex-col" data-lenis>
 		<!-- Skip links for accessibility -->
 		<div class="skip-links">
 			<a href="#main-content" class="skip-link"> Skip to main content </a>
@@ -332,5 +332,36 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<Footer />
 		<CookieBanner />
 		<AccessibilityTab />
+
+		<!-- Lenis Smooth Scroll -->
+		<script>
+			import Lenis from 'lenis';
+
+			// Initialize Lenis
+			const lenis = new Lenis({
+				duration: 1.2, // Duration of scroll animation in seconds
+				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function for smooth inertia
+				orientation: 'vertical', // Scroll direction
+				gestureOrientation: 'vertical',
+				smoothWheel: true, // Enable smooth scrolling for mouse wheel
+				wheelMultiplier: 1, // Multiplier for wheel scroll speed
+				smoothTouch: false, // Disable on touch devices to avoid conflicts
+				touchMultiplier: 2,
+				infinite: false,
+			});
+
+			// Request animation frame loop for Lenis
+			function raf(time: number) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+
+			requestAnimationFrame(raf);
+
+			// Sync Lenis with Astro View Transitions
+			document.addEventListener('astro:page-load', () => {
+				lenis.scrollTo(0, { immediate: true });
+			});
+		</script>
 	</body>
 </html>

@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+	title: string;
+	category: string;
+	duration: string;
+	level: string;
+	format: string;
+	description: string;
+	image: string;
+	topics: string[];
+	price: string;
+}
+
+const { title, category, duration, level, format, description, image, topics, price } = Astro.props;
+---
+
+<article
+	data-category={category}
+	class="training-program bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-200"
+>
+	<div class="relative h-48 overflow-hidden">
+		<Image
+			src={image}
+			alt={title}
+			class="w-full h-full object-cover"
+			width={800}
+			height={600}
+			loading="lazy"
+		/>
+		<div class="absolute top-4 right-4">
+			<span class="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">
+				{category}
+			</span>
+		</div>
+	</div>
+	<div class="p-6">
+		<h3 class="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+		<div class="space-y-2 mb-4">
+			<div class="flex items-center gap-2 text-sm text-gray-600">
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+				</svg>
+				<span>{duration}</span>
+			</div>
+			<div class="flex items-center gap-2 text-sm text-gray-600">
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+					></path>
+				</svg>
+				<span>{level}</span>
+			</div>
+			<div class="flex items-center gap-2 text-sm text-gray-600">
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+					></path>
+				</svg>
+				<span>{format}</span>
+			</div>
+		</div>
+		<p class="text-gray-600 text-sm mb-4 line-clamp-3">{description}</p>
+		<div class="mb-4">
+			<p class="text-sm font-semibold text-gray-900 mb-2">Topics Covered:</p>
+			<ul class="space-y-1">
+				{
+					topics.map((topic) => (
+						<li class="flex items-start gap-2 text-sm text-gray-600">
+							<svg
+								class="w-4 h-4 text-primary flex-shrink-0 mt-0.5"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+								aria-hidden="true"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+							<span>{topic}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+		<div class="flex items-center justify-between pt-4 border-t border-gray-200">
+			<div>
+				<p class="text-sm text-gray-500">Price</p>
+				<p class="text-lg font-bold text-primary">{price}</p>
+			</div>
+			<button
+				class="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-sm font-semibold rounded-lg transition-colors"
+			>
+				Learn More
+			</button>
+		</div>
+	</div>
+</article>
