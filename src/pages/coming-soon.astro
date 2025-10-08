@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Coming Soon | Home Performance Stakeholder Council"
+	description="Something exciting is on the way. Stay tuned for updates from HPSC."
+	fullWidth={true}
+>
+	<div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-900 via-primary-700 to-primary-500">
+		<!-- Animated background pattern -->
+		<div class="absolute inset-0 opacity-10">
+			<div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full filter blur-3xl animate-pulse"></div>
+			<div class="absolute bottom-0 right-0 w-96 h-96 bg-accent-green rounded-full filter blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+			<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent-blue rounded-full filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+		</div>
+
+		<!-- Content -->
+		<div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+			<!-- Logo/Icon -->
+			<div class="mb-8 flex justify-center">
+				<div class="relative">
+					<svg class="w-24 h-24 sm:w-32 sm:h-32 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+					</svg>
+					<div class="absolute -top-2 -right-2 w-8 h-8 bg-accent-green rounded-full animate-ping"></div>
+				</div>
+			</div>
+
+			<!-- Heading -->
+			<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
+				Coming Soon
+			</h1>
+
+			<!-- Subheading -->
+			<p class="text-xl sm:text-2xl lg:text-3xl text-primary-100 mb-8 font-light">
+				We're building something amazing
+			</p>
+
+			<!-- Description -->
+			<p class="text-lg sm:text-xl text-primary-50 mb-12 max-w-2xl mx-auto leading-relaxed">
+				We're working hard to bring you an exciting new experience. Check back soon for updates from the Home Performance Stakeholder Council.
+			</p>
+
+			<!-- CTA Buttons -->
+			<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+				<a
+					href="/"
+					class="inline-flex items-center px-8 py-4 text-lg font-semibold text-primary-700 bg-white rounded-lg hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+				>
+					<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+					</svg>
+					Back to Home
+				</a>
+				<a
+					href="/contact"
+					class="inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-primary-800 bg-opacity-50 backdrop-blur-sm rounded-lg hover:bg-opacity-70 transition-all duration-300 border-2 border-white border-opacity-30 transform hover:-translate-y-1"
+				>
+					Contact Us
+					<svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+					</svg>
+				</a>
+			</div>
+
+			<!-- Social links or additional info -->
+			<div class="text-primary-100">
+				<p class="text-sm mb-4">Stay connected with us</p>
+				<div class="flex justify-center gap-6">
+					<a href="#" class="text-white hover:text-accent-green transition-colors duration-300" aria-label="Follow us on social media">
+						<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Decorative elements -->
+		<div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-20"></div>
+	</div>
+</Layout>
+
+<style>
+	@keyframes pulse {
+		0%, 100% {
+			opacity: 0.1;
+		}
+		50% {
+			opacity: 0.2;
+		}
+	}
+
+	@keyframes bounce {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	@keyframes ping {
+		75%, 100% {
+			transform: scale(2);
+			opacity: 0;
+		}
+	}
+
+	.animate-pulse {
+		animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	}
+
+	.animate-bounce {
+		animation: bounce 2s ease-in-out infinite;
+	}
+
+	.animate-ping {
+		animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+	}
+</style>
