@@ -335,3 +335,26 @@ html.lenis body {
 		animation: none;
 	}
 }
+
+/* Reduce motion when accessibility setting is enabled */
+body.reduce-motion,
+body.reduce-motion * {
+	animation-duration: 0.01ms !important;
+	animation-iteration-count: 1 !important;
+	transition-duration: 0.01ms !important;
+	scroll-behavior: auto !important;
+}
+
+body.reduce-motion ::view-transition-old(root),
+body.reduce-motion ::view-transition-new(root) {
+	animation: none !important;
+}
+
+/* Disable Lenis smooth scroll when reduce motion is enabled */
+body.reduce-motion.lenis {
+	scroll-behavior: auto !important;
+}
+
+body.reduce-motion .lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}

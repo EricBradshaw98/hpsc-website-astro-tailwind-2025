@@ -1,7 +1,4 @@
----
-// Accessibility Tab component that slides out on hover
----
-
+<!-- Accessibility Tab component that slides out on hover -->
 <div class="accessibility-tab-container fixed left-0 top-1/2 -translate-y-1/2 z-50">
 	<div
 		id="accessibility-tab-wrapper"
@@ -11,7 +8,7 @@
 		<!-- Tab Content Panel -->
 		<div
 			id="accessibility-tab-panel"
-			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 max-w-[calc(100vw-48px)] transition-opacity duration-300 border-2 border-white"
+			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 max-w-[calc(100vw-48px)] transition-opacity duration-300 border-2 border-white overflow-hidden"
 			style="opacity: 0;"
 		>
 			<h2 class="text-xl font-bold mb-4 flex items-center gap-2">
@@ -65,10 +62,21 @@
 			<div class="mb-4">
 				<label class="flex items-center justify-between cursor-pointer">
 					<span class="text-sm font-medium">High Contrast</span>
-					<div class="relative">
-						<input type="checkbox" id="high-contrast" class="sr-only peer" />
+					<div class="relative flex-shrink-0">
+						<!-- only the input is the peer -->
+						<input
+							type="checkbox"
+							id="high-contrast"
+							class="sr-only peer"
+							aria-label="Enable high contrast"
+						/>
+						<!-- track: relative, knob via ::after -->
 						<div
-							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+							class="w-11 h-6 rounded-full bg-gray-700 peer-focus:outline-none transition-colors duration-200
+                     relative peer-checked:bg-primary
+                     after:content-[''] after:absolute after:h-5 after:w-5 after:top-0.5 after:left-0.5
+                     after:bg-white after:border after:border-gray-300 after:rounded-full after:transition-transform after:duration-200
+                     peer-checked:after:translate-x-5 peer-checked:after:border-white"
 						>
 						</div>
 					</div>
@@ -79,10 +87,19 @@
 			<div class="mb-4">
 				<label class="flex items-center justify-between cursor-pointer">
 					<span class="text-sm font-medium">Increased Line Height</span>
-					<div class="relative">
-						<input type="checkbox" id="line-height" class="sr-only peer" />
+					<div class="relative flex-shrink-0">
+						<input
+							type="checkbox"
+							id="line-height"
+							class="sr-only peer"
+							aria-label="Increase line height"
+						/>
 						<div
-							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+							class="w-11 h-6 rounded-full bg-gray-700 peer-focus:outline-none transition-colors duration-200
+                     relative peer-checked:bg-primary
+                     after:content-[''] after:absolute after:h-5 after:w-5 after:top-0.5 after:left-0.5
+                     after:bg-white after:border after:border-gray-300 after:rounded-full after:transition-transform after:duration-200
+                     peer-checked:after:translate-x-5 peer-checked:after:border-white"
 						>
 						</div>
 					</div>
@@ -93,10 +110,19 @@
 			<div class="mb-4">
 				<label class="flex items-center justify-between cursor-pointer">
 					<span class="text-sm font-medium">Letter Spacing</span>
-					<div class="relative">
-						<input type="checkbox" id="letter-spacing" class="sr-only peer" />
+					<div class="relative flex-shrink-0">
+						<input
+							type="checkbox"
+							id="letter-spacing"
+							class="sr-only peer"
+							aria-label="Enable letter spacing"
+						/>
 						<div
-							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+							class="w-11 h-6 rounded-full bg-gray-700 peer-focus:outline-none transition-colors duration-200
+                     relative peer-checked:bg-primary
+                     after:content-[''] after:absolute after:h-5 after:w-5 after:top-0.5 after:left-0.5
+                     after:bg-white after:border after:border-gray-300 after:rounded-full after:transition-transform after:duration-200
+                     peer-checked:after:translate-x-5 peer-checked:after:border-white"
 						>
 						</div>
 					</div>
@@ -107,10 +133,19 @@
 			<div class="mb-4">
 				<label class="flex items-center justify-between cursor-pointer">
 					<span class="text-sm font-medium">Reduce Motion</span>
-					<div class="relative">
-						<input type="checkbox" id="reduce-motion" class="sr-only peer" />
+					<div class="relative flex-shrink-0">
+						<input
+							type="checkbox"
+							id="reduce-motion"
+							class="sr-only peer"
+							aria-label="Reduce motion"
+						/>
 						<div
-							class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+							class="w-11 h-6 rounded-full bg-gray-700 peer-focus:outline-none transition-colors duration-200
+                     relative peer-checked:bg-primary
+                     after:content-[''] after:absolute after:h-5 after:w-5 after:top-0.5 after:left-0.5
+                     after:bg-white after:border after:border-gray-300 after:rounded-full after:transition-transform after:duration-200
+                     peer-checked:after:translate-x-5 peer-checked:after:border-white"
 						>
 						</div>
 					</div>
@@ -128,7 +163,10 @@
 
 		<!-- Tab Handle -->
 		<div
-			class="bg-primary text-white px-4 py-8 rounded-r-lg shadow-2xl cursor-pointer flex items-center border-r-4 border-white"
+			class="bg-primary text-white px-4 py-8 rounded-r-lg shadow-2xl cursor-pointer flex items-center border-r-4 border-white tab-handle"
+			role="button"
+			aria-label="Open Accessibility Options"
+			tabindex="0"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +211,7 @@
 	});
 
 	// High contrast toggle
-	const highContrastToggle = document.getElementById('high-contrast') as HTMLInputElement;
+	const highContrastToggle = document.getElementById('high-contrast');
 	highContrastToggle?.addEventListener('change', () => {
 		if (highContrastToggle.checked) {
 			document.body.classList.add('high-contrast');
@@ -185,7 +223,7 @@
 	});
 
 	// Line height toggle
-	const lineHeightToggle = document.getElementById('line-height') as HTMLInputElement;
+	const lineHeightToggle = document.getElementById('line-height');
 	lineHeightToggle?.addEventListener('change', () => {
 		if (lineHeightToggle.checked) {
 			document.body.classList.add('increased-line-height');
@@ -197,7 +235,7 @@
 	});
 
 	// Letter spacing toggle
-	const letterSpacingToggle = document.getElementById('letter-spacing') as HTMLInputElement;
+	const letterSpacingToggle = document.getElementById('letter-spacing');
 	letterSpacingToggle?.addEventListener('change', () => {
 		if (letterSpacingToggle.checked) {
 			document.body.classList.add('increased-letter-spacing');
@@ -209,7 +247,7 @@
 	});
 
 	// Reduce motion toggle
-	const reduceMotionToggle = document.getElementById('reduce-motion') as HTMLInputElement;
+	const reduceMotionToggle = document.getElementById('reduce-motion');
 	reduceMotionToggle?.addEventListener('change', () => {
 		if (reduceMotionToggle.checked) {
 			document.body.classList.add('reduce-motion');
@@ -218,6 +256,8 @@
 			document.body.classList.remove('reduce-motion');
 			localStorage.setItem('reduceMotion', 'false');
 		}
+		// Dispatch event to notify other parts of the app if needed
+		window.dispatchEvent(new CustomEvent('reduce-motion-changed'));
 	});
 
 	// Reset all settings
@@ -230,48 +270,65 @@
 			'increased-letter-spacing',
 			'reduce-motion'
 		);
-		if (highContrastToggle) highContrastToggle.checked = false;
-		if (lineHeightToggle) lineHeightToggle.checked = false;
-		if (letterSpacingToggle) letterSpacingToggle.checked = false;
-		if (reduceMotionToggle) reduceMotionToggle.checked = false;
+
+		const inputs = ['high-contrast', 'line-height', 'letter-spacing', 'reduce-motion'];
+		inputs.forEach((id) => {
+			const el = document.getElementById(id);
+			if (el) el.checked = false;
+		});
+
 		localStorage.removeItem('fontSize');
 		localStorage.removeItem('highContrast');
 		localStorage.removeItem('lineHeight');
 		localStorage.removeItem('letterSpacing');
 		localStorage.removeItem('reduceMotion');
+
+		// notify reduce-motion listeners
+		window.dispatchEvent(new CustomEvent('reduce-motion-changed'));
 	});
 
 	// Mobile tap support for accessibility tab
 	const tabWrapper = document.getElementById('accessibility-tab-wrapper');
 	const tabPanel = document.getElementById('accessibility-tab-panel');
-	const tabHandle = document.querySelector('.accessibility-tab-wrapper .bg-primary');
+	const tabHandle = document.querySelector('.tab-handle');
 	let isTabOpen = false;
+
+	function openTab() {
+		tabWrapper?.style.setProperty('transform', 'translateX(0)');
+		if (tabPanel) tabPanel.style.opacity = '1';
+		isTabOpen = true;
+	}
+	function closeTab() {
+		tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
+		if (tabPanel) tabPanel.style.opacity = '0';
+		isTabOpen = false;
+	}
 
 	tabHandle?.addEventListener('click', (e) => {
 		e.stopPropagation();
-		isTabOpen = !isTabOpen;
+		if (isTabOpen) closeTab();
+		else openTab();
+	});
 
-		if (isTabOpen) {
-			tabWrapper?.style.setProperty('transform', 'translateX(0)');
-			if (tabPanel) tabPanel.style.opacity = '1';
-		} else {
-			tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
-			if (tabPanel) tabPanel.style.opacity = '0';
+	// keyboard accessibility for handle
+	tabHandle?.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			if (isTabOpen) closeTab();
+			else openTab();
 		}
 	});
 
 	// Close tab when clicking outside on mobile
 	document.addEventListener('click', (e) => {
-		const target = e.target as HTMLElement;
+		const target = /** @type {HTMLElement} */ (e.target);
 		if (isTabOpen && !target.closest('.accessibility-tab-wrapper')) {
-			isTabOpen = false;
-			tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
-			if (tabPanel) tabPanel.style.opacity = '0';
+			closeTab();
 		}
 	});
 
-	// Load saved preferences on page load
-	window.addEventListener('DOMContentLoaded', () => {
+	// Load saved preferences function
+	function loadAccessibilitySettings() {
 		const savedFontSize = localStorage.getItem('fontSize');
 		if (savedFontSize) {
 			fontSize = parseInt(savedFontSize);
@@ -281,27 +338,37 @@
 		const savedHighContrast = localStorage.getItem('highContrast');
 		if (savedHighContrast === 'true') {
 			document.body.classList.add('high-contrast');
-			if (highContrastToggle) highContrastToggle.checked = true;
+			const hc = document.getElementById('high-contrast');
+			if (hc) hc.checked = true;
 		}
 
 		const savedLineHeight = localStorage.getItem('lineHeight');
 		if (savedLineHeight === 'true') {
 			document.body.classList.add('increased-line-height');
-			if (lineHeightToggle) lineHeightToggle.checked = true;
+			const lh = document.getElementById('line-height');
+			if (lh) lh.checked = true;
 		}
 
 		const savedLetterSpacing = localStorage.getItem('letterSpacing');
 		if (savedLetterSpacing === 'true') {
 			document.body.classList.add('increased-letter-spacing');
-			if (letterSpacingToggle) letterSpacingToggle.checked = true;
+			const ls = document.getElementById('letter-spacing');
+			if (ls) ls.checked = true;
 		}
 
 		const savedReduceMotion = localStorage.getItem('reduceMotion');
 		if (savedReduceMotion === 'true') {
 			document.body.classList.add('reduce-motion');
-			if (reduceMotionToggle) reduceMotionToggle.checked = true;
+			const rm = document.getElementById('reduce-motion');
+			if (rm) rm.checked = true;
 		}
-	});
+	}
+
+	// Load on initial page load
+	document.addEventListener('DOMContentLoaded', loadAccessibilitySettings);
+
+	// Load on Astro View Transitions navigation (if used)
+	document.addEventListener('astro:page-load', loadAccessibilitySettings);
 </script>
 
 <style>
@@ -312,5 +379,11 @@
 		.accessibility-tab-wrapper:hover #accessibility-tab-panel {
 			opacity: 1 !important;
 		}
+	}
+
+	/* disable transitions inside the tab when reduce-motion is enabled */
+	.reduce-motion .accessibility-tab-wrapper *,
+	.reduce-motion .accessibility-tab-wrapper *::after {
+		transition: none !important;
 	}
 </style>

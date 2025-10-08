@@ -340,30 +340,88 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<script>
 			import Lenis from 'lenis';
 
-			// Initialize Lenis
-			const lenis = new Lenis({
-				duration: 1.2, // Duration of scroll animation in seconds
-				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function for smooth inertia
-				orientation: 'vertical', // Scroll direction
-				gestureOrientation: 'vertical',
-				smoothWheel: true, // Enable smooth scrolling for mouse wheel
-				wheelMultiplier: 1, // Multiplier for wheel scroll speed
-				smoothTouch: false, // Disable on touch devices to avoid conflicts
-				touchMultiplier: 2,
-				infinite: false,
-			});
-
-			// Request animation frame loop for Lenis
-			function raf(time: number) {
-				lenis.raf(time);
-				requestAnimationFrame(raf);
+			// Check if reduce motion is enabled
+			function isReduceMotionEnabled() {
+				// Check localStorage first, then system preference
+				const savedReduceMotion = localStorage.getItem('reduceMotion');
+				if (savedReduceMotion === 'true') return true;
+				return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 			}
 
-			requestAnimationFrame(raf);
+			let lenis: Lenis | null = null;
+			let rafId: number | null = null;
 
-			// Sync Lenis with Astro View Transitions
+			// Initialize Lenis
+			function initLenis() {
+				// Destroy existing instance first
+				if (lenis) {
+					destroyLenis();
+				}
+
+				if (isReduceMotionEnabled()) {
+					// Don't initialize if reduce motion is enabled
+					return;
+				}
+
+				lenis = new Lenis({
+					duration: 1.2,
+					easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+					orientation: 'vertical',
+					gestureOrientation: 'vertical',
+					smoothWheel: true,
+					wheelMultiplier: 1,
+					smoothTouch: false,
+					touchMultiplier: 2,
+					infinite: false,
+				});
+
+				// Request animation frame loop
+				function raf(time: number) {
+					if (lenis) {
+						lenis.raf(time);
+					}
+					rafId = requestAnimationFrame(raf);
+				}
+
+				rafId = requestAnimationFrame(raf);
+			}
+
+			// Destroy Lenis
+			function destroyLenis() {
+				if (rafId !== null) {
+					cancelAnimationFrame(rafId);
+					rafId = null;
+				}
+				if (lenis) {
+					lenis.destroy();
+					lenis = null;
+				}
+			}
+
+			// Initialize on load (wait a bit for DOM to be ready)
+			setTimeout(() => {
+				initLenis();
+			}, 100);
+
+			// Listen for reduce motion changes
+			window.addEventListener('reduce-motion-changed', () => {
+				if (isReduceMotionEnabled()) {
+					destroyLenis();
+				} else {
+					initLenis();
+				}
+			});
+
+			// Sync with Astro View Transitions
 			document.addEventListener('astro:page-load', () => {
-				lenis.scrollTo(0, { immediate: true });
+				setTimeout(() => {
+					if (lenis) {
+						lenis.scrollTo(0, { immediate: true });
+					} else {
+						// Re-initialize if it doesn't exist
+						initLenis();
+					}
+				}, 100);
 			});
 		</script>
 	</body>

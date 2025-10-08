@@ -1,0 +1,41 @@
+---
+export interface ContactInfoCardProps {
+	icon: string; // SVG path data
+	title: string;
+	content: string; // HTML string for content
+	link?: {
+		href: string;
+		text: string;
+	};
+}
+
+interface Props extends ContactInfoCardProps {}
+
+const { icon, title, content, link } = Astro.props;
+---
+
+<div class="flex items-start gap-4 mb-6">
+	<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+		<svg
+			class="w-6 h-6 text-primary"
+			fill="none"
+			stroke="currentColor"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+		>
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+		</svg>
+	</div>
+	<div>
+		<h3 class="font-semibold text-gray-900 mb-1">{title}</h3>
+		{
+			link ? (
+				<a href={link.href} class="text-primary hover:text-primary-dark">
+					{link.text}
+				</a>
+			) : (
+				<p class="text-gray-600" set:html={content} />
+			)
+		}
+	</div>
+</div>
