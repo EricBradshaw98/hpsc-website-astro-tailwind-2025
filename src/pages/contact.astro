@@ -408,41 +408,51 @@ const faqs: FAQItemProps[] = [
 	});
 
 	// FAQ Smooth Animation
-	document.querySelectorAll('.faq-item').forEach((details) => {
-		const summary = details.querySelector('summary');
-		const content = details.querySelector('.faq-content') as HTMLElement;
+	document.addEventListener('DOMContentLoaded', () => {
+		document.querySelectorAll('.faq-item').forEach((details) => {
+			const summary = details.querySelector('summary');
+			const content = details.querySelector('.faq-content') as HTMLElement;
 
-		if (!summary || !content) return;
+			if (!summary || !content) return;
 
-		summary.addEventListener('click', (e) => {
-			e.preventDefault();
+			summary.addEventListener('click', (e) => {
+				e.preventDefault();
 
-			if (details.hasAttribute('open')) {
-				// Closing
-				const startHeight = content.scrollHeight;
-				content.style.height = startHeight + 'px';
+				if (details.hasAttribute('open')) {
+					// Closing
+					const startHeight = content.scrollHeight;
+					content.style.height = startHeight + 'px';
 
-				requestAnimationFrame(() => {
+					// Force reflow
+					content.offsetHeight;
+
+					requestAnimationFrame(() => {
+						content.style.height = '0px';
+					});
+
+					setTimeout(() => {
+						details.removeAttribute('open');
+					}, 350);
+				} else {
+					// Opening
+					details.setAttribute('open', '');
+					const endHeight = content.scrollHeight;
 					content.style.height = '0px';
-				});
 
-				setTimeout(() => {
-					details.removeAttribute('open');
-				}, 300);
-			} else {
-				// Opening
-				details.setAttribute('open', '');
-				const endHeight = content.scrollHeight;
-				content.style.height = '0px';
+					// Force reflow
+					content.offsetHeight;
 
-				requestAnimationFrame(() => {
-					content.style.height = endHeight + 'px';
-				});
+					requestAnimationFrame(() => {
+						requestAnimationFrame(() => {
+							content.style.height = endHeight + 'px';
+						});
+					});
 
-				setTimeout(() => {
-					content.style.height = 'auto';
-				}, 300);
-			}
+					setTimeout(() => {
+						content.style.height = 'auto';
+					}, 350);
+				}
+			});
 		});
 	});
 </script>
@@ -450,7 +460,7 @@ const faqs: FAQItemProps[] = [
 <style>
 	.faq-content {
 		overflow: hidden;
-		transition: height 300ms ease-out;
+		transition: height 350ms cubic-bezier(0.4, 0, 0.2, 1);
 		height: 0;
 	}
 
