@@ -289,9 +289,31 @@ img[loading="lazy"] {
 	background-size: 200% 100%;
 }
 
-/* Smooth scrolling for anchor links */
-html {
-	scroll-behavior: smooth;
+/* Smooth scrolling for anchor links - disabled when using Lenis */
+html:not([data-lenis-prevent]) {
+	scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
+}
+
+/* Lenis smooth scroll styles */
+html.lenis,
+html.lenis body {
+	height: auto;
+}
+
+.lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+	overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+	overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+	pointer-events: none;
 }
 
 /* Respect prefers-reduced-motion for all animations */

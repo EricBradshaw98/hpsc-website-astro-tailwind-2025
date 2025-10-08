@@ -16,16 +16,16 @@ const { icon, title, description } = Astro.props;
 // - description (Textarea)
 ---
 
-<div class="bg-white rounded-xl p-6 shadow-sm border border-primary/20">
-	<div class="flex items-start gap-4">
-		<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-			<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon} />
-			</svg>
-		</div>
-		<div>
-			<h3 class="font-bold text-gray-900 mb-2">{title}</h3>
-			<p class="text-gray-600 text-sm">{description}</p>
-		</div>
+<div class="bg-white rounded-xl p-6 shadow-sm border border-primary/20 relative overflow-hidden">
+	<!-- Background SVG -->
+	<div class="absolute right-0 top-0 opacity-5 pointer-events-none">
+		<svg class="w-32 h-32 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={icon} />
+		</svg>
+	</div>
+	<!-- Content -->
+	<div class="relative z-10">
+		<h3 class="font-bold text-gray-900 mb-2">{title}</h3>
+		<p class="text-gray-600 text-sm">{description}</p>
 	</div>
 </div>

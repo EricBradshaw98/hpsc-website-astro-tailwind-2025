@@ -1,0 +1,48 @@
+---
+export interface ContractorCardProps {
+	name: string;
+	services: string[];
+	location: string;
+	phone: string;
+	email: string;
+	website: string;
+}
+
+interface Props extends ContractorCardProps {}
+
+const { name, services, location, phone, email, website } = Astro.props;
+---
+
+<div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+	<h4 class="text-xl font-bold text-gray-900 mb-2">{name}</h4>
+	<p class="text-sm text-gray-600 mb-2">
+		<strong>Services:</strong>
+		{services.join(', ')}
+	</p>
+	<p class="text-sm text-gray-600 mb-2">
+		<strong>Location:</strong>
+		{location}
+	</p>
+	<div class="flex flex-wrap gap-4 mt-4">
+		<a
+			href={`tel:${phone}`}
+			class="text-primary hover:text-primary-dark font-semibold text-sm"
+		>
+			{phone}
+		</a>
+		<a
+			href={`mailto:${email}`}
+			class="text-primary hover:text-primary-dark font-semibold text-sm"
+		>
+			{email}
+		</a>
+		<a
+			href={website}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="text-primary hover:text-primary-dark font-semibold text-sm"
+		>
+			Visit Website
+		</a>
+	</div>
+</div>

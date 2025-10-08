@@ -1,5 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ContractorCard, {
+	type ContractorCardProps,
+} from '../../components/contractornetwork/ContractorCard.astro';
 
 // API Configuration for contractor search (will be used when API is integrated)
 // const CONTRACTOR_API_URL = import.meta.env.PUBLIC_CONTRACTOR_API_URL;
@@ -685,6 +688,8 @@ import Layout from '../../layouts/Layout.astro';
 			];
 
 			if (mockContractors.length > 0) {
+				// TODO: When API is connected, render results server-side with ContractorCard component
+				// For now, using inline template for dynamic client-side rendering
 				resultsContainer!.innerHTML = mockContractors
 					.map(
 						(contractor) => `
@@ -699,7 +704,7 @@ import Layout from '../../layouts/Layout.astro';
 							<a href="mailto:${contractor.email}" class="text-primary hover:text-primary-dark font-semibold text-sm">
 								${contractor.email}
 							</a>
-							<a href="${contractor.website}" target="_blank" class="text-primary hover:text-primary-dark font-semibold text-sm">
+							<a href="${contractor.website}" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary-dark font-semibold text-sm">
 								Visit Website
 							</a>
 						</div>
