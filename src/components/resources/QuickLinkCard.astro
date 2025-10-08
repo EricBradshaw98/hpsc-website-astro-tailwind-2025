@@ -1,0 +1,25 @@
+---
+export interface Props {
+	href: string;
+	icon: string;
+	label: string;
+}
+
+const { href, icon, label } = Astro.props;
+---
+
+<a
+	href={href}
+	class="flex items-center gap-3 p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+>
+	<svg
+		class="w-6 h-6 text-primary flex-shrink-0"
+		fill="none"
+		stroke="currentColor"
+		viewBox="0 0 24 24"
+		aria-hidden="true"
+	>
+		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+	</svg>
+	<span class="font-semibold text-gray-900">{label}</span>
+</a>

@@ -94,7 +94,9 @@ const searchTips: SearchTipCardProps[] = [
 {
 	!searchQuery && (
 		<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-			{searchTips.map((tip) => <SearchTipCard {...tip} />)}
+			{searchTips.map((tip) => (
+				<SearchTipCard {...tip} />
+			))}
 		</div>
 	)
 }

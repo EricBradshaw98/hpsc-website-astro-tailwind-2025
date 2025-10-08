@@ -1,6 +1,68 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ResourceCategoryCard from '../../components/resources/ResourceCategoryCard.astro';
+import FeaturedResourceCard from '../../components/resources/FeaturedResourceCard.astro';
+import QuickLinkCard from '../../components/resources/QuickLinkCard.astro';
+
+// Featured resources data
+const featuredResources = [
+	{
+		icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+		title: 'Home Performance Contractor Network Overview',
+		description:
+			'Comprehensive overview of the HPCN, including eligibility requirements, benefits, and application process.',
+		href: '/contractor-network',
+		linkText: 'Learn More',
+	},
+	{
+		icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+		title: 'Energy Efficiency Rebate Programs',
+		description:
+			'Guide to available rebate programs from CleanBC, BC Hydro, FortisBC, and other program administrators.',
+		href: '/resources/guides',
+		linkText: 'View Guide',
+	},
+	{
+		icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+		title: 'Training & Certification Programs',
+		description:
+			'Information on professional development opportunities, certifications, and training programs for contractors.',
+		href: '/resources/guides',
+		linkText: 'Explore Programs',
+	},
+	{
+		icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+		title: 'Industry Statistics & Reports',
+		description:
+			"Access annual reports, market research, and industry statistics on BC's residential retrofit sector.",
+		href: '/resources/documents',
+		linkText: 'View Reports',
+	},
+];
+
+// Quick links data
+const quickLinks = [
+	{
+		href: '/contractor-network/find-a-contractor',
+		icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+		label: 'Find a Contractor',
+	},
+	{
+		href: '/the-big-picture',
+		icon: 'M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7',
+		label: 'The Big Picture',
+	},
+	{
+		href: '/about/strategy',
+		icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
+		label: 'Our Strategy',
+	},
+	{
+		href: '/contact',
+		icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+		label: 'Contact Us',
+	},
+];
 
 // Resource categories data
 const resourceCategories = [
@@ -63,147 +125,7 @@ const resourceCategories = [
 	<section class="mb-16">
 		<h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Resources</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-			<!-- Featured Item 1 -->
-			<div class="bg-white rounded-2xl shadow-md p-8 border border-primary/20">
-				<div class="flex items-start gap-4 mb-4">
-					<div
-						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
-					>
-						<svg
-							class="w-6 h-6 text-primary"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-							></path>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">
-							Home Performance Contractor Network Overview
-						</h3>
-						<p class="text-gray-600 mb-4">
-							Comprehensive overview of the HPCN, including eligibility requirements, benefits, and
-							application process.
-						</p>
-						<a
-							href="/contractor-network"
-							class="text-primary font-semibold hover:underline"
-							aria-label="Learn more about the Home Performance Contractor Network"
-						>
-							Learn More →
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Featured Item 2 -->
-			<div class="bg-white rounded-2xl shadow-md p-8 border border-primary/20">
-				<div class="flex items-start gap-4 mb-4">
-					<div
-						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
-					>
-						<svg
-							class="w-6 h-6 text-primary"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-							></path>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Energy Efficiency Rebate Programs</h3>
-						<p class="text-gray-600 mb-4">
-							Guide to available rebate programs from CleanBC, BC Hydro, FortisBC, and other program
-							administrators.
-						</p>
-						<a href="/resources/guides" class="text-primary font-semibold hover:underline">
-							View Guide →
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Featured Item 3 -->
-			<div class="bg-white rounded-2xl shadow-md p-8 border border-primary/20">
-				<div class="flex items-start gap-4 mb-4">
-					<div
-						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
-					>
-						<svg
-							class="w-6 h-6 text-primary"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-							></path>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Training & Certification Programs</h3>
-						<p class="text-gray-600 mb-4">
-							Information on professional development opportunities, certifications, and training
-							programs for contractors.
-						</p>
-						<a href="/resources/guides" class="text-primary font-semibold hover:underline">
-							Explore Programs →
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Featured Item 4 -->
-			<div class="bg-white rounded-2xl shadow-md p-8 border border-primary/20">
-				<div class="flex items-start gap-4 mb-4">
-					<div
-						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
-					>
-						<svg
-							class="w-6 h-6 text-primary"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-							></path>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl font-bold text-gray-900 mb-2">Industry Statistics & Reports</h3>
-						<p class="text-gray-600 mb-4">
-							Access annual reports, market research, and industry statistics on BC's residential
-							retrofit sector.
-						</p>
-						<a href="/resources/documents" class="text-primary font-semibold hover:underline">
-							View Reports →
-						</a>
-					</div>
-				</div>
-			</div>
+			{featuredResources.map((resource) => <FeaturedResourceCard {...resource} />)}
 		</div>
 	</section>
 
@@ -212,88 +134,7 @@ const resourceCategories = [
 		<div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 md:p-12">
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Quick Links</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-				<a
-					href="/contractor-network/find-a-contractor"
-					class="flex items-center gap-3 p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
-				>
-					<svg
-						class="w-6 h-6 text-primary flex-shrink-0"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-					</svg>
-					<span class="font-semibold text-gray-900">Find a Contractor</span>
-				</a>
-
-				<a
-					href="/the-big-picture"
-					class="flex items-center gap-3 p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
-				>
-					<svg
-						class="w-6 h-6 text-primary flex-shrink-0"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-						></path>
-					</svg>
-					<span class="font-semibold text-gray-900">The Big Picture</span>
-				</a>
-
-				<a
-					href="/about/strategy"
-					class="flex items-center gap-3 p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
-				>
-					<svg
-						class="w-6 h-6 text-primary flex-shrink-0"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-						></path>
-					</svg>
-					<span class="font-semibold text-gray-900">Our Strategy</span>
-				</a>
-
-				<a
-					href="/contact"
-					class="flex items-center gap-3 p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
-				>
-					<svg
-						class="w-6 h-6 text-primary flex-shrink-0"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-						></path>
-					</svg>
-					<span class="font-semibold text-gray-900">Contact Us</span>
-				</a>
+				{quickLinks.map((link) => <QuickLinkCard {...link} />)}
 			</div>
 		</div>
 	</section>

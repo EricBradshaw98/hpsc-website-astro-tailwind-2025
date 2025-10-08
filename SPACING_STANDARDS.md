@@ -221,7 +221,8 @@ xl: 1280px  /* Large desktop */
 	<!-- Buttons -->
 	<button class="hover:bg-primary-dark transition-colors duration-300">
 		<!-- Links -->
-		<a class="hover:text-primary-dark transition-colors duration-200"></a></button>
+		<a class="hover:text-primary-dark transition-colors duration-200"></a></button
+	>
 </div>
 ```
 
