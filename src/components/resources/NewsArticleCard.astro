@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+
+export interface NewsArticleCardProps {
+	slug: string;
+	title: string;
+	excerpt: string;
+	image: string;
+	date: string;
+	category: string;
+	author: string;
+}
+
+interface Props extends NewsArticleCardProps {}
+
+const { slug, title, excerpt, image, date, category, author } = Astro.props;
+---
+
+<article
+	data-category={category}
+	class="news-article bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+>
+	<a href={`/resources/news/${slug}`} class="block md:flex" aria-label={`Read more about ${title}`}>
+		<div class="md:w-2/5">
+			<Image
+				src={image}
+				alt={title}
+				class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+				width={800}
+				height={600}
+				loading="lazy"
+			/>
+		</div>
+		<div class="p-6 md:w-3/5">
+			<div class="flex items-center gap-3 mb-3">
+				<span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+					{category}
+				</span>
+				<time class="text-sm text-gray-500">
+					{
+						new Date(date).toLocaleDateString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})
+					}
+				</time>
+			</div>
+			<h2 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+				{title}
+			</h2>
+			<p class="text-gray-600 mb-4">{excerpt}</p>
+			<div class="flex items-center justify-between">
+				<span class="text-sm text-gray-500">By {author}</span>
+				<span class="text-primary font-semibold group-hover:underline"> Read More → </span>
+			</div>
+		</div>
+	</a>
+</article>
