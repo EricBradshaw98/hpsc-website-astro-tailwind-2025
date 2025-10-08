@@ -1,0 +1,36 @@
+---
+export interface PopularLinkCardProps {
+	href: string;
+	icon: string; // SVG path data
+	title: string;
+	description: string;
+}
+
+interface Props extends PopularLinkCardProps {}
+
+const { href, icon, title, description } = Astro.props;
+---
+
+<a
+	href={href}
+	class="flex items-center gap-3 p-4 bg-white rounded-lg hover:shadow-md transition-shadow group"
+>
+	<div
+		class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors"
+	>
+		<svg
+			class="w-6 h-6 text-primary group-hover:text-white"
+			fill="currentColor"
+			viewBox="0 0 24 24"
+			aria-hidden="true"
+		>
+			<path d={icon}></path>
+		</svg>
+	</div>
+	<div class="flex-1">
+		<div class="font-semibold text-gray-900 group-hover:text-primary transition-colors">
+			{title}
+		</div>
+		<div class="text-sm text-gray-600">{description}</div>
+	</div>
+</a>

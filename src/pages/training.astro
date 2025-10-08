@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TrainingProgramCard from '../components/training/TrainingProgramCard.astro';
+import BenefitCard from '../components/training/BenefitCard.astro';
+import UpcomingSessionCard from '../components/training/UpcomingSessionCard.astro';
 
 // Mock training programs data
 const trainingPrograms = [
@@ -116,6 +118,50 @@ const trainingPrograms = [
 
 // Training categories
 const categories = ['All', ...new Set(trainingPrograms.map((p) => p.category))];
+
+// Training benefits
+const benefits = [
+	{
+		icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+		title: 'Industry-Leading Instructors',
+		description: 'Learn from experienced professionals with decades of combined expertise',
+	},
+	{
+		icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+		title: 'Subsidized Programs',
+		description: 'HPCN members receive significant discounts on training courses',
+	},
+	{
+		icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+		title: 'Recognized Credentials',
+		description: 'Certificates recognized by utilities, government programs, and industry',
+	},
+];
+
+// Upcoming sessions
+const upcomingSessions = [
+	{
+		title: 'Building Science Fundamentals',
+		date: 'October 15-17, 2025',
+		location: 'Vancouver, BC',
+		status: 'Registration Open',
+		statusColor: 'green',
+	},
+	{
+		title: 'Advanced Air Sealing Techniques',
+		date: 'October 22-23, 2025',
+		location: 'Kelowna, BC',
+		status: 'Registration Open',
+		statusColor: 'green',
+	},
+	{
+		title: 'Heat Pump Installation & Optimization',
+		date: 'November 5-6, 2025',
+		location: 'Victoria, BC',
+		status: 'Coming Soon',
+		statusColor: 'orange',
+	},
+];
 ---
 
 <Layout
@@ -140,85 +186,7 @@ const categories = ['All', ...new Set(trainingPrograms.map((p) => p.category))];
 		<div class="bg-primary/5 rounded-2xl p-8 md:p-12 border-2 border-primary/20">
 			<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Why Choose HPSC Training?</h2>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-				<div class="flex items-start gap-4">
-					<div
-						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
-					>
-						<svg
-							class="w-6 h-6 text-primary"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-						</svg>
-					</div>
-					<div>
-						<h3 class="font-bold text-gray-900 mb-2">Industry-Leading Instructors</h3>
-						<p class="text-gray-600 text-sm">
-							Learn from experienced professionals with decades of combined expertise
-						</p>
-					</div>
-				</div>
-
-				<div class="flex items-start gap-4">
-					<div
-						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
-					>
-						<svg
-							class="w-6 h-6 text-primary"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-							></path>
-						</svg>
-					</div>
-					<div>
-						<h3 class="font-bold text-gray-900 mb-2">Subsidized Programs</h3>
-						<p class="text-gray-600 text-sm">
-							HPCN members receive significant discounts on training courses
-						</p>
-					</div>
-				</div>
-
-				<div class="flex items-start gap-4">
-					<div
-						class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"
-					>
-						<svg
-							class="w-6 h-6 text-primary"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-							></path>
-						</svg>
-					</div>
-					<div>
-						<h3 class="font-bold text-gray-900 mb-2">Recognized Credentials</h3>
-						<p class="text-gray-600 text-sm">
-							Certificates recognized by utilities, government programs, and industry
-						</p>
-					</div>
-				</div>
+				{benefits.map((benefit) => <BenefitCard {...benefit} />)}
 			</div>
 		</div>
 	</section>
@@ -256,175 +224,7 @@ const categories = ['All', ...new Set(trainingPrograms.map((p) => p.category))];
 		<h2 class="text-3xl font-bold text-gray-900 mb-8">Upcoming Training Sessions</h2>
 		<div class="bg-white rounded-2xl shadow-md p-8 border border-gray-200">
 			<div class="space-y-4">
-				<div
-					class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-gray-50 rounded-lg"
-				>
-					<div class="flex-1">
-						<h3 class="text-lg font-bold text-gray-900 mb-1">Building Science Fundamentals</h3>
-						<div class="flex flex-wrap gap-4 text-sm text-gray-600">
-							<span class="flex items-center gap-1">
-								<svg
-									class="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									aria-hidden="true"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-									></path>
-								</svg>
-								October 15-17, 2025
-							</span>
-							<span class="flex items-center gap-1">
-								<svg
-									class="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									aria-hidden="true"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-									></path>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-								</svg>
-								Vancouver, BC
-							</span>
-						</div>
-					</div>
-					<div class="mt-4 md:mt-0">
-						<span
-							class="inline-block px-3 py-1 bg-green text-white text-sm font-semibold rounded-full"
-						>
-							Registration Open
-						</span>
-					</div>
-				</div>
-
-				<div
-					class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-gray-50 rounded-lg"
-				>
-					<div class="flex-1">
-						<h3 class="text-lg font-bold text-gray-900 mb-1">Advanced Air Sealing Techniques</h3>
-						<div class="flex flex-wrap gap-4 text-sm text-gray-600">
-							<span class="flex items-center gap-1">
-								<svg
-									class="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									aria-hidden="true"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-									></path>
-								</svg>
-								October 22-23, 2025
-							</span>
-							<span class="flex items-center gap-1">
-								<svg
-									class="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									aria-hidden="true"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-									></path>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-								</svg>
-								Kelowna, BC
-							</span>
-						</div>
-					</div>
-					<div class="mt-4 md:mt-0">
-						<span
-							class="inline-block px-3 py-1 bg-green text-white text-sm font-semibold rounded-full"
-						>
-							Registration Open
-						</span>
-					</div>
-				</div>
-
-				<div
-					class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-gray-50 rounded-lg"
-				>
-					<div class="flex-1">
-						<h3 class="text-lg font-bold text-gray-900 mb-1">
-							Heat Pump Installation & Optimization
-						</h3>
-						<div class="flex flex-wrap gap-4 text-sm text-gray-600">
-							<span class="flex items-center gap-1">
-								<svg
-									class="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									aria-hidden="true"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-									></path>
-								</svg>
-								November 5-6, 2025
-							</span>
-							<span class="flex items-center gap-1">
-								<svg
-									class="w-4 h-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-									aria-hidden="true"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-									></path>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-								</svg>
-								Victoria, BC
-							</span>
-						</div>
-					</div>
-					<div class="mt-4 md:mt-0">
-						<span
-							class="inline-block px-3 py-1 bg-orange text-white text-sm font-semibold rounded-full"
-						>
-							Coming Soon
-						</span>
-					</div>
-				</div>
+				{upcomingSessions.map((session) => <UpcomingSessionCard {...session} />)}
 			</div>
 			<div class="mt-6 text-center">
 				<a href="/events" class="text-primary font-semibold hover:underline">
