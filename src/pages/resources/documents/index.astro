@@ -1,6 +1,8 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import DocumentCard, { type DocumentCardProps } from '../../../components/resources/DocumentCard.astro';
+import DocumentCard, {
+	type DocumentCardProps,
+} from '../../../components/resources/DocumentCard.astro';
 
 // Document list - this could be fetched from a CMS or database later
 const documents = [
@@ -87,7 +89,9 @@ const documentsByCategory = documents.reduce((acc: Record<string, any[]>, doc) =
 					{category}
 				</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{docs.map((doc: any) => <DocumentCard {...doc} />)}
+					{docs.map((doc: any) => (
+						<DocumentCard {...doc} />
+					))}
 				</div>
 			</section>
 		))
