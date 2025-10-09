@@ -91,8 +91,8 @@ const statsData = {
 				src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=600&fit=crop',
 				alt: 'Professional contractors installing home performance upgrades and energy-efficient systems',
 			},
-			bgColor: 'bg-primary',
-			textColor: 'text-primary',
+			bgColor: 'bg-primary-600',
+			textColor: 'text-primary-600',
 			link: { text: 'Find a Contractor', href: '/contractor-network' },
 		},
 		{
@@ -107,8 +107,8 @@ const statsData = {
 				src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=600&fit=crop',
 				alt: 'Residential homes that have been retrofitted with energy-efficient upgrades and improvements',
 			},
-			bgColor: 'bg-accent-green',
-			textColor: 'text-accent-green',
+			bgColor: 'bg-primary-700',
+			textColor: 'text-primary-700',
 			link: { text: 'Learn More', href: '/resources' },
 		},
 		{
@@ -123,8 +123,8 @@ const statsData = {
 				src: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=600&fit=crop',
 				alt: 'High-quality home construction demonstrating 15 years of industry excellence and standards',
 			},
-			bgColor: 'bg-accent-blue',
-			textColor: 'text-accent-blue',
+			bgColor: 'bg-primary-800',
+			textColor: 'text-primary-800',
 			link: { text: 'Our Story', href: '/about' },
 		},
 	],
@@ -202,7 +202,7 @@ const supportersData = {
 	],
 };
 
-// Latest News Data - WordPress REST API /wp-json/wp/v2/posts?per_page=6
+// Latest News Data - WordPress REST API /wp-json/wp/v2/posts?per_page=3
 const latestNewsData = {
 	heading: 'Latest News',
 	viewAllLink: { text: 'View All', href: '/resources/news' },
@@ -240,39 +240,6 @@ const latestNewsData = {
 				alt: 'Heat Pump Technology Advances',
 			},
 		},
-		{
-			title: 'Insulation Best Practices for 2025',
-			slug: 'insulation-best-practices-2025',
-			excerpt:
-				'Updated guidelines and best practices for insulation contractors, including new materials and installation techniques.',
-			date: '2025-08-28',
-			featuredImage: {
-				src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop',
-				alt: 'Insulation Best Practices for 2025',
-			},
-		},
-		{
-			title: 'Windows and Doors: Energy Star Certification Updates',
-			slug: 'windows-doors-energy-star-updates',
-			excerpt:
-				'New Energy Star requirements for windows and doors will improve energy efficiency across BC homes.',
-			date: '2025-08-22',
-			featuredImage: {
-				src: 'https://images.unsplash.com/photo-1597218868981-1b68e15f0065?w=600&h=400&fit=crop',
-				alt: 'Windows and Doors Energy Star Updates',
-			},
-		},
-		{
-			title: 'New Solar and Battery Storage Incentives Announced',
-			slug: 'solar-battery-storage-incentives',
-			excerpt:
-				'BC announces expanded incentives for residential solar installations and battery storage systems.',
-			date: '2025-08-15',
-			featuredImage: {
-				src: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop',
-				alt: 'Solar and Battery Storage Incentives',
-			},
-		},
 	],
 };
 ---
@@ -286,8 +253,8 @@ const latestNewsData = {
 	<HeroSection {...heroData} />
 	<ServicesSection {...servicesData} />
 	<StatsCards {...statsData} />
-	<ParallaxCTA {...parallaxCTAData} />
 	<WeWorkWithSection {...weWorkWithData} />
 	<SupportersCarousel {...supportersData} />
 	<LatestNews {...latestNewsData} />
+	<ParallaxCTA {...parallaxCTAData} />
 </Layout>

@@ -89,9 +89,22 @@ const { heading, description, supporters } = Astro.props;
 		<!-- Dots Indicator -->
 		<div class="flex justify-center gap-2 mt-6">
 			{
+				/* Mobile: Show dots for each supporter */
 				Array.from({ length: supporters.length }).map((_, index) => (
 					<button
-						class={`carousel-dot w-11 h-11 rounded-full transition-all flex items-center justify-center ${index === 0 ? 'bg-primary/30' : 'bg-gray-300/30'} ${index > 1 ? 'md:hidden' : ''}`}
+						class={`carousel-dot md:hidden w-11 h-11 rounded-full transition-all flex items-center justify-center ${index === 0 ? 'bg-primary/30' : 'bg-gray-300/30'}`}
+						data-index={index.toString()}
+						aria-label={`Go to slide ${index + 1}`}
+					>
+						<span class={`w-3 h-3 rounded-full ${index === 0 ? 'bg-primary' : 'bg-gray-300'}`} />
+					</button>
+				))
+			}
+			{
+				/* Desktop: Only show 2 dots for 2 slides */
+				Array.from({ length: 2 }).map((_, index) => (
+					<button
+						class={`carousel-dot hidden md:flex w-11 h-11 rounded-full transition-all items-center justify-center ${index === 0 ? 'bg-primary/30' : 'bg-gray-300/30'}`}
 						data-index={index.toString()}
 						aria-label={`Go to slide ${index + 1}`}
 					>

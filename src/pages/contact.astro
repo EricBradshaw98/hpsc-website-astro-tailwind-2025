@@ -263,7 +263,7 @@ const faqs: FAQItemProps[] = [
 							</p>
 							<a
 								href="#contact-form"
-								class="block w-full bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors mb-3"
+								class="block w-full bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors mb-3"
 								onclick="const element = document.getElementById('contact-form'); const y = element.getBoundingClientRect().top + window.pageYOffset - 100; window.scrollTo({ top: y, behavior: 'smooth' }); return false;"
 							>
 								Ask Your Question
@@ -415,42 +415,56 @@ const faqs: FAQItemProps[] = [
 
 			if (!summary || !content) return;
 
+			// Store animation state
+			let isAnimating = false;
+
 			summary.addEventListener('click', (e) => {
 				e.preventDefault();
 
-				if (details.hasAttribute('open')) {
-					// Closing
+				// Prevent multiple clicks during animation
+				if (isAnimating) return;
+				isAnimating = true;
+
+				const isOpen = details.hasAttribute('open');
+
+				if (isOpen) {
+					// Closing animation
 					const startHeight = content.scrollHeight;
 					content.style.height = startHeight + 'px';
 
 					// Force reflow
-					content.offsetHeight;
-
 					requestAnimationFrame(() => {
 						content.style.height = '0px';
 					});
 
-					setTimeout(() => {
+					// Wait for animation to complete before removing 'open'
+					const onTransitionEnd = () => {
+						content.removeEventListener('transitionend', onTransitionEnd);
 						details.removeAttribute('open');
-					}, 350);
+						content.style.height = '';
+						isAnimating = false;
+					};
+
+					content.addEventListener('transitionend', onTransitionEnd);
 				} else {
-					// Opening
+					// Opening animation
 					details.setAttribute('open', '');
 					const endHeight = content.scrollHeight;
 					content.style.height = '0px';
 
 					// Force reflow
-					content.offsetHeight;
-
 					requestAnimationFrame(() => {
-						requestAnimationFrame(() => {
-							content.style.height = endHeight + 'px';
-						});
+						content.style.height = endHeight + 'px';
 					});
 
-					setTimeout(() => {
+					// Reset height to auto after animation
+					const onTransitionEnd = () => {
+						content.removeEventListener('transitionend', onTransitionEnd);
 						content.style.height = 'auto';
-					}, 350);
+						isAnimating = false;
+					};
+
+					content.addEventListener('transitionend', onTransitionEnd);
 				}
 			});
 		});

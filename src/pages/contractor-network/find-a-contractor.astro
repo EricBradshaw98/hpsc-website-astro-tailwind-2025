@@ -1,5 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// Import program partner logos
+import bcHydroLogo from '../../assets/BC_Hydro.png';
+import bcLogo from '../../assets/bc-logo.jpg';
+import fortisBCLogo from '../../assets/FortisBC-Secondary-W-RGB_Small-480x227.png';
 
 // API Configuration for contractor search (will be used when API is integrated)
 // const CONTRACTOR_API_URL = import.meta.env.PUBLIC_CONTRACTOR_API_URL;
@@ -82,7 +88,7 @@ import Layout from '../../layouts/Layout.astro';
 
 				<button
 					type="submit"
-					class="w-full md:w-auto px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+					class="w-full md:w-auto px-8 py-3 bg-primary-dark text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors"
 				>
 					Search Contractors
 				</button>
@@ -567,7 +573,7 @@ import Layout from '../../layouts/Layout.astro';
 					type="submit"
 					id="submit-feedback-btn"
 					disabled
-					class="w-full md:w-auto px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+					class="w-full md:w-auto px-8 py-3 bg-primary-dark text-white rounded-lg font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 				>
 					Submit Feedback
 				</button>
@@ -595,43 +601,49 @@ import Layout from '../../layouts/Layout.astro';
 
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
 			<div
-				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100"
+				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
 			>
-				<img
-					src="/src/assets/bc-logo.jpg"
+				<Image
+					src={bcLogo}
 					alt="CleanBC"
 					class="h-16 w-auto object-contain"
 					loading="lazy"
+					width={200}
+					height={64}
 				/>
 			</div>
 
 			<div
-				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100"
+				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
 			>
-				<img
-					src="/src/assets/BC_Hydro.png"
+				<Image
+					src={bcHydroLogo}
 					alt="BC Hydro"
 					class="h-16 w-auto object-contain"
 					loading="lazy"
+					width={200}
+					height={64}
 				/>
 			</div>
 
 			<div
-				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100"
+				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
 			>
-				<img
-					src="/src/assets/FortisBC-Secondary-W-RGB_Small-480x227.png"
+				<Image
+					src={fortisBCLogo}
 					alt="FortisBC"
 					class="h-16 w-auto object-contain"
 					loading="lazy"
+					width={200}
+					height={64}
 				/>
 			</div>
 
 			<div
-				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100"
+				class="flex items-center justify-center p-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow"
 			>
 				<div class="text-center">
-					<p class="font-bold text-gray-900">Pacific Northern Gas</p>
+					<p class="font-bold text-gray-900 text-lg">Pacific Northern Gas</p>
 				</div>
 			</div>
 		</div>
