@@ -303,7 +303,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<!-- Custom head content from pages -->
 		<slot name="head" />
 	</head>
-	<body class="min-h-screen bg-white text-gray-900 flex flex-col">
+	<body class="min-h-screen bg-white text-gray-900 flex flex-col" data-lenis>
 		<!-- Skip links for accessibility -->
 		<div class="skip-links">
 			<a href="#main-content" class="skip-link bg-primary-dark text-white px-4 py-2 rounded">
@@ -341,5 +341,105 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<Footer />
 		<CookieBanner />
 		<AccessibilityTab />
+
+		<!-- Lenis Smooth Scroll -->
+		<script>
+			import Lenis from 'lenis';
+
+			// Check if reduce motion is enabled
+			function isReduceMotionEnabled() {
+				// Check localStorage first, then system preference
+				const savedReduceMotion = localStorage.getItem('reduceMotion');
+				if (savedReduceMotion === 'true') return true;
+				return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			}
+
+			// Check if device is mobile/touch-enabled
+			function isTouchDevice() {
+				return (
+					'ontouchstart' in window ||
+					navigator.maxTouchPoints > 0 ||
+					window.matchMedia('(max-width: 1024px)').matches
+				);
+			}
+
+			let lenis: Lenis | null = null;
+			let rafId: number | null = null;
+
+			// Initialize Lenis
+			function initLenis() {
+				// Destroy existing instance first
+				if (lenis) {
+					destroyLenis();
+				}
+
+				if (isReduceMotionEnabled()) {
+					// Don't initialize if reduce motion is enabled
+					return;
+				}
+
+				// Disable smooth scroll on touch devices to prevent conflicts
+				if (isTouchDevice()) {
+					return;
+				}
+
+				lenis = new Lenis({
+					duration: 1.2,
+					easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+					orientation: 'vertical',
+					gestureOrientation: 'vertical',
+					smoothWheel: true,
+					wheelMultiplier: 1,
+					smoothTouch: false,
+					touchMultiplier: 2,
+					infinite: false,
+				});
+
+				// Request animation frame loop
+				function raf(time: number) {
+					if (lenis) {
+						lenis.raf(time);
+					}
+					rafId = requestAnimationFrame(raf);
+				}
+
+				rafId = requestAnimationFrame(raf);
+			}
+
+			// Destroy Lenis
+			function destroyLenis() {
+				if (rafId !== null) {
+					cancelAnimationFrame(rafId);
+					rafId = null;
+				}
+				if (lenis) {
+					lenis.destroy();
+					lenis = null;
+				}
+			}
+
+			// Initialize on load
+			initLenis();
+
+			// Listen for reduce motion changes
+			window.addEventListener('reduce-motion-changed', () => {
+				if (isReduceMotionEnabled()) {
+					destroyLenis();
+				} else {
+					initLenis();
+				}
+			});
+
+			// Properly handle Astro View Transitions
+			document.addEventListener('astro:before-preparation', () => {
+				// Destroy Lenis before navigation starts
+				destroyLenis();
+			});
+
+			document.addEventListener('astro:page-load', () => {
+				// Re-initialize after navigation completes
+				initLenis();
+			});
+		</script>
 	</body>
 </html>
