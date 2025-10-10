@@ -275,7 +275,7 @@ function buildSortUrl(newSort: 'date' | 'title'): string {
 								href={pageNum === 1 ? '/news' : `/news/${pageNum}`}
 								class={`px-4 py-2 rounded-lg transition-colors ${
 									pageNum === page.currentPage
-										? 'bg-primary text-white'
+										? 'bg-primary-dark text-white'
 										: 'bg-white border border-gray-300 hover:bg-gray-50'
 								}`}
 								aria-label={`Go to page ${pageNum}`}

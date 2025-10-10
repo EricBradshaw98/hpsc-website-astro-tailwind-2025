@@ -139,7 +139,7 @@ const archiveMonths = getArchiveMonths();
 							data-category={category}
 							class={`filter-btn px-4 py-2 rounded-full text-sm font-medium transition-all ${
 								category === 'All'
-									? 'bg-primary text-white'
+									? 'bg-primary-dark text-white'
 									: 'bg-gray-100 text-gray-700 hover:bg-gray-200'
 							}`}
 						>
@@ -183,11 +183,15 @@ const archiveMonths = getArchiveMonths();
 					inbox.
 				</p>
 				<form class="space-y-3">
+					<label for="newsletter-email-news" class="sr-only">Email address</label>
 					<input
+						id="newsletter-email-news"
 						type="email"
+						name="email"
 						placeholder="Your email address"
 						class="w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
 						required
+						aria-label="Email address for newsletter subscription"
 					/>
 					<button
 						type="submit"
@@ -202,17 +206,22 @@ const archiveMonths = getArchiveMonths();
 			<div class="bg-white rounded-2xl shadow-md p-6 mb-8">
 				<h3 class="text-xl font-bold text-gray-900 mb-4">Search News</h3>
 				<form action="/resources/news/search" method="get" class="relative">
+					<label for="search-news" class="sr-only">Search news articles</label>
 					<input
+						id="search-news"
 						type="search"
 						name="q"
 						placeholder="Search articles..."
 						class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+						aria-label="Search news articles"
 					/>
+					<button type="submit" class="sr-only">Search</button>
 					<svg
-						class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+						class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
+						aria-hidden="true"
 					>
 						<path
 							stroke-linecap="round"
@@ -328,9 +337,9 @@ const archiveMonths = getArchiveMonths();
 			const btnCategory = btn.getAttribute('data-category');
 			if (btnCategory === category) {
 				btn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
-				btn.classList.add('bg-primary', 'text-white');
+				btn.classList.add('bg-primary-dark', 'text-white');
 			} else {
-				btn.classList.remove('bg-primary', 'text-white');
+				btn.classList.remove('bg-primary-dark', 'text-white');
 				btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
 			}
 		});
@@ -398,7 +407,7 @@ const archiveMonths = getArchiveMonths();
 				pageBtn.textContent = i.toString();
 				pageBtn.className = `px-4 py-2 rounded-lg ${
 					i === currentPage
-						? 'bg-primary text-white'
+						? 'bg-primary-dark text-white'
 						: 'bg-gray-100 text-gray-700 hover:bg-gray-200'
 				}`;
 				pageBtn.addEventListener('click', () => {

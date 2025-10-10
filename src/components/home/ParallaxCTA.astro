@@ -27,15 +27,15 @@ const { backgroundImage, heading, description, ctas } = Astro.props;
 	</div>
 
 	<!-- Gradient Overlay -->
-	<div class="absolute inset-0 bg-gradient-to-br from-primary-900/95 to-primary-600/90"></div>
+	<div class="absolute inset-0 bg-gradient-to-br from-black/80 to-primary-800/85"></div>
 
 	<!-- Content -->
 	<div class="relative z-10 h-full flex items-center px-4 md:px-16 py-8 md:py-0">
-		<div class="w-full">
-			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6);">
+		<div class="w-full bg-black/60 p-6 md:p-8 rounded-lg">
+			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
 				{heading}
 			</h2>
-			<p class="text-lg md:text-xl text-white mb-8" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+			<p class="text-lg md:text-xl text-white mb-8">
 				{description}
 			</p>
 			<nav aria-label="Call-to-action">
@@ -48,7 +48,7 @@ const { backgroundImage, heading, description, ctas } = Astro.props;
 									class={
 										cta.style === 'primary'
 											? 'inline-block px-8 py-3 rounded-lg font-semibold transition-colors bg-white text-primary-900 hover:bg-primary-50 shadow-lg'
-											: 'inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-900 transition-colors shadow-md'
+											: 'inline-block px-8 py-3 rounded-lg font-semibold bg-black/40 text-white border-2 border-white/80 hover:bg-white hover:text-primary-900 transition-colors shadow-md'
 									}
 								>
 									{cta.text}

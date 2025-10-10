@@ -48,15 +48,15 @@ const { title, description, images, ctas } = Astro.props;
 				))
 			}
 			<div
-				class="absolute inset-0 z-10 bg-gradient-to-r from-primary-900/95 via-primary-700/90 to-primary-500/75"
+				class="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-primary-900/85 to-primary-700/70"
 			>
 			</div>
 		</div>
-		<div class="w-full relative z-10">
-			<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6);">
+		<div class="w-full relative z-10 bg-black/60 p-6 md:p-8 rounded-lg">
+			<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
 				{title}
 			</h1>
-			<p class="text-xl md:text-2xl mb-8" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+			<p class="text-xl md:text-2xl mb-8">
 				{description}
 			</p>
 			<nav aria-label="Hero call-to-action">
@@ -69,7 +69,7 @@ const { title, description, images, ctas } = Astro.props;
 									class={
 										cta.style === 'primary'
 											? 'inline-block px-8 py-3 rounded-lg font-semibold transition-colors bg-white text-primary-900 hover:bg-primary-50 shadow-lg'
-											: 'inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-900 transition-colors shadow-md'
+											: 'inline-block px-8 py-3 rounded-lg font-semibold bg-black/40 text-white border-2 border-white/80 hover:bg-white hover:text-primary-900 transition-colors shadow-md'
 									}
 									aria-label={cta.text}
 								>

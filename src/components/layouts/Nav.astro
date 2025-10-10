@@ -163,7 +163,7 @@ function isActive(href: string): boolean {
 														href={child.href}
 														class={`block px-4 py-2 transition-colors ${
 															isActive(child.href)
-																? 'bg-primary text-white'
+																? 'bg-primary-dark text-white'
 																: 'text-gray-600 hover:bg-primary hover:text-white'
 														}`}
 													>
@@ -318,94 +318,106 @@ function isActive(href: string): boolean {
 </header>
 
 <script>
-	// Top bar scroll behavior
-	let lastScrollTop = 0;
-	const topBar = document.getElementById('top-bar');
+	function initNav() {
+		// Top bar scroll behavior
+		let lastScrollTop = 0;
+		const topBar = document.getElementById('top-bar');
 
-	window.addEventListener('scroll', () => {
-		const scrollTop = window.scrollY || document.documentElement.scrollTop;
+		window.addEventListener('scroll', () => {
+			const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-		if (scrollTop > 50 && scrollTop > lastScrollTop) {
-			// Scrolling down and past threshold
-			topBar?.classList.add('-translate-y-full');
-		} else if (scrollTop < 10) {
-			// At very top
-			topBar?.classList.remove('-translate-y-full');
-		}
-
-		lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-	});
-
-	// Mobile menu toggle with hamburger animation
-	const mobileMenuButton = document.getElementById('mobile-menu-button');
-	const mobileMenu = document.getElementById('mobile-menu');
-	const hamburgerLines = mobileMenuButton?.querySelectorAll('.hamburger-line');
-	let isMenuOpen = false;
-
-	mobileMenuButton?.addEventListener('click', () => {
-		isMenuOpen = !isMenuOpen;
-
-		if (isMenuOpen) {
-			// Open menu - smooth dropdown
-			mobileMenu?.classList.remove('max-h-0', 'opacity-0');
-			mobileMenu?.classList.add('max-h-[800px]', 'opacity-100');
-
-			// Transform hamburger to X with 90 degree rotation first
-			if (hamburgerLines) {
-				// First line: rotate 90deg, then rotate to 45deg and move down
-				hamburgerLines[0].style.transform = 'rotate(135deg) translateY(5px) translateX(5px)';
-				// Second line: rotate 90deg, then rotate to -45deg and move up
-				hamburgerLines[1].style.transform = 'rotate(-135deg) translateY(-5px) translateX(5px)';
-			}
-		} else {
-			// Close menu - smooth slide up
-			mobileMenu?.classList.remove('max-h-[800px]', 'opacity-100');
-			mobileMenu?.classList.add('max-h-0', 'opacity-0');
-
-			// Back to hamburger
-			if (hamburgerLines) {
-				hamburgerLines[0].style.transform = 'rotate(0) translateY(0)';
-				hamburgerLines[1].style.transform = 'rotate(0) translateY(0)';
+			if (scrollTop > 50 && scrollTop > lastScrollTop) {
+				// Scrolling down and past threshold
+				topBar?.classList.add('-translate-y-full');
+			} else if (scrollTop < 10) {
+				// At very top
+				topBar?.classList.remove('-translate-y-full');
 			}
 
-			// Close all submenus when main menu closes
-			const allSubmenus = document.querySelectorAll('[id^="submenu-"]');
-			const allToggleButtons = document.querySelectorAll('.mobile-submenu-toggle');
-			allSubmenus.forEach((submenu) => {
-				submenu.classList.remove('max-h-96', 'opacity-100', 'mt-2');
-				submenu.classList.add('max-h-0', 'opacity-0');
-			});
-			allToggleButtons.forEach((button) => {
-				const svg = button.querySelector('svg');
-				if (svg) svg.style.transform = 'rotate(0deg)';
-			});
-		}
-	});
+			lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+		});
 
-	// Mobile submenu toggles
-	const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
-	submenuToggles.forEach((toggle) => {
-		toggle.addEventListener('click', (e) => {
-			e.preventDefault();
-			const submenuId = toggle.getAttribute('data-submenu');
-			const submenu = document.getElementById(submenuId || '');
-			const svg = toggle.querySelector('svg');
+		// Mobile menu toggle with hamburger animation
+		const mobileMenuButton = document.getElementById('mobile-menu-button');
+		const mobileMenu = document.getElementById('mobile-menu');
+		const hamburgerLines = mobileMenuButton?.querySelectorAll('.hamburger-line');
+		let isMenuOpen = false;
 
-			if (submenu) {
-				const isOpen = submenu.classList.contains('max-h-96');
+		mobileMenuButton?.addEventListener('click', () => {
+			isMenuOpen = !isMenuOpen;
 
-				if (isOpen) {
-					// Close submenu
+			if (isMenuOpen) {
+				// Open menu - smooth dropdown
+				mobileMenu?.classList.remove('max-h-0', 'opacity-0');
+				mobileMenu?.classList.add('max-h-[800px]', 'opacity-100');
+
+				// Transform hamburger to X with 90 degree rotation first
+				if (hamburgerLines) {
+					// First line: rotate 90deg, then rotate to 45deg and move down
+					hamburgerLines[0].style.transform =
+						'rotate(135deg) translateY(5px) translateX(5px)';
+					// Second line: rotate 90deg, then rotate to -45deg and move up
+					hamburgerLines[1].style.transform =
+						'rotate(-135deg) translateY(-5px) translateX(5px)';
+				}
+			} else {
+				// Close menu - smooth slide up
+				mobileMenu?.classList.remove('max-h-[800px]', 'opacity-100');
+				mobileMenu?.classList.add('max-h-0', 'opacity-0');
+
+				// Back to hamburger
+				if (hamburgerLines) {
+					hamburgerLines[0].style.transform = 'rotate(0) translateY(0)';
+					hamburgerLines[1].style.transform = 'rotate(0) translateY(0)';
+				}
+
+				// Close all submenus when main menu closes
+				const allSubmenus = document.querySelectorAll('[id^="submenu-"]');
+				const allToggleButtons = document.querySelectorAll('.mobile-submenu-toggle');
+				allSubmenus.forEach((submenu) => {
 					submenu.classList.remove('max-h-96', 'opacity-100', 'mt-2');
 					submenu.classList.add('max-h-0', 'opacity-0');
+				});
+				allToggleButtons.forEach((button) => {
+					const svg = button.querySelector('svg');
 					if (svg) svg.style.transform = 'rotate(0deg)';
-				} else {
-					// Open submenu
-					submenu.classList.remove('max-h-0', 'opacity-0');
-					submenu.classList.add('max-h-96', 'opacity-100', 'mt-2');
-					if (svg) svg.style.transform = 'rotate(180deg)';
-				}
+				});
 			}
 		});
+
+		// Mobile submenu toggles
+		const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
+		submenuToggles.forEach((toggle) => {
+			toggle.addEventListener('click', (e) => {
+				e.preventDefault();
+				const submenuId = toggle.getAttribute('data-submenu');
+				const submenu = document.getElementById(submenuId || '');
+				const svg = toggle.querySelector('svg');
+
+				if (submenu) {
+					const isOpen = submenu.classList.contains('max-h-96');
+
+					if (isOpen) {
+						// Close submenu
+						submenu.classList.remove('max-h-96', 'opacity-100', 'mt-2');
+						submenu.classList.add('max-h-0', 'opacity-0');
+						if (svg) svg.style.transform = 'rotate(0deg)';
+					} else {
+						// Open submenu
+						submenu.classList.remove('max-h-0', 'opacity-0');
+						submenu.classList.add('max-h-96', 'opacity-100', 'mt-2');
+						if (svg) svg.style.transform = 'rotate(180deg)';
+					}
+				}
+			});
+		});
+	}
+
+	// Initialize on page load
+	initNav();
+
+	// Reinitialize after Astro View Transitions
+	document.addEventListener('astro:page-load', () => {
+		initNav();
 	});
 </script>

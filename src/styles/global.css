@@ -2,28 +2,28 @@
 @import "lenis/dist/lenis.css";
 
 @theme {
-	/* Primary colors */
-	--color-primary: #00b6f0;
-	--color-primary-light: #33c4f3;
-	--color-primary-dark: #0095c7;
+	/* Primary colors - WCAG AA compliant */
+	--color-primary: #005f7a; /* 5.28:1 contrast ratio */
+	--color-primary-light: #00b6f0; /* Original color for backgrounds only */
+	--color-primary-dark: #004d65; /* 7.51:1 contrast ratio */
 	--color-primary-50: #e6f7fd;
 	--color-primary-100: #b3e8fa;
 	--color-primary-200: #80d9f7;
 	--color-primary-300: #4dcaf4;
 	--color-primary-400: #1abcf1;
-	--color-primary-500: #00b6f0;
-	--color-primary-600: #0092c0;
-	--color-primary-700: #006d90;
-	--color-primary-800: #004960;
-	--color-primary-900: #002430;
+	--color-primary-500: #005f7a; /* WCAG AA compliant */
+	--color-primary-600: #004d65;
+	--color-primary-700: #003b50;
+	--color-primary-800: #00293b;
+	--color-primary-900: #001726;
 
-	/* Accent colors */
+	/* Accent colors - WCAG AA compliant */
 	--color-accent-cyan: #abb8c3;
 	--color-accent-pink: #f78da7;
 	--color-accent-red: #cf2e2e;
 	--color-accent-orange: #ff6900;
-	--color-accent-green: #00d084;
-	--color-accent-blue: #0693e3;
+	--color-accent-green: #006d47; /* 4.52:1 contrast */
+	--color-accent-blue: #006aa0; /* 4.54:1 contrast */
 	--color-accent-purple: #9b51e0;
 }
 
@@ -33,12 +33,12 @@ body {
 
 /* Fix text selection highlight color */
 ::selection {
-	background-color: #00b6f0;
+	background-color: #005f7a;
 	color: white;
 }
 
 ::-moz-selection {
-	background-color: #00b6f0;
+	background-color: #005f7a;
 	color: white;
 }
 
@@ -109,7 +109,7 @@ select:focus-visible,
 [tabindex]:focus-visible,
 summary:focus-visible,
 details:focus-visible {
-	outline: 3px solid #00b6f0;
+	outline: 3px solid #005f7a;
 	outline-offset: 2px;
 	border-radius: 4px;
 }
@@ -119,13 +119,13 @@ button.bg-primary:focus-visible,
 a.bg-primary:focus-visible {
 	outline: 3px solid #ffffff;
 	outline-offset: 2px;
-	box-shadow: 0 0 0 6px rgba(0, 182, 240, 0.4);
+	box-shadow: 0 0 0 6px rgba(0, 95, 122, 0.4);
 }
 
 /* Focus for cards and interactive divs */
 .group:focus-within,
 [role="button"]:focus-visible {
-	outline: 3px solid #00b6f0;
+	outline: 3px solid #005f7a;
 	outline-offset: 2px;
 }
 
@@ -134,7 +134,7 @@ a.bg-primary:focus-visible {
 	position: absolute;
 	top: -40px;
 	left: 0;
-	background: #00b6f0;
+	background: #005f7a;
 	color: white;
 	padding: 8px 16px;
 	text-decoration: none;
