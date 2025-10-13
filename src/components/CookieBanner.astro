@@ -252,6 +252,8 @@
 	function showBanner() {
 		const banner = document.getElementById('cookie-banner');
 		if (banner) {
+			// Remove hidden class first
+			banner.classList.remove('hidden');
 			// Use setTimeout to ensure transition plays
 			setTimeout(() => {
 				banner.classList.remove('translate-y-full');
@@ -264,6 +266,10 @@
 		const banner = document.getElementById('cookie-banner');
 		if (banner) {
 			banner.classList.add('translate-y-full');
+			// Wait for transition to complete, then add hidden class
+			setTimeout(() => {
+				banner.classList.add('hidden');
+			}, 500);
 		}
 	}
 
