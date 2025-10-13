@@ -150,6 +150,19 @@ const gridColsClass = {
 
 		interactiveCards.forEach((card, index) => {
 			const handleToggle = (e: Event) => {
+				const clickTarget = e.target as HTMLElement;
+
+				// Don't interfere with links, buttons, or interactive elements
+				if (
+					clickTarget.tagName === 'A' ||
+					clickTarget.tagName === 'BUTTON' ||
+					clickTarget.closest('a') ||
+					clickTarget.closest('button')
+				) {
+					console.log('Click on interactive element, allowing default behavior');
+					return;
+				}
+
 				e.preventDefault();
 				e.stopPropagation();
 				e.stopImmediatePropagation();
@@ -177,6 +190,19 @@ const gridColsClass = {
 			};
 
 			const handleTouchEnd = (e: TouchEvent) => {
+				const touchTarget = e.target as HTMLElement;
+
+				// Don't interfere with links, buttons, or interactive elements
+				if (
+					touchTarget.tagName === 'A' ||
+					touchTarget.tagName === 'BUTTON' ||
+					touchTarget.closest('a') ||
+					touchTarget.closest('button')
+				) {
+					console.log('Touch on interactive element, allowing default behavior');
+					return;
+				}
+
 				// Prevent default and stop all propagation for touch events
 				e.preventDefault();
 				e.stopPropagation();
