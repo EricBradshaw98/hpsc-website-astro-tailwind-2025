@@ -19,9 +19,9 @@ import vancityLogo from '../assets/Vancity_Logo_ReadyRead_RGB-480x215.png';
 
 // Hero Section Data - Will come from WordPress ACF fields
 const heroData = {
-	title: 'Building a More Energy-Efficient Future',
+	title: 'Modern Web Development: Accessibility & Security First',
 	description:
-		'Connecting homeowners with certified contractors to deliver proven home performance solutions across British Columbia.',
+		'Built with cutting-edge technology (Astro, Tailwind CSS) while remaining fully manageable through WordPress. This demo showcases WCAG 2.1 AA compliance, built-in spam protection, and flexible component-based architecture. No plugin bloat, just clean, purposeful code built to spec. Hosted on enterprise-grade infrastructure (Cloudflare + Oracle Cloud) trusted by Fortune 500 companies, major banks, and tech platforms worldwide. Note: This is a demonstration of functionality. The final design, branding, and visual style can be completely customized to match your vision. Content, images, and layouts can be easily rearranged via WordPress CMS.',
 	images: [
 		{
 			src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&h=800&fit=crop',
@@ -38,14 +38,19 @@ const heroData = {
 	],
 	ctas: [
 		{
-			text: 'Find a Contractor',
-			href: '/contractor-network/find-a-contractor',
+			text: 'View Demo Guides',
+			href: '/resources/guides',
 			style: 'primary' as const,
 		},
-		{ text: 'Learn More', href: '/about', style: 'secondary' as const },
+		{ text: 'Meet the Team', href: '/about/our-team', style: 'secondary' as const },
 		{
-			text: 'View Demo Content (Guides)',
-			href: '/resources/guides',
+			text: 'Try Contact Form (Spam Protected)',
+			href: '/contact',
+			style: 'demo' as const,
+		},
+		{
+			text: 'Find a Contractor (Search Demo)',
+			href: '/contractor-network/find-a-contractor',
 			style: 'demo' as const,
 		},
 	],
