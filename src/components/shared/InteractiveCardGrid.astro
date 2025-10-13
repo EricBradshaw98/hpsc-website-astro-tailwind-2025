@@ -1,0 +1,314 @@
+---
+import { Image } from 'astro:assets';
+
+export interface InteractiveCard {
+	name: string;
+	emoji: string;
+	description: string;
+	details: string;
+	detailsSubtext: string;
+	image: {
+		src: string;
+		alt: string;
+	};
+	bgColor: string; // e.g., 'bg-primary-500', 'bg-accent-green-500'
+	textColor: string; // e.g., 'text-primary-500', 'text-accent-green-500'
+	link: {
+		text: string;
+		href: string;
+	};
+}
+
+export interface InteractiveCardGridProps {
+	title?: string;
+	description?: string;
+	cards: InteractiveCard[];
+	columns?: 1 | 2 | 3 | 4;
+	bgGradient?: string;
+}
+
+interface Props extends InteractiveCardGridProps {}
+
+const {
+	title,
+	description,
+	cards,
+	columns = 3,
+	bgGradient = 'bg-gradient-to-br from-gray-50 to-gray-100',
+} = Astro.props;
+
+const gridColsClass = {
+	1: 'grid-cols-1',
+	2: 'grid-cols-1 md:grid-cols-2',
+	3: 'grid-cols-1 md:grid-cols-3',
+	4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+}[columns];
+---
+
+<section class={`py-20 ${bgGradient} relative overflow-hidden`}>
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+		{
+			(title || description) && (
+				<div class="mb-16">
+					{title && <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{title}</h2>}
+					{description && <p class="text-xl text-gray-700 max-w-3xl">{description}</p>}
+				</div>
+			)
+		}
+
+		<!-- Interactive Cards Grid -->
+		<div class={`grid ${gridColsClass} gap-6 mb-16`}>
+			{
+				cards.map((card) => (
+					<div
+						class={`interactive-card ${card.bgColor} rounded-3xl overflow-hidden transform transition-all duration-300 hover:shadow-xl group cursor-pointer relative border-4 border-primary`}
+						role="button"
+						tabindex="0"
+						aria-label={`Learn more about ${card.name}`}
+						onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }"
+					>
+						<!-- Image Container -->
+						<div class="aspect-square relative overflow-hidden">
+							<Image
+								src={card.image.src}
+								alt={card.image.alt}
+								class="card-image w-full h-full object-cover transition-transform duration-500"
+								width={600}
+								height={600}
+								loading="lazy"
+							/>
+							<!-- Dark overlay that intensifies on hover/active -->
+							<div class="card-overlay absolute inset-0 bg-black/50 transition-all duration-300" />
+						</div>
+
+						<!-- Sliding Tab - Different behavior for mobile vs desktop -->
+						<div
+							class={`sliding-tab absolute bottom-0 left-0 right-0 ${card.bgColor} transform transition-transform duration-400 ease-out z-50`}
+						>
+							<!-- Basic tab content (always visible) -->
+							<div class="p-6">
+								<div class="flex items-center justify-between">
+									<div class="flex items-center gap-3">
+										<div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-gray-800 text-xl">
+											{card.emoji}
+										</div>
+										<div class="text-white">
+											<span class="font-bold text-lg">{card.name}</span>
+										</div>
+									</div>
+									<button
+										class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 text-xl font-bold hover:bg-gray-100 transition-colors"
+										aria-label={`Expand ${card.name} information`}
+										tabindex="-1"
+									>
+										+
+									</button>
+								</div>
+							</div>
+
+							<!-- Extended content revealed on hover/active -->
+							<div class="px-6 pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150">
+								<div class="text-white text-sm leading-relaxed mb-4">{card.description}</div>
+								<div class="text-white font-semibold mb-2">{card.details}</div>
+								<div class="text-white/90 text-xs mb-4">{card.detailsSubtext}</div>
+								<!-- Action Button -->
+								<a
+									href={card.link.href}
+									class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-primary-900 px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 border-2 border-white"
+								>
+									{card.link.text}
+									<svg
+										class="w-4 h-4"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										aria-hidden="true"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M9 5l7 7-7 7"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<script>
+	function initInteractiveCards() {
+		const interactiveCards = document.querySelectorAll('.interactive-card');
+		let activeCard: HTMLElement | null = null;
+
+		console.log('Found interactive cards:', interactiveCards.length);
+
+		interactiveCards.forEach((card, index) => {
+			const handleToggle = (e: Event) => {
+				e.preventDefault();
+				e.stopPropagation();
+				e.stopImmediatePropagation();
+				const target = card as HTMLElement;
+
+				console.log('Card clicked:', index, 'Current active:', target.classList.contains('active'));
+
+				// Close other cards
+				interactiveCards.forEach((otherCard) => {
+					if (otherCard !== target && otherCard.classList.contains('active')) {
+						otherCard.classList.remove('active');
+					}
+				});
+
+				// Toggle current card
+				if (target.classList.contains('active')) {
+					target.classList.remove('active');
+					activeCard = null;
+					console.log('Card deactivated');
+				} else {
+					target.classList.add('active');
+					activeCard = target;
+					console.log('Card activated');
+				}
+			};
+
+			const handleTouchEnd = (e: TouchEvent) => {
+				// Prevent default and stop all propagation for touch events
+				e.preventDefault();
+				e.stopPropagation();
+				e.stopImmediatePropagation();
+
+				const target = card as HTMLElement;
+				console.log('Card touched:', index, 'Current active:', target.classList.contains('active'));
+
+				// Close other cards
+				interactiveCards.forEach((otherCard) => {
+					if (otherCard !== target && otherCard.classList.contains('active')) {
+						otherCard.classList.remove('active');
+					}
+				});
+
+				// Toggle current card
+				if (target.classList.contains('active')) {
+					target.classList.remove('active');
+					activeCard = null;
+					console.log('Card deactivated');
+				} else {
+					target.classList.add('active');
+					activeCard = target;
+					console.log('Card activated');
+				}
+			};
+
+			// Add click for desktop
+			card.addEventListener('click', handleToggle, { passive: false });
+			// Add touch events for mobile with passive: false to allow preventDefault
+			card.addEventListener('touchend', handleTouchEnd, { passive: false });
+		});
+
+		// Close card when clicking outside
+		document.addEventListener('click', (e) => {
+			const target = e.target as HTMLElement;
+			if (activeCard && !target.closest('.interactive-card')) {
+				activeCard.classList.remove('active');
+				activeCard = null;
+			}
+		});
+	}
+
+	// Initialize on page load
+	document.addEventListener('DOMContentLoaded', initInteractiveCards);
+
+	// Reinitialize after Astro View Transitions
+	document.addEventListener('astro:page-load', initInteractiveCards);
+</script>
+
+<style>
+	/* Mobile-first: Default collapsed state */
+	@media (max-width: 767px) {
+		/* Initial state - tab is DOWN (showing only top portion) */
+		.interactive-card .sliding-tab {
+			transform: translateY(66.666667%);
+		}
+
+		/* Completely disable ALL hover effects on mobile */
+		.interactive-card:hover .sliding-tab {
+			transform: translateY(66.666667%) !important;
+		}
+
+		.interactive-card:hover .opacity-0 {
+			opacity: 0 !important;
+		}
+
+		.interactive-card:hover .card-image {
+			transform: scale(1) !important;
+		}
+
+		.interactive-card:hover .card-overlay {
+			background-color: rgba(0, 0, 0, 0.5) !important;
+		}
+
+		/* Active state - tab slides UP (showing full content) */
+		.interactive-card.active .sliding-tab {
+			transform: translateY(0) !important;
+		}
+
+		.interactive-card.active .opacity-0 {
+			opacity: 1 !important;
+		}
+
+		.interactive-card.active .card-image {
+			transform: scale(1.1) !important;
+		}
+
+		.interactive-card.active .card-overlay {
+			background-color: rgba(0, 0, 0, 0.6) !important;
+		}
+	}
+
+	/* Desktop: Hover and click both work */
+	@media (min-width: 768px) {
+		/* Initial state - tab is DOWN */
+		.interactive-card .sliding-tab {
+			transform: translateY(66.666667%);
+		}
+
+		/* Hover state - tab slides UP */
+		.interactive-card:hover .sliding-tab {
+			transform: translateY(0);
+		}
+
+		.interactive-card:hover .opacity-0 {
+			opacity: 1;
+		}
+
+		.interactive-card:hover .card-image {
+			transform: scale(1.1);
+		}
+
+		.interactive-card:hover .card-overlay {
+			background-color: rgba(0, 0, 0, 0.6);
+		}
+
+		/* Active state (click) - same as hover */
+		.interactive-card.active .sliding-tab {
+			transform: translateY(0) !important;
+		}
+
+		.interactive-card.active .opacity-0 {
+			opacity: 1 !important;
+		}
+
+		.interactive-card.active .card-image {
+			transform: scale(1.1) !important;
+		}
+
+		.interactive-card.active .card-overlay {
+			background-color: rgba(0, 0, 0, 0.6) !important;
+		}
+	}
+</style>
