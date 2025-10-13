@@ -129,9 +129,11 @@ function isActive(href: string): boolean {
 			<!-- Mobile Menu Button -->
 			<button
 				id="mobile-menu-button"
-				class="lg:hidden flex flex-col gap-2 w-8 h-8 justify-center items-center"
+				class="lg:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center"
 				aria-label="Toggle menu"
 			>
+				<span class="hamburger-line w-6 h-0.5 bg-primary transition-all duration-500 ease-in-out"
+				></span>
 				<span class="hamburger-line w-6 h-0.5 bg-primary transition-all duration-500 ease-in-out"
 				></span>
 				<span class="hamburger-line w-6 h-0.5 bg-primary transition-all duration-500 ease-in-out"
@@ -351,12 +353,14 @@ function isActive(href: string): boolean {
 				mobileMenu?.classList.remove('max-h-0', 'opacity-0');
 				mobileMenu?.classList.add('max-h-[800px]', 'opacity-100');
 
-				// Transform hamburger to X with 90 degree rotation first
+				// Transform hamburger to X
 				if (hamburgerLines) {
-					// First line: rotate 90deg, then rotate to 45deg and move down
-					hamburgerLines[0].style.transform = 'rotate(135deg) translateY(5px) translateX(5px)';
-					// Second line: rotate 90deg, then rotate to -45deg and move up
-					hamburgerLines[1].style.transform = 'rotate(-135deg) translateY(-5px) translateX(5px)';
+					// First line: rotate to 45deg and move down
+					hamburgerLines[0].style.transform = 'rotate(45deg) translateY(8px) translateX(6px)';
+					// Second line: fade out
+					hamburgerLines[1].style.opacity = '0';
+					// Third line: rotate to -45deg and move up
+					hamburgerLines[2].style.transform = 'rotate(-45deg) translateY(-8px) translateX(6px)';
 				}
 			} else {
 				// Close menu - smooth slide up
@@ -365,8 +369,9 @@ function isActive(href: string): boolean {
 
 				// Back to hamburger
 				if (hamburgerLines) {
-					hamburgerLines[0].style.transform = 'rotate(0) translateY(0)';
-					hamburgerLines[1].style.transform = 'rotate(0) translateY(0)';
+					hamburgerLines[0].style.transform = 'rotate(0) translateY(0) translateX(0)';
+					hamburgerLines[1].style.opacity = '1';
+					hamburgerLines[2].style.transform = 'rotate(0) translateY(0) translateX(0)';
 				}
 
 				// Close all submenus when main menu closes

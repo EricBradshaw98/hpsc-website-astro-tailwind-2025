@@ -9,7 +9,7 @@ export interface HeroImage {
 export interface HeroCTA {
 	text: string;
 	href: string;
-	style: 'primary' | 'secondary';
+	style: 'primary' | 'secondary' | 'demo';
 }
 
 export interface HeroSectionProps {
@@ -53,6 +53,24 @@ const { title, description, images, ctas } = Astro.props;
 			</div>
 		</div>
 		<div class="w-full relative z-10 bg-black/60 p-6 md:p-8 rounded-lg">
+			<!-- Demo Badge -->
+			<div class="inline-flex items-center gap-2 bg-yellow-500/90 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+				</svg>
+				<span>Demo Website</span>
+			</div>
+
 			<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
 				{title}
 			</h1>
@@ -69,11 +87,29 @@ const { title, description, images, ctas } = Astro.props;
 									class={
 										cta.style === 'primary'
 											? 'inline-block px-8 py-3 rounded-lg font-semibold transition-colors bg-white text-primary-900 hover:bg-primary-50 shadow-lg'
-											: 'inline-block px-8 py-3 rounded-lg font-semibold bg-black/40 text-white border-2 border-white/80 hover:bg-white hover:text-primary-900 transition-colors shadow-md'
+											: cta.style === 'secondary'
+												? 'inline-block px-8 py-3 rounded-lg font-semibold bg-black/40 text-white border-2 border-white/80 hover:bg-white hover:text-primary-900 transition-colors shadow-md'
+												: 'inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold bg-yellow-500/90 text-gray-900 hover:bg-yellow-400 transition-colors shadow-lg border-2 border-yellow-600'
 									}
 									aria-label={cta.text}
 								>
 									{cta.text}
+									{cta.style === 'demo' && (
+										<svg
+											class="w-5 h-5"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+											aria-hidden="true"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M9 5l7 7-7 7"
+											/>
+										</svg>
+									)}
 								</a>
 							</li>
 						))

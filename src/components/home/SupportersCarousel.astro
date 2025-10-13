@@ -126,8 +126,16 @@ const { heading, description, supporters } = Astro.props;
 
 	// Get total slides based on screen size
 	function getTotalSlides() {
-		const supporters = carousel?.querySelectorAll('.min-w-full');
-		return supporters ? supporters.length : 0;
+		const isMobile = window.innerWidth < 768; // md breakpoint
+		if (isMobile) {
+			// On mobile: count only visible slides (exclude hidden md:flex)
+			const mobileSlides = carousel?.querySelectorAll('.min-w-full:not(.md\\:flex)');
+			return mobileSlides ? mobileSlides.length : 0;
+		} else {
+			// On desktop: count only visible slides (exclude md:hidden)
+			const desktopSlides = carousel?.querySelectorAll('.min-w-full:not(.md\\:hidden)');
+			return desktopSlides ? desktopSlides.length : 0;
+		}
 	}
 
 	function updateCarousel() {

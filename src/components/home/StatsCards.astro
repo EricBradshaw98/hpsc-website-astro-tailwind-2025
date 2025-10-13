@@ -138,7 +138,7 @@ const { stats } = Astro.props;
 				observer.observe(card);
 			});
 		} else {
-			// On desktop: Keep the original click/touch behavior
+			// On desktop: Click/touch to toggle behavior
 			let activeCard: HTMLElement | null = null;
 
 			statsCards.forEach((card) => {
@@ -223,6 +223,29 @@ const { stats } = Astro.props;
 		.stats-card.active div[class*='bg-black'] {
 			background-color: rgba(0, 0, 0, 0.6) !important;
 			transition: background-color 0.3s ease-out !important;
+		}
+	}
+
+	/* Desktop active state styles */
+	@media (min-width: 768px) {
+		/* Active state - slide up the colored tab to show full content */
+		.stats-card.active > div[class*='translate-y'] {
+			transform: translateY(0) !important;
+		}
+
+		/* Show the hidden content when active */
+		.stats-card.active .opacity-0 {
+			opacity: 1 !important;
+		}
+
+		/* Zoom the image when active */
+		.stats-card.active img {
+			transform: scale(1.1) !important;
+		}
+
+		/* Darken the overlay when active */
+		.stats-card.active div[class*='bg-black'] {
+			background-color: rgba(0, 0, 0, 0.6) !important;
 		}
 	}
 </style>
