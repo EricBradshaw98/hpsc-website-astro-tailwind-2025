@@ -354,11 +354,9 @@ function isActive(href: string): boolean {
 				// Transform hamburger to X with 90 degree rotation first
 				if (hamburgerLines) {
 					// First line: rotate 90deg, then rotate to 45deg and move down
-					hamburgerLines[0].style.transform =
-						'rotate(135deg) translateY(5px) translateX(5px)';
+					hamburgerLines[0].style.transform = 'rotate(135deg) translateY(5px) translateX(5px)';
 					// Second line: rotate 90deg, then rotate to -45deg and move up
-					hamburgerLines[1].style.transform =
-						'rotate(-135deg) translateY(-5px) translateX(5px)';
+					hamburgerLines[1].style.transform = 'rotate(-135deg) translateY(-5px) translateX(5px)';
 				}
 			} else {
 				// Close menu - smooth slide up

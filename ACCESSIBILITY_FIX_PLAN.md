@@ -23,6 +23,7 @@ The accessibility audit revealed 602 issues across the site, with **199 critical
 ### 1. Color Contrast Issues (WCAG 2.1 Level AA - 4.5:1 ratio required)
 
 #### Current Brand Color Problems:
+
 - **Primary Blue (`#00b6f0`)**: Contrast ratio of 2.35:1 on white (needs 4.5:1)
 - **Accent Green (`#00d084`)**: Contrast ratio of 2.03:1 on white (needs 4.5:1)
 - **Accent Blue (`#0693e3`)**: Contrast ratio of 3.34:1 on white (needs 4.5:1)
@@ -31,6 +32,7 @@ The accessibility audit revealed 602 issues across the site, with **199 critical
 #### Solutions:
 
 **Option A: Darken Primary Colors (Recommended)**
+
 ```css
 /* Updated colors with WCAG AA compliance */
 colors: {
@@ -57,23 +59,26 @@ Can improve readability but not ideal for accessibility
 ### 2. Form Accessibility Issues
 
 #### Search Forms Missing Submit Buttons
+
 **Pages Affected:** All pages with search functionality
 
 **Current Code:**
+
 ```html
 <form action="/search" method="get" class="relative">
-  <input type="search" name="q" placeholder="Search..." />
-  <!-- No submit button -->
+	<input type="search" name="q" placeholder="Search..." />
+	<!-- No submit button -->
 </form>
 ```
 
 **Fixed Code:**
+
 ```html
 <form action="/search" method="get" class="relative">
-  <input type="search" name="q" placeholder="Search..." />
-  <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2" aria-label="Search">
-    <svg><!-- search icon --></svg>
-  </button>
+	<input type="search" name="q" placeholder="Search..." />
+	<button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2" aria-label="Search">
+		<svg><!-- search icon --></svg>
+	</button>
 </form>
 ```
 
@@ -82,23 +87,26 @@ Can improve readability but not ideal for accessibility
 ### 3. Semantic HTML & Navigation Structure
 
 #### Issue: Navigation Sections Not Marked as Lists
+
 Many navigation sections (skip links, CTAs, social links) should use `<ul>/<li>` for proper semantics.
 
 **Before:**
+
 ```html
 <div class="flex gap-4">
-  <a href="/link1">Link 1</a>
-  <a href="/link2">Link 2</a>
+	<a href="/link1">Link 1</a>
+	<a href="/link2">Link 2</a>
 </div>
 ```
 
 **After:**
+
 ```html
 <nav aria-label="Call to action">
-  <ul class="flex gap-4 list-none">
-    <li><a href="/link1">Link 1</a></li>
-    <li><a href="/link2">Link 2</a></li>
-  </ul>
+	<ul class="flex gap-4 list-none">
+		<li><a href="/link1">Link 1</a></li>
+		<li><a href="/link2">Link 2</a></li>
+	</ul>
 </nav>
 ```
 
@@ -107,6 +115,7 @@ Many navigation sections (skip links, CTAs, social links) should use `<ul>/<li>`
 ### 4. Fixed Positioning Warnings
 
 #### Cookie Banner & Accessibility Tab
+
 Fixed elements may require 2D scrolling on small screens.
 
 **Solution:** Ensure fixed elements don't obscure content and can be dismissed easily.
@@ -118,6 +127,7 @@ Fixed elements may require 2D scrolling on small screens.
 ### Home Page (73 issues)
 
 #### Priority Fixes:
+
 1. **Hero Section Contrast**
    - White text on gradient: Fix overlay opacity or text color
    - CTA buttons: Use darker primary color
@@ -133,17 +143,17 @@ Fixed elements may require 2D scrolling on small screens.
    - Wrap in `<nav>` with `<ul>/<li>` structure
 
 **Implementation:**
+
 ```astro
 <!-- Hero CTAs with semantic markup -->
 <nav aria-label="Primary actions">
-  <ul class="flex flex-wrap gap-4 list-none">
-    <li>
-      <a href="/contractor-network/find-a-contractor"
-         class="bg-primary-dark text-white">
-        Find a Contractor
-      </a>
-    </li>
-  </ul>
+	<ul class="flex flex-wrap gap-4 list-none">
+		<li>
+			<a href="/contractor-network/find-a-contractor" class="bg-primary-dark text-white">
+				Find a Contractor
+			</a>
+		</li>
+	</ul>
 </nav>
 ```
 
@@ -152,6 +162,7 @@ Fixed elements may require 2D scrolling on small screens.
 ### Contact Page (35 issues)
 
 #### Priority Fixes:
+
 1. **Form Validation**
    - Ensure error messages are announced to screen readers
    - Add `aria-describedby` for field hints
@@ -163,16 +174,10 @@ Fixed elements may require 2D scrolling on small screens.
    - Already using semantic `<details>/<summary>` ✓
 
 **Implementation:**
+
 ```astro
-<input
-  type="email"
-  id="email"
-  aria-describedby="email-hint"
-  aria-invalid="false"
-/>
-<span id="email-hint" class="text-sm text-gray-600">
-  We'll never share your email.
-</span>
+<input type="email" id="email" aria-describedby="email-hint" aria-invalid="false" />
+<span id="email-hint" class="text-sm text-gray-600"> We'll never share your email. </span>
 ```
 
 ---
@@ -180,6 +185,7 @@ Fixed elements may require 2D scrolling on small screens.
 ### News Index (51 issues) & News Slug Pages
 
 #### Priority Fixes:
+
 1. **Article Cards**
    - Ensure sufficient color contrast on hover states
    - Add proper alt text to all images
@@ -193,22 +199,23 @@ Fixed elements may require 2D scrolling on small screens.
    - Indicate current page with `aria-current="page"`
 
 **Implementation:**
+
 ```astro
 <article>
-  <a href="/news/article-slug">
-    <img src="..." alt="Descriptive text about the article content" />
-    <time datetime="2025-10-08">October 8, 2025</time>
-    <h3>Article Title</h3>
-  </a>
+	<a href="/news/article-slug">
+		<img src="..." alt="Descriptive text about the article content" />
+		<time datetime="2025-10-08">October 8, 2025</time>
+		<h3>Article Title</h3>
+	</a>
 </article>
 
 <!-- Pagination -->
 <nav aria-label="News pagination">
-  <ul class="flex gap-2 list-none">
-    <li>
-      <a href="/news?page=1" aria-label="Page 1" aria-current="page">1</a>
-    </li>
-  </ul>
+	<ul class="flex gap-2 list-none">
+		<li>
+			<a href="/news?page=1" aria-label="Page 1" aria-current="page">1</a>
+		</li>
+	</ul>
 </nav>
 ```
 
@@ -217,6 +224,7 @@ Fixed elements may require 2D scrolling on small screens.
 ### Guides Index (51 issues) & Guides Slug Pages
 
 #### Priority Fixes:
+
 1. **Guide Cards Layout**
    - Same fixes as News cards above
    - Ensure category badges have sufficient contrast
@@ -233,6 +241,7 @@ Fixed elements may require 2D scrolling on small screens.
 ### About/Our Team Page (61 issues)
 
 #### Priority Fixes:
+
 1. **Team Member Cards**
    - Placeholder avatars need alt text or `role="presentation"`
    - Social links need proper labels
@@ -241,23 +250,21 @@ Fixed elements may require 2D scrolling on small screens.
    - Ensure proper heading hierarchy (h2, h3)
 
 **Implementation:**
+
 ```astro
 <article>
-  <img
-    src="placeholder-avatar.jpg"
-    alt="Profile photo of John Doe, Executive Director"
-  />
-  <h3>John Doe</h3>
-  <p>Executive Director</p>
-  <nav aria-label="John Doe's social links">
-    <ul class="flex gap-2 list-none">
-      <li>
-        <a href="..." aria-label="John Doe on LinkedIn">
-          <svg aria-hidden="true"><!-- LinkedIn icon --></svg>
-        </a>
-      </li>
-    </ul>
-  </nav>
+	<img src="placeholder-avatar.jpg" alt="Profile photo of John Doe, Executive Director" />
+	<h3>John Doe</h3>
+	<p>Executive Director</p>
+	<nav aria-label="John Doe's social links">
+		<ul class="flex gap-2 list-none">
+			<li>
+				<a href="..." aria-label="John Doe on LinkedIn">
+					<svg aria-hidden="true"><!-- LinkedIn icon --></svg>
+				</a>
+			</li>
+		</ul>
+	</nav>
 </article>
 ```
 
@@ -266,23 +273,24 @@ Fixed elements may require 2D scrolling on small screens.
 ## Global Component Fixes
 
 ### Layout.astro
+
 1. **Skip Links**
    - Add explicit background color to prevent contrast issues
    - Currently positioned absolutely with unknown background
 
 ```astro
-<a href="#main-content" class="skip-link bg-primary-dark text-white">
-  Skip to main content
-</a>
+<a href="#main-content" class="skip-link bg-primary-dark text-white"> Skip to main content </a>
 ```
 
 ### Nav.astro
+
 1. **Search Form**
    - Add submit button
 2. **Top Contact Bar**
    - Wrap phone/email links in semantic list
 
 ### Footer.astro
+
 1. **Footer Links**
    - Already using semantic structure ✓
 2. **Social Links**
@@ -327,16 +335,19 @@ After implementing fixes:
 ## Implementation Priority
 
 ### Phase 1: Critical Errors (Must Fix)
+
 1. Update primary brand colors for contrast compliance
 2. Add submit buttons to search forms
 3. Fix hero section contrast issues
 
 ### Phase 2: Warnings (Should Fix)
+
 1. Convert navigation groups to semantic lists
 2. Add proper ARIA labels to all icons
 3. Improve form field descriptions
 
 ### Phase 3: Enhancements (Nice to Have)
+
 1. Add focus indicators for better keyboard navigation
 2. Implement reduced-motion preferences
 3. Add high contrast mode support
@@ -346,11 +357,13 @@ After implementing fixes:
 ## Estimated Impact
 
 **Before Fixes:**
+
 - Total Issues: 602
 - Errors: 199
 - Warnings: 403
 
 **After Priority Page Fixes (Target):**
+
 - Home: 73 → ~10 issues
 - Contact: 35 → ~5 issues
 - News Index: 51 → ~8 issues

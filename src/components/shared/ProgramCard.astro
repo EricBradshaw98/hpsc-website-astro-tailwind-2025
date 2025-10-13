@@ -126,7 +126,11 @@ const { title, category, duration, level, format, description, image, topics, pr
 						</li>
 					))
 				}
-				{topics.length > 3 && <li class="text-sm text-primary-dark">+{topics.length - 3} more...</li>}
+				{
+					topics.length > 3 && (
+						<li class="text-sm text-primary-dark">+{topics.length - 3} more...</li>
+					)
+				}
 			</ul>
 		</div>
 
