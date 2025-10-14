@@ -2606,62 +2606,73 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 </Layout>
 
 <script>
-	// Progress tracking
-	const stepLinks = document.querySelectorAll('.step-link');
-	const steps = document.querySelectorAll('[id^="step-"]');
+	// Initialize smooth scroll and progress tracking after DOM is ready
+	function initializeGuideInteractions() {
+		// Progress tracking
+		const stepLinks = document.querySelectorAll('.step-link');
+		const steps = document.querySelectorAll('[id^="step-"]');
 
-	// Intersection Observer for progress tracking
-	const observerOptions = {
-		root: null,
-		rootMargin: '-20% 0px -70% 0px',
-		threshold: 0,
-	};
+		// Intersection Observer for progress tracking
+		const observerOptions = {
+			root: null,
+			rootMargin: '-20% 0px -70% 0px',
+			threshold: 0,
+		};
 
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) {
-				const stepId = entry.target.id;
-				const stepNumber = stepId.replace('step-', '');
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const stepId = entry.target.id;
+					const stepNumber = stepId.replace('step-', '');
 
-				// Update active state
-				stepLinks.forEach((link) => {
-					const linkStep = link.getAttribute('data-step');
-					const circle = link.querySelector('div > div');
-					const text = link.querySelector('div > div:last-child');
+					// Update active state
+					stepLinks.forEach((link) => {
+						const linkStep = link.getAttribute('data-step');
+						const circle = link.querySelector('div > div');
+						const text = link.querySelector('div > div:last-child');
 
-					if (linkStep === stepNumber) {
-						circle?.classList.remove('border-gray-300', 'text-gray-400');
-						circle?.classList.add('border-primary-dark', 'bg-primary-dark', 'text-white');
-						text?.classList.remove('text-gray-600');
-						text?.classList.add('text-primary', 'font-semibold');
-					} else {
-						circle?.classList.remove('border-primary-dark', 'bg-primary-dark', 'text-white');
-						circle?.classList.add('border-gray-300', 'text-gray-400');
-						text?.classList.remove('text-primary', 'font-semibold');
-						text?.classList.add('text-gray-600');
-					}
-				});
-			}
-		});
-	}, observerOptions);
-
-	// Observe all steps
-	steps.forEach((step) => {
-		observer.observe(step);
-	});
-
-	// Smooth scroll for step links (desktop and mobile)
-	const allStepLinks = document.querySelectorAll('.step-link, .step-link-mobile');
-	allStepLinks.forEach((link) => {
-		link.addEventListener('click', (e) => {
-			e.preventDefault();
-			const href = link.getAttribute('href');
-			if (href) {
-				const target = document.querySelector(href);
-				if (target) {
-					target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+						if (linkStep === stepNumber) {
+							circle?.classList.remove('border-gray-300', 'text-gray-400');
+							circle?.classList.add('border-primary-dark', 'bg-primary-dark', 'text-white');
+							text?.classList.remove('text-gray-600');
+							text?.classList.add('text-primary', 'font-semibold');
+						} else {
+							circle?.classList.remove('border-primary-dark', 'bg-primary-dark', 'text-white');
+							circle?.classList.add('border-gray-300', 'text-gray-400');
+							text?.classList.remove('text-primary', 'font-semibold');
+							text?.classList.add('text-gray-600');
+						}
+					});
 				}
-			}
+			});
+		}, observerOptions);
+
+		// Observe all steps
+		steps.forEach((step) => {
+			observer.observe(step);
 		});
-	});
+
+		// Smooth scroll for step links (desktop and mobile)
+		const allStepLinks = document.querySelectorAll('.step-link, .step-link-mobile');
+		allStepLinks.forEach((link) => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				const href = link.getAttribute('href');
+				if (href) {
+					const target = document.querySelector(href);
+					if (target) {
+						target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+					}
+				}
+			});
+		});
+	}
+
+	// Initialize on DOM ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initializeGuideInteractions);
+	} else {
+		// DOM already loaded
+		initializeGuideInteractions();
+	}
 </script>

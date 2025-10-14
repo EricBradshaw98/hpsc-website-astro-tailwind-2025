@@ -188,187 +188,198 @@
 </div>
 
 <script>
-	// Font size control
-	let fontSize = 16;
-	const htmlElement = document.documentElement;
+	// Initialize accessibility controls after DOM is ready
+	function initializeAccessibilityControls() {
+		// Font size control
+		let fontSize = 16;
+		const htmlElement = document.documentElement;
 
-	document.getElementById('increase-font')?.addEventListener('click', () => {
-		fontSize = Math.min(fontSize + 2, 24);
-		htmlElement.style.fontSize = `${fontSize}px`;
-		localStorage.setItem('fontSize', fontSize.toString());
-	});
-
-	document.getElementById('decrease-font')?.addEventListener('click', () => {
-		fontSize = Math.max(fontSize - 2, 12);
-		htmlElement.style.fontSize = `${fontSize}px`;
-		localStorage.setItem('fontSize', fontSize.toString());
-	});
-
-	document.getElementById('reset-font')?.addEventListener('click', () => {
-		fontSize = 16;
-		htmlElement.style.fontSize = `${fontSize}px`;
-		localStorage.setItem('fontSize', fontSize.toString());
-	});
-
-	// High contrast toggle
-	const highContrastToggle = document.getElementById('high-contrast');
-	highContrastToggle?.addEventListener('change', () => {
-		if (highContrastToggle.checked) {
-			document.body.classList.add('high-contrast');
-			localStorage.setItem('highContrast', 'true');
-		} else {
-			document.body.classList.remove('high-contrast');
-			localStorage.setItem('highContrast', 'false');
-		}
-	});
-
-	// Line height toggle
-	const lineHeightToggle = document.getElementById('line-height');
-	lineHeightToggle?.addEventListener('change', () => {
-		if (lineHeightToggle.checked) {
-			document.body.classList.add('increased-line-height');
-			localStorage.setItem('lineHeight', 'true');
-		} else {
-			document.body.classList.remove('increased-line-height');
-			localStorage.setItem('lineHeight', 'false');
-		}
-	});
-
-	// Letter spacing toggle
-	const letterSpacingToggle = document.getElementById('letter-spacing');
-	letterSpacingToggle?.addEventListener('change', () => {
-		if (letterSpacingToggle.checked) {
-			document.body.classList.add('increased-letter-spacing');
-			localStorage.setItem('letterSpacing', 'true');
-		} else {
-			document.body.classList.remove('increased-letter-spacing');
-			localStorage.setItem('letterSpacing', 'false');
-		}
-	});
-
-	// Reduce motion toggle
-	const reduceMotionToggle = document.getElementById('reduce-motion');
-	reduceMotionToggle?.addEventListener('change', () => {
-		if (reduceMotionToggle.checked) {
-			document.body.classList.add('reduce-motion');
-			localStorage.setItem('reduceMotion', 'true');
-		} else {
-			document.body.classList.remove('reduce-motion');
-			localStorage.setItem('reduceMotion', 'false');
-		}
-		// Dispatch event to notify other parts of the app if needed
-		window.dispatchEvent(new CustomEvent('reduce-motion-changed'));
-	});
-
-	// Reset all settings
-	document.getElementById('reset-all')?.addEventListener('click', () => {
-		fontSize = 16;
-		htmlElement.style.fontSize = '16px';
-		document.body.classList.remove(
-			'high-contrast',
-			'increased-line-height',
-			'increased-letter-spacing',
-			'reduce-motion'
-		);
-
-		const inputs = ['high-contrast', 'line-height', 'letter-spacing', 'reduce-motion'];
-		inputs.forEach((id) => {
-			const el = document.getElementById(id);
-			if (el) el.checked = false;
+		document.getElementById('increase-font')?.addEventListener('click', () => {
+			fontSize = Math.min(fontSize + 2, 24);
+			htmlElement.style.fontSize = `${fontSize}px`;
+			localStorage.setItem('fontSize', fontSize.toString());
 		});
 
-		localStorage.removeItem('fontSize');
-		localStorage.removeItem('highContrast');
-		localStorage.removeItem('lineHeight');
-		localStorage.removeItem('letterSpacing');
-		localStorage.removeItem('reduceMotion');
+		document.getElementById('decrease-font')?.addEventListener('click', () => {
+			fontSize = Math.max(fontSize - 2, 12);
+			htmlElement.style.fontSize = `${fontSize}px`;
+			localStorage.setItem('fontSize', fontSize.toString());
+		});
 
-		// notify reduce-motion listeners
-		window.dispatchEvent(new CustomEvent('reduce-motion-changed'));
-	});
+		document.getElementById('reset-font')?.addEventListener('click', () => {
+			fontSize = 16;
+			htmlElement.style.fontSize = `${fontSize}px`;
+			localStorage.setItem('fontSize', fontSize.toString());
+		});
 
-	// Mobile tap support for accessibility tab
-	const tabWrapper = document.getElementById('accessibility-tab-wrapper');
-	const tabPanel = document.getElementById('accessibility-tab-panel');
-	const tabHandle = document.querySelector('.tab-handle');
-	let isTabOpen = false;
+		// High contrast toggle
+		const highContrastToggle = document.getElementById('high-contrast');
+		highContrastToggle?.addEventListener('change', () => {
+			if ((highContrastToggle as HTMLInputElement).checked) {
+				document.body.classList.add('high-contrast');
+				localStorage.setItem('highContrast', 'true');
+			} else {
+				document.body.classList.remove('high-contrast');
+				localStorage.setItem('highContrast', 'false');
+			}
+		});
 
-	function openTab() {
-		tabWrapper?.style.setProperty('transform', 'translateX(0)');
-		if (tabPanel) tabPanel.style.opacity = '1';
-		isTabOpen = true;
-	}
-	function closeTab() {
-		tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
-		if (tabPanel) tabPanel.style.opacity = '0';
-		isTabOpen = false;
-	}
+		// Line height toggle
+		const lineHeightToggle = document.getElementById('line-height');
+		lineHeightToggle?.addEventListener('change', () => {
+			if ((lineHeightToggle as HTMLInputElement).checked) {
+				document.body.classList.add('increased-line-height');
+				localStorage.setItem('lineHeight', 'true');
+			} else {
+				document.body.classList.remove('increased-line-height');
+				localStorage.setItem('lineHeight', 'false');
+			}
+		});
 
-	tabHandle?.addEventListener('click', (e) => {
-		e.stopPropagation();
-		if (isTabOpen) closeTab();
-		else openTab();
-	});
+		// Letter spacing toggle
+		const letterSpacingToggle = document.getElementById('letter-spacing');
+		letterSpacingToggle?.addEventListener('change', () => {
+			if ((letterSpacingToggle as HTMLInputElement).checked) {
+				document.body.classList.add('increased-letter-spacing');
+				localStorage.setItem('letterSpacing', 'true');
+			} else {
+				document.body.classList.remove('increased-letter-spacing');
+				localStorage.setItem('letterSpacing', 'false');
+			}
+		});
 
-	// keyboard accessibility for handle
-	tabHandle?.addEventListener('keydown', (e) => {
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
+		// Reduce motion toggle
+		const reduceMotionToggle = document.getElementById('reduce-motion');
+		reduceMotionToggle?.addEventListener('change', () => {
+			if ((reduceMotionToggle as HTMLInputElement).checked) {
+				document.body.classList.add('reduce-motion');
+				localStorage.setItem('reduceMotion', 'true');
+			} else {
+				document.body.classList.remove('reduce-motion');
+				localStorage.setItem('reduceMotion', 'false');
+			}
+			// Dispatch event to notify other parts of the app if needed
+			window.dispatchEvent(new CustomEvent('reduce-motion-changed'));
+		});
+
+		// Reset all settings
+		document.getElementById('reset-all')?.addEventListener('click', () => {
+			fontSize = 16;
+			htmlElement.style.fontSize = '16px';
+			document.body.classList.remove(
+				'high-contrast',
+				'increased-line-height',
+				'increased-letter-spacing',
+				'reduce-motion'
+			);
+
+			const inputs = ['high-contrast', 'line-height', 'letter-spacing', 'reduce-motion'];
+			inputs.forEach((id) => {
+				const el = document.getElementById(id) as HTMLInputElement | null;
+				if (el) el.checked = false;
+			});
+
+			localStorage.removeItem('fontSize');
+			localStorage.removeItem('highContrast');
+			localStorage.removeItem('lineHeight');
+			localStorage.removeItem('letterSpacing');
+			localStorage.removeItem('reduceMotion');
+
+			// notify reduce-motion listeners
+			window.dispatchEvent(new CustomEvent('reduce-motion-changed'));
+		});
+
+		// Mobile tap support for accessibility tab
+		const tabWrapper = document.getElementById('accessibility-tab-wrapper');
+		const tabPanel = document.getElementById('accessibility-tab-panel');
+		const tabHandle = document.querySelector('.tab-handle');
+		let isTabOpen = false;
+
+		function openTab() {
+			tabWrapper?.style.setProperty('transform', 'translateX(0)');
+			if (tabPanel) tabPanel.style.opacity = '1';
+			isTabOpen = true;
+		}
+		function closeTab() {
+			tabWrapper?.style.setProperty('transform', 'translateX(calc(-100% + 48px))');
+			if (tabPanel) tabPanel.style.opacity = '0';
+			isTabOpen = false;
+		}
+
+		tabHandle?.addEventListener('click', (e) => {
+			e.stopPropagation();
 			if (isTabOpen) closeTab();
 			else openTab();
-		}
-	});
+		});
 
-	// Close tab when clicking outside on mobile
-	document.addEventListener('click', (e) => {
-		const target = /** @type {HTMLElement} */ (e.target);
-		if (isTabOpen && !target.closest('.accessibility-tab-wrapper')) {
-			closeTab();
-		}
-	});
+		// keyboard accessibility for handle
+		tabHandle?.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				if (isTabOpen) closeTab();
+				else openTab();
+			}
+		});
 
-	// Load saved preferences function
-	function loadAccessibilitySettings() {
-		const savedFontSize = localStorage.getItem('fontSize');
-		if (savedFontSize) {
-			fontSize = parseInt(savedFontSize);
-			htmlElement.style.fontSize = `${fontSize}px`;
+		// Close tab when clicking outside on mobile
+		document.addEventListener('click', (e) => {
+			const target = e.target as HTMLElement;
+			if (isTabOpen && !target.closest('.accessibility-tab-wrapper')) {
+				closeTab();
+			}
+		});
+
+		// Load saved preferences function
+		function loadAccessibilitySettings() {
+			const savedFontSize = localStorage.getItem('fontSize');
+			if (savedFontSize) {
+				fontSize = parseInt(savedFontSize);
+				htmlElement.style.fontSize = `${fontSize}px`;
+			}
+
+			const savedHighContrast = localStorage.getItem('highContrast');
+			if (savedHighContrast === 'true') {
+				document.body.classList.add('high-contrast');
+				const hc = document.getElementById('high-contrast') as HTMLInputElement | null;
+				if (hc) hc.checked = true;
+			}
+
+			const savedLineHeight = localStorage.getItem('lineHeight');
+			if (savedLineHeight === 'true') {
+				document.body.classList.add('increased-line-height');
+				const lh = document.getElementById('line-height') as HTMLInputElement | null;
+				if (lh) lh.checked = true;
+			}
+
+			const savedLetterSpacing = localStorage.getItem('letterSpacing');
+			if (savedLetterSpacing === 'true') {
+				document.body.classList.add('increased-letter-spacing');
+				const ls = document.getElementById('letter-spacing') as HTMLInputElement | null;
+				if (ls) ls.checked = true;
+			}
+
+			const savedReduceMotion = localStorage.getItem('reduceMotion');
+			if (savedReduceMotion === 'true') {
+				document.body.classList.add('reduce-motion');
+				const rm = document.getElementById('reduce-motion') as HTMLInputElement | null;
+				if (rm) rm.checked = true;
+			}
 		}
 
-		const savedHighContrast = localStorage.getItem('highContrast');
-		if (savedHighContrast === 'true') {
-			document.body.classList.add('high-contrast');
-			const hc = document.getElementById('high-contrast');
-			if (hc) hc.checked = true;
-		}
-
-		const savedLineHeight = localStorage.getItem('lineHeight');
-		if (savedLineHeight === 'true') {
-			document.body.classList.add('increased-line-height');
-			const lh = document.getElementById('line-height');
-			if (lh) lh.checked = true;
-		}
-
-		const savedLetterSpacing = localStorage.getItem('letterSpacing');
-		if (savedLetterSpacing === 'true') {
-			document.body.classList.add('increased-letter-spacing');
-			const ls = document.getElementById('letter-spacing');
-			if (ls) ls.checked = true;
-		}
-
-		const savedReduceMotion = localStorage.getItem('reduceMotion');
-		if (savedReduceMotion === 'true') {
-			document.body.classList.add('reduce-motion');
-			const rm = document.getElementById('reduce-motion');
-			if (rm) rm.checked = true;
-		}
+		// Load saved settings immediately
+		loadAccessibilitySettings();
 	}
 
-	// Load on initial page load
-	document.addEventListener('DOMContentLoaded', loadAccessibilitySettings);
+	// Initialize on DOM ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initializeAccessibilityControls);
+	} else {
+		// DOM already loaded
+		initializeAccessibilityControls();
+	}
 
-	// Load on Astro View Transitions navigation (if used)
-	document.addEventListener('astro:page-load', loadAccessibilitySettings);
+	// Also handle Astro View Transitions navigation (if used)
+	document.addEventListener('astro:page-load', initializeAccessibilityControls);
 </script>
 
 <style>
