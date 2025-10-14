@@ -1,6 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
+import ScrollProgressBar from '../../../components/ScrollProgressBar.astro';
+import SwipeableImageCarousel from '../../../components/SwipeableImageCarousel.astro';
+import StepByStepTutorial from '../../../components/StepByStepTutorial.astro';
 
 const { slug } = Astro.params;
 
@@ -36,11 +39,6 @@ const guides: Record<string, any> = {
 				title: 'Pre-Installation Site Assessment',
 				content: `<p>A thorough site assessment is critical for heat pump success. This step ensures you select the right equipment and identify potential installation challenges before starting work.</p>
 
-				<div class="my-6 rounded-xl overflow-hidden">
-					<img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=450&fit=crop" alt="Heat pump outdoor unit installation site" class="w-full h-auto" />
-					<p class="text-sm text-gray-500 mt-2 italic">Example of proper outdoor unit placement and clearances</p>
-				</div>
-
 				<h3>What to Evaluate</h3>
 				<ul>
 					<li><strong>Electrical capacity:</strong> Verify the home has adequate electrical service (usually 200A minimum for whole-home heat pumps)</li>
@@ -53,6 +51,23 @@ const guides: Record<string, any> = {
 				<p class="bg-primary/10 p-4 rounded-lg mt-4">
 					<strong>Pro Tip:</strong> Take photos and measurements during assessment. This documentation helps with equipment selection and can prevent surprises during installation.
 				</p>`,
+				carousel: [
+					{
+						src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=450&fit=crop',
+						alt: 'Heat pump outdoor unit installation site',
+						caption: 'Example of proper outdoor unit placement and clearances',
+					},
+					{
+						src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop',
+						alt: 'Electrical panel inspection',
+						caption: 'Checking electrical capacity for heat pump installation',
+					},
+					{
+						src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=450&fit=crop',
+						alt: 'Ductwork inspection',
+						caption: 'Assessing existing ductwork condition and sizing',
+					},
+				],
 			},
 			{
 				title: 'Equipment Selection and Sizing',
@@ -384,6 +399,43 @@ const guides: Record<string, any> = {
 					<li>How much could I save annually?</li>
 					<li>Can you recommend certified contractors?</li>
 				</ul>`,
+				tutorial: {
+					title: 'Interactive: Understanding the Blower Door Test',
+					steps: [
+						{
+							title: 'Setup and Preparation',
+							content:
+								'<p>The energy advisor begins by preparing your home for the test. All exterior doors and windows are closed, while interior doors remain open. This creates a controlled environment for accurate measurements.</p><p>The advisor installs a large calibrated fan in your main doorway using an adjustable frame that seals tightly.</p>',
+							tip: "This preparation usually takes about 15 minutes. It's a good time to ask questions about what you'll see during the test.",
+							image:
+								'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=450&fit=crop',
+						},
+						{
+							title: 'Running the Test',
+							content:
+								'<p>Once setup is complete, the advisor turns on the fan which pulls air out of your home. This creates negative pressure inside - about 50 Pascals, similar to a 20 mph wind.</p><p>Digital gauges measure exactly how much air the fan needs to move to maintain this pressure. More air = more leaks in your home.</p>',
+							tip: "You might hear whistling sounds at this point - that's air rushing through the leaks the test is designed to find!",
+							image:
+								'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=450&fit=crop',
+						},
+						{
+							title: 'Finding the Leaks',
+							content:
+								'<p>With the fan running and your home depressurized, the advisor walks through with an infrared thermal camera or smoke pencil. These tools make air leaks visible.</p><p>The thermal camera shows temperature differences in real-time - cold spots indicate where outside air is entering. Common leak locations include window frames, electrical outlets, and attic hatches.</p>',
+							tip: "Ask to follow along! It's fascinating to see hidden leaks that are costing you money every month.",
+							image:
+								'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop',
+						},
+						{
+							title: 'Understanding Your Results',
+							content:
+								"<p>At the end of the test, you'll receive an 'ACH50' number - this measures how many times per hour all the air in your home would be replaced at test pressure.</p><p>Lower is better! A number above 10 means your home has significant air leakage. Modern building code requires 3.0 or less for new homes.</p>",
+							tip: "Don't worry about the number too much - your advisor will translate it into practical recommendations and potential savings.",
+							image:
+								'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=450&fit=crop',
+						},
+					],
+				},
 			},
 			{
 				title: 'Understanding Your Report',
@@ -670,40 +722,6 @@ const guides: Record<string, any> = {
 				<h3>Blower Door Testing</h3>
 				<p>A blower door test quantifies air leakage and helps prioritize sealing efforts.</p>
 
-				<div class="image-carousel my-6" data-carousel="blower-door">
-					<div class="carousel-container relative rounded-xl overflow-hidden">
-						<div class="carousel-slides">
-							<div class="carousel-slide active">
-								<img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=450&fit=crop" alt="Blower door test setup" class="w-full h-auto" />
-								<p class="text-sm text-gray-500 mt-2 italic">Blower door fan installed in doorway</p>
-							</div>
-							<div class="carousel-slide">
-								<img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=450&fit=crop" alt="Pressure gauge reading" class="w-full h-auto" />
-								<p class="text-sm text-gray-500 mt-2 italic">Digital pressure gauge showing air leakage rates</p>
-							</div>
-							<div class="carousel-slide">
-								<img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop" alt="Thermal imaging during test" class="w-full h-auto" />
-								<p class="text-sm text-gray-500 mt-2 italic">Using thermal camera to identify leaks during test</p>
-							</div>
-						</div>
-						<button class="carousel-btn carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg">
-							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-							</svg>
-						</button>
-						<button class="carousel-btn carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg">
-							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-							</svg>
-						</button>
-						<div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-							<button class="carousel-dot active w-2 h-2 rounded-full bg-white" data-index="0"></button>
-							<button class="carousel-dot w-2 h-2 rounded-full bg-white/50" data-index="1"></button>
-							<button class="carousel-dot w-2 h-2 rounded-full bg-white/50" data-index="2"></button>
-						</div>
-					</div>
-				</div>
-
 				<h3>Test Procedure</h3>
 				<ol>
 					<li>Close all exterior doors and windows</li>
@@ -713,6 +731,23 @@ const guides: Record<string, any> = {
 					<li>Use thermal camera or smoke pencil to locate leaks</li>
 					<li>Document findings with photos and measurements</li>
 				</ol>`,
+				carousel: [
+					{
+						src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=450&fit=crop',
+						alt: 'Blower door test setup',
+						caption: 'Blower door fan installed in doorway',
+					},
+					{
+						src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=450&fit=crop',
+						alt: 'Pressure gauge reading',
+						caption: 'Digital pressure gauge showing air leakage rates',
+					},
+					{
+						src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop',
+						alt: 'Thermal imaging during test',
+						caption: 'Using thermal camera to identify leaks during test',
+					},
+				],
 			},
 			{
 				title: 'Material Selection',
@@ -888,45 +923,6 @@ const guides: Record<string, any> = {
 			{
 				title: 'Insulation Types Compared',
 				content: `<p>Each insulation type has specific advantages for different applications.</p>
-
-				<div class="image-carousel my-6" data-carousel="insulation-types">
-					<div class="carousel-container relative rounded-xl overflow-hidden">
-						<div class="carousel-slides">
-							<div class="carousel-slide active">
-								<img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop" alt="Fiberglass batt insulation" class="w-full h-auto" />
-								<p class="text-sm text-gray-500 mt-2 italic">Fiberglass batts - most common and affordable</p>
-							</div>
-							<div class="carousel-slide">
-								<img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=450&fit=crop" alt="Spray foam insulation" class="w-full h-auto" />
-								<p class="text-sm text-gray-500 mt-2 italic">Spray foam - highest R-value per inch, air sealing included</p>
-							</div>
-							<div class="carousel-slide">
-								<img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=450&fit=crop" alt="Blown-in cellulose insulation" class="w-full h-auto" />
-								<p class="text-sm text-gray-500 mt-2 italic">Blown cellulose - excellent for retrofits and irregular spaces</p>
-							</div>
-							<div class="carousel-slide">
-								<img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=450&fit=crop" alt="Rigid foam board insulation" class="w-full h-auto" />
-								<p class="text-sm text-gray-500 mt-2 italic">Rigid foam boards - great for basements and exteriors</p>
-							</div>
-						</div>
-						<button class="carousel-btn carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg">
-							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-							</svg>
-						</button>
-						<button class="carousel-btn carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg">
-							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-							</svg>
-						</button>
-						<div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-							<button class="carousel-dot active w-2 h-2 rounded-full bg-white" data-index="0"></button>
-							<button class="carousel-dot w-2 h-2 rounded-full bg-white/50" data-index="1"></button>
-							<button class="carousel-dot w-2 h-2 rounded-full bg-white/50" data-index="2"></button>
-							<button class="carousel-dot w-2 h-2 rounded-full bg-white/50" data-index="3"></button>
-						</div>
-					</div>
-				</div>
 
 				<h3>Quick Comparison</h3>
 				<div class="my-6 bg-white rounded-xl shadow-md overflow-hidden">
@@ -1238,38 +1234,6 @@ const guides: Record<string, any> = {
 				title: 'Leak Detection and Prioritization',
 				content: `<p>Use the pressure difference during testing to identify and locate air leaks.</p>
 
-				<div class="image-carousel my-6" data-carousel="leak-detection">
-					<div class="carousel-container relative rounded-xl overflow-hidden">
-						<div class="carousel-slide active">
-							<img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop" alt="Thermal imaging during blower door test" class="w-full h-auto" />
-							<p class="text-sm text-gray-500 mt-2 italic">Thermal camera showing air leakage</p>
-						</div>
-						<div class="carousel-slide">
-							<img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=450&fit=crop" alt="Smoke pencil test" class="w-full h-auto" />
-							<p class="text-sm text-gray-500 mt-2 italic">Using smoke pencil to visualize air movement</p>
-						</div>
-						<div class="carousel-slide">
-							<img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=450&fit=crop" alt="Common leak locations" class="w-full h-auto" />
-							<p class="text-sm text-gray-500 mt-2 italic">Common leak locations around windows and baseboards</p>
-						</div>
-					</div>
-					<button class="carousel-btn carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-						</svg>
-					</button>
-					<button class="carousel-btn carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg">
-						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-						</svg>
-					</button>
-					<div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-						<button class="carousel-dot active w-2 h-2 rounded-full bg-white" data-index="0"></button>
-						<button class="carousel-dot w-2 h-2 rounded-full bg-white/50" data-index="1"></button>
-						<button class="carousel-dot w-2 h-2 rounded-full bg-white/50" data-index="2"></button>
-					</div>
-				</div>
-
 				<h3>Leak Detection Methods</h3>
 				<ul>
 					<li><strong>Thermal imaging:</strong> Best for comprehensive leak detection, works well in cold weather</li>
@@ -1386,6 +1350,35 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 		{ label: guide.title, href: `/resources/guides/${slug}` },
 	]}
 >
+	<ScrollProgressBar />
+
+	<!-- Table of Contents - Mobile Only (appears right after breadcrumbs) -->
+	<div class="lg:hidden mb-8">
+		<div class="bg-white rounded-2xl shadow-md p-6">
+			<h3 class="text-lg font-bold text-gray-900 mb-4">Table of Contents</h3>
+			<div class="space-y-3">
+				{
+					guide.steps.map((step: any, index: number) => (
+						<a
+							href={`#step-${index + 1}`}
+							class="step-link-mobile block group"
+							data-step={index + 1}
+						>
+							<div class="flex items-center gap-3">
+								<div class="flex-shrink-0 w-8 h-8 border-2 border-gray-300 rounded-full flex items-center justify-center text-sm font-semibold text-gray-400 group-hover:border-primary group-hover:text-primary transition-colors">
+									{index + 1}
+								</div>
+								<div class="flex-1 text-sm text-gray-600 group-hover:text-primary transition-colors">
+									{step.title}
+								</div>
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+
 	<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 		<!-- Main Content -->
 		<article class="lg:col-span-3">
@@ -1443,6 +1436,23 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 									class="prose prose-lg max-w-none prose-headings:font-bold prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-ul:my-4 prose-li:my-2 prose-ol:my-4 prose-strong:text-gray-900"
 									set:html={step.content}
 								/>
+								{step.carousel && step.carousel.length > 0 && (
+									<div class="my-6">
+										<SwipeableImageCarousel
+											images={step.carousel}
+											id={`carousel-step-${index + 1}`}
+										/>
+									</div>
+								)}
+								{step.tutorial && (
+									<div class="my-8">
+										<StepByStepTutorial
+											steps={step.tutorial.steps}
+											id={`tutorial-step-${index + 1}`}
+											title={step.tutorial.title}
+										/>
+									</div>
+								)}
 							</div>
 							{index < guide.steps.length - 1 && <div class="mt-8 pt-8 border-b border-gray-200" />}
 						</div>
@@ -1511,10 +1521,10 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 			}
 		</article>
 
-		<!-- Sidebar -->
-		<aside class="lg:col-span-1">
-			<div class="sticky top-24 space-y-6">
-				<!-- Progress Tracker -->
+		<!-- Sidebar - Desktop Only -->
+		<aside class="hidden lg:block lg:col-span-1">
+			<div class="lg:sticky lg:top-24 flex flex-col gap-6">
+				<!-- Progress Tracker / Table of Contents -->
 				<div class="bg-white rounded-2xl shadow-md p-6">
 					<h3 class="text-lg font-bold text-gray-900 mb-4">Progress</h3>
 					<div class="space-y-3">
@@ -1536,7 +1546,7 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 				</div>
 
 				<!-- Guide Info -->
-				<div class="bg-gray-50 rounded-2xl p-6">
+				<div class="bg-gray-50 rounded-2xl p-6 order-2">
 					<h3 class="text-lg font-bold text-gray-900 mb-4">Guide Information</h3>
 					<dl class="space-y-3 text-sm">
 						<div>
@@ -1561,7 +1571,7 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 				<!-- Back Button -->
 				<a
 					href="/resources/guides"
-					class="block bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow"
+					class="block bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow order-3"
 				>
 					<div class="flex items-center gap-3 text-primary font-semibold">
 						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1637,102 +1647,4 @@ const pageTitle = `${guide.title} | HPSC Guides`;
 			}
 		});
 	});
-
-	// Image Carousel functionality
-	document.querySelectorAll('.image-carousel').forEach((carousel) => {
-		const slides = carousel.querySelectorAll('.carousel-slide');
-		const dots = carousel.querySelectorAll('.carousel-dot');
-		const prevBtn = carousel.querySelector('.carousel-prev');
-		const nextBtn = carousel.querySelector('.carousel-next');
-		let currentSlide = 0;
-
-		function showSlide(index: number) {
-			// Hide all slides
-			slides.forEach((slide) => {
-				slide.classList.remove('active');
-				(slide as HTMLElement).style.display = 'none';
-			});
-
-			// Remove active class from all dots
-			dots.forEach((dot) => {
-				dot.classList.remove('active');
-				dot.classList.remove('bg-white');
-				dot.classList.add('bg-white/50');
-			});
-
-			// Show current slide
-			if (slides[index]) {
-				(slides[index] as HTMLElement).style.display = 'block';
-				slides[index].classList.add('active');
-			}
-
-			// Update active dot
-			if (dots[index]) {
-				dots[index].classList.add('active');
-				dots[index].classList.add('bg-white');
-				dots[index].classList.remove('bg-white/50');
-			}
-
-			currentSlide = index;
-		}
-
-		function nextSlide() {
-			let next = currentSlide + 1;
-			if (next >= slides.length) {
-				next = 0;
-			}
-			showSlide(next);
-		}
-
-		function prevSlide() {
-			let prev = currentSlide - 1;
-			if (prev < 0) {
-				prev = slides.length - 1;
-			}
-			showSlide(prev);
-		}
-
-		// Event listeners
-		prevBtn?.addEventListener('click', prevSlide);
-		nextBtn?.addEventListener('click', nextSlide);
-
-		dots.forEach((dot, index) => {
-			dot.addEventListener('click', () => {
-				showSlide(index);
-			});
-		});
-
-		// Initialize first slide
-		showSlide(0);
-
-		// Auto-advance every 5 seconds (optional)
-		// setInterval(nextSlide, 5000);
-	});
 </script>
-
-<style>
-	.carousel-slide {
-		display: none;
-	}
-
-	.carousel-slide.active {
-		display: block;
-	}
-
-	.carousel-btn {
-		transition: all 0.3s ease;
-	}
-
-	.carousel-btn:hover {
-		transform: scale(1.1);
-	}
-
-	.carousel-dot {
-		cursor: pointer;
-		transition: all 0.3s ease;
-	}
-
-	.carousel-dot:hover {
-		transform: scale(1.2);
-	}
-</style>

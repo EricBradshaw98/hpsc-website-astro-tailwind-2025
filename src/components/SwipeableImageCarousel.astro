@@ -1,0 +1,301 @@
+---
+/**
+ * SwipeableImageCarousel Component
+ * Instagram-style image carousel with touch/swipe support
+ *
+ * Props:
+ * - images: Array of { src: string, alt: string, caption?: string }
+ * - id: Unique ID for this carousel instance (required)
+ */
+
+interface CarouselImage {
+	src: string;
+	alt: string;
+	caption?: string;
+}
+
+interface Props {
+	images: CarouselImage[];
+	id: string;
+}
+
+const { images, id } = Astro.props;
+---
+
+<div class="swipeable-carousel" data-carousel-id={id}>
+	<div class="relative rounded-xl overflow-hidden bg-gray-900">
+		<!-- Images Container -->
+		<div class="carousel-track relative" data-track>
+			{
+				images.map((image, index) => (
+					<div class={`carousel-slide ${index === 0 ? 'active' : ''}`} data-slide={index}>
+						<img
+							src={image.src}
+							alt={image.alt}
+							class="w-full h-auto object-cover"
+							loading={index === 0 ? 'eager' : 'lazy'}
+						/>
+					</div>
+				))
+			}
+		</div>
+
+		<!-- Progress Dots (Instagram style) -->
+		<div class="absolute top-3 left-0 right-0 px-3 flex gap-1 z-10">
+			{
+				images.map((_, index) => (
+					<div class="flex-1 h-0.5 bg-white/30 rounded-full overflow-hidden">
+						<div
+							class={`carousel-progress h-full bg-white transition-all duration-300 ${index === 0 ? 'w-full' : 'w-0'}`}
+							data-progress={index}
+						/>
+					</div>
+				))
+			}
+		</div>
+
+		<!-- Tap Areas (Mobile - Instagram style) -->
+		<div class="md:hidden absolute inset-0 flex z-10" data-tap-areas>
+			<button class="flex-1" aria-label="Previous image" data-tap-prev> </button>
+			<button class="flex-1" aria-label="Next image" data-tap-next> </button>
+		</div>
+	</div>
+
+	<!-- Caption -->
+	{
+		images[0].caption && (
+			<div class="carousel-caption mt-3 text-sm text-gray-600 italic" data-caption>
+				{images[0].caption}
+			</div>
+		)
+	}
+</div>
+
+<style>
+	.swipeable-carousel {
+		position: relative;
+	}
+
+	.carousel-track {
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: 1fr;
+	}
+
+	.carousel-slide {
+		grid-column: 1;
+		grid-row: 1;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		pointer-events: none;
+	}
+
+	.carousel-slide.active {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	/* Prevent image drag on desktop */
+	.carousel-slide img {
+		user-select: none;
+		-webkit-user-drag: none;
+	}
+</style>
+
+<script>
+	/* eslint-disable no-undef */
+	class SwipeableCarousel {
+		private container: HTMLElement;
+		private track: HTMLElement;
+		private slides: NodeListOf<HTMLElement>;
+		private progressBars: NodeListOf<HTMLElement>;
+		private caption: HTMLElement | null;
+		private currentIndex = 0;
+		private startX = 0;
+		private isDragging = false;
+		private images: { caption?: string }[];
+
+		constructor(container: HTMLElement) {
+			this.container = container;
+			this.track = container.querySelector('[data-track]')!;
+			this.slides = container.querySelectorAll('.carousel-slide');
+			this.progressBars = container.querySelectorAll('[data-progress]');
+			this.caption = container.querySelector('[data-caption]');
+
+			// Get image data from slides
+			this.images = Array.from(this.slides).map((slide) => ({
+				caption: slide.querySelector('img')?.alt || '',
+			}));
+
+			// Store captions properly
+			this.images = Array.from(this.slides).map((slide) => {
+				const img = slide.querySelector('img');
+				return {
+					caption: img?.getAttribute('data-caption') || img?.alt || '',
+				};
+			});
+
+			this.init();
+		}
+
+		private init() {
+			// Tap areas (mobile)
+			const tapPrev = this.container.querySelector('[data-tap-prev]');
+			const tapNext = this.container.querySelector('[data-tap-next]');
+
+			tapPrev?.addEventListener('click', (e) => {
+				e.preventDefault();
+				this.prev();
+			});
+			tapNext?.addEventListener('click', (e) => {
+				e.preventDefault();
+				this.next();
+			});
+
+			// Touch/swipe support
+			this.track.addEventListener('touchstart', this.handleTouchStart.bind(this), {
+				passive: true,
+			});
+			this.track.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+			this.track.addEventListener('touchend', this.handleTouchEnd.bind(this));
+
+			// Mouse drag support (desktop)
+			this.track.addEventListener('mousedown', this.handleMouseDown.bind(this));
+			this.track.addEventListener('mousemove', this.handleMouseMove.bind(this));
+			this.track.addEventListener('mouseup', this.handleMouseUp.bind(this));
+			this.track.addEventListener('mouseleave', this.handleMouseUp.bind(this));
+
+			// Keyboard navigation
+			this.container.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowLeft') this.prev();
+				if (e.key === 'ArrowRight') this.next();
+			});
+		}
+
+		private handleTouchStart(e: TouchEvent) {
+			this.startX = e.touches[0].clientX;
+			this.isDragging = true;
+		}
+
+		private handleTouchMove(e: TouchEvent) {
+			if (!this.isDragging) return;
+			// Prevent default to stop scrolling while swiping
+			const diff = e.touches[0].clientX - this.startX;
+			if (Math.abs(diff) > 10) {
+				e.preventDefault();
+			}
+		}
+
+		private handleTouchEnd(e: TouchEvent) {
+			if (!this.isDragging) return;
+			this.isDragging = false;
+
+			const endX = e.changedTouches[0].clientX;
+			const diff = this.startX - endX;
+
+			// Swipe threshold
+			if (Math.abs(diff) > 50) {
+				if (diff > 0) {
+					this.next();
+				} else {
+					this.prev();
+				}
+			}
+		}
+
+		private handleMouseDown(e: MouseEvent) {
+			this.startX = e.clientX;
+			this.isDragging = true;
+			this.track.style.cursor = 'grabbing';
+		}
+
+		private handleMouseMove(_e: MouseEvent) {
+			if (!this.isDragging) return;
+		}
+
+		private handleMouseUp(e: MouseEvent) {
+			if (!this.isDragging) return;
+			this.isDragging = false;
+			this.track.style.cursor = 'grab';
+
+			const endX = e.clientX;
+			const diff = this.startX - endX;
+
+			// Drag threshold
+			if (Math.abs(diff) > 50) {
+				if (diff > 0) {
+					this.next();
+				} else {
+					this.prev();
+				}
+			}
+		}
+
+		private next() {
+			if (this.currentIndex < this.slides.length - 1) {
+				this.goToSlide(this.currentIndex + 1);
+			}
+		}
+
+		private prev() {
+			if (this.currentIndex > 0) {
+				this.goToSlide(this.currentIndex - 1);
+			}
+		}
+
+		private goToSlide(index: number) {
+			// Remove active class from current slide
+			this.slides[this.currentIndex].classList.remove('active');
+			this.progressBars[this.currentIndex].style.width = '0%';
+
+			// Update index
+			this.currentIndex = index;
+
+			// Add active class to new slide
+			this.slides[this.currentIndex].classList.add('active');
+			this.progressBars[this.currentIndex].style.width = '100%';
+
+			// Update caption if exists
+			if (this.caption) {
+				const currentSlide = this.slides[this.currentIndex];
+				const img = currentSlide.querySelector('img');
+				const newCaption = img?.getAttribute('data-caption') || img?.alt || '';
+
+				if (newCaption) {
+					this.caption.textContent = newCaption;
+					this.caption.style.display = 'block';
+				} else {
+					this.caption.style.display = 'none';
+				}
+			}
+
+			// Mark all previous slides as viewed
+			for (let i = 0; i < this.currentIndex; i++) {
+				this.progressBars[i].style.width = '100%';
+			}
+		}
+	}
+
+	// Initialize all carousels on the page
+	document.addEventListener('DOMContentLoaded', () => {
+		const carousels = document.querySelectorAll('.swipeable-carousel');
+		carousels.forEach((carousel) => {
+			new SwipeableCarousel(carousel as HTMLElement);
+		});
+	});
+
+	// Also initialize if the script runs after DOMContentLoaded
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', () => {
+			const carousels = document.querySelectorAll('.swipeable-carousel');
+			carousels.forEach((carousel) => {
+				new SwipeableCarousel(carousel as HTMLElement);
+			});
+		});
+	} else {
+		const carousels = document.querySelectorAll('.swipeable-carousel');
+		carousels.forEach((carousel) => {
+			new SwipeableCarousel(carousel as HTMLElement);
+		});
+	}
+</script>

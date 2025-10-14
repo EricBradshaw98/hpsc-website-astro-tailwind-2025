@@ -1,0 +1,46 @@
+---
+// Scroll Progress Bar Component
+// Shows reading progress at the top of the page on mobile
+// The bar fills from left to right as the user scrolls down
+---
+
+<div
+	id="scroll-progress-bar"
+	class="fixed top-0 left-0 right-0 h-1 bg-gray-200 z-50 lg:hidden"
+	aria-hidden="true"
+>
+	<div
+		id="scroll-progress-fill"
+		class="h-full bg-gradient-to-r from-primary to-primary-dark transition-all duration-150 ease-out"
+		style="width: 0%"
+	>
+	</div>
+</div>
+
+<script>
+	function updateScrollProgress() {
+		const progressFill = document.getElementById('scroll-progress-fill');
+		if (!progressFill) return;
+
+		// Calculate scroll percentage
+		const windowHeight = window.innerHeight;
+		const documentHeight = document.documentElement.scrollHeight;
+		const scrollTop = window.scrollY;
+
+		// Calculate how far through the document we've scrolled
+		const scrollableHeight = documentHeight - windowHeight;
+		const scrollPercentage = (scrollTop / scrollableHeight) * 100;
+
+		// Update the progress bar width
+		progressFill.style.width = `${Math.min(Math.max(scrollPercentage, 0), 100)}%`;
+	}
+
+	// Update on scroll
+	window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+	// Update on page load
+	updateScrollProgress();
+
+	// Update on resize (in case content height changes)
+	window.addEventListener('resize', updateScrollProgress, { passive: true });
+</script>
