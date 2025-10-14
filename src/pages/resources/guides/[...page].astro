@@ -1,0 +1,404 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import Layout from '../../../layouts/Layout.astro';
+import FeaturedGuideCard from '../../../components/resources/FeaturedGuideCard.astro';
+import GuideCard from '../../../components/resources/GuideCard.astro';
+import { guides } from '../../../data/guides';
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const GUIDES_PER_PAGE = 12;
+
+	// Separate featured and regular guides
+	const featuredGuides = guides.filter((g) => g.featured);
+	const regularGuides = guides.filter((g) => !g.featured);
+
+	return paginate(regularGuides, {
+		pageSize: GUIDES_PER_PAGE,
+		props: { featuredGuides },
+	});
+}) satisfies GetStaticPaths;
+
+interface Props {
+	page: Page;
+	featuredGuides: any[];
+}
+
+const { page, featuredGuides } = Astro.props;
+
+// Group guides by category
+const guidesByCategory = page.data.reduce((acc: Record<string, any[]>, guide: any) => {
+	if (!acc[guide.category]) {
+		acc[guide.category] = [];
+	}
+	acc[guide.category].push(guide);
+	return acc;
+}, {});
+
+// Get all categories for filter dropdown
+const allCategories = Array.from(new Set(guides.map((g) => g.category)));
+
+// Build page numbers array for pagination (avoiding JSX parsing issues)
+const pageNumbers = [];
+for (let i = 1; i <= page.lastPage; i++) {
+	const isCurrent = i === page.currentPage;
+	const showPage = i === 1 || i === page.lastPage || Math.abs(i - page.currentPage) <= 1;
+	const showEllipsis =
+		(i === 2 && page.currentPage > 3) ||
+		(i === page.lastPage - 1 && page.currentPage < page.lastPage - 2);
+
+	if (showPage || showEllipsis) {
+		pageNumbers.push({
+			number: i,
+			isCurrent,
+			showEllipsis,
+			showPage,
+		});
+	}
+}
+---
+
+<Layout
+	title={`Guides${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} | HPSC Resources`}
+	description="Browse our comprehensive guides on home performance, energy efficiency, and retrofit best practices for contractors and homeowners in British Columbia."
+	keywords="home performance guides, energy efficiency resources, retrofit guides, contractor resources, homeowner guides"
+	breadcrumbs={[
+		{ label: 'Resources', href: '/resources' },
+		{ label: 'Guides', href: '/resources/guides' },
+	]}
+>
+	<div class="mb-12">
+		<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Guides</h1>
+		<p class="text-xl text-gray-600 max-w-3xl">
+			Step-by-step guides to help you navigate home performance, energy efficiency, and contractor
+			certification.
+		</p>
+		{page.total > 0 && (
+			<p class="text-sm text-gray-500 mt-2">
+				Showing {page.start + 1}-{page.end + 1} of {page.total} guides
+			</p>
+		)}
+	</div>
+
+	<!-- Search and Filter -->
+	<div class="mb-12 flex flex-col md:flex-row gap-4">
+		<div class="flex-1">
+			<div class="relative">
+				<svg
+					class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+				</svg>
+				<input
+					type="text"
+					id="search-input"
+					placeholder="Search guides..."
+					class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+				/>
+			</div>
+		</div>
+		<select
+			id="category-filter"
+			class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
+		>
+			<option value="all">All Categories</option>
+			{
+				allCategories.map((category) => (
+					<option value={category}>{category}</option>
+				))
+			}
+		</select>
+		<select
+			id="difficulty-filter"
+			class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
+		>
+			<option value="all">All Levels</option>
+			<option value="Beginner">Beginner</option>
+			<option value="Intermediate">Intermediate</option>
+			<option value="Advanced">Advanced</option>
+		</select>
+	</div>
+
+	<!-- Featured Guides (only on page 1) -->
+	{
+		page.currentPage === 1 && featuredGuides.length > 0 && (
+			<section class="mb-16">
+				<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+					<svg
+						class="w-6 h-6 text-primary"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+						/>
+					</svg>
+					Featured Guides
+				</h2>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					{featuredGuides.map((guide: any) => (
+						<FeaturedGuideCard {...guide} />
+					))}
+				</div>
+			</section>
+		)
+	}
+
+	<!-- Guides by Category -->
+	{
+		Object.entries(guidesByCategory).map(([category, categoryGuides]) => (
+			<section class="mb-12" data-category-section={category}>
+				<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+					{category === 'Homeowners' ? (
+						<svg
+							class="w-6 h-6 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+							/>
+						</svg>
+					) : (
+						<svg
+							class="w-6 h-6 text-primary"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+							/>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+							/>
+						</svg>
+					)}
+					{category}
+				</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{(categoryGuides as any[]).map((guide: any) => (
+						<GuideCard {...guide} />
+					))}
+				</div>
+			</section>
+		))
+	}
+
+	<!-- No Results Message -->
+	<div id="no-results" class="hidden text-center py-12">
+		<svg
+			class="w-16 h-16 text-gray-400 mx-auto mb-4"
+			fill="none"
+			stroke="currentColor"
+			viewBox="0 0 24 24"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+			></path>
+		</svg>
+		<p class="text-xl text-gray-600 mb-2">No guides found</p>
+		<p class="text-gray-500">Try adjusting your search or filters</p>
+	</div>
+
+	<!-- Pagination -->
+	{
+		page.lastPage > 1 && (
+			<nav class="flex justify-center items-center gap-2 mt-12" aria-label="Pagination">
+				{page.url.prev ? (
+					<a
+						href={page.url.prev}
+						class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
+						aria-label="Previous page"
+					>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M15 19l-7-7 7-7"
+							/>
+						</svg>
+						Previous
+					</a>
+				) : (
+					<span class="px-4 py-2 border border-gray-200 rounded-lg text-gray-400 cursor-not-allowed flex items-center gap-2">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M15 19l-7-7 7-7"
+							/>
+						</svg>
+						Previous
+					</span>
+				)}
+
+				<div class="flex gap-2">
+					{
+						pageNumbers.map((pageInfo) => {
+							if (pageInfo.showEllipsis) {
+								return <span class="px-3 py-2 text-gray-400">...</span>;
+							}
+
+							if (pageInfo.isCurrent) {
+								return (
+									<span
+										class="px-4 py-2 bg-primary text-white rounded-lg font-semibold"
+										aria-current="page"
+									>
+										{pageInfo.number}
+									</span>
+								);
+							}
+
+							return (
+								<a
+									href={
+										pageInfo.number === 1
+											? '/resources/guides'
+											: `/resources/guides/${pageInfo.number}`
+									}
+									class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+									aria-label={`Go to page ${pageInfo.number}`}
+								>
+									{pageInfo.number}
+								</a>
+							);
+						})
+					}
+				</div>
+
+				{page.url.next ? (
+					<a
+						href={page.url.next}
+						class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
+						aria-label="Next page"
+					>
+						Next
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 5l7 7-7 7"
+							/>
+						</svg>
+					</a>
+				) : (
+					<span class="px-4 py-2 border border-gray-200 rounded-lg text-gray-400 cursor-not-allowed flex items-center gap-2">
+						Next
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 5l7 7-7 7"
+							/>
+						</svg>
+					</span>
+				)}
+			</nav>
+		)
+	}
+</Layout>
+
+<script>
+	// Search and filter functionality (client-side only, doesn't affect pagination)
+	function initializeFilters() {
+		const searchInput = document.getElementById('search-input') as HTMLInputElement;
+		const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement;
+		const difficultyFilter = document.getElementById('difficulty-filter') as HTMLSelectElement;
+		const guideCards = document.querySelectorAll('.guide-card');
+		const categorySections = document.querySelectorAll('[data-category-section]');
+		const noResults = document.getElementById('no-results');
+
+		function filterGuides() {
+			const searchTerm = searchInput.value.toLowerCase();
+			const selectedCategory = categoryFilter.value;
+			const selectedDifficulty = difficultyFilter.value;
+			let visibleCount = 0;
+
+			guideCards.forEach((card) => {
+				const title = card.getAttribute('data-title') || '';
+				const category = card.getAttribute('data-category') || '';
+				const difficulty = card.getAttribute('data-difficulty') || '';
+
+				const matchesSearch = title.includes(searchTerm);
+				const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+				const matchesDifficulty = selectedDifficulty === 'all' || difficulty === selectedDifficulty;
+
+				if (matchesSearch && matchesCategory && matchesDifficulty) {
+					(card as HTMLElement).style.display = 'block';
+					visibleCount++;
+				} else {
+					(card as HTMLElement).style.display = 'none';
+				}
+			});
+
+			// Show/hide category sections
+			categorySections.forEach((section) => {
+				const sectionCategory = section.getAttribute('data-category-section');
+				const visibleCardsInSection = section.querySelectorAll(
+					`.guide-card:not([style*="display: none"])`
+				);
+
+				if (
+					visibleCardsInSection.length > 0 &&
+					(selectedCategory === 'all' || sectionCategory === selectedCategory)
+				) {
+					(section as HTMLElement).style.display = 'block';
+				} else {
+					(section as HTMLElement).style.display = 'none';
+				}
+			});
+
+			// Show/hide no results message
+			if (noResults) {
+				if (visibleCount === 0) {
+					noResults.classList.remove('hidden');
+				} else {
+					noResults.classList.add('hidden');
+				}
+			}
+		}
+
+		searchInput?.addEventListener('input', filterGuides);
+		categoryFilter?.addEventListener('change', filterGuides);
+		difficultyFilter?.addEventListener('change', filterGuides);
+	}
+
+	// Initialize on DOM ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initializeFilters);
+	} else {
+		initializeFilters();
+	}
+</script>
