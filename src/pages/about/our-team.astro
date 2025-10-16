@@ -4,6 +4,26 @@ import PageHeader from '../../components/shared/PageHeader.astro';
 import TeamSection from '../../components/about/TeamSection.astro';
 import { type TeamMember } from '../../components/about/TeamMemberCard.astro';
 
+// Import staff photos
+import TanyaPhoto from '../../assets/HPSC_Tanya_2021-300x300 (1).png';
+import BraideyPhoto from '../../assets/Braidey-480x480.png';
+import PubaliPhoto from '../../assets/HPSC_Pubali-480x480.png';
+import TatiannaPhoto from '../../assets/Tatiana-Cullen-2-300x300.png';
+import HelenaPhoto from '../../assets/Helena_Arnold-2-480x480.png';
+import LeighPhoto from '../../assets/Leigh-McKay-480x480.png';
+
+// Import board photos
+import RyanPhoto from '../../assets/HPSC_Ryan-480x480.png';
+import AkuaPhoto from '../../assets/HPSC_Akua_Schatz-480x480.png';
+import AndyPhoto from '../../assets/HPSC_AndyCockburn-480x480.png';
+import DonPhoto from '../../assets/Don-Gulevich-480x480.png';
+import DavidPhoto from '../../assets/HPSC_DavidLewis-480x480.png';
+
+// Import advisor photos
+import ChristinePhoto from '../../assets/HPSC_Christine-480x480.png';
+import PeterPhoto from '../../assets/HPSC_Peter-480x480.png';
+import JovanPhoto from '../../assets/HPSC_Jovan_Cheema-480x480.png';
+
 // API Configuration
 const TEAM_API_URL = import.meta.env.PUBLIC_TEAM_API_URL;
 const TEAM_API_KEY = import.meta.env.TEAM_API_KEY;
@@ -92,42 +112,42 @@ const fallbackData = {
 			name: 'Tanya Ratzlaff',
 			title: 'Executive Director',
 			bio: 'Guides strategic planning, provides industry and program oversight, and leads government relations',
-			image: getPlaceholderAvatar('Tanya Ratzlaff', 0),
+			image: TanyaPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Braidey Sturgeon',
 			title: 'Manager of Industry Engagement',
 			bio: "Leads industry engagement and outreach, and spearheads the organization's justice, equity, diversity, inclusion, and Indigenous reconciliation work",
-			image: getPlaceholderAvatar('Braidey Sturgeon', 1),
+			image: BraideyPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Pubali ShomeBasu',
 			title: 'Program Manager',
 			bio: 'Leads operations for the Home Performance Contractor Network and provides strategic support',
-			image: getPlaceholderAvatar('Pubali ShomeBasu', 2),
+			image: PubaliPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Tatianna Cullen',
 			title: 'Coordinator',
 			bio: 'Provides administrative, operational, and project support',
-			image: getPlaceholderAvatar('Tatianna Cullen', 3),
+			image: TatiannaPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Helena Arnold',
 			title: 'Coordinator',
 			bio: 'Provides administrative, operational, and project support',
-			image: getPlaceholderAvatar('Helena Arnold', 4),
+			image: HelenaPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Leigh McKay',
 			title: 'Coordinator',
 			bio: 'Provides administrative, operational, and project support',
-			image: getPlaceholderAvatar('Leigh McKay', 5),
+			image: LeighPhoto.src,
 			linkedin: '#',
 		},
 	],
@@ -135,31 +155,31 @@ const fallbackData = {
 		{
 			name: 'Ryan Coleman',
 			title: 'Board Chair',
-			image: getPlaceholderAvatar('Ryan Coleman', 6),
+			image: RyanPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Akua Schatz',
 			title: 'Board Member',
-			image: getPlaceholderAvatar('Akua Schatz', 7),
+			image: AkuaPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Andy Cockburn',
 			title: 'Board Member',
-			image: getPlaceholderAvatar('Andy Cockburn', 8),
+			image: AndyPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Don Gulevich',
 			title: 'Board Member',
-			image: getPlaceholderAvatar('Don Gulevich', 9),
+			image: DonPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'David Lewis',
 			title: 'Board Member',
-			image: getPlaceholderAvatar('David Lewis', 10),
+			image: DavidPhoto.src,
 			linkedin: '#',
 		},
 	],
@@ -167,19 +187,19 @@ const fallbackData = {
 		{
 			name: 'Christine Gustafson',
 			title: 'Advisor to the Board',
-			image: getPlaceholderAvatar('Christine Gustafson', 11),
+			image: ChristinePhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Peter Sundberg',
 			title: 'Advisor to the Board',
-			image: getPlaceholderAvatar('Peter Sundberg', 12),
+			image: PeterPhoto.src,
 			linkedin: '#',
 		},
 		{
 			name: 'Jovan Cheema',
 			title: 'Advisor to the Board',
-			image: getPlaceholderAvatar('Jovan Cheema', 13),
+			image: JovanPhoto.src,
 			linkedin: '#',
 		},
 	],
