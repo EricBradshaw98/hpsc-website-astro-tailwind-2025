@@ -16,6 +16,11 @@ export default [
 				ecmaVersion: 'latest',
 				sourceType: 'module',
 			},
+			globals: {
+				fetch: 'readonly',
+				Buffer: 'readonly',
+				console: 'readonly',
+			},
 		},
 		plugins: {
 			'@typescript-eslint': tsPlugin,

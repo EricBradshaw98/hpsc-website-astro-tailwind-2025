@@ -170,7 +170,8 @@ export const guides: GuideMetadata[] = [
 	{
 		slug: 'ductless-mini-split-installation',
 		title: 'Ductless Mini-Split Installation Guide',
-		description: 'Best practices for installing ductless heat pump systems in residential settings.',
+		description:
+			'Best practices for installing ductless heat pump systems in residential settings.',
 		category: 'Contractors',
 		steps: 2,
 		readTime: '7 min',

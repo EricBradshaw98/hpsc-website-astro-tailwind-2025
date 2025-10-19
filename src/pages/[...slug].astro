@@ -1,0 +1,239 @@
+---
+/**
+ * Catch-all route for WordPress pages
+ * Handles any page that isn't matched by static routes
+ *
+ * Examples:
+ * - /about → WordPress page with slug "about"
+ * - /about/team → WordPress page with slug "about/team"
+ * - /training → WordPress page with slug "training"
+ * - /events/summer-2025 → WordPress page with slug "events/summer-2025"
+ */
+
+import Layout from '../layouts/Layout.astro';
+import { getWordPressPage, getAllWordPressPages } from '../lib/wordpress';
+import type { WordPressPage } from '../lib/wordpress';
+
+// Get the full slug path from URL params
+const { slug } = Astro.params;
+const fullSlug = slug || 'home';
+
+export async function getStaticPaths() {
+	try {
+		// Fetch all WordPress pages at build time
+		const pages = await getAllWordPressPages();
+
+		return pages.map((page: WordPressPage) => ({
+			params: { slug: page.slug },
+			props: { page },
+		}));
+	} catch (error) {
+		console.error('Error fetching WordPress pages:', error);
+		// Return empty array if WordPress is not available during build
+		// This allows the site to build without WordPress connection
+		return [];
+	}
+}
+
+// Get page data from props (static build) or fetch directly (dev mode)
+let page: WordPressPage | null = null;
+
+if (Astro.props.page) {
+	// Static build: use pre-fetched data
+	page = Astro.props.page;
+} else {
+	// Dev mode or ISR: fetch page dynamically
+	try {
+		page = await getWordPressPage(fullSlug);
+	} catch (error) {
+		console.error(`Error fetching page "${fullSlug}":`, error);
+	}
+}
+
+// If page not found, return 404
+if (!page) {
+	return Astro.redirect('/404');
+}
+
+// Extract SEO data from WordPress (Yoast or similar)
+const seoTitle = page.yoast_head_json?.title || page.title.rendered;
+const seoDescription =
+	page.yoast_head_json?.description ||
+	page.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 160);
+const ogImage = page.yoast_head_json?.og_image?.[0]?.url || page.featured_image_url;
+
+// Extract breadcrumbs if available from WordPress
+const breadcrumbs = page.acf?.breadcrumbs || [];
+---
+
+<Layout
+	title={seoTitle}
+	description={seoDescription}
+	ogImage={ogImage}
+	breadcrumbs={breadcrumbs}
+	canonical={`https://homeperformance.ca/${fullSlug}`}
+>
+	<!-- Page Header from WordPress ACF -->
+	{
+		page.acf?.show_page_header && (
+			<section class="bg-gradient-to-br from-primary-dark to-primary py-16 md:py-24">
+				<div class="container mx-auto px-4 max-w-7xl">
+					<div class="max-w-4xl">
+						<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+							{page.acf.page_header?.title || page.title.rendered}
+						</h1>
+						{page.acf.page_header?.subtitle && (
+							<p class="text-xl md:text-2xl text-white/90 leading-relaxed">
+								{page.acf.page_header.subtitle}
+							</p>
+						)}
+					</div>
+				</div>
+			</section>
+		)
+	}
+
+	<!-- Main Content -->
+	<article class="py-12">
+		{
+			!page.acf?.show_page_header && (
+				<header class="mb-12">
+					<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{page.title.rendered}</h1>
+				</header>
+			)
+		}
+
+		<!-- WordPress Content -->
+		<div
+			class="prose prose-lg max-w-none
+				prose-headings:font-bold prose-headings:text-gray-900
+				prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+				prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+				prose-p:text-gray-700 prose-p:leading-relaxed
+				prose-a:text-primary-dark prose-a:no-underline hover:prose-a:underline
+				prose-strong:text-gray-900 prose-strong:font-semibold
+				prose-ul:list-disc prose-ul:pl-6
+				prose-ol:list-decimal prose-ol:pl-6
+				prose-li:text-gray-700 prose-li:my-2
+				prose-img:rounded-xl prose-img:shadow-lg
+				prose-blockquote:border-l-4 prose-blockquote:border-primary
+				prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700"
+			set:html={page.content.rendered}
+		/>
+
+		<!-- WordPress ACF Flexible Content Blocks -->
+		{
+			page.acf?.content_blocks && (
+				<div class="mt-12 space-y-12">
+					{page.acf.content_blocks.map((block: any) => {
+						// You can create custom components for each ACF block type
+						switch (block.acf_fc_layout) {
+							case 'text_block':
+								return <div class="prose prose-lg max-w-none" set:html={block.content} />;
+							case 'image_block':
+								return (
+									<figure class="my-8">
+										<img
+											src={block.image.url}
+											alt={block.image.alt || ''}
+											class="w-full rounded-xl shadow-lg"
+										/>
+										{block.caption && (
+											<figcaption class="text-center text-gray-600 mt-4 italic">
+												{block.caption}
+											</figcaption>
+										)}
+									</figure>
+								);
+							case 'cta_block':
+								return (
+									<div class="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-8 md:p-12 text-white">
+										<h3 class="text-3xl font-bold mb-4">{block.title}</h3>
+										<p class="text-xl mb-6 text-white/90">{block.description}</p>
+										{block.button_link && (
+											<a
+												href={block.button_link}
+												class="inline-block bg-white text-primary-dark px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+											>
+												{block.button_text || 'Learn More'}
+											</a>
+										)}
+									</div>
+								);
+							case 'two_column_block':
+								return (
+									<div class="grid md:grid-cols-2 gap-8">
+										<div class="prose prose-lg" set:html={block.left_column} />
+										<div class="prose prose-lg" set:html={block.right_column} />
+									</div>
+								);
+							default:
+								return null;
+						}
+					})}
+				</div>
+			)
+		}
+	</article>
+
+	<!-- Page Meta Info (optional) -->
+	{
+		import.meta.env.DEV && (
+			<div class="mt-12 p-6 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300">
+				<h3 class="text-lg font-bold text-gray-900 mb-2">Dev Info</h3>
+				<p class="text-sm text-gray-600">
+					<strong>Slug:</strong> {fullSlug}
+					<br />
+					<strong>WP ID:</strong> {page.id}
+					<br />
+					<strong>Modified:</strong> {page.modified}
+					<br />
+					<strong>Template:</strong> {page.template || 'default'}
+				</p>
+			</div>
+		)
+	}
+</Layout>
+
+<style is:global>
+	/* Custom styles for WordPress content */
+	article img {
+		border-radius: 0.75rem;
+		box-shadow:
+			0 10px 15px -3px rgb(0 0 0 / 0.1),
+			0 4px 6px -4px rgb(0 0 0 / 0.1);
+	}
+
+	article .wp-block-quote {
+		border-left: 4px solid var(--color-primary);
+		padding-left: 1.5rem;
+		font-style: italic;
+		color: #374151;
+	}
+
+	article .wp-block-button__link {
+		display: inline-block;
+		background-color: var(--color-primary);
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: background-color 0.2s;
+	}
+
+	article .wp-block-button__link:hover {
+		background-color: var(--color-primary-dark);
+	}
+
+	article .wp-block-columns {
+		display: grid;
+		gap: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		article .wp-block-columns {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

@@ -45,7 +45,8 @@
 			"Bash(xargs cat:*)",
 			"Bash(for page in \"/training\" \"/events\" \"/about\" \"/contact\" \"/resources/news\" \"/contractor-network\")",
 			"Bash(for page in \"/\" \"/training\" \"/events\" \"/about\" \"/contact\" \"/resources/news\" \"/contractor-network\" \"/about/strategy\")",
-			"Bash(do echo \"====== $page ======\")"
+			"Bash(do echo \"====== $page ======\")",
+			"Bash(rm src/components/Welcome.astro)"
 		],
 		"deny": [],
 		"ask": []

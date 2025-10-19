@@ -72,11 +72,13 @@ for (let i = 1; i <= page.lastPage; i++) {
 			Step-by-step guides to help you navigate home performance, energy efficiency, and contractor
 			certification.
 		</p>
-		{page.total > 0 && (
-			<p class="text-sm text-gray-500 mt-2">
-				Showing {page.start + 1}-{page.end + 1} of {page.total} guides
-			</p>
-		)}
+		{
+			page.total > 0 && (
+				<p class="text-sm text-gray-500 mt-2">
+					Showing {page.start + 1}-{page.end + 1} of {page.total} guides
+				</p>
+			)
+		}
 	</div>
 
 	<!-- Search and Filter -->
@@ -108,11 +110,7 @@ for (let i = 1; i <= page.lastPage; i++) {
 			class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
 		>
 			<option value="all">All Categories</option>
-			{
-				allCategories.map((category) => (
-					<option value={category}>{category}</option>
-				))
-			}
+			{allCategories.map((category) => <option value={category}>{category}</option>)}
 		</select>
 		<select
 			id="difficulty-filter"
@@ -262,38 +260,36 @@ for (let i = 1; i <= page.lastPage; i++) {
 				)}
 
 				<div class="flex gap-2">
-					{
-						pageNumbers.map((pageInfo) => {
-							if (pageInfo.showEllipsis) {
-								return <span class="px-3 py-2 text-gray-400">...</span>;
-							}
+					{pageNumbers.map((pageInfo) => {
+						if (pageInfo.showEllipsis) {
+							return <span class="px-3 py-2 text-gray-400">...</span>;
+						}
 
-							if (pageInfo.isCurrent) {
-								return (
-									<span
-										class="px-4 py-2 bg-primary text-white rounded-lg font-semibold"
-										aria-current="page"
-									>
-										{pageInfo.number}
-									</span>
-								);
-							}
-
+						if (pageInfo.isCurrent) {
 							return (
-								<a
-									href={
-										pageInfo.number === 1
-											? '/resources/guides'
-											: `/resources/guides/${pageInfo.number}`
-									}
-									class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-									aria-label={`Go to page ${pageInfo.number}`}
+								<span
+									class="px-4 py-2 bg-primary text-white rounded-lg font-semibold"
+									aria-current="page"
 								>
 									{pageInfo.number}
-								</a>
+								</span>
 							);
-						})
-					}
+						}
+
+						return (
+							<a
+								href={
+									pageInfo.number === 1
+										? '/resources/guides'
+										: `/resources/guides/${pageInfo.number}`
+								}
+								class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+								aria-label={`Go to page ${pageInfo.number}`}
+							>
+								{pageInfo.number}
+							</a>
+						);
+					})}
 				</div>
 
 				{page.url.next ? (
