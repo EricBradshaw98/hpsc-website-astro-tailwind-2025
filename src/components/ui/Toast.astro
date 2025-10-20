@@ -1,0 +1,148 @@
+---
+// Toast notification container component
+// This component provides a container for toast notifications that can be triggered via JavaScript
+---
+
+<!-- Toast Container - Fixed position at top right -->
+<div
+	id="toast-container"
+	class="fixed top-4 right-4 z-50 flex flex-col gap-3 pointer-events-none"
+	aria-live="polite"
+	aria-atomic="true"
+>
+	<!-- Toasts will be dynamically inserted here -->
+</div>
+
+<script>
+	// Toast types
+	type ToastType = 'success' | 'error' | 'warning' | 'info';
+
+	interface ToastOptions {
+		message: string;
+		type?: ToastType;
+		duration?: number;
+		dismissible?: boolean;
+	}
+
+	// Toast configuration
+	const TOAST_CONFIG = {
+		success: {
+			icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+			bgColor: 'bg-green-50',
+			borderColor: 'border-green-200',
+			textColor: 'text-green-800',
+			iconColor: 'text-green-500',
+		},
+		error: {
+			icon: 'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z',
+			bgColor: 'bg-red-50',
+			borderColor: 'border-red-200',
+			textColor: 'text-red-800',
+			iconColor: 'text-red-500',
+		},
+		warning: {
+			icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
+			bgColor: 'bg-yellow-50',
+			borderColor: 'border-yellow-200',
+			textColor: 'text-yellow-800',
+			iconColor: 'text-yellow-500',
+		},
+		info: {
+			icon: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+			bgColor: 'bg-blue-50',
+			borderColor: 'border-blue-200',
+			textColor: 'text-blue-800',
+			iconColor: 'text-blue-500',
+		},
+	};
+
+	// Create and show a toast notification
+	function showToast(options: ToastOptions) {
+		const { message, type = 'info', duration = 5000, dismissible = true } = options;
+
+		const container = document.getElementById('toast-container');
+		if (!container) return;
+
+		const config = TOAST_CONFIG[type];
+		const toastId = `toast-${Date.now()}-${Math.random()}`;
+
+		// Create toast element
+		const toast = document.createElement('div');
+		toast.id = toastId;
+		toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-lg border shadow-lg ${config.bgColor} ${config.borderColor} ${config.textColor} min-w-[320px] max-w-md transform transition-all duration-300 ease-out opacity-0 translate-x-full`;
+
+		toast.innerHTML = `
+			<div class="flex-shrink-0">
+				<svg class="w-6 h-6 ${config.iconColor}" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${config.icon}"></path>
+				</svg>
+			</div>
+			<div class="flex-1 pt-0.5">
+				<p class="text-sm font-medium">${message}</p>
+			</div>
+			${
+				dismissible
+					? `
+			<button
+				type="button"
+				class="flex-shrink-0 inline-flex rounded-lg p-1.5 ${config.textColor} hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${type === 'success' ? 'green' : type === 'error' ? 'red' : type === 'warning' ? 'yellow' : 'blue'}-500 transition-colors"
+				aria-label="Dismiss notification"
+				data-dismiss-toast
+			>
+				<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+					<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+				</svg>
+			</button>
+			`
+					: ''
+			}
+		`;
+
+		container.appendChild(toast);
+
+		// Trigger entrance animation
+		requestAnimationFrame(() => {
+			toast.classList.remove('opacity-0', 'translate-x-full');
+			toast.classList.add('opacity-100', 'translate-x-0');
+		});
+
+		// Auto-dismiss after duration
+		const timeoutId = setTimeout(() => {
+			dismissToast(toastId);
+		}, duration);
+
+		// Handle manual dismiss
+		if (dismissible) {
+			const dismissBtn = toast.querySelector('[data-dismiss-toast]');
+			dismissBtn?.addEventListener('click', () => {
+				clearTimeout(timeoutId);
+				dismissToast(toastId);
+			});
+		}
+	}
+
+	// Dismiss a toast
+	function dismissToast(toastId: string) {
+		const toast = document.getElementById(toastId);
+		if (!toast) return;
+
+		// Exit animation
+		toast.classList.remove('opacity-100', 'translate-x-0');
+		toast.classList.add('opacity-0', 'translate-x-full');
+
+		// Remove from DOM after animation
+		setTimeout(() => {
+			toast.remove();
+		}, 300);
+	}
+
+	// Expose showToast function globally
+	(window as any).showToast = showToast;
+
+	// TypeScript declaration for global window
+	declare global {
+		interface Window {
+			showToast: (options: ToastOptions) => void;
+		}
+	}
+</script>

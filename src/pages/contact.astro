@@ -190,16 +190,6 @@ const faqs: FAQItemProps[] = [
 					>
 						Send Message
 					</button>
-
-					<!-- Success/Error Messages -->
-					<div
-						id="form-message"
-						class="hidden p-4 rounded-lg text-sm font-medium"
-						role="alert"
-						aria-live="polite"
-						aria-atomic="true"
-					>
-					</div>
 				</form>
 			</div>
 
@@ -310,12 +300,12 @@ const faqs: FAQItemProps[] = [
 	(window as any).onTurnstileError = function () {
 		turnstileToken = null;
 		updateSubmitButton();
-		const formMessage = document.getElementById('form-message') as HTMLDivElement;
-		if (formMessage) {
-			formMessage.className =
-				'block p-4 rounded-lg text-sm font-medium bg-red-50 text-red-800 border border-red-200';
-			formMessage.textContent =
-				'Security verification failed. Please refresh the page and try again.';
+		if (window.showToast) {
+			window.showToast({
+				message: 'Security verification failed. Please refresh the page and try again.',
+				type: 'error',
+				duration: 7000,
+			});
 		}
 	};
 
@@ -336,19 +326,19 @@ const faqs: FAQItemProps[] = [
 
 	// Form submission handler
 	const form = document.getElementById('contact-form') as HTMLFormElement;
-	const formMessage = document.getElementById('form-message') as HTMLDivElement;
 
 	form?.addEventListener('submit', async (e) => {
 		e.preventDefault();
 
 		// Verify Turnstile token exists
 		if (!turnstileToken) {
-			formMessage.className =
-				'block p-4 rounded-lg text-sm font-medium bg-red-50 text-red-800 border border-red-200';
-			formMessage.textContent = 'Please complete the security verification.';
-			setTimeout(() => {
-				formMessage.className = 'hidden';
-			}, 5000);
+			if (window.showToast) {
+				window.showToast({
+					message: 'Please complete the security verification.',
+					type: 'warning',
+					duration: 5000,
+				});
+			}
 			return;
 		}
 
@@ -370,11 +360,14 @@ const faqs: FAQItemProps[] = [
 			// For now, simulate form submission
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 
-			// Show success message
-			formMessage.className =
-				'block p-4 rounded-lg text-sm font-medium bg-green-50 text-green-800 border border-green-200';
-			formMessage.textContent =
-				'Thank you for your message! We will get back to you within 1-2 business days.';
+			// Show success toast
+			if (window.showToast) {
+				window.showToast({
+					message: 'Thank you for your message! We will get back to you within 1-2 business days.',
+					type: 'success',
+					duration: 6000,
+				});
+			}
 
 			// Reset form and Turnstile
 			form.reset();
@@ -384,22 +377,16 @@ const faqs: FAQItemProps[] = [
 				(window as any).turnstile.reset();
 			}
 			updateSubmitButton();
-
-			// Hide message after 5 seconds
-			setTimeout(() => {
-				formMessage.className = 'hidden';
-			}, 5000);
 		} catch {
-			// Show error message
-			formMessage.className =
-				'block p-4 rounded-lg text-sm font-medium bg-red-50 text-red-800 border border-red-200';
-			formMessage.textContent =
-				'Sorry, there was an error sending your message. Please try again or contact us directly.';
-
-			// Hide message after 5 seconds
-			setTimeout(() => {
-				formMessage.className = 'hidden';
-			}, 5000);
+			// Show error toast
+			if (window.showToast) {
+				window.showToast({
+					message:
+						'Sorry, there was an error sending your message. Please try again or contact us directly.',
+					type: 'error',
+					duration: 7000,
+				});
+			}
 		} finally {
 			// Reset button
 			submitButton.disabled = false;

@@ -6,6 +6,7 @@ import Footer from '../components/layouts/Footer.astro';
 import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
 import CookieBanner from '../components/ui/CookieBanner.astro';
 import AccessibilityTab from '../components/ui/AccessibilityTab.astro';
+import Toast from '../components/ui/Toast.astro';
 
 export interface BreadcrumbItem {
 	label: string;
@@ -341,6 +342,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<Footer />
 		<CookieBanner />
 		<AccessibilityTab />
+		<Toast />
 
 		<!-- Lenis Smooth Scroll -->
 		<script>
