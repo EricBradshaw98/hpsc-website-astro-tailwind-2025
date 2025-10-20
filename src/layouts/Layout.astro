@@ -395,6 +395,17 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 					smoothTouch: false,
 					touchMultiplier: 2,
 					infinite: false,
+					// Prevent Lenis from interfering with form inputs and interactive elements
+					prevent: (node) => {
+						return (
+							node.tagName === 'INPUT' ||
+							node.tagName === 'TEXTAREA' ||
+							node.tagName === 'SELECT' ||
+							node.tagName === 'BUTTON' ||
+							node.closest('form') !== null ||
+							node.closest('[data-lenis-prevent]') !== null
+						);
+					},
 				});
 
 				// Request animation frame loop
