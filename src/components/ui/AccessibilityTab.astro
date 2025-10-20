@@ -1,5 +1,7 @@
 <!-- Accessibility Tab component that slides out on hover --><!-- TODO: Re-enable on mobile with better UX (currently hidden on mobile) -->
-<div class="accessibility-tab-container fixed left-0 top-1/2 -translate-y-1/2 z-50 hidden md:block">
+<div
+	class="accessibility-tab-container fixed left-0 top-1/2 -translate-y-1/2 z-50 hidden md:block pointer-events-none"
+>
 	<div
 		id="accessibility-tab-wrapper"
 		class="accessibility-tab-wrapper group flex items-center transition-transform duration-300 md:hover:translate-x-0"
@@ -8,7 +10,7 @@
 		<!-- Tab Content Panel -->
 		<div
 			id="accessibility-tab-panel"
-			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 max-w-[calc(100vw-48px)] transition-opacity duration-300 border-2 border-white overflow-hidden"
+			class="bg-gray-900 text-white p-6 rounded-r-lg shadow-2xl w-80 max-w-[calc(100vw-48px)] transition-opacity duration-300 border-2 border-white overflow-hidden pointer-events-auto"
 			style="opacity: 0;"
 		>
 			<h2 class="text-xl font-bold mb-4 flex items-center gap-2">
@@ -163,7 +165,7 @@
 
 		<!-- Tab Handle -->
 		<div
-			class="bg-primary-dark text-white px-4 py-8 rounded-r-lg shadow-2xl cursor-pointer flex items-center border-r-4 border-white tab-handle"
+			class="bg-primary-dark text-white px-4 py-8 rounded-r-lg shadow-2xl cursor-pointer flex items-center border-r-4 border-white tab-handle pointer-events-auto"
 			role="button"
 			aria-label="Open Accessibility Options"
 			tabindex="0"
